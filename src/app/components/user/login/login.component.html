@@ -1,0 +1,11 @@
+<form *ngIf= "!authenticated" #form=ngForm (ngSubmit)= "signIn(form.value)"> <!-- signIn z login.component-->
+  <input type="email" name="email" ngModel>
+  <input type="password" name="password"ngModel>
+  <input type="submit" value="Log in">
+</form>
+<button (click)="getToken()">Show token</button>
+<div *ngIf="authenticated">
+  <h1>Hello in system!!!</h1>
+</div>
+<br>
+<button *ngIf="authenticated" (click)="signOut()">Sign out</button> <!--pokaz if user is auth;  signOut() z login.comp-->
