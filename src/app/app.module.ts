@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 
-
-import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -25,16 +23,11 @@ import { HeaderComponent } from './components/header/header.component';
 import {AuthGuardService} from './services/authentication/auth-guard.service';
 import { BookingService} from './services/booking/booking.service';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
+import { AppRoutingModule } from './/app-routing.module';
 
 
 
-const ROUTES = [
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
-  {path: 'login', component: LoginComponent},
-  {path: 'booking', component: BookingComponent,
-    canActivate: [AuthGuardService]
-  }
-];
+
 
 @NgModule({
   declarations: [
@@ -56,11 +49,11 @@ const ROUTES = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(ROUTES),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
-  providers: [ BookingService, AuthGuardService,
+  providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true } ],
   bootstrap: [AppComponent]
 })
