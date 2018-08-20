@@ -33,9 +33,7 @@ export class AuthService {
   }
 
   signOut(): boolean {
-    console.log('signOut 1 ', this.getToken() );
     localStorage.clear();
-    console.log('signOut 2 ', this.getToken());
     return this.authenticated = false;
   }
 
@@ -43,8 +41,8 @@ export class AuthService {
     return this.authenticated;
   }
 
-  setauthenticated(val: boolean) {
-    return this.authenticated = val ;
+  set isAuthenticated(val: boolean) {
+    this.authenticated = val ;
   }
 
 }

@@ -1,40 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import {RegisterUser} from '../../../models/user-register';
 import {AuthService} from '../../../services/authentication/auth.service';
-
+import {Router} from '@angular/router';
+import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  loginDto = {
+    email: '',
+    password: ''
+  };
 
-  authenticated;
-  public user: RegisterUser;
-
-
-
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
-    console.log('Authentic 1 ', this.authenticated);
-    this.authenticated = this.auth.isAuthenticated;
-    console.log('Authentic 2 ', this.authenticated);
-    this.user = new RegisterUser();
   }
 
-  signIn(fields) { // TODO auth
-    console.log('Hello');
-    console.log(fields.email);
-    console.log(fields.password);
-    this.auth.signIn(fields)
+  signIn(form: FormGroup) {
+    this.auth.signIn(this.loginDto)
       .subscribe(res => {
         console.log('Hello token');
         console.log(res);
         this.auth.saveToken(res);
-        this.auth.setauthenticated(true);
-        this.authenticated = true;
-      } );
+        this.auth.isAuthenticated = true;
+        this.router.navigate(['/']);
+      });
   }
 
   getToken() {
@@ -43,6 +36,6 @@ export class LoginComponent implements OnInit {
   }
 
   signOut() {
-    this.authenticated = this.auth.signOut();
+    this.auth.signOut();
   }
 }
