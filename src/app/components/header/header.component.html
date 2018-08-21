@@ -2,10 +2,10 @@
   <a class="navbar-brand" routerLink="#">Bookinglite</a>
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="userName">
         <a class="nav-link" routerLink="#">My bookings</a>
       </li>
-      <li class="nav-item" *ngIf="true">
+      <li class="nav-item" *ngIf="isOwner">
         <a class="nav-link" routerLink="#">My properties</a>
       </li>
     </ul>
