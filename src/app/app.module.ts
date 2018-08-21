@@ -24,6 +24,8 @@ import {AuthGuardService} from './services/authentication/auth-guard.service';
 import { BookingService} from './services/booking/booking.service';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
 import { AppRoutingModule } from './/app-routing.module';
+import {PhotoComponent} from './components/property/photo/photo.component';
+import { PhotoListComponent } from './components/property/photo-list/photo-list.component';
 
 
 
@@ -45,7 +47,9 @@ import { AppRoutingModule } from './/app-routing.module';
     BookingComponent,
     SearchComponent,
     ListBookingComponent,
-    HeaderComponent
+    HeaderComponent,
+    PhotoComponent,
+    PhotoListComponent
   ],
   imports: [
     BrowserModule,

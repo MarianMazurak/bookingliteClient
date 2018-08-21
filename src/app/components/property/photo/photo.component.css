@@ -1,0 +1,12 @@
+.photo{
+  border:1px solid #ccc!important;
+  padding:8px !important;
+  max-width: 230px;
+  height: 160px;
+  margin: 6px;
+  cursor: zoom-in;
+  transition: opacity .4s;
+}
+.photo:hover {
+  opacity: .8;
+}
