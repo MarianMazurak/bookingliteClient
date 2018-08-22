@@ -15,13 +15,10 @@ import { ListPropertyComponent } from './components/property/list-property/list-
 import { ApartmentComponent } from './components/apartment/apartment.component';
 import { CreateApartmentComponent } from './components/apartment/create-apartment/create-apartment.component';
 import { ListApartmentComponent } from './components/apartment/list-apartment/list-apartment.component';
-import { SelectedApartmentComponent } from './components/apartment/selected-apartment/selected-apartment.component';
 import { BookingComponent } from './components/booking/booking.component';
 import { SearchComponent } from './components/search/search.component';
 import { ListBookingComponent } from './components/booking/list-booking/list-booking.component';
 import { HeaderComponent } from './components/header/header.component';
-import {AuthGuardService} from './services/authentication/auth-guard.service';
-import { BookingService} from './services/booking/booking.service';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
 import { AppRoutingModule } from './/app-routing.module';
 import {PhotoComponent} from './components/property/photo/photo.component';
@@ -47,7 +44,6 @@ import { CityService } from './services/city/city.service';
     ApartmentComponent,
     CreateApartmentComponent,
     ListApartmentComponent,
-    SelectedApartmentComponent,
     BookingComponent,
     SearchComponent,
     ListBookingComponent,
