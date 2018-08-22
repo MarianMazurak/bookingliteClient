@@ -28,6 +28,8 @@ import { PropertyItemComponent } from './components/property/list-property/prope
 import { PropertyService } from './services/property/property.service';
 import { ReviewComponent } from './components/review/review.component';
 
+import { ApartmentService } from './services/apartment/apartment.service';
+
 import { CoutryService } from './services/country/coutry.service';
 import { CityService } from './services/city/city.service';
 
@@ -61,7 +63,7 @@ import { CityService } from './services/city/city.service';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    PropertyService,CoutryService,CityService],
+    PropertyService,CoutryService,CityService,ApartmentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
