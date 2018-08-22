@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Property } from '../../../../models/property';
+import { PropertyService } from '../../../../services/property/property.service';
+
 @Component ({
   selector: 'app-property-item',
   templateUrl: './property-item.component.html',
@@ -7,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PropertyItemComponent implements OnInit {
 
-  constructor() { }
+  constructor(private propertyService: PropertyService) { }
 
   ngOnInit() {
   }

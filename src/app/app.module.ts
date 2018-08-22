@@ -27,8 +27,9 @@ import { AppRoutingModule } from './/app-routing.module';
 import {PhotoComponent} from './components/property/photo/photo.component';
 import { PhotoListComponent } from './components/property/photo-list/photo-list.component';
 
-
-
+import { PropertyItemComponent } from './components/property/list-property/property-item/property-item.component';
+import { PropertyService } from './services/property/property.service';
+import { ReviewComponent } from './components/review/review.component';
 
 
 @NgModule({
@@ -49,7 +50,9 @@ import { PhotoListComponent } from './components/property/photo-list/photo-list.
     ListBookingComponent,
     HeaderComponent,
     PhotoComponent,
-    PhotoListComponent
+    PhotoListComponent,
+    PropertyItemComponent,
+    ReviewComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,8 @@ import { PhotoListComponent } from './components/property/photo-list/photo-list.
     AppRoutingModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true } ],
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    PropertyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
