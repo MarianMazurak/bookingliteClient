@@ -31,6 +31,9 @@ import { PropertyItemComponent } from './components/property/list-property/prope
 import { PropertyService } from './services/property/property.service';
 import { ReviewComponent } from './components/review/review.component';
 
+import { CoutryService } from './services/country/coutry.service';
+import { CityService } from './services/city/city.service';
+
 
 @NgModule({
   declarations: [
@@ -62,7 +65,7 @@ import { ReviewComponent } from './components/review/review.component';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    PropertyService],
+    PropertyService,CoutryService,CityService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
