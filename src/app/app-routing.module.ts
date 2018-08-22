@@ -4,13 +4,15 @@ import { LoginComponent } from './components/user/login/login.component';
 import { RegisterComponent } from './components/user/register/register.component';
 import {ListPropertyComponent} from './components/property/list-property/list-property.component';
 import {ListApartmentComponent} from './components/apartment/list-apartment/list-apartment.component';
+import {CreateApartmentComponent} from './components/apartment/create-apartment/create-apartment.component';
 
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent},
   { path: 'property-list', component: ListPropertyComponent},
-  { path: 'apartment-list', component: ListApartmentComponent}
+  { path: 'apartment-list', component: ListApartmentComponent},
+  { path: 'create-apartment', component: CreateApartmentComponent}
 ];
 
 
