@@ -1,3 +1,16 @@
-<p>
-  list-apartment works!
-</p>
+<div class="container">
+  <h1>Apartments List</h1>
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Amenities</th>
+      <th>Price</th>
+    </tr>
+    <tr *ngFor="let apartment of aprtmentsList">
+      <td>{{apartment.name}}</td>
+      <td><p *ngFor="let am of apartment.amenities">{{am.name}}</p></td>
+      <td>{{apartment.price}}</td>
+    </tr>
+  </table>
+</div>
