@@ -26,6 +26,7 @@ import {JwtInterceptor} from './helpers/jwt.interceptor';
 import { AppRoutingModule } from './/app-routing.module';
 import {PhotoComponent} from './components/property/photo/photo.component';
 import { PhotoListComponent } from './components/property/photo-list/photo-list.component';
+import { UploadPhotoListComponent } from './components/property/create-property/upload-photo-list/upload-photo-list.component';
 
 
 
@@ -49,7 +50,8 @@ import { PhotoListComponent } from './components/property/photo-list/photo-list.
     ListBookingComponent,
     HeaderComponent,
     PhotoComponent,
-    PhotoListComponent
+    PhotoListComponent,
+    UploadPhotoListComponent,
   ],
   imports: [
     BrowserModule,
