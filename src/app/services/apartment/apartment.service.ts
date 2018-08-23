@@ -11,27 +11,27 @@ import {CreateApartment} from '../../models/create-apartment';
   providedIn: 'root'
 })
 export class ApartmentService {
-  // private apartmentUrl = '/api/property/';
-  private apartmentUrl = '/api/property/1/apartment';
+  private apartmentUrl = '/api/property/';
   private typeUrl = '/api/create-apartment/apartment-type';
   private amenityUrl = '/api/create-apartment/amenities';
+  private propId: number;
 
   constructor(private http: HttpClient) { }
 
-  // public getAllApartments(propertyId: number): Observable<Apartment[]> {
-  //   return this.http.get<Apartment[]>(`${this.apartmentUrl}${propertyId}/apartment`);
-  // }
-
-  public getAllApartments(): Observable<Apartment[]> {
-    return this.http.get<Apartment[]>(this.apartmentUrl);
+  public setPropertyId(propertyId: number) {
+    this.propId = propertyId;
   }
 
-  public getAmenities(): Observable<Amenity[]> {
-    return this.http.get<Amenity[]>(this.amenityUrl);
+  public getAllApartments(): Observable<Apartment[]> {
+    return this.http.get<Apartment[]>(`${this.apartmentUrl}/${this.propId}/apartment`);
   }
 
   public getApartmentType(): Observable<ApartmentType[]> {
     return this.http.get<ApartmentType[]>(this.typeUrl);
+  }
+
+  public getAmenities(): Observable<Amenity[]> {
+    return this.http.get<Amenity[]>(this.amenityUrl);
   }
 
   public createApartment(createApartment: CreateApartment) {
