@@ -1,0 +1,12 @@
+.ion-md-close{
+  padding-top: 5%;
+}
+.ion-md-close:hover{
+  opacity: 0.5;
+}
+.btn{
+  margin: 20px;
+}
+.exist-photo{
+  max-height: 100px;
+}

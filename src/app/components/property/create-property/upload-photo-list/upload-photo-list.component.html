@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row justify-content-start">
+    <div class="col-3" *ngFor="let photo of existPhotos">
+      <input type="checkbox" (change)="markPhoto(photo)">
+      <img class="exist-photo" [src]="photo.url">
+    </div>
+  </div>
+  <button *ngIf="existPhotos.length > 0" type="button" class="btn btn-danger" (click)="deletePhotos()">Delete</button>
+</div>
+<div class="container" *ngIf="property">
+  <form>
+    <div class="row">
+      <div class="form-group">
+        <label for="File0">{{messageList[0]}}</label>
+        <input type="file" class="form-control-file" id="File0" #input0 (change)="addPhoto($event, 0)">
+      </div>
+      <i class="icon ion-md-close" (click)="clearInput(0)"></i>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <label for="File1">{{messageList[1]}}</label>
+        <input type="file" class="form-control-file" id="File1" #input1 (change)="addPhoto($event, 1)">
+      </div>
+      <i class="icon ion-md-close" (click)="clearInput(1)"></i>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <label for="File2">{{messageList[2]}}</label>
+        <input type="file" class="form-control-file" id="File2" #input2 (change)="addPhoto($event, 2)">
+      </div>
+      <i class="icon ion-md-close" (click)="clearInput(2)"></i>
+    </div>
+    <div class="row">
+      <button type="submit" class="btn btn-primary" (click)="uploadPhotos()">Upload</button>
+      <button type="submit" class="btn btn-secondary" (click)="clearAllInputs()">add more</button>
+    </div>
+  </form>
+</div>

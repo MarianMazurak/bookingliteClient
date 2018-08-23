@@ -28,6 +28,7 @@
   <div class="form-group">
     <label class="col-form-label">Country</label>
     <select class="custom-select">
+      <option *ngFor="let country of countries" (change)="getCities(country.id)">{{country.name}}</option>
 
     </select>
   </div>
@@ -35,12 +36,14 @@
   <div class="form-group">
     <label class="col-form-label">City</label>
     <select class="custom-select">
+      <option *ngFor="let city of cities" (click)="selectedCityId = city.id">{{city.name}}</option>
     </select>
   </div>
 
   <div class="form-group">
     <label class="col-form-label">Property Type</label>
     <select class="custom-select">
+      <option *ngFor="let propertyType of propertyTypes" (click)="selectedPropertyTypeId = propertyType.id">{{propertyType.name}}</option>
     </select>
   </div>
 

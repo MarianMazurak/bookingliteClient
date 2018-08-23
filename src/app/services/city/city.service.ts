@@ -12,7 +12,7 @@ export class CityService {
 
   constructor(private http: HttpClient) { }
 
-  public getCity(): Observable<City[]> {
-    return this.http.get<City[]>("api/country/{id}/cities")
+  public getCity(countryId: number): Observable<City[]> {
+    return this.http.get<City[]>(`api/country/${countryId}/cities`)
   }
 }
