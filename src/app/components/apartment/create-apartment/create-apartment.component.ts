@@ -17,7 +17,6 @@ export class CreateApartmentComponent implements OnInit {
   apartmentTypes: ApartmentType[];
   amenities: Amenity[];
   createdApartment: CreateApartment;
-  selected: number[] = [];
 
   constructor(private auth: AuthService,
     private apartmentService: ApartmentService
