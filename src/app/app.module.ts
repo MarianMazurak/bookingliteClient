@@ -53,7 +53,7 @@ import { UploadPhotoListComponent } from './components/property/create-property/
     PhotoComponent,
     PhotoListComponent,
 
-    
+
     UploadPhotoListComponent,
   ],
   imports: [
