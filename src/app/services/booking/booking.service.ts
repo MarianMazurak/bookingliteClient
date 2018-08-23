@@ -43,11 +43,11 @@ export class BookingService {
   isCanceled( bookingStatus: string):boolean {
     const canceledStatus = 'Canceled';
     if(bookingStatus == canceledStatus){
-      console.log('iscancel booking TRUE');  
+     //console.log('iscancel booking TRUE');  
       return true;
     }
     else{
-      console.log('iscancel booking FALSE');  
+      //console.log('iscancel booking FALSE');  
       return false;
     }
   }
@@ -61,11 +61,11 @@ export class BookingService {
     //console.log('date1', checkIn);
     //console.log('date2', checkOut);
     if(dateChackIn > this.nowDate || dateChackOut > this.nowDate){
-      console.log('isCheckBookingDate', true);
+      //console.log('isCheckBookingDate', true);
       return true;
     }
     else {
-      console.log('isCheckBookingDate', false);
+      //console.log('isCheckBookingDate', false);
       return false;
     }
   }

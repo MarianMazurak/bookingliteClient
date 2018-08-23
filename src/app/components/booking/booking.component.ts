@@ -17,7 +17,7 @@ import { Router } from "@angular/router";
 export class BookingComponent implements OnInit {
 
   @Input() booking: Booking;
-  private bookingUrl = 'api/bookings';
+  private bookingsUrl = '/bookings';
 
   constructor(private route: ActivatedRoute,
     private bookingService: BookingService,
@@ -40,7 +40,7 @@ export class BookingComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.bookingService.cancelBookings(id)
       .subscribe(res => {console.log('cancellllll done');
-      this.router.navigate(['/bookings']);// in constant!!!!!!!!!!
+      this.backToBookings();
       });
   }  
 
@@ -63,6 +63,10 @@ export class BookingComponent implements OnInit {
       console.log('in isReview true');
       return false;
     }
+  }
+
+  backToBookings(){
+    this.router.navigate([this.bookingsUrl]);
   }
 
 }

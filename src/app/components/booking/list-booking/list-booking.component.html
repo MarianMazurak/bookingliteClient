@@ -38,7 +38,6 @@
                     <br>
                     <small>Apartment type: {{booking.apartmentDto.apartmentType.name}}
                     </small>
-
                   </div>
                 </div>
                 <div class="col-md-3 border-left card-body">
@@ -62,7 +61,11 @@
   </li>
 </ul>
 
-<br><hr>
+<ul style="list-style: none">
+<div class="container">
+<br><hr><br>
+</div>
+</ul>
 
 <ul style="list-style: none">
   <li *ngFor="let booking of bookings">
@@ -93,30 +96,30 @@
                     </ul>
                   </div>
                   <div class="list-location">
-                   <small>P desc</small>
-                  </div>
-                  <div class="list-descrip">
                     <small>Dates: {{booking.checkIn | date:'dd-MM-yyyy' }} - {{booking.checkOut | date:'dd-MM-yyyy' }}
-                    </small>
-                    <small>Number of guests: {{booking.apartmentDto.numberOfGuests}}
-                    </small>
-                    <br>
-                    <small>Apartment type: {{booking.apartmentDto.apartmentType.name}}
-                    </small>
-
-                  </div>
+                      </small>
                 </div>
-                <div class="col-md-3 border-left card-body">
-                  <ul class="list-unstyled">
-                    <li><h4>Status: {{booking.bookingStatus.name}}</h4></li>                    
-                    <li><h3>Price: {{booking.totalPrice}} </h3></li>
-                    <!-- <li class="text-secondary">
-                      <small> Reviews</small>
-                      <small>{property.review}</small>-->
-                    <!-- </li> --> 
-                  </ul>
-                  <!-- <button type="button" routerLink="" class="btn btn-outline-primary">Available apartment</button> -->
+                <div class="list-descrip">                    
+                  <small>Number of guests: {{booking.apartmentDto.numberOfGuests}}
+                  </small>
+                  <br>
+                  <small>Apartment type: {{booking.apartmentDto.apartmentType.name}}
+                  </small>
                 </div>
+                </div>
+                 <div class="col-md-3 border-left card-body">
+                    <ul class="list-unstyled">
+                      <li><h4>Status: {{booking.bookingStatus.name}}</h4></li>                    
+                      <li><h3>Price: {{booking.totalPrice}} </h3></li>
+                      <!-- <li class="text-secondary">
+                        <small> Reviews</small>
+                        <small>{property.review}</small>-->
+                      <!-- </li> --> 
+                    </ul>
+                    <div>
+                      <button type="button" routerLink="" class="btn btn-outline-primary">Review</button>
+                    </div>
+                    </div>
               </div>
             </div>
           </div>
