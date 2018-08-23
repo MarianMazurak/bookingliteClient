@@ -23,6 +23,9 @@ import {JwtInterceptor} from './helpers/jwt.interceptor';
 import { AppRoutingModule } from './/app-routing.module';
 import {PhotoComponent} from './components/property/photo/photo.component';
 import { PhotoListComponent } from './components/property/photo-list/photo-list.component';
+import { UploadPhotoListComponent } from './components/property/create-property/upload-photo-list/upload-photo-list.component';
+
+
 
 import { PropertyItemComponent } from './components/property/list-property/property-item/property-item.component';
 import { PropertyService } from './services/property/property.service';
@@ -53,8 +56,10 @@ import { CityService } from './services/city/city.service';
     HeaderComponent,
     PhotoComponent,
     PhotoListComponent,
+    UploadPhotoListComponent,
     PropertyItemComponent,
     ReviewComponent
+
   ],
   imports: [
     BrowserModule,

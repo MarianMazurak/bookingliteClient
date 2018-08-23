@@ -23,10 +23,12 @@ export class PropertyService {
     return this.http.post("localhost:8080/api/property", model, httpOptions);
   }
 
-  public getProperties(): Observable<Property[]>{
-     return this.http.get<Property[]>("api/property")
+  public getProperties(): Observable<Property[]> {
+    return this.http.get<Property[]>('api/property');
   }
-  public getPropertyById(id: number): Observable<Property>{
-    return this.http.get<Property>("api/property/" + id);
+
+  public getPropertyById(id: number): Observable<Property> {
+    return this.http.get<Property>('api/property/' + id);
+
   }
 }
