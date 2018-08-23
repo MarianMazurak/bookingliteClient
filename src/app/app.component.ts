@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import {PropertyService} from './services/property/property.service';
-import {Property} from './models/property';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +7,4 @@ import {Property} from './models/property';
 })
 export class AppComponent {
   title = 'bookingliteClient';
-  constructor() {}
 }

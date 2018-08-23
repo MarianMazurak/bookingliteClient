@@ -32,6 +32,8 @@ import { UploadPhotoListComponent } from './components/property/create-property/
 
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,13 +46,14 @@ import { UploadPhotoListComponent } from './components/property/create-property/
     ApartmentComponent,
     CreateApartmentComponent,
     ListApartmentComponent,
-    SelectedApartmentComponent,
     BookingComponent,
     SearchComponent,
     ListBookingComponent,
     HeaderComponent,
     PhotoComponent,
     PhotoListComponent,
+
+    
     UploadPhotoListComponent,
   ],
   imports: [
