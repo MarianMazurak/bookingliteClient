@@ -1,3 +1,55 @@
-<p>
-  list-property works!
-</p>
+<ul style="list-style: none">
+  <li *ngFor="let property of propertyList">
+    <div class="container">
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-3">
+                  <img src={{property.photos[0]}}>
+                </div>
+                <div class="col-md-6  card-body">
+                  <div class="list-title">
+                    <ul class="list-inline list-unstyled">
+                      <li class="list-inline-item"><h4>{{property.name}}</h4></li>
+                      <li class="list-inline-item text-warning"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                        class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half"></i></li>
+                      <li class="list-inline-item text-success"><i class="fa fa-thumbs-up"></i></li>
+                      <ul>
+                        <li><p *ngFor="let facility of property.facilities">{{facility.name}}</p></li>
+                      </ul>
+                    </ul>
+                  </div>
+                  <div class="list-location">
+                   <small>{{property.description}}</small>
+                  </div>
+                  <div class="list-descrip">
+                    <small>{{property.contactEmail}}
+                    </small>
+                    <small>{{property.phoneNumber}}
+                    </small>
+                    <br>
+                    <small>{{property.propertyType.name}}
+                    </small>
+
+                  </div>
+                </div>
+                <div class="col-md-3 border-left card-body">
+                  <ul class="list-unstyled">
+                    <li><h3>Rating {{property.rating}}</h3></li>
+                    <li class="text-secondary">
+                      <small>{{property.id}} Reviews</small>
+                      <!--<small>{property.review}</small>-->
+                    </li>
+                  </ul>
+                  <button type="button" routerLink="" class="btn btn-outline-primary">Available apartment</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>

@@ -15,13 +15,10 @@ import { ListPropertyComponent } from './components/property/list-property/list-
 import { ApartmentComponent } from './components/apartment/apartment.component';
 import { CreateApartmentComponent } from './components/apartment/create-apartment/create-apartment.component';
 import { ListApartmentComponent } from './components/apartment/list-apartment/list-apartment.component';
-import { SelectedApartmentComponent } from './components/apartment/selected-apartment/selected-apartment.component';
 import { BookingComponent } from './components/booking/booking.component';
 import { SearchComponent } from './components/search/search.component';
 import { ListBookingComponent } from './components/booking/list-booking/list-booking.component';
 import { HeaderComponent } from './components/header/header.component';
-import {AuthGuardService} from './services/authentication/auth-guard.service';
-import { BookingService} from './services/booking/booking.service';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
 import { AppRoutingModule } from './/app-routing.module';
 import {PhotoComponent} from './components/property/photo/photo.component';
@@ -30,8 +27,14 @@ import { UploadPhotoListComponent } from './components/property/create-property/
 
 
 
+import { PropertyItemComponent } from './components/property/list-property/property-item/property-item.component';
+import { PropertyService } from './services/property/property.service';
+import { ReviewComponent } from './components/review/review.component';
 
+import { ApartmentService } from './services/apartment/apartment.service';
 
+import { CoutryService } from './services/country/coutry.service';
+import { CityService } from './services/city/city.service';
 
 
 @NgModule({
@@ -52,9 +55,10 @@ import { UploadPhotoListComponent } from './components/property/create-property/
     HeaderComponent,
     PhotoComponent,
     PhotoListComponent,
-
-
     UploadPhotoListComponent,
+    PropertyItemComponent,
+    ReviewComponent
+
   ],
   imports: [
     BrowserModule,
@@ -63,7 +67,8 @@ import { UploadPhotoListComponent } from './components/property/create-property/
     AppRoutingModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true } ],
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    PropertyService,CoutryService,CityService,ApartmentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
