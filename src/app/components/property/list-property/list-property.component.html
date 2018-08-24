@@ -43,7 +43,9 @@
                       <!--<small>{property.review}</small>-->
                     </li>
                   </ul>
-                  <button type="button" routerLink="" class="btn btn-outline-primary">Available apartment</button>
+                  <button type="button" routerLink="apartment-list"
+                          class="btn btn-outline-primary"
+                          (click)="setPropertyIdInApartmentService(property.id)">Select apartment</button>
                 </div>
               </div>
             </div>
@@ -53,3 +55,4 @@
     </div>
   </li>
 </ul>
+<router-outlet></router-outlet>

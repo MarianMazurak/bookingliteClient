@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../services/authentication/auth.service';
 import {ApartmentService} from '../../../services/apartment/apartment.service';
 import {Apartment} from '../../../models/apartment';
@@ -22,9 +22,8 @@ export class ListApartmentComponent implements OnInit {
   }
 
   public getApartments() {
-    this.apartmentService.getAllApartments().subscribe(apartments => {
-      this.aprtmentsList = apartments;
-      console.log('apartments: ', apartments);
+    this.apartmentService.getAllApartments().subscribe(apartment => {
+      this.aprtmentsList = apartment;
     });
   }
 
