@@ -36,6 +36,7 @@ import { ApartmentService } from './services/apartment/apartment.service';
 import { CoutryService } from './services/country/coutry.service';
 import { CityService } from './services/city/city.service';
 import {SearchFormComponent} from './components/search/search-form/search-form.component';
+import { EditPropertyComponent } from './components/property/edit-property/edit-property.component';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import {SearchFormComponent} from './components/search/search-form/search-form.c
     UploadPhotoListComponent,
     PropertyItemComponent,
     ReviewComponent,
-    SearchFormComponent
+    SearchFormComponent,
+    EditPropertyComponent
   ],
   imports: [
     BrowserModule,
