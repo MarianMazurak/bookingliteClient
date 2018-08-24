@@ -11,12 +11,6 @@ export class EditPropertyComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) { }
 
-  ngOnInit() {
-    this.route.paramMap.pipe(
-      switchMap( params =>  params.get('id'))
-    ).subscribe( res => {
-      console.log(res);
-    });
-  }
+  ngOnInit() {}
 
 }
