@@ -7,7 +7,7 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-md-3">
-                  <img src={{property.photos[0]}}>
+                  <img class="img-responsive" alt="No Photo" src={{property.photos[0].url}}>
                 </div>
                 <div class="col-md-6  card-body">
                   <div class="list-title">
@@ -22,7 +22,7 @@
                     </ul>
                   </div>
                   <div class="list-location">
-                   <small>{{property.description}}</small>
+                    <small>{{property.description}}</small>
                   </div>
                   <div class="list-descrip">
                     <small>{{property.contactEmail}}
