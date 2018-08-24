@@ -33,10 +33,6 @@ export class ListBookingComponent implements OnInit {
     return  this.bookingService.isCanceled(bookingStatus);
   }
 
-  // isCheckBookingDate(){
-  //   console.log('heloooooooooooo');
-  //   return true;
-  // }
   isCheckBookingDate(checkIn, checkOut):boolean {
     return this.bookingService.isCheckBookingDate(checkIn, checkOut);
   }
