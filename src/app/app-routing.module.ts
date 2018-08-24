@@ -8,11 +8,15 @@ import { CreatePropertyComponent } from './components/property/create-property/c
 
 import {ListApartmentComponent} from './components/apartment/list-apartment/list-apartment.component';
 import {CreateApartmentComponent} from './components/apartment/create-apartment/create-apartment.component';
+import { ListBookingComponent } from './components/booking/list-booking/list-booking.component';
+import { BookingComponent } from './components/booking/booking.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent},
-  {path : 'create-property', component: CreatePropertyComponent },
+  { path: 'bookings', component: ListBookingComponent },
+  { path: 'booking/:id', component: BookingComponent },
+  { path: 'create-property', component: CreatePropertyComponent },
   { path: 'property-list', component: ListPropertyComponent},
   { path: 'apartment-list', component: ListApartmentComponent},
   { path: 'create-apartment', component: CreateApartmentComponent}
