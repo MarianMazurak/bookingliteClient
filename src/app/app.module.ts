@@ -29,6 +29,7 @@ import { UploadPhotoListComponent } from './components/property/create-property/
 
 import { PropertyItemComponent } from './components/property/list-property/property-item/property-item.component';
 import { PropertyService } from './services/property/property.service';
+import { PropertyTypeService } from './services/propertyTypy/property-type.service';
 import { ReviewComponent } from './components/review/review.component';
 
 import { ApartmentService } from './services/apartment/apartment.service';
@@ -71,7 +72,7 @@ import { EditPropertyComponent } from './components/property/edit-property/edit-
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    PropertyService,CoutryService,CityService,ApartmentService],
+    PropertyService,CoutryService,CityService,ApartmentService,PropertyTypeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
