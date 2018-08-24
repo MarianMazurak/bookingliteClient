@@ -2,6 +2,7 @@ import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Property} from '../../../../models/property';
 import {HttpClient} from '@angular/common/http';
 import {PropertyService} from '../../../../services/property/property.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-upload-photo-list',
@@ -9,7 +10,7 @@ import {PropertyService} from '../../../../services/property/property.service';
   styleUrls: ['./upload-photo-list.component.css']
 })
 export class UploadPhotoListComponent implements OnInit {
-  @Input()
+  /*@Input()*/
   propertyId: number;
   property: Property;
   existPhotos = [];
@@ -22,11 +23,12 @@ export class UploadPhotoListComponent implements OnInit {
   @ViewChild('input2')
   input2;
   inputs = [];
-  constructor(private http: HttpClient, private propertyService: PropertyService) {}
+  constructor(private http: HttpClient, private propertyService: PropertyService, private route: ActivatedRoute) {}
   ngOnInit() {
     this.initExistPhotos();
   }
   initExistPhotos() {
+    this.propertyId = Number.parseInt( this.route.snapshot.paramMap.get('id') );
     this.propertyService.getPropertyById(this.propertyId).subscribe(
       pr => {
         this.property = pr;
