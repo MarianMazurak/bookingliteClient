@@ -29,11 +29,20 @@ export class ListBookingComponent implements OnInit {
     } );
   }
 
+  isCanceled( bookingStatus: string):boolean {
+    return  this.bookingService.isCanceled(bookingStatus);
+  }
+
   // isCheckBookingDate(){
   //   console.log('heloooooooooooo');
   //   return true;
   // }
   isCheckBookingDate(checkIn, checkOut):boolean {
     return this.bookingService.isCheckBookingDate(checkIn, checkOut);
+  }
+
+  calculateNumberOfDates(checkIn, checkOut): number{
+    console.log('calculateNumberOfDates component');
+    return this.bookingService.calculateNumberOfDates(checkIn, checkOut);
   }
 }
