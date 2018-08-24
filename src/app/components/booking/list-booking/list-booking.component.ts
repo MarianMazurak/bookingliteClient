@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Booking } from '../../../models/booking';
+import { BookingService } from '../../../services/booking/booking.service';
+import { AuthService } from '../../../services/authentication/auth.service';
 
 @Component({
   selector: 'app-list-booking',
@@ -7,9 +10,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListBookingComponent implements OnInit {
 
-  constructor() { }
+  authenticated;
+  bookings: Booking[];
+  today: Date;
+
+  constructor(private bookingService: BookingService,
+              private auth: AuthService ) { }
 
   ngOnInit() {
+    this.authenticated = this.auth.isAuthenticated;
+    this.getBookings();
+    this.today =new Date();
   }
 
+  getBookings(): void {
+    this.bookingService.getBookings().subscribe(bookings => {  this.bookings= bookings,
+      console.log('bbbb', bookings);
+    } );
+  }
+
+  // isCheckBookingDate(){
+  //   console.log('heloooooooooooo');
+  //   return true;
+  // }
+  isCheckBookingDate(checkIn, checkOut):boolean {
+    return this.bookingService.isCheckBookingDate(checkIn, checkOut);
+  }
 }
