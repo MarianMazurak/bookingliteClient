@@ -52,8 +52,15 @@ export class BookingService {
     }
   }
 
+  calculateNumberOfDates(checkIn, checkOut): number{
+    let dateChackIn = new Date (checkIn);
+    let dateChackOut = new Date (checkOut);
+    let oneDay= 24*60*60*1000;
+    return Math.round((dateChackOut.getTime() - dateChackIn.getTime()) / (oneDay) );  
+  }
+
   isCheckBookingDate(checkIn, checkOut):boolean {
-    let dateChackIn = new Date (checkIn)
+    let dateChackIn = new Date (checkIn);
     let dateChackOut = new Date (checkOut);
     this.nowDate = new Date();
     //console.log('date', d);

@@ -12,7 +12,6 @@ import { Router } from "@angular/router";
   selector: 'app-booking',
   templateUrl: './booking.component.html',
   styleUrls: ['./booking.component.css']
-  //template:    'yyyy-MM-dd HH:mm:ss'
 })
 export class BookingComponent implements OnInit {
 
