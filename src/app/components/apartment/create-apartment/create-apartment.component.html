@@ -10,7 +10,7 @@
       <h5>Apartment Type</h5>
       <div class="custom-control custom-radio" *ngFor="let type of apartmentTypes">
         <input type="radio" id="customRadio{{type.id}}"
-               name="customRadio" class="custom-control-input">
+               name="customRadio" class="custom-control-input" (click)="createdApartment.typeId = type.id">
         <label class="custom-control-label" for="customRadio{{type.id}}">{{type.name}}</label>
       </div>
     </div>
@@ -18,7 +18,8 @@
     <div class="form-group">
       <h5>Amenities</h5>
       <div class="custom-control custom-checkbox" *ngFor="let am of amenities">
-        <input type="checkbox" class="custom-control-input" id="customCheck{{am.id}}">
+        <input type="checkbox" class="custom-control-input" id="customCheck{{am.id}}"
+          (change)="workWithCheckboxes(am.id)">
         <label class="custom-control-label" for="customCheck{{am.id}}">{{am.name}}</label>
       </div>
     </div>

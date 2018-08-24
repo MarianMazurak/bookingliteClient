@@ -1,14 +1,15 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" routerLink="#">Bookinglite</a>
-  <div class="collapse navbar-collapse" id="navbarColor01">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item" *ngIf="userName">
-        <a class="nav-link" routerLink="#">My bookings</a>
-      </li>
-      <li class="nav-item" *ngIf="isOwner">
-        <a class="nav-link" routerLink="#">My properties</a>
-      </li>
-    </ul>
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" routerLink="#">Bookinglite</a>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" *ngIf="userName">
+          <a class="nav-link" routerLink="#">My bookings</a>
+        </li>
+        <li class="nav-item" *ngIf="isOwner">
+          <a class="nav-link" routerLink="#">My properties</a>
+        </li>
+      </ul>
 
       <ng-container *ngIf="userName; else loginbot">
         <a class="nav-link" routerLink="#"><i class="icon ion-md-body hed-buts"></i></a>
@@ -16,8 +17,9 @@
         <a class="nav-link" routerLink="#"><span class="hed-buts">Log out</span></a>
       </ng-container>
       <ng-template #loginbot>
-        <a class="nav-link"  routerLink="login"><span class="hed-buts">Log in</span></a>
+        <a class="nav-link" routerLink="login"><span class="hed-buts">Log in</span></a>
       </ng-template>
 
-  </div>
-</nav>
+    </div>
+  </nav>
+</div>

@@ -4,6 +4,7 @@ import {Amenity} from '../../../models/amenity';
 import {Apartment} from '../../../models/apartment';
 import {ApartmentService} from '../../../services/apartment/apartment.service';
 import {AuthService} from '../../../services/authentication/auth.service';
+import {CreateApartment} from '../../../models/create-apartment';
 
 @Component({
   selector: 'app-create-apartment',
@@ -15,7 +16,7 @@ export class CreateApartmentComponent implements OnInit {
   private authenticated;
   apartmentTypes: ApartmentType[];
   amenities: Amenity[];
-  apartment: Apartment;
+  createdApartment: CreateApartment;
 
   constructor(private auth: AuthService,
     private apartmentService: ApartmentService
@@ -25,6 +26,8 @@ export class CreateApartmentComponent implements OnInit {
     this.authenticated = this.auth.isAuthenticated;
     this.getApartmentType();
     this.getAmenities();
+    this.createdApartment = new CreateApartment();
+    this.createdApartment.amenitiesId = [];
   }
 
   public getApartmentType() {
@@ -42,7 +45,17 @@ export class CreateApartmentComponent implements OnInit {
   }
 
   public createApartments() {
-    this.apartmentService.createApartment(this.apartment);
+    console.log(this.createdApartment.amenitiesId);
+    //this.apartmentService.createApartment(this.createdApartment);
+  }
+
+  public workWithCheckboxes(id: number) {
+    const index = this.createdApartment.amenitiesId.indexOf(id);
+    if (index !== -1) {
+      this.createdApartment.amenitiesId.splice(index, 1);
+      return;
+    }
+    this.createdApartment.amenitiesId.push(id);
   }
 
 }
