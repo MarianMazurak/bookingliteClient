@@ -14,7 +14,9 @@ import {Observable} from 'rxjs';
 export class ListPropertyComponent implements OnInit {
 
   private authentication;
+
   propertyList: Property[];
+
 
   reviewCount: number;
 
@@ -25,7 +27,7 @@ export class ListPropertyComponent implements OnInit {
 
   ngOnInit() {
     this.authentication = this.auth.isAuthenticated;
-    this.getProperties();
+      this.getProperties();
   }
 
   public getProperties() {
