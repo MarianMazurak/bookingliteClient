@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, enableProdMode } from '@angular/core';
 import {AuthService} from '../../../services/authentication/auth.service';
 import {ReviewService} from '../../../services/review/review.service';
 import {ActivatedRoute} from '@angular/router';
-import {Review} from '../../../models/review';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-review-create',
@@ -11,7 +11,11 @@ import {Review} from '../../../models/review';
 })
 export class ReviewCreateComponent implements OnInit {
   private authenticated;
-  review: Review;
+  reviewDto = {
+    rating: '',
+    message: '',
+    guests: ''
+  };
   constructor(private auth: AuthService,
               private reviewService: ReviewService,
               private route: ActivatedRoute) { }
@@ -19,9 +23,9 @@ export class ReviewCreateComponent implements OnInit {
   ngOnInit() {
     this.authenticated = this.auth.isAuthenticated;
   }
-  createReview() {
+  createReview(form: FormGroup) {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.reviewService.createReview(this.review, id);
+   // this.reviewService.createReview(this.reviewDto, id);
   }
 
 }
