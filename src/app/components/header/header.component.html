@@ -3,23 +3,18 @@
     <a class="navbar-brand" routerLink="#">Bookinglite</a>
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item" *ngIf="userName">
+        <li class="nav-item" *ngIf="this.auth.isAuthenticated">
           <a class="nav-link" routerLink="#">My bookings</a>
         </li>
-        <li class="nav-item" *ngIf="isOwner">
-          <a class="nav-link" routerLink="#">My properties</a>
-        </li>
       </ul>
-
-      <ng-container *ngIf="userName; else loginbot">
+      <ng-container *ngIf="this.auth.isAuthenticated; else loginbot">
         <a class="nav-link" routerLink="#"><i class="icon ion-md-body hed-buts"></i></a>
-        <a class="nav-link" routerLink="#"><span class="hed-buts">{{userName}}</span></a>
-        <a class="nav-link" routerLink="#"><span class="hed-buts">Log out</span></a>
+        <a class="nav-link" routerLink="#"><span class="hed-buts">My profile</span></a>
+        <a class="nav-link" routerLink="login"><span class="hed-buts">Log out</span></a>
       </ng-container>
       <ng-template #loginbot>
         <a class="nav-link" routerLink="login"><span class="hed-buts">Log in</span></a>
       </ng-template>
-
     </div>
   </nav>
 </div>
