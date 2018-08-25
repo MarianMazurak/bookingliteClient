@@ -31,7 +31,6 @@ export class AuthService {
         responseType: 'text'
       }  );
   }
-  
 
   saveToken(token: string) {
     localStorage.setItem('token', token);
