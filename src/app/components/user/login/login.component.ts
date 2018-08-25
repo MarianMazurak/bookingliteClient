@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
         console.log(res);
         this.auth.saveToken(res);
         this.auth.isAuthenticated = true;
-        this.router.navigate(['/']);
+        this.router.navigate(['/search']);
       });
   }
 
