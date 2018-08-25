@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { AuthService } from '../../../services/authentication/auth.service';
+import { RegisterDto } from '../../../models/registerDto';
 
 @Component({
   selector: 'app-register',
@@ -6,10 +9,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  registerDto: RegisterDto;
 
-  constructor() { }
+
+
+  constructor(private auth: AuthService) { }
 
   ngOnInit() {
+  }
+  signUp(registerForm: FormGroup) {
+    console.log('in register');
+    console.log(this.registerDto);
   }
 
 }

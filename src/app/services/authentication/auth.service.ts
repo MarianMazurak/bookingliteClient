@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {RegisterUser} from '../../models/user-register';
-
+import {LoginDto} from '../../models/loginDto';
+import { Router } from '@angular/router';
+import { RegisterDto } from '../../models/registerDto';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,11 +11,11 @@ export class AuthService {
 
   private authenticated = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
-  signIn(model: RegisterUser): Observable<any> {
+  signIn(model: LoginDto): Observable<any> {
     console.log('In auth service');
-    console.log('json', JSON.stringify({email: model.email, password: model.password}));
+    console.log('json', JSON.stringify(model));
     return this.http.post('/api/login', JSON.stringify({email: model.email, password: model.password}),
       {headers: new HttpHeaders({
           'Content-Type':  'application/json' }),
@@ -22,19 +23,28 @@ export class AuthService {
       }  );
   }
 
+  signUp(model: RegisterDto): Observable<any> {
+    console.log('json', JSON.stringify(model));
+    return this.http.post('/api/login', JSON.stringify(model),
+      {headers: new HttpHeaders({
+          'Content-Type':  'application/json' }),
+        responseType: 'text'
+      }  );
+  }
+  
+
   saveToken(token: string) {
-    console.log('save token', token);
     localStorage.setItem('token', token);
   }
 
   getToken(): string {
-    console.log('in get token');
     return localStorage.getItem('token');
   }
 
-  signOut(): boolean {
-    localStorage.clear();
-    return this.authenticated = false;
+  signOut(): void {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+    this.authenticated = false;
   }
 
   get isAuthenticated() {
@@ -42,7 +52,6 @@ export class AuthService {
   }
 
   set isAuthenticated(val: boolean) {
-    this.authenticated = val ;
+    this.authenticated = val;
   }
-
 }

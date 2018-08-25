@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {RegisterUser} from '../../../models/user-register';
-import {AuthService} from '../../../services/authentication/auth.service';
-import {Router} from '@angular/router';
+import { LoginDto } from '../../../models/loginDto';
+import { AuthService } from '../../../services/authentication/auth.service';
+import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-login',
@@ -9,10 +9,7 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginDto = {
-    email: '',
-    password: ''
-  };
+  loginDto: LoginDto = new LoginDto();
 
   constructor(private auth: AuthService, private router: Router) { }
 
@@ -20,6 +17,7 @@ export class LoginComponent implements OnInit {
   }
 
   signIn(form: FormGroup) {
+    console.log(form);
     this.auth.signIn(this.loginDto)
       .subscribe(res => {
         console.log('Hello token');
@@ -29,6 +27,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/']);
       });
   }
+
 
   getToken() {
     console.log('in getToken component');
