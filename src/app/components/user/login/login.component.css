@@ -1,3 +1,4 @@
 .ng-invalid:not(.ng-pristine) {
     border-color: red;
 }
+

@@ -1,18 +1,112 @@
-<p>
-  booking works!
-</p>
-<!--<button (click)="getBookings()">get Bookings</button>-->
-<!--<ul>-->
-  <!--<li *ngFor="let booking of bookings">-->
-    <!--<h4>Booking # {{booking.bookingId}}</h4>-->
-<!--</ul>-->
-<!--<div *ngIf="authenticated">-->
-  <!--<h1>Hello in system!!!</h1>-->
-<!--</div>-->
-<!-- <ul> -->
-<!-- <li *ngFor = "let booking of bookings  routerLink="booking/{{booking.bookingId}}">
-  <h4>Booking # {{booking.bookingId}}</h4>
-{{booking.bookingId}} - {{booking.apartment}}- {{booking.user}} - {{booking.checkIn}} -
-{{booking.checOut}} - {{booking.totalPrice}} - {{booking.bookingStatus}} - {{booking.review}}
-</li>
+<h1>Booking</h1>
+
+<ul *ngIf="booking" style="list-style: none">
+    <div class="container">
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <!-- <div class="col-md-3">
+                  <img src={{property.photos[0]}}>
+                </div> -->
+                <div class="col-md-6  card-body">
+                  <div class="list-title">
+                    <ul class="list-inline list-unstyled">
+                      <li class="list-inline-item">
+                          <a routerLink="/booking/{{booking.bookingId}}">
+                            <h4>Booking # {{booking.bookingId}}</h4>     
+                          </a>
+                      </li>
+                      <li class="list-inline-item text-warning"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                        class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half"></i></li>
+                      <li class="list-inline-item text-success"><i class="fa fa-thumbs-up"></i></li>
+                      <!-- <ul>
+                        <li><p *ngFor="let facility of property.facilities">{{facility.name}}</p></li>
+                      </ul> -->
+                    </ul>
+                  </div>
+                  <div class="list-location">
+                      <h4>Price: {{booking.totalPrice}} USD</h4>   
+                      <h4>Status: {{booking.bookingStatus.name}}</h4>    
+                  </div>
+                  <div class="list-descrip">        
+                    <small>Dates: {{booking.checkIn | date:'dd-MM-yyyy' }} - {{booking.checkOut | date:'dd-MM-yyyy' }}</small>          
+                    <br>
+                    <small>Number of guests: {{booking.apartmentDto.numberOfGuests}}</small>                    
+                    <br><br>
+                    <h5>Apartment:</h5>
+                    <small>Actual Price: {{booking.apartmentDto.price}} USD</small>                      
+                    <br>
+                    <small>Amenties: 
+                      <small *ngFor= "let am of booking.apartmentDto.amenities">{{am.name}}; </small>
+                    </small>                      
+                    <br>
+                    <small>Number of guests: {{booking.apartmentDto.numberOfGuests}}</small>                      
+                    <br><br>
+                    <h5>Hotel:</h5>
+                    <small>Rating: </small>                      
+                    <br>
+                    <small>Address: </small>                      
+                    <br>
+                    <small>Phone number: </small>                      
+                    <br>
+                    <small>Email: </small>                      
+                    <br>
+                    <div *ngIf= "booking?.reviewDto">
+                      <br>
+                      <h5>Your review:</h5>
+                      <small>Rating: {{booking.reviewDto.rating}}</small>
+                      <br>
+                      <small>Message: {{booking.reviewDto.message}}</small>
+                      <br>
+                     </div>
+                  </div>
+                </div>
+                <!-- <div class="col-md-3 border-left card-body">
+                    <ul class="list-unstyled">
+                      <li><h4>Status: {{booking.bookingStatus.name}}</h4></li>                    
+                      <li><h3>Price: {{booking.totalPrice}} </h3></li>
+                       <li class="text-secondary">
+                        <small> Reviews</small>
+                        <small>{property.review}</small>-->
+                      <!-- </li> --> 
+                    <!-- </ul> -->
+                    <!-- <button type="button" routerLink="" class="btn btn-outline-primary">Available apartment</button> -->
+                  <!-- </div> --> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</ul>
+
+<!-- <ul>
+  <li *ngIf="booking">
+   <h4>Booking # {{booking.bookingId}}</h4>
+   <h6>bookingStatus- {{booking.bookingStatus.name}} </h6>
+   <h6>apartmentType - {{booking.apartmentDto.apartmentType.name}} </h6>
+   <h6>Name apartmentDto - {{booking.apartmentDto.name}} </h6>
+   <h6>checkIn - {{booking.checkIn | date }} </h6>
+   <h6>checkOut- {{booking.checkOut | date }} </h6>
 </ul> -->
+
+<div class="col-md-3 border-left card-body">
+  <div class="row mb-3">
+    <button (click)="backToBookings()">Back to bookings</button>
+    <br>
+     <!-- <div *ngIf="booking"> -->
+        <div *ngIf="isCheckBookingDate(booking?.checkIn, booking?.checkOut) && 
+              !isCanceled(booking?.bookingStatus?.name)"> <!--safe operator, or above comment-->
+            <button (click)="cancelBooking()">Cancel Booking</button>
+         </div>
+      <!-- </div> -->
+  </div>
+</div>
+
+
+<!-- <div *ngIf="booking && !isCheckBookingDate(booking?.checkIn, booking?.checkOut) && 
+           !isCanceled(booking?.bookingStatus?.name) && !booking?.reviewDto?.id">
+ <textarea rows= "5" cols= "120" placeholder= "Enter your review here"></textarea>   <!-- move to css -->       
+<!-- </div> --> 

@@ -12,4 +12,5 @@ export class Property {
   propertyType: PropertyType;
   facilities: Facility[];
   photos: Photo[];
+
 }

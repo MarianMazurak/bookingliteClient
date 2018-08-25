@@ -15,18 +15,29 @@ import { ListPropertyComponent } from './components/property/list-property/list-
 import { ApartmentComponent } from './components/apartment/apartment.component';
 import { CreateApartmentComponent } from './components/apartment/create-apartment/create-apartment.component';
 import { ListApartmentComponent } from './components/apartment/list-apartment/list-apartment.component';
-import { SelectedApartmentComponent } from './components/apartment/selected-apartment/selected-apartment.component';
 import { BookingComponent } from './components/booking/booking.component';
 import { SearchComponent } from './components/search/search.component';
 import { ListBookingComponent } from './components/booking/list-booking/list-booking.component';
 import { HeaderComponent } from './components/header/header.component';
-import {AuthGuardService} from './services/authentication/auth-guard.service';
-import { BookingService} from './services/booking/booking.service';
 import {JwtInterceptor} from './helpers/jwt.interceptor';
 import { AppRoutingModule } from './/app-routing.module';
+import {PhotoComponent} from './components/property/photo/photo.component';
+import { PhotoListComponent } from './components/property/photo-list/photo-list.component';
+import { UploadPhotoListComponent } from './components/property/create-property/upload-photo-list/upload-photo-list.component';
 
 
 
+import { PropertyItemComponent } from './components/property/list-property/property-item/property-item.component';
+import { PropertyService } from './services/property/property.service';
+import { PropertyTypeService } from './services/propertyTypy/property-type.service';
+import { ReviewComponent } from './components/review/review.component';
+
+import { ApartmentService } from './services/apartment/apartment.service';
+
+import { CoutryService } from './services/country/coutry.service';
+import { CityService } from './services/city/city.service';
+import {SearchFormComponent} from './components/search/search-form/search-form.component';
+import { EditPropertyComponent } from './components/property/edit-property/edit-property.component';
 
 
 @NgModule({
@@ -41,11 +52,17 @@ import { AppRoutingModule } from './/app-routing.module';
     ApartmentComponent,
     CreateApartmentComponent,
     ListApartmentComponent,
-    SelectedApartmentComponent,
     BookingComponent,
     SearchComponent,
     ListBookingComponent,
-    HeaderComponent
+    HeaderComponent,
+    PhotoComponent,
+    PhotoListComponent,
+    UploadPhotoListComponent,
+    PropertyItemComponent,
+    ReviewComponent,
+    SearchFormComponent,
+    EditPropertyComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +71,8 @@ import { AppRoutingModule } from './/app-routing.module';
     AppRoutingModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true } ],
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    PropertyService,CoutryService,CityService,ApartmentService,PropertyTypeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

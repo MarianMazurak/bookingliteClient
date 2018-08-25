@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from '../../services/authentication/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor() { }
+  userName = '';
+  isOwner = false;
+  constructor(private auth: AuthService) { }
 
   ngOnInit() {
+    /*if(this.auth.getUser() && this.auth.getUser().getFirstName()) {
+      this.userName = this.auth.getUser().getFirstName();
+    }
+    if(this.auth.getUser() && this.auth.getUser().getRoles())
+    this.isOwner = this.auth.getUser().getRoles().length > 1;*/
   }
 
 }
