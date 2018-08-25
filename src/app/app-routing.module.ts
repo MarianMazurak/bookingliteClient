@@ -15,6 +15,7 @@ import {PropertyComponent} from './components/property/property.component';
 
 import { ListBookingComponent } from './components/booking/list-booking/list-booking.component';
 import { BookingComponent } from './components/booking/booking.component';
+import {ReviewComponent} from './components/review/review.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -27,7 +28,8 @@ const routes: Routes = [
   { path: 'create-apartment', component: CreateApartmentComponent},
   { path: 'search', component: SearchComponent},
   { path: 'edit-property/:id', component: EditPropertyComponent },
-  { path: 'property-detailes/:id', component: PropertyComponent}
+  { path: 'property-detailes/:id', component: PropertyComponent},
+  { path: 'property/:id/reviews', component: ReviewComponent }
 
 ];
 

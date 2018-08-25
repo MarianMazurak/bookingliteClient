@@ -1,3 +1,5 @@
-<p>
-  review works!
-</p>
+<li *ngFor="let rev of reviewsList">
+  <!--<p>User: {{rev.user.first_name}}</p>-->
+  <p>Message: {{rev.message}}</p>
+  <p>Rating: {{rev.rating}}</p>
+</li>
