@@ -4,6 +4,7 @@ import {Review} from '../../models/review';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Property} from '../../models/property';
+import {HttpHeaders} from '../../../../node_modules/@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,5 +18,13 @@ export class ReviewService {
   }
   public getReviewByBooking(id: number): Observable<Review> {
     return this.http.get<Review>(`${this.reviewUrl}/${id}/review`);
+  }
+  public createReview(review: Review, id: number): Observable<any> {
+    return this.http.post('${this.reviewUrl}/${id}/review',
+      JSON.stringify({message: review.message, rating: review.rating}),
+      {headers: new HttpHeaders({
+          'Content-Type':  'application/json' }),
+        responseType: 'text'
+      }  );
   }
 }

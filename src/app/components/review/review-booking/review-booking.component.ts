@@ -1,7 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Booking} from '../../../models/booking';
 import {AuthService} from '../../../services/authentication/auth.service';
-import {BookingService} from '../../../services/booking/booking.service';
 import {ActivatedRoute} from '@angular/router';
 import {ReviewService} from '../../../services/review/review.service';
 import {Review} from '../../../models/review';

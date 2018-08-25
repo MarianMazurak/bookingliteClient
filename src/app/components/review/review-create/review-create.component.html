@@ -1,3 +1,10 @@
-<p>
-  review-create works!
-</p>
+<form #form="ngForm" (ngSubmit)="createReview()" style="border: 1px solid black;">
+  <div style="padding: 30px;height: 400px;width: 500px">
+
+    <label for="rating">write your review : </label>
+    <input type="number" min="1" max="10" name="rating" id="rating"  required [(ngModel)]="reviewDto.rating">
+    <hr>
+    <label for="message">write your review : </label>
+    <input type="text" name="message" id="message" style="height: 200px;width:500px" required [(ngModel)]="reviewDto.message"></div>
+  <input type="submit" value="Submit" >
+</form>
