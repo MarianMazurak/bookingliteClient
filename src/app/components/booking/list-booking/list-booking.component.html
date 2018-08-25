@@ -17,7 +17,7 @@
                     <ul class="list-inline list-unstyled">
                       <li class="list-inline-item">
                           <a routerLink="/booking/{{booking.bookingId}}">
-                            <h4>Booking # {{booking.bookingId}}</h4>     
+                            <h4>Booking # {{booking.bookingId}}</h4>
                           </a>
                       </li>
                       <li class="list-inline-item text-warning"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
@@ -32,7 +32,7 @@
                       <small>Dates: {{booking.checkIn | date:'dd-MM-yyyy' }} - {{booking.checkOut | date:'dd-MM-yyyy' }}
                         </small>
                   </div>
-                  <div class="list-descrip">                    
+                  <div class="list-descrip">
                     <small>Number of guests: {{booking.apartmentDto.numberOfGuests}}
                     </small>
                     <br>
@@ -42,12 +42,12 @@
                 </div>
                 <div class="col-md-3 border-left card-body">
                     <ul class="list-unstyled">
-                      <li><h4>Status: {{booking.bookingStatus.name}}</h4></li>                    
+                      <li><h4>Status: {{booking.bookingStatus.name}}</h4></li>
                       <li><h3>Price: {{booking.totalPrice}} </h3></li>
                       <!-- <li class="text-secondary">
                         <small> Reviews</small>
                         <small>{property.review}</small>-->
-                      <!-- </li> --> 
+                      <!-- </li> -->
                     </ul>
                     <!-- <button type="button" routerLink="" class="btn btn-outline-primary">Available apartment</button> -->
                   </div>
@@ -84,7 +84,7 @@
                     <ul class="list-inline list-unstyled">
                       <li class="list-inline-item">
                           <a routerLink="/booking/{{booking.bookingId}}">
-                            <h4>Booking # {{booking.bookingId}}</h4>     
+                            <h4>Booking # {{booking.bookingId}}</h4>
                           </a>
                       </li>
                       <li class="list-inline-item text-warning"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
@@ -99,7 +99,7 @@
                     <small>Dates: {{booking.checkIn | date:'dd-MM-yyyy' }} - {{booking.checkOut | date:'dd-MM-yyyy' }}
                       </small>
                 </div>
-                <div class="list-descrip">                    
+                <div class="list-descrip">
                   <small>Number of guests: {{booking.apartmentDto.numberOfGuests}}
                   </small>
                   <br>
@@ -109,12 +109,12 @@
                 </div>
                  <div class="col-md-3 border-left card-body">
                     <ul class="list-unstyled">
-                      <li><h4>Status: {{booking.bookingStatus.name}}</h4></li>                    
+                      <li><h4>Status: {{booking.bookingStatus.name}}</h4></li>
                       <li><h3>Price: {{booking.totalPrice}} </h3></li>
                       <!-- <li class="text-secondary">
                         <small> Reviews</small>
                         <small>{property.review}</small>-->
-                      <!-- </li> --> 
+                      <!-- </li> -->
                     </ul>
                     <div>
                       <button type="button" routerLink="" class="btn btn-outline-primary">Review</button>
@@ -133,7 +133,7 @@
 <!-- <ng-container *ngFor="let booking of bookings" >
   <div *ngIf=" isCheckBookingDate(booking.checkIn, booking.checkOut)">
     <a routerLink="/booking/{{booking.bookingId}}">
-      <h4>Booking # {{booking.bookingId}}</h4>     
+      <h4>Booking # {{booking.bookingId}}</h4>
     </a>
     <h6>{{booking.checkIn | date:'dd-MM-yyyy' }} - {{booking.checkOut | date:'dd-MM-yyyy' }}</h6>
     <h6>Booking status- {{booking.bookingStatus.name}}</h6>
@@ -144,7 +144,7 @@
 <ng-container *ngFor="let booking of bookings" >
     <div *ngIf="!isCheckBookingDate(booking.checkIn, booking.checkOut)">
         <a routerLink="/booking/{{booking.bookingId}}">
-           <h4>Booking # {{booking.bookingId}}</h4>     
+           <h4>Booking # {{booking.bookingId}}</h4>
         </a>
         <h6>{{booking.checkIn | date:'dd-MM-yyyy' }} - {{booking.checkOut | date:'dd-MM-yyyy' }}</h6>
         <h6>Booking status- {{booking.bookingStatus.name}}</h6>

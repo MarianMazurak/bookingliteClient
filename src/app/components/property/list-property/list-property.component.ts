@@ -38,8 +38,4 @@ export class ListPropertyComponent implements OnInit {
     });
   }
 
-  public setPropertyIdInApartmentService(propertyId: number) {
-    this.apartmentService.setPropertyId(propertyId);
-  }
-
 }

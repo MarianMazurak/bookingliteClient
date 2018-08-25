@@ -46,7 +46,7 @@ export class CreateApartmentComponent implements OnInit {
 
   public createApartments() {
     console.log(this.createdApartment.amenitiesId);
-    //this.apartmentService.createApartment(this.createdApartment);
+    // this.apartmentService.createApartment(this.createdApartment);
   }
 
   public workWithCheckboxes(id: number) {
