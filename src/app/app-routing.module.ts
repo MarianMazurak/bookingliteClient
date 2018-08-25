@@ -16,6 +16,7 @@ import {PropertyComponent} from './components/property/property.component';
 import { ListBookingComponent } from './components/booking/list-booking/list-booking.component';
 import { BookingComponent } from './components/booking/booking.component';
 import {GuestArrivalsComponent} from './components/booking/guest-arrivals/guest-arrivals.component';
+import {ReviewBookingComponent} from './components/review/review-booking/review-booking.component';
 
 
 const routes: Routes = [
@@ -34,8 +35,8 @@ const routes: Routes = [
   { path: 'search', component: SearchComponent},
   { path: 'edit-property/:id', component: EditPropertyComponent },
   { path: 'property-detailes/:id', component: PropertyComponent},
-  {path: 'guest-arrivals', component: GuestArrivalsComponent}
-
+  {path: 'guest-arrivals', component: GuestArrivalsComponent},
+  {path: 'review-booking/:id', component: ReviewBookingComponent}
 ];
 
 @NgModule({

@@ -1,3 +1,7 @@
-<p>
-  review-booking works!
-</p>
+<div *ngIf="review" style="height: 300px ;width: 500px; border: 1px solid black;padding: 30px">
+  <p>{{review.message}}</p>
+  <hr><p>Rating : {{review.rating}}</p>
+</div>
+<div *ngIf="!review" style="height: 300px ;width: 500px; border: 1px solid black">
+  <h1>No review</h1>
+</div>
