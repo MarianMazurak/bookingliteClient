@@ -8,6 +8,11 @@ import { CreatePropertyComponent } from './components/property/create-property/c
 
 import {ListApartmentComponent} from './components/apartment/list-apartment/list-apartment.component';
 import {CreateApartmentComponent} from './components/apartment/create-apartment/create-apartment.component';
+
+import {SearchComponent} from './components/search/search.component';
+import {EditPropertyComponent} from './components/property/edit-property/edit-property.component';
+import {PropertyComponent} from './components/property/property.component';
+
 import { ListBookingComponent } from './components/booking/list-booking/list-booking.component';
 import { BookingComponent } from './components/booking/booking.component';
 
@@ -19,7 +24,11 @@ const routes: Routes = [
   { path: 'create-property', component: CreatePropertyComponent },
   { path: 'property', component: ListPropertyComponent},
   { path: 'property/:id', component: ListApartmentComponent},
-  { path: 'create-apartment', component: CreateApartmentComponent}
+  { path: 'create-apartment', component: CreateApartmentComponent},
+  { path: 'search', component: SearchComponent},
+  { path: 'edit-property/:id', component: EditPropertyComponent },
+  { path: 'property-detailes/:id', component: PropertyComponent}
+
 ];
 
 @NgModule({

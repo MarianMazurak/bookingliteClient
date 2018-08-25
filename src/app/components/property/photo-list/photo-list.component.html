@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row justify-content-start">
-    <div class="col-3" *ngFor="let url of urls" (click)="openPhoto(url)">
-      <app-photo [photoUrl]='url'></app-photo>
+    <div class="col-3" *ngFor="let photo of photos" (click)="openPhoto(photo.url)">
+      <app-photo [photoUrl]='photo.url'></app-photo>
     </div>
   </div>
 </div>
