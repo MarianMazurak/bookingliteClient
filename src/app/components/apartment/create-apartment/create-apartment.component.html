@@ -3,16 +3,24 @@
     <h4>Create Apartment</h4>
 
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="quantity" id="inputDefault">
+      <label class="col-form-label">Apartment Name</label>
+      <input type="text" class="form-control"[(ngModel)]="createdApartment.name">
     </div>
 
     <div class="form-group">
-      <h5>Apartment Type</h5>
-      <div class="custom-control custom-radio" *ngFor="let type of apartmentTypes">
-        <input type="radio" id="customRadio{{type.id}}"
-               name="customRadio" class="custom-control-input" (click)="createdApartment.typeId = type.id">
-        <label class="custom-control-label" for="customRadio{{type.id}}">{{type.name}}</label>
-      </div>
+      <label class="col-form-label">Price</label>
+      <input type="text" class="form-control" [(ngModel)]="createdApartment.price">
+    </div>
+
+    <div class="form-group">
+      <label class="col-form-label">Apartment Type</label>
+      <select class="custom-select"
+              [(ngModel)]='selectedTypeId'
+              [(ngModel)]='createdApartment.typeId'>
+        <option *ngFor="let type of apartmentTypes" [(value)]="type.id">
+          {{type.name}}
+        </option>
+      </select>
     </div>
 
     <div class="form-group">
