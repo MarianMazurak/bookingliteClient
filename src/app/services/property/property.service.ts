@@ -21,7 +21,7 @@ export class PropertyService {
       })
     };
     console.log(model, 'JSON');
-    return this.http.post('api/testversion', model, httpOptions);
+    return this.http.post('api/addproperty', model, httpOptions);
   }
 
   public getProperties(): Observable<Property[]> {

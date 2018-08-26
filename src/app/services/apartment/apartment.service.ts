@@ -6,6 +6,7 @@ import {tap} from 'rxjs/operators';
 import {ApartmentType} from '../../models/apartment-type';
 import {Amenity} from '../../models/amenity';
 import {CreateApartment} from '../../models/create-apartment';
+import {PropertyCreate} from '../../models/property-create';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,7 @@ export class ApartmentService {
     return this.http.get<Amenity[]>(this.amenityUrl);
   }
 
-  public createApartment(createApartment: CreateApartment) {
+  public createApartment0(createApartment: CreateApartment) {
     return this.http.post(this.apartmentUrl, createApartment,
       {headers: new HttpHeaders({
           'Content-Type': 'application/json' }),
@@ -37,6 +38,17 @@ export class ApartmentService {
       })
       .pipe(tap(res => console.log('created apartments')
       ));
+  }
+
+
+  public createApartment (model: CreateApartment) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    console.log(model, 'JSON');
+    return this.http.post('api/property/1/apartment', model, httpOptions);
   }
 
 }

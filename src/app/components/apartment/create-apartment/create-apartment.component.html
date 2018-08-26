@@ -14,9 +14,10 @@
 
     <div class="form-group">
       <label class="col-form-label">Apartment Type</label>
-      <select class="custom-select"
+      <br>
+      <select
               [(ngModel)]='selectedTypeId'
-              [(ngModel)]='createdApartment.typeId'>
+              [(ngModel)]='createdApartment.apartmentTypeId'>
         <option *ngFor="let type of apartmentTypes" [(value)]="type.id">
           {{type.name}}
         </option>
