@@ -24,8 +24,7 @@ export class ListBookingComponent implements OnInit {
   }
 
   getBookings(): void {
-    this.bookingService.getBookings().subscribe(bookings => {  this.bookings= bookings,
-      console.log('bbbb', bookings);
+    this.bookingService.getBookings().subscribe(bookings => {  this.bookings= bookings
     } );
   }
 
@@ -38,7 +37,6 @@ export class ListBookingComponent implements OnInit {
   }
 
   calculateNumberOfDates(checkIn, checkOut): number{
-    console.log('calculateNumberOfDates component');
     return this.bookingService.calculateNumberOfDates(checkIn, checkOut);
   }
 }
