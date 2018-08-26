@@ -13,6 +13,6 @@ export class CityService {
   constructor(private http: HttpClient) { }
 
   public getCity(countryId: number): Observable<City[]> {
-    return this.http.get<City[]>(`api/country/${countryId}/cities`)
+    return this.http.get<City[]>(`api/country/${countryId}/cities`);
   }
 }
