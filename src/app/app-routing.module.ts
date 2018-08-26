@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'property-list', component: ListPropertyComponent},
 
   { path: 'property-list/apartment-list', component: ListApartmentComponent},
-  { path: 'create-apartment', component: CreateApartmentComponent}
+  { path: 'create-apartment', component: CreateApartmentComponent},
 
   { path: 'apartment-list', component: ListApartmentComponent},
   { path: 'create-apartment', component: CreateApartmentComponent},

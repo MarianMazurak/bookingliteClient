@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
+    this.signOut();
   }
 
   signIn(form: FormGroup) {
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
         console.log(res);
         this.auth.saveToken(res);
         this.auth.isAuthenticated = true;
-        this.router.navigate(['/']);
+        this.router.navigate(['/search']);
       });
   }
 
