@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-
-import { Country } from '../../models/country';
+import {Facility} from '../../models/facility';
 import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CoutryService {
+export class FacilityService {
 
   constructor(private http: HttpClient) { }
 
-  public getCountry(): Observable<Country[]> {
-    return this.http.get<Country[]>('api/countries');
+  public getAllFacilities(): Observable<Facility[]> {
+    return this.http.get<Facility[]>('api/facilities');
   }
 }

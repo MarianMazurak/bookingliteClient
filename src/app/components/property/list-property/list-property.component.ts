@@ -36,14 +36,4 @@ export class ListPropertyComponent implements OnInit {
     });
   }
 
-  public getReviewCount(id: number) {
-    return this.reviewService.getReviewCountByPropertyId(id).subscribe(reviewCount => {
-      return reviewCount;
-    });
-  }
-
-  public setPropertyIdInApartmentService(propertyId: number) {
-    this.apartmentService.setPropertyId(propertyId);
-  }
-
 }

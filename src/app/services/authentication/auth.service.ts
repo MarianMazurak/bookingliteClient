@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders  } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {RegisterUser} from '../../models/user-register';
+import {User} from '../../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,6 @@ import {RegisterUser} from '../../models/user-register';
 export class AuthService {
 
   private authenticated = false;
-
   constructor(private http: HttpClient) { }
 
   signIn(model: RegisterUser): Observable<any> {
@@ -37,12 +37,11 @@ export class AuthService {
     return this.authenticated = false;
   }
 
-  get isAuthenticated() {
-    return this.authenticated;
+  get isAuthenticated(): boolean {
+    return localStorage.getItem('token') != null;
   }
 
   set isAuthenticated(val: boolean) {
     this.authenticated = val ;
   }
-
 }

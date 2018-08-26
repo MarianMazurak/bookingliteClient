@@ -51,7 +51,7 @@ export class UploadPhotoListComponent implements OnInit {
         this.http.post('/api/property/' + this.propertyId + '/photo', uploadData)
           .subscribe(data => {
               this.messageList[i] = 'success';
-              setTimeout(() => {this.initExistPhotos(); }, 1000);
+              setTimeout(() => {this.initExistPhotos(); }, 1500);
             },
             err => {
               this.messageList[i] = err.error.message;

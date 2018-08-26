@@ -14,6 +14,6 @@ export class PropertyTypeService {
   constructor(private http: HttpClient) { }
 
   public getAllPropertyTypes(): Observable<PropertyType[]>{
-    return this.http.get<PropertyType[]>("api/propertytype")
+    return this.http.get<PropertyType[]>("api/propertytype");
   }
 }
