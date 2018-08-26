@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-
-// import {Review} from '../../models/review';
-
-
+import {Component, Input, OnInit} from '@angular/core';
+import {Property} from '../../models/property';
+import {PropertyService} from '../../services/property/property.service';
+import {AuthService} from '../../services/authentication/auth.service';
+import {ActivatedRoute} from '@angular/router';
+import {ReviewService} from '../../services/review/review.service';
+import {Review} from '../../models/review';
+import {Observable} from 'rxjs';
+import {User} from '../../models/user';
 
 @Component ({
   selector: 'app-review',
@@ -11,11 +15,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReviewComponent implements OnInit {
 
-  constructor() { }
+  private authenticated;
+  reviewsList: Review[];
+  user: User;
+  @Input() property: Property;
+
+  constructor(private propertyService: PropertyService,
+              private auth: AuthService,
+              private route: ActivatedRoute,
+              private reviewService: ReviewService) { }
 
   ngOnInit() {
-
+    this.authenticated = this.auth.isAuthenticated;
+    this.getReviewsByPropertyId();
+    this.getUser();
   }
 
+  public getReviewsByPropertyId() {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.propertyService.getPropertyById(id).subscribe(pr => this.property = pr);
+    this.reviewService.getAllReviews(id).subscribe(rev => {
+      this.reviewsList = rev;
+    });
+  }
+
+  public getUser() {
+    this.reviewService.getUserDetails().subscribe(res => {
+      this.user = res;
+    });
+  }
 
 }

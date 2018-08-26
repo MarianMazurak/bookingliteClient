@@ -38,6 +38,10 @@ import { CountryService } from './services/country/coutry.service';
 import { CityService } from './services/city/city.service';
 import {SearchFormComponent} from './components/search/search-form/search-form.component';
 import { EditPropertyComponent } from './components/property/edit-property/edit-property.component';
+import { BookingCreateComponent } from './components/booking/booking-create/booking-create.component';
+import { GuestArrivalsComponent } from './components/booking/guest-arrivals/guest-arrivals.component';
+import { ReviewBookingComponent } from './components/review/review-booking/review-booking.component';
+import { ReviewCreateComponent } from './components/review/review-create/review-create.component';
 
 
 @NgModule({
@@ -62,7 +66,11 @@ import { EditPropertyComponent } from './components/property/edit-property/edit-
     PropertyItemComponent,
     ReviewComponent,
     SearchFormComponent,
-    EditPropertyComponent
+    EditPropertyComponent,
+    BookingCreateComponent,
+    GuestArrivalsComponent,
+    ReviewBookingComponent,
+    ReviewCreateComponent
   ],
   imports: [
     BrowserModule,

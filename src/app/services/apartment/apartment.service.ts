@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable, Input} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Apartment} from '../../models/apartment';
@@ -11,19 +11,14 @@ import {CreateApartment} from '../../models/create-apartment';
   providedIn: 'root'
 })
 export class ApartmentService {
-  private apartmentUrl = '/api/property/';
+  private apartmentUrl = '/api/property';
   private typeUrl = '/api/create-apartment/apartment-type';
   private amenityUrl = '/api/create-apartment/amenities';
-  private propId: number;
 
   constructor(private http: HttpClient) { }
 
-  public setPropertyId(propertyId: number) {
-    this.propId = propertyId;
-  }
-
-  public getAllApartments(): Observable<Apartment[]> {
-    return this.http.get<Apartment[]>(`${this.apartmentUrl}/${this.propId}/apartment`);
+  public getAllApartments(id: number): Observable<Apartment[]> {
+    return this.http.get<Apartment[]>(`${this.apartmentUrl}/${id}/apartment`);
   }
 
   public getApartmentType(): Observable<ApartmentType[]> {

@@ -1,0 +1,11 @@
+<form #form="ngForm" (ngSubmit)="createBooking()" style="border: 1px solid black;">
+  <div style="padding: 30px">
+
+    <label for="checkIn">Check In </label>
+    <input type="date" name="checkIn" id="checkIn"
+           required [(ngModel)]="booking.checkIn">
+    <label for="checkOut">Check out</label>
+    <input type="date" name="checkOut" id="checkOut"
+           required [(ngModel)]="booking.checkOut"></div>
+  <input type="submit" value="Submit" >
+</form>
