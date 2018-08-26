@@ -15,9 +15,7 @@
       <td>{{apartment.apartmentType.name}}</td>
       <td><p *ngFor="let am of apartment.amenities">{{am.name}}</p></td>
       <td>{{apartment.price}}</td>
-      <td><a href="#" class="btn btn-primary">select</a></td> <!--booking-->
-      <td> <button type="button" routerLink="/booking-create/{{apartment.id}}"
-                   class="btn btn-outline-primary">Reserve Apartment</button></td>
+      <td><a routerLink="/booking-create/{{apartment.id}}">select</a></td> <!--booking-->
     </tr>
   </table>
 </div>

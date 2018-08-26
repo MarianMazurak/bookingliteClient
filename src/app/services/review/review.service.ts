@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {HttpHeaders} from '../../../../node_modules/@angular/common/http';
 import {CreateReview} from '../../models/create-review';
+import {User} from '../../models/user';
 
 
 @Injectable({
@@ -40,5 +41,9 @@ export class ReviewService {
     console.log('url : ', `${this.reviewUrl}/${id}/review`);
     console.log('return : ', this.http.post(`${this.reviewUrl}/${id}/review`, review, httpOptions));
     return this.http.post(`${this.reviewUrl}/${id}/review`, review, httpOptions);
+  }
+  public getUserDetails(): Observable<User> {
+    return this.http.get<User>(`/api/hello`);
+
   }
 }
