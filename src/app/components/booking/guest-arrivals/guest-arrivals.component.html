@@ -16,7 +16,7 @@
                       <ul class="list-inline list-unstyled">
                         <li class="list-inline-item">
                           <a routerLink="/booking/{{booking.bookingId}}">
-                            <h4>Booking # {{booking.bookingId}}</h4>
+                            <h4>Booking </h4>
                           </a>
                         </li>
                         <li class="list-inline-item text-warning"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
@@ -54,7 +54,9 @@
 
 <ul style="list-style: none">
   <div class="container">
-    <br><hr><br>
+    <br>
+    <hr>
+    <br>
   </div>
 </ul>
 
@@ -75,7 +77,7 @@
                       <ul class="list-inline list-unstyled">
                         <li class="list-inline-item">
                           <a routerLink="/booking/{{booking.bookingId}}">
-                            <h4>Booking # {{booking.bookingId}}</h4>
+                            <h4>Booking</h4>
                           </a>
                         </li>
                         <li class="list-inline-item text-warning"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
@@ -99,8 +101,11 @@
                     <ul class="list-unstyled">
                       <li><h4>Status: {{booking.bookingStatus.name}}</h4></li>
                       <li><h3>Price: {{booking.totalPrice}} </h3></li>
-                      <li><button type="button" routerLink="/review-booking/{{booking.bookingId}}"
-                                  class="btn btn-outline-primary">Get Review</button></li>
+                      <li>
+                        <button type="button" routerLink="/review-booking/{{booking.bookingId}}"
+                                class="btn btn-outline-primary">Get Review
+                        </button>
+                      </li>
                     </ul>
                   </div>
                 </div>

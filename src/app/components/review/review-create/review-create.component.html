@@ -1,13 +1,14 @@
-<form #reviewForm=ngForm (ngSubmit)="createReview(reviewForm)" style="border: 1px solid black;">
-  <div style="padding: 30px;height: 400px;width: 500px">
-
-    <label for="rating">write your review : </label>
-    <input type="number" min="1" max="10" name="rating" id="rating"  required [(ngModel)]="reviewDto.rating">
+<div class="reviewDiv">
+  <form #crReview="ngForm" (ngSubmit)="createReview(crReview)">
+    <label for="FormControlTextarea">Review : </label>
+    <textarea class="form-control" id="FormControlTextarea" rows="4" placeholder="write your review..."
+              [(ngModel)]="review.message" name="message"></textarea>
     <hr>
-    <label for="message">write your review : </label>
-    <input type="text" name="message" id="message" style="height: 200px;width:500px" required [(ngModel)]="reviewDto.message">
-  <label for="guests">write your review : </label>
-  <input type="number" name="guests" id="guests" min="0"  required [(ngModel)]="reviewDto.guests"></div>
+    <p>Rating :<input type="number" min="1" max="10" [(ngModel)]="review.rating" name="rating" required value="10"></p>
+    <div class="form-row">
+      <button (click)="goBack()" class="btn-danger">Cancel</button>
+      <input type="submit" class="btn-info" value="Save Review">
+    </div>
+  </form>
+</div>
 
-  <input type="submit" value="Submit" >
-</form>

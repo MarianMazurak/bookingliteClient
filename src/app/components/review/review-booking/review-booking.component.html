@@ -1,7 +1,12 @@
-<div *ngIf="review" style="height: 300px ;width: 500px; border: 1px solid black;padding: 30px">
-  <p>{{review.message}}</p>
+
+<div *ngIf="review" class="reviewDiv">
+  <label for="FormControlTextarea1">Review : </label>
+  <textarea class="form-control" id="FormControlTextarea1" rows="4" readonly>{{review.message}}</textarea>
   <hr><p>Rating : {{review.rating}}</p>
+  <button (click)="goBack()" class="btn-light">Back</button>
 </div>
-<div *ngIf="!review" style="height: 300px ;width: 500px; border: 1px solid black">
-  <h1>No review</h1>
+<div *ngIf="!review" class="reviewDiv">
+  <label for="FormControlTextarea1">Review : </label>
+  <textarea class="form-control" id="FormControlTextarea2 " rows="5" readonly>No reviews...</textarea>
+  <button (click)="goBack()" class="btn-light"> Back </button>
 </div>

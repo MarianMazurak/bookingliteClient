@@ -17,7 +17,7 @@ import {User} from '../../models/user';
 export class ReviewService {
   private reviewUrl = '/api/booking';
 
-  private reviewUrl = '/api/property';
+  private propertyUrl = '/api/property';
 
   constructor(private http: HttpClient) { }
 
@@ -28,20 +28,19 @@ export class ReviewService {
   public getReviewByBooking(id: number): Observable<Review> {
     return this.http.get<Review>(`${this.reviewUrl}/${id}/review`);
   }
-  public createReview(review: CreateReview, id: number): Observable<any> {
-    return this.http.post('${this.reviewUrl}/${id}/review',
-      JSON.stringify({message: review.message, rating: review.rating}),
-      {headers: new HttpHeaders({
-          'Content-Type':  'application/json' }),
-        responseType: 'text'
-      }  );
-
   public getAllReviews(id: number): Observable<Review[]> {
-    return this.http.get<Review[]>(`${this.reviewUrl}/${id}/reviews`);
+    return this.http.get<Review[]>(`${this.propertyUrl}/${id}/reviews`);
   }
 
-  public getUserDetails(): Observable<User> {
-    return this.http.get<User>(`/api/hello`);
-
+  public createReview(review: CreateReview, id: number): Observable<any> {
+    console.log('service : ', review);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    console.log('url : ', `${this.reviewUrl}/${id}/review`);
+    console.log('return : ', this.http.post(`${this.reviewUrl}/${id}/review`, review, httpOptions));
+    return this.http.post(`${this.reviewUrl}/${id}/review`, review, httpOptions);
   }
 }
