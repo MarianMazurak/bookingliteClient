@@ -4,14 +4,17 @@ import {Review} from '../../models/review';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Property} from '../../models/property';
+import {Apartment} from '../../models/apartment';
 @Injectable({
   providedIn: 'root'
 })
 export class ReviewService {
 
+  private reviewUrl = '/api/property';
+
   constructor(private http: HttpClient) { }
 
-  public getReviewCountByPropertyId(id:number): Observable<number>{
-    return this.http.get<number>("api/property/${id}/reviews/count");
+  public getAllReviews(id: number): Observable<Review[]> {
+    return this.http.get<Review[]>(`${this.reviewUrl}/${id}/reviews`);
   }
 }

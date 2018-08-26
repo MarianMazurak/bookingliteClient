@@ -17,51 +17,68 @@ import {AuthService} from '../../../services/authentication/auth.service';
 })
 export class CreatePropertyComponent implements OnInit {
 
+
+  public selectedCountryId: number;
+
   public propertyCreate: PropertyCreate;
   public countries: Country[];
   public cities: City[];
   public propertyTypes: PropertyType[];
-  public selectedCityId: number;
-  public selectedPropertyTypeId: number;
-  private authenticated;
+     private authenticated;
 
-  constructor(private auth: AuthService,private countryService: CoutryService,private cityService: CityService,
+  constructor(private auth: AuthService, private countryService: CoutryService, private cityService: CityService,
               private propertyService: PropertyService, private propertyTypeService: PropertyTypeService) { }
 
   ngOnInit() {
     this.authenticated = this.auth.isAuthenticated;
     this.propertyCreate = new PropertyCreate();
     this.getCountries();
+    // this.getCities();
     this.getPropertyTypes();
+    this.selectedCountryId = 0;
   }
 
-  public getCountries(){
+  public getCountries() {
     this.countryService.getCountry().subscribe(res => {
       this.countries = res;
-      alert("pk");
-    })
+      this.showCountry();
+    });
   }
 
-  public getCities(countryId: number){
-    this.cityService.getCity(countryId).subscribe(res => {
-      this.cities = res;
-    })
+  public getCities(id: number) {
+    console.log(this.selectedCountryId, 'countrysdaiddd');
+    this.cityService.getCity(id).subscribe(res => {
+        this.cities = res;
+    });
   }
 
-  public getPropertyTypes(){
+  public showCountry() {
+    console.log(this.selectedCountryId, '@@!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+  }
+
+  public getPropertyTypes() {
     this.propertyTypeService.getAllPropertyTypes().subscribe(res => {
       this.propertyTypes = res;
-    })
+    });
   }
 
-  public createProperty(){
+  public createProperty() {
     this.propertyService.createProperty(this.propertyCreate).subscribe(res => {
-      alert("Property created")
+      alert('Property created');
     });
 
 
   }
-  public getId(){
-    alert(this.selectedPropertyTypeId);
+
+  onSelectedCountryId(id: number) {
+    this.customFunction(id);
   }
-}
+
+  customFunction(id: number) {
+    this.selectedCountryId = id;
+  }
+
+   public saveCountryId(id: number) {
+    this.selectedCountryId = id;
+   }
+ }

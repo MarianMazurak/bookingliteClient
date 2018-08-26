@@ -15,7 +15,7 @@ import {PropertyComponent} from './components/property/property.component';
 
 import { ListBookingComponent } from './components/booking/list-booking/list-booking.component';
 import { BookingComponent } from './components/booking/booking.component';
-
+import {ReviewComponent} from './components/review/review.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -23,17 +23,15 @@ const routes: Routes = [
   { path: 'bookings', component: ListBookingComponent },
   { path: 'booking/:id', component: BookingComponent },
   { path: 'create-property', component: CreatePropertyComponent },
-  { path: 'property-list', component: ListPropertyComponent},
-
-  { path: 'property-list/apartment-list', component: ListApartmentComponent},
-  { path: 'create-apartment', component: CreateApartmentComponent},
-
+  { path: 'property', component: ListPropertyComponent},
+  { path: 'property/:id', component: ListApartmentComponent},
+  //{ path: 'property-list', component: ListPropertyComponent},
   { path: 'apartment-list', component: ListApartmentComponent},
   { path: 'create-apartment', component: CreateApartmentComponent},
   { path: 'search', component: SearchComponent},
   { path: 'edit-property/:id', component: EditPropertyComponent },
-  { path: 'property-detailes/:id', component: PropertyComponent}
-
+  { path: 'property-detailes/:id', component: PropertyComponent},
+  { path: 'property/:id/reviews', component: ReviewComponent }
 ];
 
 @NgModule({

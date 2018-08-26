@@ -14,13 +14,14 @@ export class PropertyService {
 
   constructor(private http: HttpClient) { }
 
-  public createProperty(model: PropertyCreate){
+  public createProperty(model: PropertyCreate) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post("localhost:8080/api/property", model, httpOptions);
+    console.log(model, '222222222222222222222222222');
+    return this.http.post('api/testversion', model, httpOptions);
   }
 
   public getProperties(): Observable<Property[]> {
