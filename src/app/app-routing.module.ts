@@ -25,12 +25,13 @@ const routes: Routes = [
   { path: 'create-property', component: CreatePropertyComponent },
   { path: 'property', component: ListPropertyComponent},
   { path: 'property/:id', component: ListApartmentComponent},
+  //{ path: 'property-list', component: ListPropertyComponent},
+  { path: 'apartment-list', component: ListApartmentComponent},
   { path: 'create-apartment', component: CreateApartmentComponent},
   { path: 'search', component: SearchComponent},
   { path: 'edit-property/:id', component: EditPropertyComponent },
   { path: 'property-detailes/:id', component: PropertyComponent},
   { path: 'property/:id/reviews', component: ReviewComponent }
-
 ];
 
 @NgModule({
