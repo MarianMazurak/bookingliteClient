@@ -1,5 +1,3 @@
-<h1>Booking</h1>
-
 <ul *ngIf="booking" style="list-style: none">
     <div class="container">
       <div class="row mb-3">
@@ -14,9 +12,7 @@
                   <div class="list-title">
                     <ul class="list-inline list-unstyled">
                       <li class="list-inline-item">
-                          <a routerLink="/booking/{{booking.bookingId}}">
-                            <h4>Booking # {{booking.bookingId}}</h4>     
-                          </a>
+                            <h3>Booking # {{booking.bookingId}}</h3>     
                       </li>
                       <li class="list-inline-item text-warning"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
                         class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half"></i></li>
@@ -27,14 +23,18 @@
                     </ul>
                   </div>
                   <div class="list-location">
-                      <h4>Price: {{booking.totalPrice}} USD</h4>   
-                      <h4>Status: {{booking.bookingStatus.name}}</h4>    
+                    <h4>Price: {{booking.totalPrice}} USD</h4> 
+                    <li>
+                    <h4>Status:
+                      <b *ngIf="isCanceled(booking.bookingStatus.name)" style="color:red">{{booking.bookingStatus.name}}</b>
+                      <b *ngIf="!isCanceled(booking.bookingStatus.name)"style="color:green">{{booking.bookingStatus.name}}</b>
+                    </h4>
+                    </li>
+                    <h4>Dates: {{booking.checkIn | date:'dd-MM-yyyy' }} - {{booking.checkOut | date:'dd-MM-yyyy' }}</h4>          
+                    <h4>Number of guests: {{booking.apartmentDto.numberOfGuests}}</h4>  
                   </div>
-                  <div class="list-descrip">        
-                    <small>Dates: {{booking.checkIn | date:'dd-MM-yyyy' }} - {{booking.checkOut | date:'dd-MM-yyyy' }}</small>          
+                  <div class="list-descrip">  
                     <br>
-                    <small>Number of guests: {{booking.apartmentDto.numberOfGuests}}</small>                    
-                    <br><br>
                     <h5>Apartment:</h5>
                     <small>Actual Price: {{booking.apartmentDto.price}} USD</small>                      
                     <br>
@@ -53,27 +53,26 @@
                     <br>
                     <small>Email: </small>                      
                     <br>
-                    <div *ngIf= "booking?.reviewDto">
-                      <br>
-                      <h5>Your review:</h5>
-                      <small>Rating: {{booking.reviewDto.rating}}</small>
-                      <br>
-                      <small>Message: {{booking.reviewDto.message}}</small>
-                      <br>
+                      <div *ngIf= "booking?.reviewDto">
+                        <br>
+                        <h5>Your review:</h5>
+                        <small>Rating: {{booking.reviewDto.rating}}</small>
+                        <br>
+                        <small>Message: {{booking.reviewDto.message}}</small>
+                        <br>
                      </div>
+                     <br>
+                      <div>
+                          <button class="btn btn-primary" (click)="backToBookings()">Back to bookings</button>
+                          <br><br>
+                          <div *ngIf="isCheckBookingDate(booking?.checkIn, booking?.checkOut) && 
+                          !isCanceled(booking?.bookingStatus?.name)"> 
+                          <button class="btn btn-primary" (click)="cancelBooking()">Cancel Booking</button>
+                      </div>
+                     
+                    </div>
                   </div>
-                </div>
-                <!-- <div class="col-md-3 border-left card-body">
-                    <ul class="list-unstyled">
-                      <li><h4>Status: {{booking.bookingStatus.name}}</h4></li>                    
-                      <li><h3>Price: {{booking.totalPrice}} </h3></li>
-                       <li class="text-secondary">
-                        <small> Reviews</small>
-                        <small>{property.review}</small>-->
-                      <!-- </li> --> 
-                    <!-- </ul> -->
-                    <!-- <button type="button" routerLink="" class="btn btn-outline-primary">Available apartment</button> -->
-                  <!-- </div> --> 
+                </div>                          
               </div>
             </div>
           </div>
@@ -82,31 +81,3 @@
     </div>
 </ul>
 
-<!-- <ul>
-  <li *ngIf="booking">
-   <h4>Booking # {{booking.bookingId}}</h4>
-   <h6>bookingStatus- {{booking.bookingStatus.name}} </h6>
-   <h6>apartmentType - {{booking.apartmentDto.apartmentType.name}} </h6>
-   <h6>Name apartmentDto - {{booking.apartmentDto.name}} </h6>
-   <h6>checkIn - {{booking.checkIn | date }} </h6>
-   <h6>checkOut- {{booking.checkOut | date }} </h6>
-</ul> -->
-
-<div class="col-md-3 border-left card-body">
-  <div class="row mb-3">
-    <button (click)="backToBookings()">Back to bookings</button>
-    <br>
-     <!-- <div *ngIf="booking"> -->
-        <div *ngIf="isCheckBookingDate(booking?.checkIn, booking?.checkOut) && 
-              !isCanceled(booking?.bookingStatus?.name)"> <!--safe operator, or above comment-->
-            <button (click)="cancelBooking()">Cancel Booking</button>
-         </div>
-      <!-- </div> -->
-  </div>
-</div>
-
-
-<!-- <div *ngIf="booking && !isCheckBookingDate(booking?.checkIn, booking?.checkOut) && 
-           !isCanceled(booking?.bookingStatus?.name) && !booking?.reviewDto?.id">
- <textarea rows= "5" cols= "120" placeholder= "Enter your review here"></textarea>   <!-- move to css -->       
-<!-- </div> --> 

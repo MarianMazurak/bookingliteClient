@@ -5,7 +5,6 @@ import {BookingService} from '../../services/booking/booking.service';
 import {AuthService} from '../../services/authentication/auth.service';
 import { ActivatedRoute } from '../../../../node_modules/@angular/router';
 import { Router } from "@angular/router";
-//import { DateFormatPipe } from '../../helpers/DateFormatPipe'
 
 
 @Component({
@@ -38,13 +37,11 @@ export class BookingComponent implements OnInit {
   cancelBooking() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.bookingService.cancelBookings(id)
-      .subscribe(res => {console.log('cancellllll done');
-      this.backToBookings();
-      });
+      .subscribe(res => this.backToBookings()
+      );
   }  
 
   isCheckBookingDate(checkIn, checkOut):boolean {
-    //console.log('111111111111111111111', this.bookingService.isCheckBookingDate(checkIn, checkOut));
     return this.bookingService.isCheckBookingDate(checkIn, checkOut)
   }
 
@@ -53,13 +50,10 @@ export class BookingComponent implements OnInit {
   }
 
   isReview(idReview){
-    console.log('Hello in isReview');
-    if( !idReview ){ //if negative, undefined, null, empty then..
-      console.log('in isReview true');
+    if( !idReview ){ 
       return true;
     }
     else  {
-      console.log('in isReview true');
       return false;
     }
   }
