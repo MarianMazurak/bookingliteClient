@@ -10,7 +10,7 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-md-3">
-                  <!-- <img src={{property.photos[0]}}> -->
+                  <img class="img-responsive" alt="No Photo" src="http://res.cloudinary.com/lv326/image/upload/v1535107395/properties/38ac382d-0bed-4280-8e93-8643057c15ca.jpg">
                 </div>
                 <div class="col-md-6  card-body">
                   <div class="list-title">
@@ -42,19 +42,14 @@
                 </div>
                 <div class="col-md-3 border-left card-body">
                     <ul class="list-unstyled">
-                      <li><h4>Status: </h4>
-                      <h4 *ngIf="isCanceled(booking.bookingStatus.name)" style="color:red">{{booking.bookingStatus.name}}</h4>
-                      <h4 *ngIf="!isCanceled(booking.bookingStatus.name)"style="color:green">{{booking.bookingStatus.name}}</h4>
-                      </li>                    
+                      <li><h4>Status:
+                      <b *ngIf="isCanceled(booking.bookingStatus.name)" style="color:red">{{booking.bookingStatus.name}}</b>
+                      <b *ngIf="!isCanceled(booking.bookingStatus.name)"style="color:green">{{booking.bookingStatus.name}}</b>
+                    </h4>
+                    </li>                    
                       <li><h3>Price: {{booking.totalPrice}}* </h3></li>
                       <small> *number of days: {{calculateNumberOfDates(booking.checkIn , booking.checkOut )}}</small>
-
-                      <!-- <li class="text-secondary">
-                        <small> Reviews</small>
-                        <small>{property.review}</small>-->
-                      <!-- </li> -->
                     </ul>
-                    <!-- <button type="button" routerLink="" class="btn btn-outline-primary">Available apartment</button> -->
                   </div>
               </div>
             </div>
@@ -81,9 +76,9 @@
           <div class="card">
             <div class="card-body">
               <div class="row">
-                <div class="col-md-3">
-                  <!-- <img src={{property.photos[0]}}> -->
-                </div>
+                  <div class="col-md-3">
+                      <img class="img-responsive" alt="No Photo" src="http://res.cloudinary.com/lv326/image/upload/v1535107395/properties/38ac382d-0bed-4280-8e93-8643057c15ca.jpg">
+                    </div>
                 <div class="col-md-6  card-body">
                   <div class="list-title">
                     <ul class="list-inline list-unstyled">
@@ -114,13 +109,16 @@
                 </div>
                  <div class="col-md-3 border-left card-body">
                     <ul class="list-unstyled">
-                      <li><h4>Status: {{booking.bookingStatus.name}}</h4></li>
-                      <li><h3>Price: {{booking.totalPrice}} </h3></li>
-                      <!-- <li class="text-secondary">
-                        <small> Reviews</small>
-                        <small>{property.review}</small>-->
-                      <!-- </li> -->
+                      <li>
+                        <h4>Status:
+                          <b *ngIf="isCanceled(booking.bookingStatus.name)" style="color:red">{{booking.bookingStatus.name}}</b>
+                          <b *ngIf="!isCanceled(booking.bookingStatus.name)"style="color:green">{{booking.bookingStatus.name}}</b>
+                        </h4>
+                      </li>                    
+                      <li><h3>Price: {{booking.totalPrice}}* </h3></li>
+                      <small> *number of days: {{calculateNumberOfDates(booking.checkIn , booking.checkOut )}}</small>
                     </ul>
+                    <br>
                     <div>
                       <button type="button" routerLink="/review-create/{{booking.bookingId}}"
                               class="btn btn-outline-primary">Write Review</button>
@@ -136,23 +134,4 @@
   </li>
 </ul>
 
-<!-- <ng-container *ngFor="let booking of bookings" >
-  <div *ngIf=" isCheckBookingDate(booking.checkIn, booking.checkOut)">
-    <a routerLink="/booking/{{booking.bookingId}}">
-      <h4>Booking # {{booking.bookingId}}</h4>
-    </a>
-    <h6>{{booking.checkIn | date:'dd-MM-yyyy' }} - {{booking.checkOut | date:'dd-MM-yyyy' }}</h6>
-    <h6>Booking status- {{booking.bookingStatus.name}}</h6>
-  </div>
-</ng-container>
-<br><hr><br>
 
-<ng-container *ngFor="let booking of bookings" >
-    <div *ngIf="!isCheckBookingDate(booking.checkIn, booking.checkOut)">
-        <a routerLink="/booking/{{booking.bookingId}}">
-           <h4>Booking # {{booking.bookingId}}</h4>
-        </a>
-        <h6>{{booking.checkIn | date:'dd-MM-yyyy' }} - {{booking.checkOut | date:'dd-MM-yyyy' }}</h6>
-        <h6>Booking status- {{booking.bookingStatus.name}}</h6>
-    </div>
-</ng-container> -->
