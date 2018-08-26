@@ -1,4 +1,4 @@
-import { Component, OnInit, enableProdMode } from '@angular/core';
+import {Component, OnInit, enableProdMode} from '@angular/core';
 import {AuthService} from '../../../services/authentication/auth.service';
 import {ReviewService} from '../../../services/review/review.service';
 import {ActivatedRoute} from '@angular/router';
@@ -17,19 +17,23 @@ export class ReviewCreateComponent implements OnInit {
     message: '',
     rating: 10
   };
+
   constructor(private auth: AuthService,
               private reviewService: ReviewService,
               private route: ActivatedRoute,
-              private location: Location) { }
+              private location: Location) {
+  }
 
   ngOnInit() {
     this.authenticated = this.auth.isAuthenticated;
   }
+
   createReview(form: FormGroup) {
     const id = +this.route.snapshot.paramMap.get('id');
     this.reviewService.createReview(this.review, id);
   }
-goBack() {
+
+  goBack() {
     this.location.back();
-}
+  }
 }
