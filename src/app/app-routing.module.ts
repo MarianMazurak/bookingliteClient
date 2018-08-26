@@ -24,16 +24,13 @@ const routes: Routes = [
   { path: 'booking/:id', component: BookingComponent },
   { path: 'create-property', component: CreatePropertyComponent },
   { path: 'property-list', component: ListPropertyComponent},
-
   { path: 'property-list/apartment-list', component: ListApartmentComponent},
-  { path: 'create-apartment', component: CreateApartmentComponent}
-
+  { path: 'create-apartment', component: CreateApartmentComponent},
   { path: 'apartment-list', component: ListApartmentComponent},
   { path: 'create-apartment', component: CreateApartmentComponent},
   { path: 'search', component: SearchComponent},
   { path: 'edit-property/:id', component: EditPropertyComponent },
   { path: 'property-detailes/:id', component: PropertyComponent}
-
 ];
 
 @NgModule({

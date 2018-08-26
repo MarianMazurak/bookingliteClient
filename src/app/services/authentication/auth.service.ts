@@ -5,14 +5,16 @@ import {LoginDto} from '../../models/loginDto';
 import { Router } from '@angular/router';
 import { RegisterDto } from '../../models/registerDto';
 import { User } from '../../models/user';
+import { tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private authenticated = false;
-  private user: User;
-  constructor(private http: HttpClient, private router: Router) { }
+  private _currentUser: User;
+  private _isOwner: boolean;
+  constructor(private http: HttpClient, private router: Router) {
+  }
 
   signIn(model: LoginDto): Observable<any> {
     console.log('In auth service');
@@ -21,7 +23,7 @@ export class AuthService {
       {headers: new HttpHeaders({
           'Content-Type':  'application/json' }),
         responseType: 'text'
-      }  );
+      });
   }
 
   signUp(model: RegisterDto): Observable<any> {
@@ -30,7 +32,17 @@ export class AuthService {
       {headers: new HttpHeaders({
           'Content-Type':  'application/json' }),
         responseType: 'text'
-      }  );
+      });
+  }
+  loadUser(): Observable<User> {
+    return this.http.get<User>('/api/user').pipe(tap( user => {
+        this._currentUser = user;
+        console.log(this._currentUser);
+        const ownerrole = this._currentUser.roles.find(role => role.name === 'ROLE_OWNER');
+        if (ownerrole) {
+          this._isOwner = true;
+        }
+    }));
   }
 
   saveToken(token: string) {
@@ -43,15 +55,38 @@ export class AuthService {
 
   signOut(): void {
     localStorage.removeItem('token');
+    this._currentUser = undefined;
+    this._isOwner = false;
     this.router.navigate(['/login']);
-    this.authenticated = false;
   }
 
-  get isAuthenticated() {
-    return this.authenticated;
+  get isAuthenticated(): boolean {
+     return localStorage.getItem('token') != null;
   }
 
-  set isAuthenticated(val: boolean) {
-    this.authenticated = val;
+  get isOwner(): Observable<boolean> {
+    return Observable.create( observer => {
+      if (this._currentUser !== undefined) {
+        observer.next(this._isOwner);
+        observer.complete();
+      } else {
+        this.loadUser().subscribe( res => {
+          observer.next(this._isOwner);
+          observer.complete();
+        });
+      }
+    });
+  }
+
+  get currentUser(): Observable<User> {
+    return Observable.create( observer => {
+      if (this._currentUser !== undefined) {
+        observer.next(this._currentUser);
+      } else {
+        this.loadUser().subscribe( res => {
+          observer.next(this.currentUser);
+        });
+      }
+    });
   }
 }

@@ -12,6 +12,7 @@ export class JwtInterceptor implements HttpInterceptor {
   if (!(this.ingoreRoutes.includes(request.url))) {
     const token = localStorage.getItem('token');
     if (token != null) {
+    console.log('Call route', request.url);
     console.log('Used token', token);
     request = request.clone({
           setHeaders: {

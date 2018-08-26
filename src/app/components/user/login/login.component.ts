@@ -11,6 +11,7 @@ import { FormGroup } from '@angular/forms';
 export class LoginComponent implements OnInit {
   loginDto: LoginDto = new LoginDto();
   formValid = true;
+  errorMessage = '';
   constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
@@ -21,8 +22,11 @@ export class LoginComponent implements OnInit {
     this.auth.signIn(this.loginDto)
       .subscribe(res => {
         this.auth.saveToken(res);
-        this.auth.isAuthenticated = true;
+        this.auth.loadUser();
         this.router.navigate(['/']);
+      }, error => {
+        console.log(error);
+        this.errorMessage = JSON.parse(error.error).message;
       });
     } else {
       this.formValid = false;
