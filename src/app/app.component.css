@@ -1,1 +1,11 @@
 
+li {
+    float: left;
+    margin-right: 5px;
+}
+ul {
+    list-style-type: none;
+}
+nav { 
+    height: 30px;
+}

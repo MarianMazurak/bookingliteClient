@@ -7,7 +7,7 @@ import {PropertyType} from '../../../models/property-type';
 import {PropertyCreate} from '../../../models/property-create';
 
 // services
-import {CoutryService} from '../../../services/country/coutry.service';
+import {CountryService} from '../../../services/country/coutry.service';
 import {CityService} from '../../../services/city/city.service';
 import { PropertyService } from '../../../services/property/property.service';
 import {PropertyTypeService} from '../../../services/propertyTypy/property-type.service';
@@ -35,7 +35,7 @@ export class CreatePropertyComponent implements OnInit {
               private propertyService: PropertyService,
               private propertyTypeService: PropertyTypeService,
               private facilityService: FacilityService,
-              private countryService: CoutryService,
+              private countryService: CountryService,
               private cityService: CityService) { }
 
   ngOnInit() {

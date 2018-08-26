@@ -4,5 +4,5 @@ export class Address {
   id: number;
   addressLine: string;
   zip: string;
-  city: City;
+  city: City = new City();
 }
