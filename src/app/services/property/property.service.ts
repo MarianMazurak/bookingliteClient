@@ -20,7 +20,7 @@ export class PropertyService {
         'Content-Type': 'application/json'
       })
     };
-    console.log(model, '222222222222222222222222222');
+    console.log(model, 'JSON');
     return this.http.post('api/testversion', model, httpOptions);
   }
 

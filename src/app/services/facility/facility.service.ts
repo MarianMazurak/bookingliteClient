@@ -11,6 +11,6 @@ export class FacilityService {
   constructor(private http: HttpClient) { }
 
   public getAllFacilities(): Observable<Facility[]> {
-    return this.http.get<Facility[]>("api/facilities")
+    return this.http.get<Facility[]>('api/facilities');
   }
 }

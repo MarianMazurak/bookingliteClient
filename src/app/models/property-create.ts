@@ -8,5 +8,5 @@ export class PropertyCreate {
   addressLine: string;
   zip: string;
   propertyTypeId: number;
-  facilityId: number;
+  facilityId: number[];
 }

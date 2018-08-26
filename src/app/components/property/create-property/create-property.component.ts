@@ -1,14 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 
+// models
 import { Country } from '../../../models/country';
 import { City } from '../../../models/city';
+import {PropertyType} from '../../../models/property-type';
+import {PropertyCreate} from '../../../models/property-create';
+
+// services
 import {CoutryService} from '../../../services/country/coutry.service';
 import {CityService} from '../../../services/city/city.service';
-import {PropertyCreate} from '../../../models/property-create';
 import { PropertyService } from '../../../services/property/property.service';
 import {PropertyTypeService} from '../../../services/propertyTypy/property-type.service';
-import {PropertyType} from '../../../models/property-type';
 import {AuthService} from '../../../services/authentication/auth.service';
+import {Facility} from '../../../models/facility';
+import {FacilityService} from '../../../services/facility/facility.service';
 
 @Component ({
   selector: 'app-create-property',
@@ -17,43 +22,42 @@ import {AuthService} from '../../../services/authentication/auth.service';
 })
 export class CreatePropertyComponent implements OnInit {
 
-
-  public selectedCountryId: number;
-
   public propertyCreate: PropertyCreate;
-  public countries: Country[];
-  public cities: City[];
   public propertyTypes: PropertyType[];
-     private authenticated;
+  public countries: Country[] = [];
+  public cities: City[] = [];
+  public facilities: Facility[];
+  public selectedCountryId: number;
+  public selectedCityId: number;
+  private authenticated;
 
-  constructor(private auth: AuthService, private countryService: CoutryService, private cityService: CityService,
-              private propertyService: PropertyService, private propertyTypeService: PropertyTypeService) { }
+  constructor(private auth: AuthService,
+              private propertyService: PropertyService,
+              private propertyTypeService: PropertyTypeService,
+              private facilityService: FacilityService,
+              private countryService: CoutryService,
+              private cityService: CityService) { }
 
   ngOnInit() {
     this.authenticated = this.auth.isAuthenticated;
     this.propertyCreate = new PropertyCreate();
-    this.getCountries();
-    // this.getCities();
+    this.propertyCreate.facilityId = [];
+    this.getFacilities();
     this.getPropertyTypes();
-    this.selectedCountryId = 0;
+    this.getCountries();
+    this.getCities(this.selectedCountryId);
   }
 
   public getCountries() {
     this.countryService.getCountry().subscribe(res => {
       this.countries = res;
-      this.showCountry();
     });
   }
 
   public getCities(id: number) {
-    console.log(this.selectedCountryId, 'countrysdaiddd');
-    this.cityService.getCity(id).subscribe(res => {
-        this.cities = res;
+    this.cityService.getCity(this.selectedCountryId).subscribe(res => {
+      this.cities = res;
     });
-  }
-
-  public showCountry() {
-    console.log(this.selectedCountryId, '@@!!!!!!!!!!!!!!!!!!!!!!!!!!!');
   }
 
   public getPropertyTypes() {
@@ -66,19 +70,21 @@ export class CreatePropertyComponent implements OnInit {
     this.propertyService.createProperty(this.propertyCreate).subscribe(res => {
       alert('Property created');
     });
-
-
   }
 
-  onSelectedCountryId(id: number) {
-    this.customFunction(id);
+  public getFacilities() {
+    this.facilityService.getAllFacilities().subscribe(facility => {
+      this.facilities = facility;
+      console.log('Facility: ', facility);
+    });
   }
 
-  customFunction(id: number) {
-    this.selectedCountryId = id;
+  public workWithCheckboxes(id: number) {
+    const index = this.propertyCreate.facilityId.indexOf(id);
+    if (index !== -1) {
+      this.propertyCreate.facilityId.splice(index, 1);
+      return;
+    }
+    this.propertyCreate.facilityId.push(id);
   }
-
-   public saveCountryId(id: number) {
-    this.selectedCountryId = id;
-   }
- }
+}
