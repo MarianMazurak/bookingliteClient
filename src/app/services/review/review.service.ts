@@ -17,7 +17,7 @@ import {User} from '../../models/user';
 export class ReviewService {
   private reviewUrl = '/api/booking';
 
-  private reviewUrl = '/api/property';
+  // private reviewUrl = '/api/property';
 
   constructor(private http: HttpClient) { }
 
@@ -35,6 +35,7 @@ export class ReviewService {
           'Content-Type':  'application/json' }),
         responseType: 'text'
       }  );
+    }
 
   public getAllReviews(id: number): Observable<Review[]> {
     return this.http.get<Review[]>(`${this.reviewUrl}/${id}/reviews`);
@@ -42,6 +43,6 @@ export class ReviewService {
 
   public getUserDetails(): Observable<User> {
     return this.http.get<User>(`/api/hello`);
-
   }
 }
+

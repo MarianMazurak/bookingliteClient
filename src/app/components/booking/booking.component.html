@@ -12,7 +12,8 @@
                   <div class="list-title">
                     <ul class="list-inline list-unstyled">
                       <li class="list-inline-item">
-                            <h3>Booking # {{booking.bookingId}}</h3>     
+                            <h3><b>{{booking.apartmentDto.propertyDto.name}}, 
+                              {{booking.apartmentDto.name}}</b></h3>     
                       </li>
                       <li class="list-inline-item text-warning"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
                         class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half"></i></li>
@@ -45,13 +46,18 @@
                     <small>Number of guests: {{booking.apartmentDto.numberOfGuests}}</small>                      
                     <br><br>
                     <h5>Hotel:</h5>
-                    <small>Rating: </small>                      
+                    <small>Rating: {{booking.apartmentDto.propertyDto.rating}}</small>                      
                     <br>
-                    <small>Address: </small>                      
+                    <small>Address: {{booking.apartmentDto.propertyDto.address.addressLine}}, 
+                        {{booking.apartmentDto.propertyDto.address.city.name}},
+                        {{booking.apartmentDto.propertyDto.address.city.country.name}}
+                    </small>                      
                     <br>
-                    <small>Phone number: </small>                      
+                    <small>Phone number: {{booking.apartmentDto.propertyDto.phoneNumber}}</small>                      
                     <br>
-                    <small>Email: </small>                      
+                    <small>Email: {{booking.apartmentDto.propertyDto.contactEmail}}</small>                      
+                    <br>
+                    <small>Descroption: {{booking.apartmentDto.propertyDto.description}}</small>                      
                     <br>
                       <div *ngIf= "booking?.reviewDto">
                         <br>
