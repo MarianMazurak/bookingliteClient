@@ -7,5 +7,5 @@ export class RegisterDto {
     password: string;
     phoneNumber: string;
     owner: boolean;
-    address: Address;
+    address: Address = new Address();
 }

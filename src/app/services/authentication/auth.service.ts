@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import {LoginDto} from '../../models/loginDto';
 import { Router } from '@angular/router';
 import { RegisterDto } from '../../models/registerDto';
+import { User } from '../../models/user';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
   private authenticated = false;
-
+  private user: User;
   constructor(private http: HttpClient, private router: Router) { }
 
   signIn(model: LoginDto): Observable<any> {
@@ -25,7 +26,7 @@ export class AuthService {
 
   signUp(model: RegisterDto): Observable<any> {
     console.log('json', JSON.stringify(model));
-    return this.http.post('/api/login', JSON.stringify(model),
+    return this.http.post('/api/register', JSON.stringify(model),
       {headers: new HttpHeaders({
           'Content-Type':  'application/json' }),
         responseType: 'text'

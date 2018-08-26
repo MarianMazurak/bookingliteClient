@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Country } from '../../../models/country';
 import { City } from '../../../models/city';
-import {CoutryService} from '../../../services/country/coutry.service';
+import {CountryService} from '../../../services/country/coutry.service';
 import {CityService} from '../../../services/city/city.service';
 import {PropertyCreate} from '../../../models/property-create';
 import { PropertyService } from '../../../services/property/property.service';
@@ -25,7 +25,7 @@ export class CreatePropertyComponent implements OnInit {
   public selectedPropertyTypeId: number;
   private authenticated;
 
-  constructor(private auth: AuthService,private countryService: CoutryService,private cityService: CityService,
+  constructor(private auth: AuthService, private countryService: CountryService, private cityService: CityService,
               private propertyService: PropertyService, private propertyTypeService: PropertyTypeService) { }
 
   ngOnInit() {

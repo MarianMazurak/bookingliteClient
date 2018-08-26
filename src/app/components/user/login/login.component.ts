@@ -10,22 +10,23 @@ import { FormGroup } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   loginDto: LoginDto = new LoginDto();
-
+  formValid = true;
   constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
 
   signIn(form: FormGroup) {
-    console.log(form);
+    if (form.valid) {
     this.auth.signIn(this.loginDto)
       .subscribe(res => {
-        console.log('Hello token');
-        console.log(res);
         this.auth.saveToken(res);
         this.auth.isAuthenticated = true;
         this.router.navigate(['/']);
       });
+    } else {
+      this.formValid = false;
+    }
   }
 
 

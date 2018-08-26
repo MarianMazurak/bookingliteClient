@@ -11,12 +11,14 @@ export class JwtInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
   if (!(this.ingoreRoutes.includes(request.url))) {
     const token = localStorage.getItem('token');
+    if (token != null) {
     console.log('Used token', token);
     request = request.clone({
           setHeaders: {
             Authorization: `Bearer ${token}`
         }
     });
+    }
   }
   return next.handle(request).pipe( tap( (ev: HttpEvent<any>) => {
       if (ev instanceof HttpResponse) {

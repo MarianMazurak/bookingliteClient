@@ -34,7 +34,7 @@ import { ReviewComponent } from './components/review/review.component';
 
 import { ApartmentService } from './services/apartment/apartment.service';
 
-import { CoutryService } from './services/country/coutry.service';
+import { CountryService } from './services/country/coutry.service';
 import { CityService } from './services/city/city.service';
 import {SearchFormComponent} from './components/search/search-form/search-form.component';
 import { EditPropertyComponent } from './components/property/edit-property/edit-property.component';
@@ -72,7 +72,7 @@ import { EditPropertyComponent } from './components/property/edit-property/edit-
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    PropertyService,CoutryService,CityService,ApartmentService,PropertyTypeService],
+    PropertyService,CountryService,CityService,ApartmentService,PropertyTypeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
