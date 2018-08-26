@@ -17,12 +17,14 @@
 
     <div class="form-group">
       <h5>Amenities</h5>
-      <div class="custom-control custom-checkbox" *ngFor="let am of amenities">
+      <div class="custom-control custom-checkbox"
+           *ngFor="let am of amenities">
         <input type="checkbox" class="custom-control-input" id="customCheck{{am.id}}"
           (change)="workWithCheckboxes(am.id)">
         <label class="custom-control-label" for="customCheck{{am.id}}">{{am.name}}</label>
       </div>
     </div>
+
     <button type="submit" class="btn btn-primary" (click)="createApartments()">save</button>
   </fieldset>
 </div>
