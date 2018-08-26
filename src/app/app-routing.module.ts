@@ -15,6 +15,11 @@ import {PropertyComponent} from './components/property/property.component';
 
 import { ListBookingComponent } from './components/booking/list-booking/list-booking.component';
 import { BookingComponent } from './components/booking/booking.component';
+
+import {GuestArrivalsComponent} from './components/booking/guest-arrivals/guest-arrivals.component';
+import {ReviewBookingComponent} from './components/review/review-booking/review-booking.component';
+import {ReviewCreateComponent} from './components/review/review-create/review-create.component';
+import {BookingCreateComponent} from './components/booking/booking-create/booking-create.component';
 import {ReviewComponent} from './components/review/review.component';
 
 const routes: Routes = [
@@ -23,15 +28,20 @@ const routes: Routes = [
   { path: 'bookings', component: ListBookingComponent },
   { path: 'booking/:id', component: BookingComponent },
   { path: 'create-property', component: CreatePropertyComponent },
+  { path: 'create-apartment', component: CreateApartmentComponent},
   { path: 'property', component: ListPropertyComponent},
   { path: 'property/:id', component: ListApartmentComponent},
-  //{ path: 'property-list', component: ListPropertyComponent},
   { path: 'apartment-list', component: ListApartmentComponent},
   { path: 'create-apartment', component: CreateApartmentComponent},
   { path: 'search', component: SearchComponent},
   { path: 'edit-property/:id', component: EditPropertyComponent },
   { path: 'property-detailes/:id', component: PropertyComponent},
+  { path: 'guest-arrivals', component: GuestArrivalsComponent},
+  { path: 'review-booking/:id', component: ReviewBookingComponent},
+  { path: 'review-create/:id', component: ReviewCreateComponent},
+  { path: 'booking-create/:id', component: BookingCreateComponent},
   { path: 'property/:id/reviews', component: ReviewComponent }
+
 ];
 
 @NgModule({

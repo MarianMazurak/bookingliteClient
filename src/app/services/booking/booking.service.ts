@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import {Booking} from '../../models/booking';
+import {BookingCreate} from '../../models/booking-create';
 
 
 
@@ -13,6 +14,7 @@ export class BookingService {
 
   private bookingUrl = 'api/bookings'
   private bookingUrl2 = 'api/booking'
+  private guestArrivalsUrl = 'api/guestarivals';
   private nowDate: Date;
 
   constructor(private http: HttpClient) { }
@@ -75,5 +77,17 @@ export class BookingService {
       //console.log('isCheckBookingDate', false);
       return false;
     }
+  }
+  public createBooking(bookingCreate: BookingCreate, apartmentId: number) {
+    const url = `api/booking/${apartmentId}`;
+    return this.http.post(url, bookingCreate, {headers: new HttpHeaders({
+        'Content-Type': 'application/json' }),
+      responseType: 'text'
+    });
+  }
+  getGuestArrivalsList(): Observable<Booking[]> {
+    return this.http.get<Booking []>(this.guestArrivalsUrl)
+      .pipe(tap(res => console.log('getGuestArrivalsList')
+      ));
   }
 }
