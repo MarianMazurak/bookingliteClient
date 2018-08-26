@@ -10,14 +10,16 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-md-3">
-                  <img class="img-responsive" alt="No Photo" src="http://res.cloudinary.com/lv326/image/upload/v1535107395/properties/38ac382d-0bed-4280-8e93-8643057c15ca.jpg">
+                  <img class="img-responsive" alt="No Photo" src={{booking.apartmentDto.propertyDto.photos[0].url}}>
                 </div>
                 <div class="col-md-6  card-body">
                   <div class="list-title">
                     <ul class="list-inline list-unstyled">
                       <li class="list-inline-item">
                           <a routerLink="/booking/{{booking.bookingId}}">
-                            <h4>Booking # {{booking.bookingId}}</h4>
+                              <h4><b>{{booking.apartmentDto.propertyDto.name}}, 
+                                {{booking.apartmentDto.name}}</b>
+                              </h4>     
                           </a>
                       </li>
                       <li class="list-inline-item text-warning"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
@@ -77,14 +79,16 @@
             <div class="card-body">
               <div class="row">
                   <div class="col-md-3">
-                      <img class="img-responsive" alt="No Photo" src="http://res.cloudinary.com/lv326/image/upload/v1535107395/properties/38ac382d-0bed-4280-8e93-8643057c15ca.jpg">
-                    </div>
+                      <img class="img-responsive" alt="No Photo" src={{booking.apartmentDto.propertyDto.photos[0].url}}>
+                      </div>
                 <div class="col-md-6  card-body">
                   <div class="list-title">
                     <ul class="list-inline list-unstyled">
                       <li class="list-inline-item">
                           <a routerLink="/booking/{{booking.bookingId}}">
-                            <h4>Booking # {{booking.bookingId}}</h4>
+                            <h4><b>{{booking.apartmentDto.propertyDto.name}}, 
+                              {{booking.apartmentDto.name}}</b>
+                            </h4> 
                           </a>
                       </li>
                       <li class="list-inline-item text-warning"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
@@ -97,7 +101,7 @@
                   </div>
                   <div class="list-location">
                     <small>Dates: {{booking.checkIn | date:'dd-MM-yyyy' }} - {{booking.checkOut | date:'dd-MM-yyyy' }}
-                      </small>
+                    </small>
                 </div>
                 <div class="list-descrip">
                   <small>Number of guests: {{booking.apartmentDto.numberOfGuests}}
@@ -106,7 +110,7 @@
                   <small>Apartment type: {{booking.apartmentDto.apartmentType.name}}
                   </small>
                 </div>
-                </div>
+              </div>
                  <div class="col-md-3 border-left card-body">
                     <ul class="list-unstyled">
                       <li>
@@ -123,7 +127,7 @@
                       <button type="button" routerLink="/review-create/{{booking.bookingId}}"
                               class="btn btn-outline-primary">Write Review</button>
                     </div>
-                    </div>
+                  </div>
               </div>
             </div>
           </div>

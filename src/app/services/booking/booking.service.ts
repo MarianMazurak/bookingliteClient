@@ -14,7 +14,7 @@ export class BookingService {
 
   private bookingsUrl = 'api/bookings'
   private bookingUrl = 'api/booking'
-   private guestArrivalsUrl = 'api/guestarivals';
+  private guestArrivalsUrl = 'api/guestarivals';
 
   private nowDate: Date;
 
@@ -31,12 +31,11 @@ export class BookingService {
 
   cancelBookings(id: number) {
     const url = `${this.bookingUrl}/${id}`;
-    return this.http.put(url, 
-      {headers: new HttpHeaders({
+    const httpOption ={
+      headers: new HttpHeaders ({
       'Content-Type':  'application/json' })
-  })
-      .pipe(tap(res => console.log('cancel booking')      
-      ));
+    };
+    return this.http.put(url, httpOption)
   }
 
   isCanceled( bookingStatus: string):boolean {
