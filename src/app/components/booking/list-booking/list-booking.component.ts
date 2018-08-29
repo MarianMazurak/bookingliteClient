@@ -10,15 +10,12 @@ import { AuthService } from '../../../services/authentication/auth.service';
 })
 export class ListBookingComponent implements OnInit {
 
-  authenticated;
   bookings: Booking[];
   today: Date;
 
-  constructor(private bookingService: BookingService,
-              private auth: AuthService ) { }
+  constructor(private bookingService: BookingService) { }
 
   ngOnInit() {
-    this.authenticated = this.auth.isAuthenticated;
     this.getBookings();
     this.today =new Date();
   }

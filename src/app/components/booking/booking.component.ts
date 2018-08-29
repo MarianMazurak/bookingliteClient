@@ -1,8 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs';
 import {Booking} from '../../models/booking';
 import {BookingService} from '../../services/booking/booking.service';
-import {AuthService} from '../../services/authentication/auth.service';
 import { ActivatedRoute } from '../../../../node_modules/@angular/router';
 import { Router } from "@angular/router";
 
@@ -20,10 +18,8 @@ export class BookingComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private bookingService: BookingService,
     private router: Router 
-  //private dateFormatPipe: DateFormatPipe
 ) {}
-  // constructor(private bookingService: BookingService,
-  //             private auth: AuthService ) { }
+
   ngOnInit() {
      this.getBooking();
   }
