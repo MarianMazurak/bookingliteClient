@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {RegisterUser} from '../../../models/user-register';
-import {AuthService} from '../../../services/authentication/auth.service';
-import {Router} from '@angular/router';
+import { LoginDto } from '../../../models/loginDto';
+import { AuthService } from '../../../services/authentication/auth.service';
+import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-login',
@@ -9,11 +9,9 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginDto = {
-    email: '',
-    password: ''
-  };
-
+  loginDto: LoginDto = new LoginDto();
+  formValid = true;
+  errorMessage = '';
   constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
@@ -21,15 +19,21 @@ export class LoginComponent implements OnInit {
   }
 
   signIn(form: FormGroup) {
+    if (form.valid) {
     this.auth.signIn(this.loginDto)
       .subscribe(res => {
-        console.log('Hello token');
-        console.log(res);
         this.auth.saveToken(res);
-        this.auth.isAuthenticated = true;
-        this.router.navigate(['/search']);
+        this.auth.loadUser();
+        this.router.navigate(['/']);
+      }, error => {
+        console.log(error);
+        this.errorMessage = JSON.parse(error.error).message;
       });
+    } else {
+      this.formValid = false;
+    }
   }
+
 
   getToken() {
     console.log('in getToken component');
