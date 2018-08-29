@@ -1,14 +1,17 @@
-<nav>
-  <ul>
-    <li><a routerLink="/login">Login</a></li>
-    <li><a routerLink="/bookings">Bookings</a></li>
-    <li><a routerLink="/create-property">CreatePropery</a></li>
-    <li><a routerLink="/property">PropertyList</a></li>
-    <li><a routerLink="/create-apartment">Create Apartment</a></li>
-    <li><a routerLink="/edit-property/1">Edit Property1</a></li>
-    <li><a routerLink="/property-detailes/1">Property1 Details</a></li>
-    <li><a routerLink="/guest-arrivals">Guest Arrivals</a></li>
-  </ul>
-</nav>
-<router-outlet></router-outlet>
-
+<div class="container">
+  <app-header></app-header>
+  <nav>
+    <ul>
+      <li><a routerLink="/login">Login</a></li>
+      <li><a routerLink="/bookings">Bookings</a></li>
+      <li><a routerLink="/create-property">CreatePropery</a></li>
+      <li><a routerLink="/property">PropertyList</a></li>
+      <li><a routerLink="property/:id/apartment">Create Apartment</a></li>
+      <li><a routerLink="/create-apartment">Create Apartment</a></li>
+      <li><a routerLink="/edit-property/1">Edit Property1</a></li>
+      <li><a routerLink="/property-detailes/1">Property1 Details</a></li>
+      <li><a routerLink="/guest-arrivals">Guest Arrivals</a></li>
+    </ul>
+  </nav>
+  <router-outlet></router-outlet>
+</div>

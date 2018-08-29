@@ -5,6 +5,7 @@ import {Apartment} from '../../../models/apartment';
 import {ApartmentService} from '../../../services/apartment/apartment.service';
 import {AuthService} from '../../../services/authentication/auth.service';
 import {CreateApartment} from '../../../models/create-apartment';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-create-apartment',
@@ -17,10 +18,11 @@ export class CreateApartmentComponent implements OnInit {
   apartmentTypes: ApartmentType[];
   amenities: Amenity[];
   createdApartment: CreateApartment;
+  public selectedTypeId: number;
 
   constructor(private auth: AuthService,
-    private apartmentService: ApartmentService
-  ) { }
+              private apartmentService: ApartmentService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.authenticated = this.auth.isAuthenticated;
@@ -45,8 +47,10 @@ export class CreateApartmentComponent implements OnInit {
   }
 
   public createApartments() {
-    console.log(this.createdApartment.amenitiesId);
-    // this.apartmentService.createApartment(this.createdApartment);
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.apartmentService.createApartment(this.createdApartment, id).subscribe(res => {
+      alert('Apartment created');
+    });
   }
 
   public workWithCheckboxes(id: number) {
