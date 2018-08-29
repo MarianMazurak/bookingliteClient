@@ -32,7 +32,7 @@ const routes: Routes = [
   { path: 'property', component: ListPropertyComponent},
   { path: 'property/:id', component: ListApartmentComponent},
   { path: 'apartment-list', component: ListApartmentComponent},
-  { path: 'create-apartment', component: CreateApartmentComponent},
+  { path: 'property/:id/apartment', component: CreateApartmentComponent},
   { path: 'search', component: SearchComponent},
   { path: 'edit-property/:id', component: EditPropertyComponent },
   { path: 'property-detailes/:id', component: PropertyComponent},

@@ -30,25 +30,14 @@ export class ApartmentService {
     return this.http.get<Amenity[]>(this.amenityUrl);
   }
 
-  public createApartment0(createApartment: CreateApartment) {
-    return this.http.post(this.apartmentUrl, createApartment,
-      {headers: new HttpHeaders({
-          'Content-Type': 'application/json' }),
-      responseType: 'text'
-      })
-      .pipe(tap(res => console.log('created apartments')
-      ));
-  }
-
-
-  public createApartment (model: CreateApartment) {
+  public createApartment (model: CreateApartment, id: number) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
     console.log(model, 'JSON');
-    return this.http.post('api/property/1/apartment', model, httpOptions);
+    return this.http.post(`api/property/1/apartment`, model, httpOptions);
   }
 
 }
