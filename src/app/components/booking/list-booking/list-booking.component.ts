@@ -13,16 +13,13 @@ export class ListBookingComponent implements OnInit {
   bookings: Booking[];
   today: Date;
   private page: number=0;
+  private totalElements: number;  
+  private sizeElements: number;
+  private totalPages: number;
   private pages: Array<number>;
 
   constructor(private bookingService: BookingService) { }
-
-  setPage(i,event:any){
-    event.prevendDefault();
-    this.page=i;
-    this.getBookingsByPage();
-  }
-
+  
   ngOnInit() {
     // this.getBookings();
     this.today =new Date();
@@ -37,10 +34,28 @@ export class ListBookingComponent implements OnInit {
   getBookingsByPage(): void {
     this.bookingService.getBookingsByPage(this.page).subscribe(data => {  {
       this.bookings= data['content'];
+      this.totalElements= data['totalElements'];
+      this.sizeElements= data['size'];
+      this.totalPages= data['totalPages'];
       this.pages= new Array(data['totalPages']);
     console.log(data);}
     } );
   }
+
+  onPage(n: number): void {
+    this.page=n;
+    this.getBookingsByPage();
+  }
+
+  onPrev(): void {
+    this.page --;
+    this.getBookingsByPage();
+  }
+
+  onNext(next: boolean): void {
+    this.page ++;
+    this.getBookingsByPage();
+}
 
   isCanceled( bookingStatus: string):boolean {
     return  this.bookingService.isCanceled(bookingStatus);
