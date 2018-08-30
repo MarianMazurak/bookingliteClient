@@ -12,16 +12,33 @@ export class ListBookingComponent implements OnInit {
 
   bookings: Booking[];
   today: Date;
+  private page: number=0;
+  private pages: Array<number>;
 
   constructor(private bookingService: BookingService) { }
 
+  setPage(i,event:any){
+    event.prevendDefault();
+    this.page=i;
+    this.getBookingsByPage();
+  }
+
   ngOnInit() {
-    this.getBookings();
+    // this.getBookings();
     this.today =new Date();
+    this.getBookingsByPage();
   }
 
   getBookings(): void {
     this.bookingService.getBookings().subscribe(bookings => {  this.bookings= bookings
+    } );
+  }
+
+  getBookingsByPage(): void {
+    this.bookingService.getBookingsByPage(this.page).subscribe(data => {  {
+      this.bookings= data['content'];
+      this.pages= new Array(data['totalPages']);
+    console.log(data);}
     } );
   }
 

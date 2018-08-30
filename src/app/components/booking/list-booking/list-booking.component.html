@@ -1,5 +1,14 @@
 <h1>Bookings</h1>
 
+<!-- <app-pagination  (changePage)="pagination.page"= $event></app-pagination> -->
+<ul class="nav nav-pills">
+  <li class="nav nav-pills" *ngFor="let p of pages; let i = index">
+    <a class="nav-link" href="#" (click)="setPage(i, $event)" [ngClass]="{'active':i==page}">{{i}}
+ 
+    </a>
+  </li>
+</ul>"
+
 <ul style="list-style: none">
   <li *ngFor="let booking of bookings">
       <div *ngIf=" isCheckBookingDate(booking.checkIn, booking.checkOut)">
@@ -131,5 +140,7 @@
   </div>
   </li>
 </ul>
+
+
 
 
