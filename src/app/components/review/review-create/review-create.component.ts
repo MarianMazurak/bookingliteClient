@@ -3,6 +3,10 @@ import {AuthService} from '../../../services/authentication/auth.service';
 import {ReviewService} from '../../../services/review/review.service';
 import {ActivatedRoute} from '@angular/router';
 import {FormGroup} from '@angular/forms';
+import {CreateReview} from '../../../models/create-review';
+import {Location} from '@angular/common';
+import {Booking} from '../../../models/booking';
+import {BookingService} from '../../../services/booking/booking.service';
 
 @Component({
   selector: 'app-review-create',
@@ -11,21 +15,30 @@ import {FormGroup} from '@angular/forms';
 })
 export class ReviewCreateComponent implements OnInit {
   private authenticated;
-  reviewDto = {
-    rating: '',
-    message: '',
-    guests: ''
-  };
+  review: CreateReview;
+  booking: Booking;
   constructor(private auth: AuthService,
               private reviewService: ReviewService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private bookingService: BookingService,
+              private location: Location) { }
 
   ngOnInit() {
     this.authenticated = this.auth.isAuthenticated;
+    this.review = new CreateReview();
   }
-  createReview(form: FormGroup) {
+  createReview() {
     const id = +this.route.snapshot.paramMap.get('id');
-   // this.reviewService.createReview(this.reviewDto, id);
+    console.log('controller review', this.review);
+    this.reviewService.createReview(this.review, id).subscribe(res => {
+      alert('Review created');
+    });
   }
-
+  goBack() {
+    this.location.back();
+  }
+  getBooking() {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.bookingService.getBooking(id).subscribe(b => {this.booking = b; } );
+  }
 }
