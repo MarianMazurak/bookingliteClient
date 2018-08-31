@@ -12,11 +12,12 @@ export class ListBookingComponent implements OnInit {
 
   bookings: Booking[];
   today: Date;
-  currentPage = 0;
+  currentPage = 1;
+  zeroPage: boolean= true;
   lastPage: number;
   allPages : number [];
-  intemOnPage = 3; //kil-t6 itemiv na stor
-  allItem= 0;  
+  itemOnPage:  number[] = [1, 3, 5]; 
+  private selectedItemOnPage: number=1;
 
   constructor(private bookingService: BookingService) { }
   
@@ -32,28 +33,26 @@ export class ListBookingComponent implements OnInit {
   }
 
   getBookingsByPage(): void {
-    if(this.currentPage === 0){
-      this.bookingService.getBookingsByPage(this.currentPage, this.intemOnPage).subscribe(data => {  {
+    if(this.zeroPage){      
+      this.bookingService.getBookingsByPage(this.currentPage, this.selectedItemOnPage).subscribe(data => {  {
         this.bookings= data['content'];
-        this.allItem= data['totalElements'];
-        this.intemOnPage= data['size'];     
         console.log(data);
         this.lastPage=data['totalPages'];
         this.calculatePages(this.currentPage, this.lastPage);
+        this.zeroPage = false;
         console.log(this.currentPage);
         console.log(this.allPages);
       }
       } );
     }
-    else if( this.currentPage >= 1){
+    else if( !this.zeroPage){
       let curPage= this.currentPage -1;
-      this.bookingService.getBookingsByPage(curPage, this.intemOnPage).subscribe(data => {  {
-        this.bookings= data['content'];
-        this.allItem= data['totalElements'];
-        this.intemOnPage= data['size'];     
+      this.bookingService.getBookingsByPage(curPage, this.selectedItemOnPage).subscribe(data => {  {
+        this.bookings= data['content']; 
         console.log(data);
         this.lastPage=data['totalPages'];
         this.calculatePages(this.currentPage, this.lastPage);
+        this.zeroPage = false;
         console.log(this.currentPage);
         console.log(this.allPages);
       }

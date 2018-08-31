@@ -1,18 +1,11 @@
 <h1>Bookings</h1>
 
-<!-- <div class="pagination" >
-  <span>{{ sizeElements }} of {{ totalElements }} </span>
-  <button (click)="onPrev()" [disabled]="page === 0 || loading">Previous</button>
-  <button *ngFor="let p of pages; let i=index" (click)="onPage(i)" 
-  [ngClass]="{'active': i===page}">{{i}}</button>
-  <button (click)="onNext()" [disabled]="page === totalPages -1 || loading">Next</button>
-</div> -->
 <app-pagination
-  [allItem]="allItem"
   [currentPage]="currentPage"
   [lastPage]="lastPage"
   [allPages]= "allPages"
-  [intemOnPage]="intemOnPage"
+  [itemOnPage]= "itemOnPage"
+  [selectedItemOnPage]="selectedItemOnPage"
   [pagesToShow]="5"
   (goFirst)="onFirst($event)"
   (goPrev)="onPrev()"

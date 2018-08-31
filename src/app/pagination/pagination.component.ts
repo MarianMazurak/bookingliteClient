@@ -11,11 +11,13 @@ export class PaginationComponent implements OnInit {
   @Input() currentPage: number; // the current page
   @Input() lastPage : number; // the current page
   @Input() allPages : number []; // the current page
-  @Input() allItem: number; // how many total items there are in all pages
-  @Input() intemOnPage: number; // how many items we want to show per page
+  @Input() itemOnPage: number[]; 
+  @Input() selectedItemOnPage: number; 
   @Input() pagesToShow: number; // how many pages between next/prev
   @Input() loading: boolean; // check if content is being loaded
   private firstPage =1;
+  //itemsOnPage:  number[] = [1, 3, 5]; 
+  
 
   @Output() goFirst = new EventEmitter<number>();
   @Output() goPrev = new EventEmitter<boolean>();
@@ -26,6 +28,8 @@ export class PaginationComponent implements OnInit {
   constructor(private bookingService: BookingService) { }
 
   ngOnInit() {
+    console.log("intemOnPage", this.itemOnPage);
+
   }
 
   // getMin(): number {
