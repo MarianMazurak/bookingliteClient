@@ -25,8 +25,9 @@ export class BookingService {
     return this.http.get<Booking []>(this.bookingsUrl);
   }
 
-  getBookingsByPage(pageNumber: number): Observable<any> {
-    return this.http.get<Booking []>(`${this.bookingByPageUrl}?getPageNumber=${pageNumber}&getPageSize=2`);
+  getBookingsByPage(pageNumber: number, pageSize: number): Observable<any> {
+    return this.http.get<Booking []>(
+      `${this.bookingByPageUrl}?getPageNumber=${pageNumber}&getPageSize=${pageSize}`);
   }
 
   getBooking(id: number): Observable<Booking> {

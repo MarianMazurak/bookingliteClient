@@ -1,7 +1,52 @@
-<div class="pagination" *ngIf="count > 0">
-  <span>{{ getMin() }} of {{ getMax() }} of {{ count }}</span>
-  <span>{{ totalPages() }} pages</span>
-  <button (click)="onPrev()" [disabled]="page === 1 || loading">Previous</button>
-  <button *ngFor="let pageNum of getPages()" (click)="onPage(pageNum)"></button>
-  <button (click)="onNext()" [disabled]="lastPage() || loading">Next</button>
+<p>total el {{allItem}},  ....................  el na stor{{intemOnPage}}</p> 
+<p>total page  ( {{lastPage}} +1) ...................currentPage {{currentPage}}</p> 
+<div class="pagination" > <!-- hide pagination if ListBooking =0 -->
+  <!-- <span>{{ getMin() }} of {{ getMax() }} of {{ count }}</span> -->
+  <button (click)="onFirst()" [disabled]="currentPage === 1 ">First</button>
+  <button (click)="onPrev()" [disabled]="currentPage === 1 ">Previous</button>
+  <button *ngFor="let pageNum of allPages" (click)="onPage(pageNum)">{{pageNum}}</button>
+  <button (click)="onNext()" [disabled]="currentPage === lastPage ">Next</button>
+  <button (click)="onLast()" [disabled]="currentPage === lastPage ">Last</button>
+</div>
+
+<div>
+  <div class="container">
+      <div class="text-center">
+          <!-- pager -->
+          <ul *ngIf="allPages " class="pagination">
+            <!--look this!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+              <li [ngClass]="{disabled:currentPage === 1}">
+                  <a (click)="onFirst()">First</a>
+              </li>
+              <li [ngClass]="{disabled:currentPage === 1}">
+                  <a (click)="onPrev()">Previous</a>
+              </li>
+              <li *ngFor="let pageNum of allPages" [ngClass]="{active: pageNum === currentPage}">
+                  <a (click)="onPage(pageNum)">{{pageNum}}</a>
+              </li>
+              <li [ngClass]="{disabled:currentPage === lastPage}">
+                  <a (click)="onNext()">Next</a>
+              </li>
+              <li [ngClass]="{disabled:currentPage === lastPage}">
+                  <a (click)="onLast()">Last</a>
+              </li>
+          </ul>
+      </div>
+  </div>
+</div>
+
+<div>
+    <ul class="pagination">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item active">
+          <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+            <a (click)="onNext()">Next</a>
+        </li>
+      </ul>
 </div>

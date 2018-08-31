@@ -12,11 +12,11 @@ export class ListBookingComponent implements OnInit {
 
   bookings: Booking[];
   today: Date;
-  private page: number=0;
-  private totalElements: number;  
-  private sizeElements: number;
-  private totalPages: number;
-  private pages: Array<number>;
+  currentPage = 0;
+  lastPage: number;
+  allPages : number [];
+  intemOnPage = 3; //kil-t6 itemiv na stor
+  allItem= 0;  
 
   constructor(private bookingService: BookingService) { }
   
@@ -32,30 +32,84 @@ export class ListBookingComponent implements OnInit {
   }
 
   getBookingsByPage(): void {
-    this.bookingService.getBookingsByPage(this.page).subscribe(data => {  {
-      this.bookings= data['content'];
-      this.totalElements= data['totalElements'];
-      this.sizeElements= data['size'];
-      this.totalPages= data['totalPages'];
-      this.pages= new Array(data['totalPages']);
-    console.log(data);}
-    } );
+    if(this.currentPage === 0){
+      this.bookingService.getBookingsByPage(this.currentPage, this.intemOnPage).subscribe(data => {  {
+        this.bookings= data['content'];
+        this.allItem= data['totalElements'];
+        this.intemOnPage= data['size'];     
+        console.log(data);
+        this.lastPage=data['totalPages'];
+        this.calculatePages(this.currentPage, this.lastPage);
+        console.log(this.currentPage);
+        console.log(this.allPages);
+      }
+      } );
+    }
+    else if( this.currentPage >= 1){
+      let curPage= this.currentPage -1;
+      this.bookingService.getBookingsByPage(curPage, this.intemOnPage).subscribe(data => {  {
+        this.bookings= data['content'];
+        this.allItem= data['totalElements'];
+        this.intemOnPage= data['size'];     
+        console.log(data);
+        this.lastPage=data['totalPages'];
+        this.calculatePages(this.currentPage, this.lastPage);
+        console.log(this.currentPage);
+        console.log(this.allPages);
+      }
+      } );
+    }
+    
   }
 
-  onPage(n: number): void {
-    this.page=n;
+  calculatePages(currentPage: number, totalPages: number): void{
+    let startPage: number, endPage: number;
+    if (totalPages <= 10) {
+      // less than 10 total pages so show all
+      startPage = 1;
+      endPage = totalPages;
+  } else {
+      // more than 10 total pages so calculate start and end pages
+      if (currentPage <= 6) {
+          startPage = 1;
+          endPage = 10;
+      } else if (currentPage + 4 >= totalPages) {
+          startPage = totalPages - 9;
+          endPage = totalPages;
+      } else {
+          startPage = currentPage - 5;
+          endPage = currentPage + 4;
+      }
+  }
+   // create an array of pages to ng-repeat in the pager control
+   this.allPages = Array.from(Array((endPage + 1) - startPage).keys()).map(i => startPage + i);
+  }
+
+  goToPage(n: number): void {
+    this.currentPage = n;
+    this.getBookingsByPage();
+  }
+
+  onFirst(n: number): void {
+    this.currentPage = n;
     this.getBookingsByPage();
   }
 
   onPrev(): void {
-    this.page --;
+    this.currentPage--;
+    this.getBookingsByPage();
+}
+
+  onNext(): void {
+    this.currentPage++;
     this.getBookingsByPage();
   }
 
-  onNext(next: boolean): void {
-    this.page ++;
+  onLast(n: number): void {
+    this.currentPage = n;
     this.getBookingsByPage();
-}
+  }
+
 
   isCanceled( bookingStatus: string):boolean {
     return  this.bookingService.isCanceled(bookingStatus);

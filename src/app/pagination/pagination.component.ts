@@ -8,14 +8,19 @@ import { BookingService } from '../services/booking/booking.service';
 })
 export class PaginationComponent implements OnInit {
 
-  @Input() page: number; // the current page
-  @Input() count: number; // how many total items there are in all pages
-  @Input() perPage: number; // how many items we want to show per page
+  @Input() currentPage: number; // the current page
+  @Input() lastPage : number; // the current page
+  @Input() allPages : number []; // the current page
+  @Input() allItem: number; // how many total items there are in all pages
+  @Input() intemOnPage: number; // how many items we want to show per page
   @Input() pagesToShow: number; // how many pages between next/prev
   @Input() loading: boolean; // check if content is being loaded
+  private firstPage =1;
 
+  @Output() goFirst = new EventEmitter<number>();
   @Output() goPrev = new EventEmitter<boolean>();
   @Output() goNext = new EventEmitter<boolean>();
+  @Output() goLast = new EventEmitter<number>();
   @Output() goPage = new EventEmitter<number>();
 
   constructor(private bookingService: BookingService) { }
@@ -23,20 +28,24 @@ export class PaginationComponent implements OnInit {
   ngOnInit() {
   }
 
-  getMin(): number {
-    return ((this.perPage * this.page) - this.perPage) + 1;
-  }
+  // getMin(): number {
+  //   return ((this.intemOnPage * this.currentPage) - this.intemOnPage) + 1;
+  // }
 
-  getMax(): number {
-    let max = this.perPage * this.page;
-    if (max > this.count) {
-      max = this.count;
-    }
-    return max;
-  }
+  // getMax(): number {
+  //   let max = this.intemOnPage * this.currentPage;
+  //   if (max > this.allItem) {
+  //     max = this.allItem;
+  //   }
+  //   return max;
+  // }
 
   onPage(n: number): void {
     this.goPage.emit(n);
+  }
+
+  onFirst(): void {
+    this.goFirst.emit(this.firstPage);
   }
 
   onPrev(): void {
@@ -47,11 +56,7 @@ export class PaginationComponent implements OnInit {
     this.goNext.emit(next);
   }
 
-  totalPages(): number {
-    return Math.ceil(this.count / this.perPage) || 0;
-  }
-
-  lastPage(): boolean {
-    return this.perPage * this.page > this.count;
-  }
+  onLast(): void {
+    this.goLast.emit(this.lastPage);
+  }  
 }
