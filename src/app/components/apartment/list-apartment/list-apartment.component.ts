@@ -14,6 +14,7 @@ import {Property} from '../../../models/property';
 export class ListApartmentComponent implements OnInit {
 
   private authenticated;
+  searchName: string;
   aprtmentsList: Apartment[];
   @Input() property: Property;
 
