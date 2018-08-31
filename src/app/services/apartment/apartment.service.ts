@@ -19,7 +19,7 @@ export class ApartmentService {
   constructor(private http: HttpClient) { }
 
   public getAllApartments(id: number): Observable<Apartment[]> {
-    return this.http.get<Apartment[]>(`${this.apartmentUrl}/${id}/apartment`);
+    return this.http.get<Apartment[]>(`${this.apartmentUrl}/${id}/apartments`);
   }
 
   public getApartmentType(): Observable<ApartmentType[]> {
