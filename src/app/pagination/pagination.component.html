@@ -1,9 +1,12 @@
-<div>
-    <select [(ngModel)]=selectedItemOnPage>
-        <option *ngFor="let item of itemOnPage" [value]="item">{{item}}
-        </option>
+<h5>Number of bookings</h5>
+<div *ngIf="itemOnPage">
+    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" 
+        [(ngModel)]=selectedItemOnPage (ngModelChange)='onSelectedItemOnPage()'>
+        <option [value]=" itemOnPage[0]" selected>{{ itemOnPage[0]}}</option>
+        <option *ngFor="let item of itemOnPage.slice(1)"  [value]="item" >{{item}}</option>
     </select>
 </div>
+
 
 <div>
     <div class="container">

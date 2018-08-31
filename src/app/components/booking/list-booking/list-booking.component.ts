@@ -12,12 +12,13 @@ export class ListBookingComponent implements OnInit {
 
   bookings: Booking[];
   today: Date;
+
   currentPage = 1;
   zeroPage: boolean= true;
   lastPage: number;
   allPages : number [];
   itemOnPage:  number[] = [1, 3, 5]; 
-  private selectedItemOnPage: number=1;
+  selectedItemOnPage: number=1;
 
   constructor(private bookingService: BookingService) { }
   
@@ -82,6 +83,11 @@ export class ListBookingComponent implements OnInit {
   }
    // create an array of pages to ng-repeat in the pager control
    this.allPages = Array.from(Array((endPage + 1) - startPage).keys()).map(i => startPage + i);
+  }
+
+  setSelectedItemOnPage(n: number): void{
+    this.selectedItemOnPage= n;
+    this.getBookingsByPage();
   }
 
   goToPage(n: number): void {
