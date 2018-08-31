@@ -80,7 +80,7 @@ import { ReviewCreateComponent } from './components/review/review-create/review-
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    PropertyService,CountryService,CityService,ApartmentService,PropertyTypeService],
+    PropertyService, CountryService, CountryService, ApartmentService, PropertyTypeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

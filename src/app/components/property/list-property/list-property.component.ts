@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 import {Property} from '../../../models/property';
 import {PropertyService} from '../../../services/property/property.service';
@@ -15,7 +15,7 @@ export class ListPropertyComponent implements OnInit {
 
   private authentication;
 
-  propertyList: Property[];
+  @Input() propertyList: Property[];
 
 
   constructor(private propertyService: PropertyService,
@@ -27,7 +27,7 @@ export class ListPropertyComponent implements OnInit {
   reviewCount: number;
   ngOnInit() {
     this.authentication = this.auth.isAuthenticated;
-      this.getProperties();
+      // this.getProperties();
   }
 
   public getProperties() {

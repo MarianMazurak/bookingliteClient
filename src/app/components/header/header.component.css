@@ -1,33 +1,5 @@
-/*.hed-buts{*/
-  /*color: #3d5c5c;*/
-/*}*/
-/*.hed-buts:hover{*/
-  /*color: #1f2e2e;*/
-/*}*/
-/*.ion-md-body{*/
-  /*font-size: 24px;*/
-/*}*/
-
 #navbarRightSide {
   justify-content: flex-end;
 }
-.searchform {
-  border: 5px solid #f8f9fa;
-  border-radius: 10px;
-  padding: 5px;
-  display: inline-flex
-}
-.search-bar {
-  margin-top:30px;
-  display: flex;
-  justify-content: center;
-}
-.result-property-list-container {
-  margin-top: 50px;
-}
-.filter-form-container {
-  padding-top: 5px;
-  border: 3px solid #f8f9fa;
-  border-radius: 10px;
-}
+
 
