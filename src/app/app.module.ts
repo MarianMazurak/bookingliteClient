@@ -1,10 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
-
 import { FormsModule } from '@angular/forms';
-
 import { AppComponent } from './app.component';
 import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/user/login/login.component';
@@ -24,16 +21,11 @@ import { AppRoutingModule } from './/app-routing.module';
 import {PhotoComponent} from './components/property/photo/photo.component';
 import { PhotoListComponent } from './components/property/photo-list/photo-list.component';
 import { UploadPhotoListComponent } from './components/property/create-property/upload-photo-list/upload-photo-list.component';
-
-
-
 import { PropertyItemComponent } from './components/property/list-property/property-item/property-item.component';
 import { PropertyService } from './services/property/property.service';
 import { PropertyTypeService } from './services/propertyTypy/property-type.service';
 import { ReviewComponent } from './components/review/review.component';
-
 import { ApartmentService } from './services/apartment/apartment.service';
-
 import { CountryService } from './services/country/coutry.service';
 import { CityService } from './services/city/city.service';
 import {SearchFormComponent} from './components/search/search-form/search-form.component';
@@ -42,6 +34,7 @@ import { BookingCreateComponent } from './components/booking/booking-create/book
 import { GuestArrivalsComponent } from './components/booking/guest-arrivals/guest-arrivals.component';
 import { ReviewBookingComponent } from './components/review/review-booking/review-booking.component';
 import { ReviewCreateComponent } from './components/review/review-create/review-create.component';
+import { OwnerPropertiesComponent } from './components/property/owner-properties/owner-properties.component';
 
 
 @NgModule({
@@ -70,7 +63,8 @@ import { ReviewCreateComponent } from './components/review/review-create/review-
     BookingCreateComponent,
     GuestArrivalsComponent,
     ReviewBookingComponent,
-    ReviewCreateComponent
+    ReviewCreateComponent,
+    OwnerPropertiesComponent
   ],
   imports: [
     BrowserModule,

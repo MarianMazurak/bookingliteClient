@@ -10,13 +10,15 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-3">
+                    <img class="img-responsive" alt="No Photo"
+                         src="http://res.cloudinary.com/lv326/image/upload/v1535107395/properties/38ac382d-0bed-4280-8e93-8643057c15ca.jpg">
                   </div>
                   <div class="col-md-6  card-body">
                     <div class="list-title">
                       <ul class="list-inline list-unstyled">
                         <li class="list-inline-item">
                           <a routerLink="/booking/{{booking.bookingId}}">
-                            <h4>Booking # {{booking.bookingId}}</h4>
+                            <h4>{{booking.userDto.email}}</h4>
                           </a>
                         </li>
                         <li class="list-inline-item text-warning"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
@@ -25,8 +27,7 @@
                       </ul>
                     </div>
                     <div class="list-location">
-                      <small>Dates: {{booking.checkIn | date:'dd-MM-yyyy' }} - {{booking.checkOut | date:'dd-MM-yyyy' }}
-                      </small>
+                      Dates: {{booking.checkIn | date:'dd-MM-yyyy' }} - {{booking.checkOut | date:'dd-MM-yyyy' }}
                     </div>
                     <div class="list-descrip">
                       <small>Number of guests: {{booking.apartmentDto.numberOfGuests}}
@@ -34,13 +35,11 @@
                       <br>
                       <small>Apartment type: {{booking.apartmentDto.apartmentType.name}}
                       </small>
+                      <ul class="list-unstyled">
+                        <li><h3>Price: {{booking.totalPrice}}* </h3></li>
+                        <small> *number of days: {{calculateNumberOfDates(booking.checkIn , booking.checkOut )}}</small>
+                      </ul>
                     </div>
-                  </div>
-                  <div class="col-md-3 border-left card-body">
-                    <ul class="list-unstyled">
-                      <li><h4>Status: {{booking.bookingStatus.name}}</h4></li>
-                      <li><h3>Price: {{booking.totalPrice}} </h3></li>
-                    </ul>
                   </div>
                 </div>
               </div>
@@ -50,14 +49,14 @@
       </div>
     </div>
   </li>
-</ul>
 
-<ul style="list-style: none">
   <div class="container">
-    <br><hr><br>
+    <br>
+    <hr>
+    <h2>Past bookings : </h2>
+    <br>
   </div>
 </ul>
-
 <ul style="list-style: none">
   <li *ngFor="let booking of guestArrivalsList">
     <div *ngIf="!isCheckBookingDate(booking.checkIn, booking.checkOut)">
@@ -68,14 +67,15 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-3">
-                    <!-- <img src={{property.photos[0]}}> -->
+                    <img class="img-responsive" alt="No Photo"
+                         src="http://res.cloudinary.com/lv326/image/upload/v1535107395/properties/38ac382d-0bed-4280-8e93-8643057c15ca.jpg">
                   </div>
                   <div class="col-md-6  card-body">
                     <div class="list-title">
                       <ul class="list-inline list-unstyled">
                         <li class="list-inline-item">
                           <a routerLink="/booking/{{booking.bookingId}}">
-                            <h4>Booking # {{booking.bookingId}}</h4>
+                            <h4>{{booking.userDto.email}}</h4>
                           </a>
                         </li>
                         <li class="list-inline-item text-warning"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
@@ -84,8 +84,7 @@
                       </ul>
                     </div>
                     <div class="list-location">
-                      <small>Dates: {{booking.checkIn | date:'dd-MM-yyyy' }} - {{booking.checkOut | date:'dd-MM-yyyy' }}
-                      </small>
+                      Dates: {{booking.checkIn | date:'dd-MM-yyyy' }} - {{booking.checkOut | date:'dd-MM-yyyy' }}
                     </div>
                     <div class="list-descrip">
                       <small>Number of guests: {{booking.apartmentDto.numberOfGuests}}
@@ -93,15 +92,14 @@
                       <br>
                       <small>Apartment type: {{booking.apartmentDto.apartmentType.name}}
                       </small>
+                      <ul class="list-unstyled">
+                        <li><h3>Price: {{booking.totalPrice}}* </h3></li>
+                        <small> *number of days: {{calculateNumberOfDates(booking.checkIn , booking.checkOut )}}</small>
+                      </ul>
                     </div>
                   </div>
                   <div class="col-md-3 border-left card-body">
-                    <ul class="list-unstyled">
-                      <li><h4>Status: {{booking.bookingStatus.name}}</h4></li>
-                      <li><h3>Price: {{booking.totalPrice}} </h3></li>
-                      <li><button type="button" routerLink="/review-booking/{{booking.bookingId}}"
-                                  class="btn btn-outline-primary">Get Review</button></li>
-                    </ul>
+                    <p>{{booking.reviewDto.message}}</p>
                   </div>
                 </div>
               </div>

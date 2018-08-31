@@ -12,6 +12,7 @@ import {Observable} from 'rxjs';
 })
 export class PropertyService {
 
+  private guestArrivalsUrl = 'api/guestArrivals';
   constructor(private http: HttpClient) { }
 
   public createProperty(model: PropertyCreate) {
@@ -30,6 +31,9 @@ export class PropertyService {
 
   public getPropertyById(id: number): Observable<Property> {
     return this.http.get<Property>('api/property/' + id);
+  }
 
+  public getOwnerProperties(): Observable<Property[]> {
+    return this.http.get<Property[]>(this.guestArrivalsUrl);
   }
 }

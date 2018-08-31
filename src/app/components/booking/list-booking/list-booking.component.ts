@@ -20,23 +20,23 @@ export class ListBookingComponent implements OnInit {
   ngOnInit() {
     this.authenticated = this.auth.isAuthenticated;
     this.getBookings();
-    this.today =new Date();
+    this.today = new Date();
   }
 
   getBookings(): void {
-    this.bookingService.getBookings().subscribe(bookings => {  this.bookings= bookings
+    this.bookingService.getBookings().subscribe(bookings => {  this.bookings = bookings;
     } );
   }
 
-  isCanceled( bookingStatus: string):boolean {
+  isCanceled( bookingStatus: string): boolean {
     return  this.bookingService.isCanceled(bookingStatus);
   }
 
-  isCheckBookingDate(checkIn, checkOut):boolean {
+  isCheckBookingDate(checkIn, checkOut): boolean {
     return this.bookingService.isCheckBookingDate(checkIn, checkOut);
   }
 
-  calculateNumberOfDates(checkIn, checkOut): number{
+  calculateNumberOfDates(checkIn, checkOut): number {
     return this.bookingService.calculateNumberOfDates(checkIn, checkOut);
   }
 }

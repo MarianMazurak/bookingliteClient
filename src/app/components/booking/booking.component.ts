@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs';
+import {Component, OnInit, Input} from '@angular/core';
+import {Observable} from 'rxjs';
 import {Booking} from '../../models/booking';
 import {BookingService} from '../../services/booking/booking.service';
 import {AuthService} from '../../services/authentication/auth.service';
-import { ActivatedRoute } from '../../../../node_modules/@angular/router';
-import { Router } from "@angular/router";
+import {ActivatedRoute} from '../../../../node_modules/@angular/router';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -18,14 +18,13 @@ export class BookingComponent implements OnInit {
   private bookingsUrl = '/bookings';
 
   constructor(private route: ActivatedRoute,
-    private bookingService: BookingService,
-    private router: Router 
-  //private dateFormatPipe: DateFormatPipe
-) {}
-  // constructor(private bookingService: BookingService,
-  //             private auth: AuthService ) { }
+              private bookingService: BookingService,
+              private router: Router
+  ) {
+  }
+
   ngOnInit() {
-     this.getBooking();
+    this.getBooking();
   }
 
   getBooking(): void {
@@ -39,26 +38,25 @@ export class BookingComponent implements OnInit {
     this.bookingService.cancelBookings(id)
       .subscribe(res => this.backToBookings()
       );
-  }  
-
-  isCheckBookingDate(checkIn, checkOut):boolean {
-    return this.bookingService.isCheckBookingDate(checkIn, checkOut)
   }
 
-  isCanceled( bookingStatus: string):boolean {
-    return  this.bookingService.isCanceled(bookingStatus);
+  isCheckBookingDate(checkIn, checkOut): boolean {
+    return this.bookingService.isCheckBookingDate(checkIn, checkOut);
   }
 
-  isReview(idReview){
-    if( !idReview ){ 
+  isCanceled(bookingStatus: string): boolean {
+    return this.bookingService.isCanceled(bookingStatus);
+  }
+
+  isReview(idReview) {
+    if (!idReview) {
       return true;
-    }
-    else  {
+    } else {
       return false;
     }
   }
 
-  backToBookings(){
+  backToBookings() {
     this.router.navigate([this.bookingsUrl]);
   }
 
