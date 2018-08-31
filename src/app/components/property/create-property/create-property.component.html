@@ -1,82 +1,82 @@
-<div class="form-group">
-  <label class="col-form-label">Property Name</label>
-  <input type="text" class="form-control" placeholder="Property Name" [(ngModel)]="propertyCreate.name">
-</div>
-
-<div class="form-group">
-  <label class="col-form-label">Descpription</label>
-  <input type="text" class="form-control" placeholder="Descpription" [(ngModel)]="propertyCreate.description">
-</div>
-
-<div class="form-group">
-  <label class="col-form-label">Phone number</label>
-  <input type="text" class="form-control" placeholder="Phone number" [(ngModel)]="propertyCreate.phoneNumber">
-</div>
-
-<div class="form-group">
-  <label class="col-form-label">Email</label>
-  <input type="email" class="form-control" placeholder="Email" [(ngModel)]="propertyCreate.contactEmail">
-</div>
-
-<div class="form-group">
-  <label class="col-form-label">Country</label>
-  <select class="custom-select"
-          [(ngModel)]="selectedCountryId"
-          (ngModelChange)='getCities(selectedCountryId)'
-          [(ngModel)]="propertyCreate.countryId">
-    <option *ngFor="let country of countries"
-            [value]="country.id">
-      {{country.name}}
-    </option>
-  </select>
-</div>
-<br>
-
-<div class="form-group">
-  <label class="col-form-label">City</label>
-  <select class="custom-select"
-    [(ngModel)]='selectedCityId'
-    [(ngModel)]='propertyCreate.cityId'>
-  <option *ngFor="let city of cities"
-          [(value)]="city.id">
-    {{city.name}}
-  </option>
-  </select>
-</div>
-
-<div class="form-group">
-  <label class="col-form-label">addressline</label>
-  <input type="email" class="form-control" placeholder="addressline" [(ngModel)]="propertyCreate.addressLine">
-</div>
-
-<div class="form-group">
-  <label class="col-form-label">zip</label>
-  <input type="email" class="form-control" placeholder="zip" [(ngModel)]="propertyCreate.zip">
-</div>
-
-<div class="form-group">
-  <label class="col-form-label">Property Type</label>
-  <select class="custom-select"
-         [(ngModel)]='propertyCreate.propertyTypeId'>
-    <option *ngFor="let propertyType of propertyTypes"
-            [(value)]="propertyType.id">
-      {{propertyType.name}}
-    </option>
-  </select>
-</div>
-
-
-<div class="form-group">
-  <h5>Facilities</h5>
-  <div class="custom-control custom-checkbox"
-       *ngFor="let facility of facilities">
-    <input type="checkbox" class="custom-control-input" id="customCheck{{facility.id}}"
-           (change)="workWithCheckboxes(facility.id)">
-    <label class="custom-control-label" for="customCheck{{facility.id}}">{{facility.name}}</label>
+<div class="container">
+  <div class="form-group">
+    <label class="col-form-label">Property Name</label>
+    <input type="text" class="form-control" placeholder="Property Name" [(ngModel)]="propertyCreate.name">
   </div>
+
+  <div class="form-group">
+    <label class="col-form-label">Descpription</label>
+    <input type="text" class="form-control" placeholder="Descpription" [(ngModel)]="propertyCreate.description">
+  </div>
+
+  <div class="form-group">
+    <label class="col-form-label">Phone number</label>
+    <input type="text" class="form-control" placeholder="Phone number" [(ngModel)]="propertyCreate.phoneNumber">
+  </div>
+
+  <div class="form-group">
+    <label class="col-form-label">Email</label>
+    <input type="email" class="form-control" placeholder="Email" [(ngModel)]="propertyCreate.contactEmail">
+  </div>
+
+  <div class="form-group">
+    <label class="col-form-label">Country</label>
+    <select class="custom-select"
+            [(ngModel)]="selectedCountryId"
+            (ngModelChange)='getCities(selectedCountryId)'
+            [(ngModel)]="propertyCreate.countryId">
+      <option *ngFor="let country of countries"
+              [value]="country.id">
+        {{country.name}}
+      </option>
+    </select>
+  </div>
+  <br>
+
+  <div class="form-group">
+    <label class="col-form-label">City</label>
+    <select class="custom-select"
+            [(ngModel)]='selectedCityId'
+            [(ngModel)]='propertyCreate.cityId'>
+      <option *ngFor="let city of cities"
+              [(value)]="city.id">
+        {{city.name}}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label class="col-form-label">addressline</label>
+    <input type="email" class="form-control" placeholder="addressline" [(ngModel)]="propertyCreate.addressLine">
+  </div>
+
+  <div class="form-group">
+    <label class="col-form-label">zip</label>
+    <input type="email" class="form-control" placeholder="zip" [(ngModel)]="propertyCreate.zip">
+  </div>
+
+  <div class="form-group">
+    <label class="col-form-label">Property Type</label>
+    <select class="custom-select"
+            [(ngModel)]='propertyCreate.propertyTypeId'>
+      <option *ngFor="let propertyType of propertyTypes"
+              [(value)]="propertyType.id">
+        {{propertyType.name}}
+      </option>
+    </select>
+  </div>
+
+
+  <div class="form-group">
+    <h5>Facilities</h5>
+    <div class="custom-control custom-checkbox"
+         *ngFor="let facility of facilities">
+      <input type="checkbox" class="custom-control-input" id="customCheck{{facility.id}}"
+             (change)="workWithCheckboxes(facility.id)">
+      <label class="custom-control-label" for="customCheck{{facility.id}}">{{facility.name}}</label>
+    </div>
+  </div>
+
+
+  <button (click)="createProperty()">Added Property</button>
 </div>
-
-
-
-
-<button (click)="createProperty()">Added Property</button>
