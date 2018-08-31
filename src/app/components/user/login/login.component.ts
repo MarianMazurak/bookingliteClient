@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
       .subscribe(res => {
         this.auth.saveToken(res);
         this.auth.loadUser();
-        this.router.navigate(['/']);
+        this.router.navigate(['/search']);
       }, error => {
         console.log(error);
         this.errorMessage = JSON.parse(error.error).message;
