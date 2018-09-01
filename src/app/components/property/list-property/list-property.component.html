@@ -1,13 +1,16 @@
 <ul style="list-style: none">
-  <li *ngFor="let property of propertyList">
+  <li *ngFor="let property of propertyList ">
     <div class="container">
-      <div class="row mb-3">
+      <div class="row mb-4">
         <div class="col-md-12">
           <div class="card">
             <div class="card-body">
               <div class="row">
                 <div class="col-md-3">
-                  <img class="img-responsive" src={{property.photos[0].url}} onerror="this.src = 'assets/image/Capture.gif'">
+                  <img *ngIf="property.photos.length > 0" class="img-responsive" src={{property.photos[0].url}}
+                       alt="{{property.name}}">
+                  <img *ngIf="property.photos.length === 0" class="img-responsive" src="assets/image/Capture.PNG"
+                       alt="{{property.name}}">
                 </div>
                 <div class="col-md-6  card-body">
                   <div class="list-title">
