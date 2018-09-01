@@ -20,8 +20,8 @@ export class GuestArrivalsComponent implements OnInit {
     this.getGuestArrivalsList();
   }
 
-  isCheckBookingDate(checkIn, checkOut): boolean {
-    return this.bookingService.isCheckBookingDate(checkIn, checkOut);
+  isBookingDateActual(checkIn, checkOut): boolean {
+    return this.bookingService.isBookingDateActual(checkIn, checkOut);
   }
 
   public getGuestArrivalsList() {

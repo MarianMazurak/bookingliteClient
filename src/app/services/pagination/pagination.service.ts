@@ -26,7 +26,7 @@ export class PaginationService {
           endPage = currentPage + 4;
       }
   }
-   // create an array of pages to ng-repeat in the pager control
+   // create an array of pages to ng-For in the pager control
    return Array.from(Array((endPage + 1) - startPage).keys()).map(i => startPage + i);
   }
 }

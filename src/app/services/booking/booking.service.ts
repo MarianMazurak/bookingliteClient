@@ -12,18 +12,12 @@ import {BookingCreate} from '../../models/booking-create';
 })
 export class BookingService {
 
-  private bookingsUrl = 'api/bookings';
   private bookingUrl = 'api/booking';
   private bookingByPageUrl = 'api/bookings/pages'
   private guestArrivalsUrl = 'api/guestarivals';
-
   private nowDate: Date;
 
   constructor(private http: HttpClient) { }
-
-  getBookings(): Observable<Booking[]> {
-    return this.http.get<Booking []>(this.bookingsUrl);
-  }
 
   getBookingsByPage(pageNumber: number, pageSize: number): Observable<any> {
     return this.http.get<Booking []>(
@@ -61,7 +55,7 @@ export class BookingService {
     return Math.round((dateChackOut.getTime() - dateChackIn.getTime()) / (oneDay) );  
   }
 
-  isCheckBookingDate(checkIn, checkOut):boolean {
+  isBookingDateActual(checkIn, checkOut):boolean {
     let dateChackIn = new Date (checkIn);
     let dateChackOut = new Date (checkOut);
     this.nowDate = new Date();
@@ -72,6 +66,7 @@ export class BookingService {
       return false;
     }
   }
+  
   public createBooking(bookingCreate: BookingCreate, apartmentId: number) {
     const url = `api/booking/${apartmentId}`;
     return this.http.post(url, bookingCreate, {headers: new HttpHeaders({

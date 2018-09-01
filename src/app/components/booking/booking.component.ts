@@ -37,8 +37,8 @@ export class BookingComponent implements OnInit {
       );
   }  
 
-  isCheckBookingDate(checkIn, checkOut):boolean {
-    return this.bookingService.isCheckBookingDate(checkIn, checkOut)
+  isBookingDateActual(checkIn, checkOut):boolean {
+    return this.bookingService.isBookingDateActual(checkIn, checkOut)
   }
 
   isCanceled( bookingStatus: string):boolean {

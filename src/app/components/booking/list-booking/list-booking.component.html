@@ -4,21 +4,11 @@
   <app-items-size
     (sentSelectedItemsSize)="setSelectedItemsSize($event)">
   </app-items-size>
-
-  <app-pagination
-    [currentPage]="currentPage"
-    [totalPages]= "totalPages"
-    [pagesToPagination]= "pagesToPagination"    
-    (goFirst)="onFirst($event)"
-    (goPrev)="onPrev()"
-    (goNext)="onNext()"
-    (goLast)="onLast($event)"
-    (goPage)="goToPage($event)">
-  </app-pagination>
+  <br><br>
 
   <ul style="list-style: none">
     <li *ngFor="let booking of bookings">
-        <div *ngIf=" isCheckBookingDate(booking.checkIn, booking.checkOut)">
+        <div *ngIf=" isBookingDateActual(booking.checkIn, booking.checkOut)">
       <div class="container">
         <div class="row mb-3">
           <div class="col-md-12">
@@ -84,7 +74,7 @@
 
   <ul style="list-style: none">
     <li *ngFor="let booking of bookings">
-        <div *ngIf="!isCheckBookingDate(booking.checkIn, booking.checkOut)">
+        <div *ngIf="!isBookingDateActual(booking.checkIn, booking.checkOut)">
       <div class="container">
         <div class="row mb-3">
           <div class="col-md-12">
@@ -147,6 +137,18 @@
     </div>
     </li>
   </ul>
+
+  <app-pagination
+    [currentPage]="currentPage"
+    [totalPages]= "totalPages"
+    [pagesToPagination]= "pagesToPagination"    
+    (goFirst)="onFirst($event)"
+    (goPrev)="onPrev()"
+    (goNext)="onNext()"
+    (goLast)="onLast($event)"
+    (goPage)="goToPage($event)">
+  </app-pagination>
+
 </div>
 
 <div *ngIf="totalElements ===0 ">

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Booking } from '../../../models/booking';
 import { BookingService } from '../../../services/booking/booking.service';
-import { AuthService } from '../../../services/authentication/auth.service';
 import { PaginationService } from '../../../services/pagination/pagination.service';
 
 @Component({
@@ -12,7 +11,7 @@ import { PaginationService } from '../../../services/pagination/pagination.servi
 export class ListBookingComponent implements OnInit {
 
   bookings: Booking[];
-  currentPage = 1;
+  currentPage: number = 1;
   selectedItemsSize: number;
   pagesToPagination : number [];//count page to show in pagination
   totalPages: number; // all pages with selected `selectedItemOnPage`
@@ -25,14 +24,13 @@ export class ListBookingComponent implements OnInit {
     this.getBookingsByPage();
   }
 
-  getBookingsByPage(): void { //evry next page- is way to DB. It is normal????????
-    if(this.currentPage && this.selectedItemsSize){
+  getBookingsByPage(): void { 
+    if(this.selectedItemsSize){
       this.bookingService.getBookingsByPage(this.currentPage -1, this.selectedItemsSize).subscribe(data =>   {
         this.bookings= data['content'];
         this.totalPages= data['totalPages'];
         this.totalElements=  data['totalElements'];
         this.pagesToPagination= this.paginationService.calculatePages(this.currentPage, this.totalPages);
-        console.log(data);
       } ); 
     }
   }
@@ -71,8 +69,8 @@ export class ListBookingComponent implements OnInit {
     return  this.bookingService.isCanceled(bookingStatus);
   }
 
-  isCheckBookingDate(checkIn, checkOut):boolean {
-    return this.bookingService.isCheckBookingDate(checkIn, checkOut);
+  isBookingDateActual(checkIn, checkOut):boolean {
+    return this.bookingService.isBookingDateActual(checkIn, checkOut);
   }
 
   calculateNumberOfDates(checkIn, checkOut): number{

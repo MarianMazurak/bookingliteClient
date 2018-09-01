@@ -83,7 +83,7 @@
               <hr>    
               <div >
                   <button class="btn btn-primary btn-block" (click)="backToBookings()">Back to bookings</button>
-                  <div *ngIf="isCheckBookingDate(booking?.checkIn, booking?.checkOut) && 
+                  <div *ngIf="isBookingDateActual(booking?.checkIn, booking?.checkOut) && 
                     !isCanceled(booking?.bookingStatus?.name)">
                     <br>
                     <button class="btn btn-secondary btn-block" (click)="cancelBooking()">Cancel Booking</button>
