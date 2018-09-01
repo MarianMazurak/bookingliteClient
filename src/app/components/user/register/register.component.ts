@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
       }
     });
   }
-  signUp(registerForm: FormGroup) {
+    signUp(registerForm: FormGroup) {
     if (registerForm.valid) {
     console.log(JSON.stringify(this.registerDto));
     this.registerDto.address.city.id = this.selectedCity;
