@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Booking } from '../../../models/booking';
 import { BookingService } from '../../../services/booking/booking.service';
 import { AuthService } from '../../../services/authentication/auth.service';
+import { PaginationService } from '../../../services/pagination/pagination.service';
 
 @Component({
   selector: 'app-list-booking',
@@ -11,82 +12,33 @@ import { AuthService } from '../../../services/authentication/auth.service';
 export class ListBookingComponent implements OnInit {
 
   bookings: Booking[];
-  today: Date;
-
   currentPage = 1;
-  zeroPage: boolean= true;
-  lastPage: number;
-  allPages : number [];
-  itemOnPage:  number[] = [1, 3, 5]; 
-  selectedItemOnPage: number=1;
+  selectedItemsSize: number;
+  pagesToPagination : number [];//count page to show in pagination
+  totalPages: number; // all pages with selected `selectedItemOnPage`
+  totalElements: number;// condition in html. If==0 you not have booking
 
-  constructor(private bookingService: BookingService) { }
+  constructor(private bookingService: BookingService,
+              private paginationService: PaginationService) { }
   
   ngOnInit() {
-    // this.getBookings();
-    this.today =new Date();
     this.getBookingsByPage();
   }
 
-  getBookings(): void {
-    this.bookingService.getBookings().subscribe(bookings => {  this.bookings= bookings
-    } );
-  }
-
-  getBookingsByPage(): void {
-    if(this.zeroPage){      
-      this.bookingService.getBookingsByPage(this.currentPage, this.selectedItemOnPage).subscribe(data => {  {
+  getBookingsByPage(): void { //evry next page- is way to DB. It is normal????????
+    if(this.currentPage && this.selectedItemsSize){
+      this.bookingService.getBookingsByPage(this.currentPage -1, this.selectedItemsSize).subscribe(data =>   {
         this.bookings= data['content'];
+        this.totalPages= data['totalPages'];
+        this.totalElements=  data['totalElements'];
+        this.pagesToPagination= this.paginationService.calculatePages(this.currentPage, this.totalPages);
         console.log(data);
-        this.lastPage=data['totalPages'];
-        this.calculatePages(this.currentPage, this.lastPage);
-        this.zeroPage = false;
-        console.log(this.currentPage);
-        console.log(this.allPages);
-      }
-      } );
+      } ); 
     }
-    else if( !this.zeroPage){
-      let curPage= this.currentPage -1;
-      this.bookingService.getBookingsByPage(curPage, this.selectedItemOnPage).subscribe(data => {  {
-        this.bookings= data['content']; 
-        console.log(data);
-        this.lastPage=data['totalPages'];
-        this.calculatePages(this.currentPage, this.lastPage);
-        this.zeroPage = false;
-        console.log(this.currentPage);
-        console.log(this.allPages);
-      }
-      } );
-    }
-    
   }
-
-  calculatePages(currentPage: number, totalPages: number): void{
-    let startPage: number, endPage: number;
-    if (totalPages <= 10) {
-      // less than 10 total pages so show all
-      startPage = 1;
-      endPage = totalPages;
-  } else {
-      // more than 10 total pages so calculate start and end pages
-      if (currentPage <= 6) {
-          startPage = 1;
-          endPage = 10;
-      } else if (currentPage + 4 >= totalPages) {
-          startPage = totalPages - 9;
-          endPage = totalPages;
-      } else {
-          startPage = currentPage - 5;
-          endPage = currentPage + 4;
-      }
-  }
-   // create an array of pages to ng-repeat in the pager control
-   this.allPages = Array.from(Array((endPage + 1) - startPage).keys()).map(i => startPage + i);
-  }
-
-  setSelectedItemOnPage(n: number): void{
-    this.selectedItemOnPage= n;
+  
+  setSelectedItemsSize(n: number): void{
+    this.selectedItemsSize= n;
     this.getBookingsByPage();
   }
 
@@ -114,7 +66,6 @@ export class ListBookingComponent implements OnInit {
     this.currentPage = n;
     this.getBookingsByPage();
   }
-
 
   isCanceled( bookingStatus: string):boolean {
     return  this.bookingService.isCanceled(bookingStatus);

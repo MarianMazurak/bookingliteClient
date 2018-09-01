@@ -42,7 +42,10 @@ import { BookingCreateComponent } from './components/booking/booking-create/book
 import { GuestArrivalsComponent } from './components/booking/guest-arrivals/guest-arrivals.component';
 import { ReviewBookingComponent } from './components/review/review-booking/review-booking.component';
 import { ReviewCreateComponent } from './components/review/review-create/review-create.component';
-import { PaginationComponent } from './pagination/pagination.component';
+
+import { PaginationService } from './services/pagination/pagination.service';
+import { ItemsSizeComponent } from './components/pagination/items-size/items-size.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 
 @NgModule({
@@ -72,7 +75,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     GuestArrivalsComponent,
     ReviewBookingComponent,
     ReviewCreateComponent,
-    PaginationComponent
+    PaginationComponent,
+    ItemsSizeComponent
   ],
   imports: [
     BrowserModule,
@@ -82,7 +86,7 @@ import { PaginationComponent } from './pagination/pagination.component';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    PropertyService,CoutryService,CityService,ApartmentService,PropertyTypeService],
+    PropertyService,CoutryService,CityService,ApartmentService,PropertyTypeService, PaginationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
