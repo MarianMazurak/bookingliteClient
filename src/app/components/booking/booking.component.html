@@ -71,12 +71,20 @@
                   </div>
                 </div>  
                 <div class="col-md-3 border-left card-body">
-                  <img class="img-responsive" alt="No Photo" src={{booking.apartmentDto.propertyDto.photos[0].url}}>
+                  <img *ngIf="booking.apartmentDto.propertyDto.photos[0]" class="img-responsive" 
+                  alt="No Photo" src={{booking.apartmentDto.propertyDto.photos[0].url}}>
                   <br><br>
-                  <img class="img-responsive" alt="No Photo" src={{booking.apartmentDto.propertyDto.photos[1].url}}>
+                  <img *ngIf="booking.apartmentDto.propertyDto.photos[1]" class="img-responsive" 
+                  alt="No Photo" src={{booking.apartmentDto.propertyDto.photos[1].url}}>
                   <br><br>
-                  <img class="img-responsive" alt="No Photo" src={{booking.apartmentDto.propertyDto.photos[2].url}}>
+                  <img *ngIf="booking.apartmentDto.propertyDto.photos[2]" class="img-responsive" 
+                  alt="No Photo" src={{booking.apartmentDto.propertyDto.photos[2].url}}>
                   <br><br>
+
+                  <app-photo-popup
+                  [booking]="booking">
+                  </app-photo-popup>
+
                   <a href="#">More photos</a>
                   </div>
               </div>

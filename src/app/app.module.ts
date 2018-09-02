@@ -46,6 +46,8 @@ import { ReviewCreateComponent } from './components/review/review-create/review-
 import { PaginationService } from './services/pagination/pagination.service';
 import { ItemsSizeComponent } from './components/pagination/items-size/items-size.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { PhotoPopupComponent } from './components/property/photo-popup/photo-popup.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -76,13 +78,15 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     ReviewBookingComponent,
     ReviewCreateComponent,
     PaginationComponent,
-    ItemsSizeComponent
+    ItemsSizeComponent,
+    PhotoPopupComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule.forRoot()
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
