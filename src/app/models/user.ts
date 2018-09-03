@@ -4,9 +4,9 @@ import { Address } from "./address";
 export class User {
   id: number;
   email: string;
-  first_name: string;
-  last_name: string;
-  phone_number: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
   roles: Role[];
-  address: Address;
+  //address: Address;
 }

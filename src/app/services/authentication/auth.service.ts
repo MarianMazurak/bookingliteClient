@@ -89,4 +89,7 @@ export class AuthService {
       }
     });
   }
+  getUserFromBackEnd(): Observable<User> {
+    return this.http.get<User>('/api/user');
+  }
 }
