@@ -1,5 +1,24 @@
 <div *ngIf="totalElements !=0 ">
 
+  <div class="container">
+    <div class="text-center">
+        <ul  class="pagination"> 
+          <li class="page-item active" [ngClass]="{active: filterQueryByDates == 'AllBookings' }">
+              <p class="page-link"  (click)="filterAllBookings()">All bookings</p>
+          </li>
+          <li class="page-item active" [ngClass]="{active: filterQueryByDates == 'ActualBookings' }">
+              <p class="page-link"  (click)="fiterActualBooking()">Actual bookings</p>
+          </li>
+          <li class="page-item active" [ngClass]="{active: filterQueryByDates === 'ArchieveBookings' }">
+              <p class="page-link"  (click)="filterArchieveBooking()">Archieve bookings</p>
+          </li>
+        </ul>  
+    </div>
+  </div>
+<p (click)="filterAllBookings()">All bookings</p>
+<p (click)="fiterActualBooking()">Actual bookings</p>
+<p (click)="filterArchieveBooking()">Archieve bookings</p>
+
   <h4>Bookings on page:</h4>
   <app-items-size
     (sentSelectedItemsSize)="setSelectedItemsSize($event)">

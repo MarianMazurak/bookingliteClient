@@ -13,15 +13,15 @@ import {BookingCreate} from '../../models/booking-create';
 export class BookingService {
 
   private bookingUrl = 'api/booking';
-  private bookingByPageUrl = 'api/bookings/pages'
+  private bookingByPageUrl = 'api/bookings'
   private guestArrivalsUrl = 'api/guestarivals';
   private nowDate: Date;
 
   constructor(private http: HttpClient) { }
 
-  getBookingsByPage(pageNumber: number, pageSize: number): Observable<any> {
+  getBookingsByPage(pageNumber: number, pageSize: number, filterByDates: string): Observable<any> {
     return this.http.get<Booking []>(
-      `${this.bookingByPageUrl}?getPageNumber=${pageNumber}&getPageSize=${pageSize}`);
+      `${this.bookingByPageUrl}?getPageNumber=${pageNumber}&getPageSize=${pageSize}&filterByDates=${filterByDates}`);
   }
 
   getBooking(id: number): Observable<Booking> {

@@ -16,6 +16,8 @@ export class ListBookingComponent implements OnInit {
   pagesToPagination : number [];//count page to show in pagination
   totalPages: number; // all pages with selected `selectedItemOnPage`
   totalElements: number;// condition in html. If==0 you not have booking
+  filterQueryByDates: string = "AllBookings"; //move to url + color active
+  
 
   constructor(private bookingService: BookingService,
               private paginationService: PaginationService) { }
@@ -26,7 +28,8 @@ export class ListBookingComponent implements OnInit {
 
   getBookingsByPage(): void { 
     if(this.selectedItemsSize){
-      this.bookingService.getBookingsByPage(this.currentPage -1, this.selectedItemsSize).subscribe(data =>   {
+      this.bookingService.getBookingsByPage(this.currentPage -1, this.selectedItemsSize,
+           this.filterQueryByDates).subscribe(data =>   {
         this.bookings= data['content'];
         this.totalPages= data['totalPages'];
         this.totalElements=  data['totalElements'];
@@ -75,5 +78,42 @@ export class ListBookingComponent implements OnInit {
 
   calculateNumberOfDates(checkIn, checkOut): number{
     return this.bookingService.calculateNumberOfDates(checkIn, checkOut);
+  }
+
+  filterAllBookings(){
+    const allBookings = "AllBookings";
+    this.filterQueryByDates= allBookings;
+    if(this.selectedItemsSize){
+      this.bookingService.getBookingsByPage(this.currentPage -1, this.selectedItemsSize, allBookings).subscribe(data =>   {
+        this.bookings= data['content'];
+        this.totalPages= data['totalPages'];
+        this.totalElements=  data['totalElements'];
+        this.pagesToPagination= this.paginationService.calculatePages(this.currentPage, this.totalPages);
+      } ); 
+    }
+  }
+  fiterActualBooking(){
+    const actualBookings = "ActualBookings";    
+    this.filterQueryByDates= actualBookings;
+    if(this.selectedItemsSize){
+      this.bookingService.getBookingsByPage(this.currentPage -1, this.selectedItemsSize, actualBookings).subscribe(data =>   {
+        this.bookings= data['content'];
+        this.totalPages= data['totalPages'];
+        this.totalElements=  data['totalElements'];
+        this.pagesToPagination= this.paginationService.calculatePages(this.currentPage, this.totalPages);
+      } ); 
+    }
+  }
+  filterArchieveBooking(){
+    const archieveBookings = "ArchieveBookings";
+    this.filterQueryByDates= archieveBookings;
+    if(this.selectedItemsSize){
+      this.bookingService.getBookingsByPage(this.currentPage -1, this.selectedItemsSize, archieveBookings).subscribe(data =>   {
+        this.bookings= data['content'];
+        this.totalPages= data['totalPages'];
+        this.totalElements=  data['totalElements'];
+        this.pagesToPagination= this.paginationService.calculatePages(this.currentPage, this.totalPages);
+      } ); 
+    }
   }
 }
