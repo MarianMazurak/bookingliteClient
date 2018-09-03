@@ -1,13 +1,13 @@
 <div class="container">
   <div class="text-center">
       <ul  class="pagination"> 
-        <li class="page-item active" [ngClass]="{active: filterQueryByDates == 'AllBookings' }">
+        <li class="page-item active" [ngClass]="{active: filterBookingsByDates == 'allBookings' }">
             <p class="page-link"  (click)="filterAllBookings()">All bookings</p>
         </li>
-        <li class="page-item active" [ngClass]="{active: filterQueryByDates == 'ActualBookings' }">
+        <li class="page-item active" [ngClass]="{active: filterBookingsByDates == 'actualBookings' }">
             <p class="page-link"  (click)="fiterActualBooking()">Actual bookings</p>
         </li>
-        <li class="page-item active" [ngClass]="{active: filterQueryByDates === 'ArchieveBookings' }">
+        <li class="page-item active" [ngClass]="{active: filterBookingsByDates === 'archieveBookings' }">
             <p class="page-link"  (click)="filterArchieveBooking()">Archieve bookings</p>
         </li>
       </ul>  

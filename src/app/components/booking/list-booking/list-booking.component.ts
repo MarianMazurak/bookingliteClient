@@ -16,7 +16,7 @@ export class ListBookingComponent implements OnInit {
   pagesToPagination : number [];//count page to show in pagination
   totalPages: number; // all pages with selected `selectedItemOnPage`
   totalElements: number;// condition in html. If==0 you not have booking
-  filterBookingsByDates: string = "AllBookings"; //move to url + color active
+  filterBookingsByDates: string = "allBookings"; //move to url + color active
   
 
   constructor(private bookingService: BookingService,
@@ -81,7 +81,7 @@ export class ListBookingComponent implements OnInit {
   }
 
   filterAllBookings(){
-    const allBookings = "AllBookings";
+    const allBookings = "allBookings";
     if(this.filterBookingsByDates != allBookings){
       this.currentPage = 1;
     }
@@ -95,8 +95,12 @@ export class ListBookingComponent implements OnInit {
       } ); 
     }
   }
-  fiterActualBooking(){
-    const actualBookings = "ActualBookings";    
+  fiterActualBooking(){    
+    const actualBookings = "actualBookings";
+    let exapmle: string = "http://localhost:4200/bookings/actualBookings";
+    let newUrl: string = window.location.href+"/actualBookings";
+    history.pushState(null, null, newUrl);
+        
     if(this.filterBookingsByDates != actualBookings){
       this.currentPage = 1;
     }
@@ -111,7 +115,7 @@ export class ListBookingComponent implements OnInit {
     }
   }
   filterArchieveBooking(){
-    const archieveBookings = "ArchieveBookings";
+    const archieveBookings = "archieveBookings";
     if(this.filterBookingsByDates != archieveBookings){
       this.currentPage = 1;
     }

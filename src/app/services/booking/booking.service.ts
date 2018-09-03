@@ -19,9 +19,9 @@ export class BookingService {
 
   constructor(private http: HttpClient) { }
 
-  getBookingsByPage(pageNumber: number, pageSize: number, filterByDates: string): Observable<any> {
+  getBookingsByPage(pageNumber: number, pageSize: number, filterBookingsByDates: string): Observable<any> {
     return this.http.get<Booking []>(
-      `${this.bookingByPageUrl}?getPageNumber=${pageNumber}&getPageSize=${pageSize}&filterByDates=${filterByDates}`);
+      `${this.bookingByPageUrl}?getPageNumber=${pageNumber}&getPageSize=${pageSize}&filterBookingsByDates=${filterBookingsByDates}`);
   }
 
   getBooking(id: number): Observable<Booking> {
