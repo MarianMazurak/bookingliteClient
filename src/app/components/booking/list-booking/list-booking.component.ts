@@ -16,7 +16,7 @@ export class ListBookingComponent implements OnInit {
   pagesToPagination : number [];//count page to show in pagination
   totalPages: number; // all pages with selected `selectedItemOnPage`
   totalElements: number;// condition in html. If==0 you not have booking
-  filterQueryByDates: string = "AllBookings"; //move to url + color active
+  filterBookingsByDates: string = "AllBookings"; //move to url + color active
   
 
   constructor(private bookingService: BookingService,
@@ -29,7 +29,7 @@ export class ListBookingComponent implements OnInit {
   getBookingsByPage(): void { 
     if(this.selectedItemsSize){
       this.bookingService.getBookingsByPage(this.currentPage -1, this.selectedItemsSize,
-           this.filterQueryByDates).subscribe(data =>   {
+           this.filterBookingsByDates).subscribe(data =>   {
         this.bookings= data['content'];
         this.totalPages= data['totalPages'];
         this.totalElements=  data['totalElements'];
@@ -82,7 +82,10 @@ export class ListBookingComponent implements OnInit {
 
   filterAllBookings(){
     const allBookings = "AllBookings";
-    this.filterQueryByDates= allBookings;
+    if(this.filterBookingsByDates != allBookings){
+      this.currentPage = 1;
+    }
+    this.filterBookingsByDates= allBookings;
     if(this.selectedItemsSize){
       this.bookingService.getBookingsByPage(this.currentPage -1, this.selectedItemsSize, allBookings).subscribe(data =>   {
         this.bookings= data['content'];
@@ -94,7 +97,10 @@ export class ListBookingComponent implements OnInit {
   }
   fiterActualBooking(){
     const actualBookings = "ActualBookings";    
-    this.filterQueryByDates= actualBookings;
+    if(this.filterBookingsByDates != actualBookings){
+      this.currentPage = 1;
+    }
+    this.filterBookingsByDates= actualBookings;
     if(this.selectedItemsSize){
       this.bookingService.getBookingsByPage(this.currentPage -1, this.selectedItemsSize, actualBookings).subscribe(data =>   {
         this.bookings= data['content'];
@@ -106,7 +112,10 @@ export class ListBookingComponent implements OnInit {
   }
   filterArchieveBooking(){
     const archieveBookings = "ArchieveBookings";
-    this.filterQueryByDates= archieveBookings;
+    if(this.filterBookingsByDates != archieveBookings){
+      this.currentPage = 1;
+    }
+    this.filterBookingsByDates= archieveBookings;
     if(this.selectedItemsSize){
       this.bookingService.getBookingsByPage(this.currentPage -1, this.selectedItemsSize, archieveBookings).subscribe(data =>   {
         this.bookings= data['content'];
