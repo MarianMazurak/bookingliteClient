@@ -6,6 +6,7 @@ import {Country} from '../../../models/country';
 import {City} from '../../../models/city';
 import {PropertyService} from '../../../services/property/property.service';
 import {Property} from '../../../models/property';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-search-form',
@@ -27,9 +28,18 @@ export class SearchFormComponent implements OnInit {
   constructor(private auth: AuthService,
               private countryService: CountryService,
               private cityService: CityService,
-              private propertyService: PropertyService) { }
+              public propertyService: PropertyService,
+              private router: Router) { }
 
   ngOnInit() {
+    // this.propertyService.cleanSelectedParameters();
+    if (this.propertyService.MainSearchParameters) {
+      this.selectedCountryId = this.propertyService.MainSearchParameters.countryId;
+      this.selectedCityId = this.propertyService.MainSearchParameters.cityId;
+      this.checkIn = this.propertyService.MainSearchParameters.checkIn;
+      this.checkOut = this.propertyService.MainSearchParameters.checkOut;
+      this.numberOfGuests = this.propertyService.MainSearchParameters.numberOfGuests;
+    }
     this.authenticated = this.auth.isAuthenticated;
     this.getCountries();
     this.getCities(this.selectedCountryId);
@@ -55,12 +65,7 @@ export class SearchFormComponent implements OnInit {
       this.numberOfGuests).subscribe(res => {
         this.properties = res;
     });
-    console.log('!!!!!!!!!',
-      this.selectedCountryId,
-      this.selectedCityId,
-      this.checkIn,
-      this.checkOut,
-      this.numberOfGuests);
+
   }
 
 }

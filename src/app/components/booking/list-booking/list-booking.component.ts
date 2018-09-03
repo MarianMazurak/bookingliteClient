@@ -20,7 +20,7 @@ export class ListBookingComponent implements OnInit {
   ngOnInit() {
     this.authenticated = this.auth.isAuthenticated;
     this.getBookings();
-    this.today =new Date();
+    this.today = new Date();
   }
 
   getBookings(): void {

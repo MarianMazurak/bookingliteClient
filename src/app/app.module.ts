@@ -42,7 +42,7 @@ import { BookingCreateComponent } from './components/booking/booking-create/book
 import { GuestArrivalsComponent } from './components/booking/guest-arrivals/guest-arrivals.component';
 import { ReviewBookingComponent } from './components/review/review-booking/review-booking.component';
 import { ReviewCreateComponent } from './components/review/review-create/review-create.component';
-
+import { AdvancedSearchComponent } from './components/advanced-search/advanced-search.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +70,8 @@ import { ReviewCreateComponent } from './components/review/review-create/review-
     BookingCreateComponent,
     GuestArrivalsComponent,
     ReviewBookingComponent,
-    ReviewCreateComponent
+    ReviewCreateComponent,
+    AdvancedSearchComponent,
   ],
   imports: [
     BrowserModule,

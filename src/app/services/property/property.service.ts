@@ -11,6 +11,10 @@ import {Observable} from 'rxjs';
 })
 export class PropertyService {
 
+  public url = 'api/addproperty';
+  public searchUrl = 'api/property/advancesearch?';
+  private mainSearchParameters = null;
+
   constructor(private http: HttpClient) { }
 
   public createProperty(model: PropertyCreate) {
@@ -20,15 +24,7 @@ export class PropertyService {
       })
     };
     console.log(model, 'JSON');
-    return this.http.post('api/addproperty', model, httpOptions);
-  }
-
-  public getProperties(): Observable<Property[]> {
-    return this.http.get<Property[]>('api/property');
-  }
-
-  public getPropertyById(id: number): Observable<Property> {
-    return this.http.get<Property>('api/property/' + id);
+    return this.http.post(this.url, model, httpOptions);
   }
 
   public search(selectedCountryId: number,
@@ -36,17 +32,41 @@ export class PropertyService {
                 checkIn: string,
                 checkOut: string,
                 numberOfGuests: number): Observable<Property[]> {
-    return this.http.get<Property[]>('api/property/search?' +
+    return this.http.get<Property[]>(this.searchUrl +
       'countryId=' + selectedCountryId +
       '&cityId=' + selectedCityId +
-      '&checkIn=' + this.parseData(checkIn)  +
-      '&checkOut=' + this.parseData(checkOut) +
-      '&numberOfGuests=' + numberOfGuests);
+      '&checkIn=' + checkIn +
+      '&checkOut=' + checkOut +
+      '&numberOfGuests=' + numberOfGuests +
+      '&price&facilities&amenities');
   }
 
-  public parseData(data: string): string {
-    return data.split('-')[2] + '/' +
-      data.split('-')[1] + '/' +
-      data.split('-')[0];
+  public getProperties(): Observable<Property[]> {
+    return this.http.get<Property[]>(this.url);
   }
+
+  public getPropertyById(id: number): Observable<Property> {
+    return this.http.get<Property>(this.url + id);
+  }
+
+  public saveMainSearchParameters(countryId: number,
+                                  cityId: number,
+                                  checkIn: string,
+                                  checkOut: string,
+                                  numberOfGuests: number) {
+    this.mainSearchParameters = {countryId: countryId,
+      cityId: cityId,
+      checkIn: checkIn,
+      checkOut: checkOut,
+      numberOfGuests: numberOfGuests};
+  }
+
+  public get MainSearchParameters() {
+    return this.mainSearchParameters;
+  }
+
+  public cleanSelectedParameters() {
+    this.mainSearchParameters = null;
+  }
+
 }

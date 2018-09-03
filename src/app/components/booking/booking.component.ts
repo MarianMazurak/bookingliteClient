@@ -1,11 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs';
 import {Booking} from '../../models/booking';
 import {BookingService} from '../../services/booking/booking.service';
-import {AuthService} from '../../services/authentication/auth.service';
-import { ActivatedRoute } from '../../../../node_modules/@angular/router';
-import { Router } from "@angular/router";
-
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-booking',
@@ -19,8 +16,8 @@ export class BookingComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private bookingService: BookingService,
-    private router: Router 
-  //private dateFormatPipe: DateFormatPipe
+    private router: Router
+  // private dateFormatPipe: DateFormatPipe
 ) {}
   // constructor(private bookingService: BookingService,
   //             private auth: AuthService ) { }
@@ -39,26 +36,25 @@ export class BookingComponent implements OnInit {
     this.bookingService.cancelBookings(id)
       .subscribe(res => this.backToBookings()
       );
-  }  
-
-  isCheckBookingDate(checkIn, checkOut):boolean {
-    return this.bookingService.isCheckBookingDate(checkIn, checkOut)
   }
 
-  isCanceled( bookingStatus: string):boolean {
+  isCheckBookingDate(checkIn, checkOut): boolean {
+    return this.bookingService.isCheckBookingDate(checkIn, checkOut);
+  }
+
+  isCanceled( bookingStatus: string): boolean {
     return  this.bookingService.isCanceled(bookingStatus);
   }
 
-  isReview(idReview){
-    if( !idReview ){ 
+  isReview(idReview) {
+    if ( !idReview ) {
       return true;
-    }
-    else  {
+    } else  {
       return false;
     }
   }
 
-  backToBookings(){
+  backToBookings() {
     this.router.navigate([this.bookingsUrl]);
   }
 

@@ -6,8 +6,7 @@
               [ngModelOptions]="{standalone: true}"
               [(ngModel)]="selectedCountryId"
               (ngModelChange)='getCities(selectedCountryId)'>
-        <option value="" [selected]=true [disabled]="true">Select Country</option>
-        <option *ngFor="let country of countries"
+        <option  *ngFor="let country of countries"
                 [value]="country.id">
           {{country.name}}
         </option>
@@ -18,7 +17,6 @@
       <select class="form-control"
               [ngModelOptions]="{standalone: true}"
               [(ngModel)]='selectedCityId'>
-        <option value="" [selected]=true [disabled]="true">Select City</option>
         <option *ngFor="let city of cities"
                 [(value)]="city.id">
           {{city.name}}
@@ -53,10 +51,12 @@
     </div>
 
     <div class="btn-group btn-group-justified">
-      <button type="submit" class="btn btn-primary" (click)="mainSearch()">Search</button>
+      <button type="button" class="btn btn-primary" (click)="mainSearch()"
+      routerLink="/properties/{{selectedCountryId}}/{{selectedCityId}}/{{checkIn}}/{{checkOut}}/{{numberOfGuests}}">Search</button>
     </div>
 
   </form>
 </div>
 
-<app-list-property [propertyList]="properties"></app-list-property>
+
+<!--<app-advanced-search [propertyList]="properties"></app-advanced-search>-->

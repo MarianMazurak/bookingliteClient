@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { AuthService } from '../../../services/authentication/auth.service';
 import { RegisterDto } from '../../../models/registerDto';
-import { Observable } from 'rxjs';
 import { Country } from '../../../models/country';
 import { CountryService } from '../../../services/country/coutry.service';
 import { City } from '../../../models/city';

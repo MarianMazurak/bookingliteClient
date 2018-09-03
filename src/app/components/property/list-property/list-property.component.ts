@@ -13,27 +13,10 @@ import {ApartmentService} from '../../../services/apartment/apartment.service';
 })
 export class ListPropertyComponent implements OnInit {
 
-  private authentication;
-
   @Input() propertyList: Property[];
 
+  constructor() {}
 
-  constructor(private propertyService: PropertyService,
-              private reviewService: ReviewService,
-              private apartmentService: ApartmentService,
-              private auth: AuthService ) {}
-
-
-  reviewCount: number;
   ngOnInit() {
-    this.authentication = this.auth.isAuthenticated;
-      // this.getProperties();
   }
-
-  public getProperties() {
-    this.propertyService.getProperties().subscribe(properties => {
-     this.propertyList = properties;
-    });
-  }
-
 }

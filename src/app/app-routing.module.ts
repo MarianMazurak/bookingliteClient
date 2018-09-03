@@ -21,6 +21,7 @@ import {ReviewBookingComponent} from './components/review/review-booking/review-
 import {ReviewCreateComponent} from './components/review/review-create/review-create.component';
 import {BookingCreateComponent} from './components/booking/booking-create/booking-create.component';
 import {ReviewComponent} from './components/review/review.component';
+import {AdvancedSearchComponent} from './components/advanced-search/advanced-search.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -34,13 +35,15 @@ const routes: Routes = [
   { path: 'apartment-list', component: ListApartmentComponent},
   { path: 'property/:id/apartment', component: CreateApartmentComponent},
   { path: 'search', component: SearchComponent},
+  { path: 'properties/:countryId/:cityId/:checkIn/:checkOut/:numberOfGuests', component: AdvancedSearchComponent},
   { path: 'edit-property/:id', component: EditPropertyComponent },
   { path: 'property-detailes/:id', component: PropertyComponent},
   { path: 'guest-arrivals', component: GuestArrivalsComponent},
   { path: 'review-booking/:id', component: ReviewBookingComponent},
   { path: 'review-create/:id', component: ReviewCreateComponent},
   { path: 'booking-create/:id', component: BookingCreateComponent},
-  { path: 'property/:id/reviews', component: ReviewComponent }
+  { path: 'property/:id/reviews', component: ReviewComponent },
+  { path: '**', redirectTo: '/'}
 
 ];
 
