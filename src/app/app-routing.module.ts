@@ -17,6 +17,7 @@ import {BookingCreateComponent} from './components/booking/booking-create/bookin
 import {ReviewComponent} from './components/review/review.component';
 import {OwnerPropertiesComponent} from './components/property/owner-properties/owner-properties.component';
 import {GuestArrivalsComponent} from './components/booking/guest-arrivals/guest-arrivals.component';
+import {UserComponent} from './components/user/user.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -37,7 +38,8 @@ const routes: Routes = [
   {path: 'booking-create/:id', component: BookingCreateComponent},
   {path: 'property/:id/reviews', component: ReviewComponent},
   {path: 'owner-properties', component: OwnerPropertiesComponent},
-  {path: 'guest-arrivals/:id', component: GuestArrivalsComponent}
+  {path: 'guest-arrivals/:id', component: GuestArrivalsComponent},
+  {path: 'user', component: UserComponent}
 ];
 
 @NgModule({
