@@ -4,10 +4,10 @@
       <a [ngClass]="{'nav-link': true, 'active': uhref.includes('user')}" routerLink="../user">Profile</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Bookings</a>
+      <a class="nav-link" routerLink="../bookings">Bookings</a>
     </li>
     <li class="nav-item" *ngIf="user && user.roles.length>1">
-      <a class="nav-link" href="#">Properties</a>
+      <a class="nav-link" routerLink="#">Properties</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#">Settings</a>
