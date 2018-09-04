@@ -35,6 +35,7 @@ import { GuestArrivalsComponent } from './components/booking/guest-arrivals/gues
 import { ReviewBookingComponent } from './components/review/review-booking/review-booking.component';
 import { ReviewCreateComponent } from './components/review/review-create/review-create.component';
 import { OwnerPropertiesComponent } from './components/property/owner-properties/owner-properties.component';
+import { UserNavigationComponent } from './components/user/user-navigation/user-navigation.component';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { OwnerPropertiesComponent } from './components/property/owner-properties
     GuestArrivalsComponent,
     ReviewBookingComponent,
     ReviewCreateComponent,
-    OwnerPropertiesComponent
+    OwnerPropertiesComponent,
+    UserNavigationComponent
   ],
   imports: [
     BrowserModule,
