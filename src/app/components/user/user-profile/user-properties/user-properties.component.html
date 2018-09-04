@@ -1,0 +1,25 @@
+<div class="container">
+  <table class="table">
+    <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">contactEmail</th>
+      <th scope="col">phoneNumber</th>
+      <th scope="col">Property Type</th>
+      <th class="text-center">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let property of propertyList">
+      <th scope="row">{{property.id}}</th>
+      <td>{{property.name}}</td>
+      <td>{{property.contactEmail}}</td>
+      <td>{{property.phoneNumber}}</td>
+      <td>{{property.propertyType}}</td>
+      <td class="text-center"><a class='btn btn-info btn-xs' href="#">
+        <span class="glyphicon glyphicon-edit"></span>Info</a>
+    </tr>
+    </tbody>
+  </table>
+</div>
