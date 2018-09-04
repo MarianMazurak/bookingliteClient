@@ -25,7 +25,7 @@ import {ReviewComponent} from './components/review/review.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent},
-  { path: 'bookings', component: ListBookingComponent },
+  { path: 'bookings/:filter', component: ListBookingComponent },//var 2: create another path: 'bookings'
   { path: 'booking/:id', component: BookingComponent },
   { path: 'create-property', component: CreatePropertyComponent },
   { path: 'create-apartment', component: CreateApartmentComponent},
