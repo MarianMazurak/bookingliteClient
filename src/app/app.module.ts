@@ -35,8 +35,8 @@ import { GuestArrivalsComponent } from './components/booking/guest-arrivals/gues
 import { ReviewBookingComponent } from './components/review/review-booking/review-booking.component';
 import { ReviewCreateComponent } from './components/review/review-create/review-create.component';
 import { OwnerPropertiesComponent } from './components/property/owner-properties/owner-properties.component';
+import { UserNavigationComponent } from './components/user/user-navigation/user-navigation.component';
 import { UserPropertiesComponent } from './components/user/user-profile/user-properties/user-properties.component';
-
 
 @NgModule({
   declarations: [
@@ -66,6 +66,7 @@ import { UserPropertiesComponent } from './components/user/user-profile/user-pro
     ReviewBookingComponent,
     ReviewCreateComponent,
     OwnerPropertiesComponent,
+    UserNavigationComponent,
     UserPropertiesComponent
   ],
   imports: [
@@ -76,7 +77,7 @@ import { UserPropertiesComponent } from './components/user/user-profile/user-pro
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    PropertyService,CountryService,CityService,ApartmentService,PropertyTypeService],
+    PropertyService, CountryService, CityService, ApartmentService, PropertyTypeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
