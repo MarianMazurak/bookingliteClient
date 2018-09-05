@@ -37,6 +37,8 @@ import { ReviewCreateComponent } from './components/review/review-create/review-
 import { OwnerPropertiesComponent } from './components/property/owner-properties/owner-properties.component';
 import { UserNavigationComponent } from './components/user/user-navigation/user-navigation.component';
 import { UserPropertiesComponent } from './components/user/user-profile/user-properties/user-properties.component';
+import { UserApartmentsComponent } from './components/user/user-profile/user-properties/user-apartments/user-apartments.component';
+import { EditApartmentComponent } from './components/apartment/edit-apartment/edit-apartment.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,9 @@ import { UserPropertiesComponent } from './components/user/user-profile/user-pro
     ReviewCreateComponent,
     OwnerPropertiesComponent,
     UserNavigationComponent,
-    UserPropertiesComponent
+    UserPropertiesComponent,
+    UserApartmentsComponent,
+    EditApartmentComponent
   ],
   imports: [
     BrowserModule,

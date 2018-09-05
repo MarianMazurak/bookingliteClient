@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container" id="box">
   <app-user-navigation></app-user-navigation>
   <table class="table">
     <thead class="thead-light">
-    <a href="#" routerLink="/create-property" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new categories</a>
+    <a href="#" routerLink="/create-property" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new property</a>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Name</th>
@@ -18,9 +18,12 @@
       <td>{{property.name}}</td>
       <td>{{property.contactEmail}}</td>
       <td>{{property.phoneNumber}}</td>
-      <td>{{property.propertyType}}</td>
-      <td class="text-center"><a class='btn btn-info btn-xs' href="#">
-        <span class="glyphicon glyphicon-edit"></span>Info</a>
+      <td>{{property.propertyType.name}}</td>
+      <td class="text-center">
+        <a class='btn btn-info btn-xs' routerLink="/edit-property/{{property.id}}">
+        <span class="glyphicon glyphicon-edit"></span>Edit</a>
+        <a class='btn btn-info btn-xs' routerLink="/edit-property/{{property.id}}">
+          <span class="glyphicon glyphicon-edit"></span>Apartments</a>
     </tr>
     </tbody>
   </table>
