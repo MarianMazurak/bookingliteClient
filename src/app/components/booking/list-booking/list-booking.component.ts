@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Booking } from '../../../models/booking';
 import { BookingService } from '../../../services/booking/booking.service';
 import { PaginationService } from '../../../services/pagination/pagination.service';
+import { AuthService } from '../../../services/authentication/auth.service';
 
 @Component({
   selector: 'app-list-booking',
@@ -10,6 +11,7 @@ import { PaginationService } from '../../../services/pagination/pagination.servi
 })
 export class ListBookingComponent implements OnInit {
 
+  private authenticated;
   bookings: Booking[];
   currentPage: number = 1;
   selectedItemsSize: number;
@@ -22,10 +24,12 @@ export class ListBookingComponent implements OnInit {
   archieveBookingsString: string = "archieveBookings";
   
 
-  constructor(private bookingService: BookingService,
+  constructor(private auth: AuthService,
+              private bookingService: BookingService,
               private paginationService: PaginationService) { }
   
   ngOnInit() {
+    this.authenticated = this.auth.isAuthenticated;
     if(window.location.href.split('/')[4] == this.actualBookingsString){ //get 'filter' from url from Router
       this.filterBookingsByDates= this.actualBookingsString;
     }

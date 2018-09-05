@@ -3,6 +3,7 @@ import {Booking} from '../../models/booking';
 import {BookingService} from '../../services/booking/booking.service';
 import { ActivatedRoute } from '../../../../node_modules/@angular/router';
 import { Router } from "@angular/router";
+import { AuthService } from '../../services/authentication/auth.service';
 
 
 
@@ -15,13 +16,16 @@ export class BookingComponent implements OnInit {
 
   @Input() booking: Booking;
   private bookingsUrl = '/bookings';
+  private authenticated;
 
-  constructor(private route: ActivatedRoute,
+  constructor(private auth: AuthService,
+    private route: ActivatedRoute,
     private bookingService: BookingService,
     private router: Router 
 ) {}
 
   ngOnInit() {
+    this.authenticated = this.auth.isAuthenticated;
     this.getBooking();
   }
 
