@@ -13,7 +13,7 @@ export class ListBookingComponent implements OnInit {
 
   private authenticated;
   bookings: Booking[];
-  currentPage: number = 1;
+  currentPage: number ;
   selectedItemsSize: number;
   pagesToPagination : number [];//count page to show in pagination
   totalPages: number; // all pages with selected `selectedItemOnPage`
@@ -30,56 +30,100 @@ export class ListBookingComponent implements OnInit {
   
   ngOnInit() {
     this.authenticated = this.auth.isAuthenticated;
-    if(window.location.href.split('/')[4] == this.actualBookingsString){ //get 'filter' from url from Router
+    if(window.location.href.split('/')[4] == this.actualBookingsString){ 
       this.filterBookingsByDates= this.actualBookingsString;
     }
     else if(window.location.href.split('/')[4] == this.archieveBookingsString){
       this.filterBookingsByDates= this.archieveBookingsString;
     }
     else    this.filterBookingsByDates= this.allBookingsString;
+
+    
+    if( Number( window.location.href.split('/')[5]) != 1){      
+      this.currentPage=  Number( window.location.href.split('/')[5]); 
+    }
+    else{     
+      this.currentPage= 1; 
+    }
     this.getBookingsByPage();
   }
 
   getBookingsByPage(): void { 
     if(this.selectedItemsSize){
-      this.bookingService.getBookingsByPage(this.currentPage -1, this.selectedItemsSize,
-           this.filterBookingsByDates).subscribe(data =>   {
-        this.bookings= data['content'];
-        this.totalPages= data['totalPages'];
-        this.totalElements=  data['totalElements'];
-        this.pagesToPagination= this.paginationService.calculatePages(this.currentPage, this.totalPages);
+      this.currentPage= Number( window.location.href.split('/')[5]); 
+      this.bookingService.getBookingsByPage( this.currentPage -1, this.selectedItemsSize,
+        this.filterBookingsByDates).subscribe(data =>   {
+          this.bookings= data['content'];
+          this.totalPages= data['totalPages'];
+          this.totalElements=  data['totalElements'];
+          this.pagesToPagination= this.paginationService.calculatePages(this.currentPage, this.totalPages);
       } ); 
     }
   }
   
-  setSelectedItemsSize(n: number): void{
+  setSelectedItemsSize(n: number): void{ //to do!!!!!!!!!!!!!!
     this.selectedItemsSize= n;
-    this.currentPage= 1;
+    // this.currentPage= 1;
+    let newUrl: string = window.location.protocol+ "//"
+                        + window.location.host +"/"
+                        +window.location.href.split('/')[3] +"/"
+                        +window.location.href.split('/')[4] +"/"
+                        + 1 ;                   
+    history.pushState(null, null, newUrl);    
     this.getBookingsByPage();
   }
 
   goToPage(n: number): void {
-    this.currentPage = n;
+    let newUrl: string = window.location.protocol+ "//"
+                        + window.location.host +"/"
+                        +window.location.href.split('/')[3] +"/"
+                        +window.location.href.split('/')[4] +"/"
+                        + n ;                   
+    history.pushState(null, null, newUrl);    
     this.getBookingsByPage();
   }
 
   onFirst(n: number): void {
-    this.currentPage = n;
+    this.currentPage= n;
+    let newUrl: string = window.location.protocol+ "//"
+                        + window.location.host +"/"
+                        +window.location.href.split('/')[3] +"/"
+                        +window.location.href.split('/')[4] +"/"
+                        + this.currentPage ;                   
+    history.pushState(null, null, newUrl);    
     this.getBookingsByPage();
   }
 
   onPrev(): void {
     this.currentPage--;
+    let newUrl: string = window.location.protocol+ "//"
+                        + window.location.host +"/"
+                        +window.location.href.split('/')[3] +"/"
+                        +window.location.href.split('/')[4] +"/"
+                        + this.currentPage ;                        
+    history.pushState(null, null, newUrl);    
     this.getBookingsByPage();
 }
 
-  onNext(): void {
+  onNext(): void {    
     this.currentPage++;
+    let newUrl: string = window.location.protocol+ "//"
+                        + window.location.host +"/"
+                        +window.location.href.split('/')[3] +"/"
+                        +window.location.href.split('/')[4] +"/"
+                        + this.currentPage ;                   
+    history.pushState(null, null, newUrl);    
     this.getBookingsByPage();
   }
 
   onLast(n: number): void {
-    this.currentPage = n;
+    this.currentPage= n;
+    let newUrl: string = window.location.protocol+ "//"
+                        + window.location.host +"/"
+                        +window.location.href.split('/')[3] +"/"
+                        +window.location.href.split('/')[4] +"/"
+                        + this.currentPage ;                   
+    history.pushState(null, null, newUrl);    
     this.getBookingsByPage();
   }
 
@@ -95,7 +139,7 @@ export class ListBookingComponent implements OnInit {
     return this.bookingService.calculateNumberOfDates(checkIn, checkOut);
   }
 
-  filterAllBookings(){
+  filterAllBookings(){//todo all 3 method!!!!!!!!!!!!!!!!!!!!!!!!!!!
     let newUrl: string = window.location.protocol+ "//"
                         + window.location.host +"/"
                         +window.location.href.split('/')[3] +"/"

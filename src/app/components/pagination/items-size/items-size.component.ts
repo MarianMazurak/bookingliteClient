@@ -15,6 +15,7 @@ export class ItemsSizeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    //if cookie works if(cookie exist){this.selectedItemsSize= cookie} else {selectedItemsSize=this.item.size=[0]}
     this.onSelectedItemsSize();
   }
 
