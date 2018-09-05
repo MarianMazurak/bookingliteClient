@@ -50,6 +50,7 @@ export class ListBookingComponent implements OnInit {
   
   setSelectedItemsSize(n: number): void{
     this.selectedItemsSize= n;
+    this.currentPage= 1;
     this.getBookingsByPage();
   }
 
@@ -78,7 +79,7 @@ export class ListBookingComponent implements OnInit {
     this.getBookingsByPage();
   }
 
-  isCanceled( bookingStatus: string):boolean {
+  isCanceled( bookingStatus: string): boolean {
     return  this.bookingService.isCanceled(bookingStatus);
   }
 
@@ -86,7 +87,7 @@ export class ListBookingComponent implements OnInit {
     return this.bookingService.isBookingDateActual(checkIn, checkOut);
   }
 
-  calculateNumberOfDates(checkIn, checkOut): number{
+  calculateNumberOfDates(checkIn, checkOut): number {
     return this.bookingService.calculateNumberOfDates(checkIn, checkOut);
   }
 

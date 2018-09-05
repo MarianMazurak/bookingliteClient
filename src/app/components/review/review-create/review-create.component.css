@@ -1,0 +1,11 @@
+div.reviewDiv{
+  height: auto;
+  width: 450px;
+  border: 1px solid silver;
+  padding: 30px;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+
+}

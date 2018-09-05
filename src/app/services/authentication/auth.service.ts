@@ -1,47 +1,95 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders  } from '@angular/common/http';
-import {Observable, Subject} from 'rxjs';
-import {RegisterUser} from '../../models/user-register';
-import {User} from '../../models/user';
-
+import { Observable } from 'rxjs';
+import {LoginDto} from '../../models/loginDto';
+import { Router } from '@angular/router';
+import { RegisterDto } from '../../models/registerDto';
+import { User } from '../../models/user';
+import { tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private authenticated = false;
-  constructor(private http: HttpClient) { }
+  private _currentUser: User;
+  private _isOwner: boolean;
+  constructor(private http: HttpClient, private router: Router) {
+  }
 
-  signIn(model: RegisterUser): Observable<any> {
+  signIn(model: LoginDto): Observable<any> {
     console.log('In auth service');
-    console.log('json', JSON.stringify({email: model.email, password: model.password}));
+    console.log('json', JSON.stringify(model));
     return this.http.post('/api/login', JSON.stringify({email: model.email, password: model.password}),
       {headers: new HttpHeaders({
           'Content-Type':  'application/json' }),
         responseType: 'text'
-      }  );
+      });
+  }
+
+  signUp(model: RegisterDto): Observable<any> {
+    console.log('json', JSON.stringify(model));
+    return this.http.post('/api/register', JSON.stringify(model),
+      {headers: new HttpHeaders({
+          'Content-Type':  'application/json' }),
+        responseType: 'text'
+      });
+  }
+  loadUser(): Observable<User> {
+    return this.http.get<User>('/api/user').pipe(tap( user => {
+        this._currentUser = user;
+        console.log(this._currentUser);
+        const ownerrole = this._currentUser.roles.find(role => role.name === 'ROLE_OWNER');
+        if (ownerrole) {
+          this._isOwner = true;
+        }
+    }));
   }
 
   saveToken(token: string) {
-    console.log('save token', token);
     localStorage.setItem('token', token);
   }
 
   getToken(): string {
-    console.log('in get token');
     return localStorage.getItem('token');
   }
 
-  signOut(): boolean {
-    localStorage.clear();
-    return this.authenticated = false;
+  signOut(): void {
+    localStorage.removeItem('token');
+    this._currentUser = undefined;
+    this._isOwner = false;
+    this.router.navigate(['/login']);
   }
 
   get isAuthenticated(): boolean {
-    return localStorage.getItem('token') != null;
+     return localStorage.getItem('token') != null;
   }
 
-  set isAuthenticated(val: boolean) {
-    this.authenticated = val ;
+  get isOwner(): Observable<boolean> {
+    return Observable.create( observer => {
+      if (this._currentUser !== undefined) {
+        observer.next(this._isOwner);
+        observer.complete();
+      } else {
+        this.loadUser().subscribe( res => {
+          observer.next(this._isOwner);
+          observer.complete();
+        });
+      }
+    });
+  }
+
+  get currentUser(): Observable<User> {
+    return Observable.create( observer => {
+      if (this._currentUser !== undefined) {
+        observer.next(this._currentUser);
+      } else {
+        this.loadUser().subscribe( res => {
+          observer.next(this.currentUser);
+        });
+      }
+    });
+  }
+  getUserFromBackEnd(): Observable<User> {
+    return this.http.get<User>('/api/user');
   }
 }

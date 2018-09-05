@@ -5,6 +5,7 @@ import { ActivatedRoute } from '../../../../node_modules/@angular/router';
 import { Router } from "@angular/router";
 
 
+
 @Component({
   selector: 'app-booking',
   templateUrl: './booking.component.html',
@@ -21,7 +22,7 @@ export class BookingComponent implements OnInit {
 ) {}
 
   ngOnInit() {
-     this.getBooking();
+    this.getBooking();
   }
 
   getBooking(): void {
@@ -35,26 +36,25 @@ export class BookingComponent implements OnInit {
     this.bookingService.cancelBookings(id)
       .subscribe(res => this.backToBookings()
       );
-  }  
+  }
 
   isBookingDateActual(checkIn, checkOut):boolean {
     return this.bookingService.isBookingDateActual(checkIn, checkOut)
   }
 
-  isCanceled( bookingStatus: string):boolean {
-    return  this.bookingService.isCanceled(bookingStatus);
+  isCanceled(bookingStatus: string): boolean {
+    return this.bookingService.isCanceled(bookingStatus);
   }
 
-  isReview(idReview){
-    if( !idReview ){ 
+  isReview(idReview) {
+    if (!idReview) {
       return true;
-    }
-    else  {
+    } else {
       return false;
     }
   }
 
-  backToBookings(){
+  backToBookings() {
     this.router.navigate([this.bookingsUrl]);
   }
 

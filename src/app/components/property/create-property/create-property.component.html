@@ -1,82 +1,106 @@
-<div class="form-group">
-  <label class="col-form-label">Property Name</label>
-  <input type="text" class="form-control" placeholder="Property Name" [(ngModel)]="propertyCreate.name">
-</div>
+<div id="menucard">
+  <div class="box">
+    <h1 class="display-4">BookingLite</h1>
+    <div class="card">
+      <article class="card-body">
+        <h4 class="card-title mb-4 mt-1">Create Property</h4>
 
-<div class="form-group">
-  <label class="col-form-label">Descpription</label>
-  <input type="text" class="form-control" placeholder="Descpription" [(ngModel)]="propertyCreate.description">
-</div>
+        <form #createPropertyForm=ngForm (ngSubmit)="createProperty(createPropertyForm)"
+              [ngClass]="{'was-validated' : !formValid}">
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <label>Property Name</label>
+                <input name="name" #name="ngModel" required [(ngModel)]="propertyCreate.name" class="form-control"
+                       placeholder="Property Name" type="text">
+                <div class="invalid-feedback">Property Name is required!</div>
+              </div>
 
-<div class="form-group">
-  <label class="col-form-label">Phone number</label>
-  <input type="text" class="form-control" placeholder="Phone number" [(ngModel)]="propertyCreate.phoneNumber">
-</div>
+              <div class="form-group">
+                <label>Email</label>
+                <input class="form-control" required name="email" [(ngModel)]="propertyCreate.contactEmail"
+                       placeholder="Email" type="email">
+                <div class="invalid-feedback">Valid email is required!</div>
+              </div>
 
-<div class="form-group">
-  <label class="col-form-label">Email</label>
-  <input type="email" class="form-control" placeholder="Email" [(ngModel)]="propertyCreate.contactEmail">
-</div>
+              <div class="form-group">
+                <label>Phone Number</label>
+                <input name="phone number" required class="form-control" [(ngModel)]="propertyCreate.phoneNumber"
+                       placeholder="phone number" type="text">
+                <div class="invalid-feedback">Phone Number is required!</div>
+              </div>
 
-<div class="form-group">
-  <label class="col-form-label">Country</label>
-  <select class="custom-select"
-          [(ngModel)]="selectedCountryId"
-          (ngModelChange)='getCities(selectedCountryId)'
-          [(ngModel)]="propertyCreate.countryId">
-    <option *ngFor="let country of countries"
-            [value]="country.id">
-      {{country.name}}
-    </option>
-  </select>
-</div>
-<br>
+              <div class="form-group">
+                <label>Property Type</label>
+                <select class="form-control" #selectPropertyType
+                        (change)="changePropertyTypes(selectPropertyType.value)">
+                  <option *ngFor="let propertyType of propertyTypes" value="{{propertyType.id}}">{{propertyType.name}}
+                  </option>
+                </select>
+              </div>
 
-<div class="form-group">
-  <label class="col-form-label">City</label>
-  <select class="custom-select"
-    [(ngModel)]='selectedCityId'
-    [(ngModel)]='propertyCreate.cityId'>
-  <option *ngFor="let city of cities"
-          [(value)]="city.id">
-    {{city.name}}
-  </option>
-  </select>
-</div>
+              <div class="form-group">
+                <label>Facilities</label>
+                <div class="custom-control custom-checkbox"
+                     *ngFor="let facility of facilities">
+                  <input type="checkbox" class="custom-control-input" id="customCheck{{facility.id}}"
+                         (change)="workWithCheckboxes(facility.id)">
+                  <label class="custom-control-label"
+                         for="customCheck{{facility.id}}">{{facility.name}}</label>
+                </div>
+              </div>
 
-<div class="form-group">
-  <label class="col-form-label">addressline</label>
-  <input type="email" class="form-control" placeholder="Email" [(ngModel)]="propertyCreate.addressLine">
-</div>
+            </div>
 
-<div class="form-group">
-  <label class="col-form-label">zip</label>
-  <input type="email" class="form-control" placeholder="Email" [(ngModel)]="propertyCreate.zip">
-</div>
-
-<div class="form-group">
-  <label class="col-form-label">Property Type</label>
-  <select class="custom-select"
-         [(ngModel)]='propertyCreate.propertyTypeId'>
-    <option *ngFor="let propertyType of propertyTypes"
-            [(value)]="propertyType.id">
-      {{propertyType.name}}
-    </option>
-  </select>
-</div>
+            <div class="col-6">
+              <div class="form-group">
+                <label>Address Line</label>
+                <input class="form-control" required name="addressline" [(ngModel)]="propertyCreate.addressLine"
+                       placeholder="Address Line" type="text">
+                <div class="invalid-feedback">Address line is required!</div>
+              </div>
 
 
-<div class="form-group">
-  <h5>Facilities</h5>
-  <div class="custom-control custom-checkbox"
-       *ngFor="let facility of facilities">
-    <input type="checkbox" class="custom-control-input" id="customCheck{{facility.id}}"
-           (change)="workWithCheckboxes(facility.id)">
-    <label class="custom-control-label" for="customCheck{{facility.id}}">{{facility.name}}</label>
+              <div class="form-group">
+                <label>Country</label>
+                <select class="form-control" #selectCountry (change)="changeCountry(selectCountry.value)">
+                  <option *ngFor="let country of countries" value="{{country.id}}">{{country.name}}</option>
+                </select>
+              </div>
+
+              <div *ngIf="cities" class="form-group">
+                <label>City</label>
+                <select class="form-control" #selectCity (change)="changeCity(selectCity.value)">
+                  <option *ngFor="let city of cities" value="{{city.id}}">{{city.name}}</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Zip</label>
+                <input class="form-control" required maxlength="5" minlength="5" name="zip"
+                       [(ngModel)]="propertyCreate.zip" placeholder="12345" type="text">
+                <div class="invalid-feedback">Valid zip is required!</div>
+              </div>
+
+              <div class="form-group">
+                <label>Description</label>
+                <input name="description" class="form-control" [(ngModel)]="propertyCreate.description"
+                       placeholder="description" type="text">
+              </div>
+
+            </div>
+          </div>
+          <ng-container *ngIf="errorMessage !== ''">
+            <div class="alert alert-danger">
+              {{errorMessage}}
+            </div>
+          </ng-container>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block" (click)=createProperty()>Create</button>
+          </div>
+        </form>
+      </article>
+    </div>
   </div>
 </div>
-
-
-
-
-<button (click)="createProperty()">Added Property</button>

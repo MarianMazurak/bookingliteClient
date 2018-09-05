@@ -1,4 +1,7 @@
 <div class="container">
+  <div class="alert alert-primary" role="alert">
+    This property have {{existPhotos.length}} photos
+  </div>
   <div class="row justify-content-start">
     <div class="col-3" *ngFor="let photo of existPhotos">
       <input type="checkbox" (change)="markPhoto(photo)">
@@ -9,30 +12,19 @@
 </div>
 <div class="container" *ngIf="property">
   <form>
+    <div *ngIf = "seccessMessages.length" class="alert alert-success" role="alert"><p *ngFor="let secces of seccessMessages">{{secces}}</p></div>
+    <div *ngIf = "errorMessages.length" class="alert alert-danger" role="alert"><p *ngFor="let error of errorMessages">{{error}}</p></div>
     <div class="row">
-      <div class="form-group">
-        <label for="File0">{{messageList[0]}}</label>
-        <input type="file" class="form-control-file" id="File0" #input0 (change)="addPhoto($event, 0)">
+      <div class="custom-file">
+        <input type="file" multiple class="custom-file-input" id="validatedCustomFile"  #input0 (change)="addPhotos($event)">
+        <label class="custom-file-label" for="validatedCustomFile">{{infoMessage}}</label>
       </div>
-      <i class="icon ion-md-close" (click)="clearInput(0)"></i>
     </div>
     <div class="row">
-      <div class="form-group">
-        <label for="File1">{{messageList[1]}}</label>
-        <input type="file" class="form-control-file" id="File1" #input1 (change)="addPhoto($event, 1)">
+      <div class="col-md-4 offset-md-4">
+        <button type="submit" class="btn btn-primary" (click)="uploadPhotos()">Upload</button>
+        <button type="button" class="btn btn-outline-danger" (click)="clearInput()">Cancle</button>
       </div>
-      <i class="icon ion-md-close" (click)="clearInput(1)"></i>
-    </div>
-    <div class="row">
-      <div class="form-group">
-        <label for="File2">{{messageList[2]}}</label>
-        <input type="file" class="form-control-file" id="File2" #input2 (change)="addPhoto($event, 2)">
-      </div>
-      <i class="icon ion-md-close" (click)="clearInput(2)"></i>
-    </div>
-    <div class="row">
-      <button type="submit" class="btn btn-primary" (click)="uploadPhotos()">Upload</button>
-      <button type="submit" class="btn btn-secondary" (click)="clearAllInputs()">add more</button>
     </div>
   </form>
 </div>

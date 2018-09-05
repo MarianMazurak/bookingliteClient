@@ -34,7 +34,7 @@ export class ReviewComponent implements OnInit {
   public getReviewsByPropertyId() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.propertyService.getPropertyById(id).subscribe(pr => this.property = pr);
-    this.reviewService.getAllReviews(id).subscribe(rev => {
+    this.reviewService.getAllReviewsByProperty(id).subscribe(rev => {
       this.reviewsList = rev;
     });
   }

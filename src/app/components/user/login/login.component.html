@@ -3,19 +3,29 @@
         <h1 class="display-4" style="text-align: center">BookingLite</h1>
     <div class="card" style="width:400px">
         <article class="card-body">
-            <h4 class="card-title mb-4 mt-1">Sign in</h4>
+            <h4 class="card-title mb-4 mt-1">Login</h4>
             <form #loginForm=ngForm (ngSubmit)="signIn(loginForm)">
                 <div class="form-group">
                     <label>Your email</label>
-                    <input id="email" required [(ngModel)]="loginDto.email" name="email" class="form-control" placeholder="Email" type="email">
+                    <input id="email" required email [(ngModel)]="loginDto.email" #email="ngModel" name="email" class="form-control" placeholder="Email" type="email">
                 </div> 
                 <div class="form-group">
                     <label>Your password</label>
                     <input id="password" required [(ngModel)]="loginDto.password"  name="password" class="form-control" placeholder="******" type="password" >
-                </div> 
+                </div>
+                <ng-container *ngIf="errorMessage !== ''">
+                    <div class="alert alert-danger">
+                            {{errorMessage}}
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="!formValid">
+                    <div class="alert alert-warning">
+                    Check input data. Password and valid email is required!
+                    </div>
+                </ng-container>  
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block">Login</button>
-                </div> 
+                </div>
                 <a href="/register">Don’t have account? Sign Up!</a>
             </form>
         </article>

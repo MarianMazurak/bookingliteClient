@@ -1,3 +1,39 @@
-<p>
-  user works!
-</p>
+<div class="container">
+  <app-user-navigation></app-user-navigation>
+  <div class="row">
+    <div class="col-4 offset-1">
+      <h3 class="username" *ngIf="user">{{user.firstName}} {{user.lastName}}</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3 offset-1"><img src="assets/image/user.png" alt="user" class="img-thumbnail"></div>
+    <div class="col-5 offset-1">
+      <table class="table">
+        <tbody>
+        <tr *ngIf="user">
+          <td>Firstname:</td>
+          <td>{{user.firstName}}</td>
+        </tr>
+        <tr *ngIf="user">
+          <td>Lastname:</td>
+          <td>{{user.lastName}}</td>
+        </tr>
+        <tr *ngIf="user">
+          <td>email:</td>
+          <td>{{user.email}}</td>
+        </tr>
+        <tr *ngIf="user">
+          <td>phone:</td>
+          <td>{{user.phoneNumber}}</td>
+        </tr>
+        <ng-container *ngIf="user">
+          <tr *ngFor="let role of user.roles">
+            <td>role:</td>
+            <td>{{role.name}}</td>
+          </tr>
+        </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

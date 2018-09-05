@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import {FormGroup} from '@angular/forms';
 
 // models
 import { Country } from '../../../models/country';
 import { City } from '../../../models/city';
 import {PropertyType} from '../../../models/property-type';
 import {PropertyCreate} from '../../../models/property-create';
+import {Facility} from '../../../models/facility';
 
 // services
-import {CoutryService} from '../../../services/country/coutry.service';
+import {CountryService} from '../../../services/country/coutry.service';
 import {CityService} from '../../../services/city/city.service';
 import { PropertyService } from '../../../services/property/property.service';
 import {PropertyTypeService} from '../../../services/propertyTypy/property-type.service';
 import {AuthService} from '../../../services/authentication/auth.service';
-import {Facility} from '../../../models/facility';
 import {FacilityService} from '../../../services/facility/facility.service';
 
 @Component ({
@@ -29,13 +30,16 @@ export class CreatePropertyComponent implements OnInit {
   public facilities: Facility[];
   public selectedCountryId: number;
   public selectedCityId: number;
-  private authenticated;
+  public selectedPropertyTypeId: number;
 
+  formValid = true;
+  errorMessage = '';
+  private authenticated;
   constructor(private auth: AuthService,
               private propertyService: PropertyService,
               private propertyTypeService: PropertyTypeService,
               private facilityService: FacilityService,
-              private countryService: CoutryService,
+              private countryService: CountryService,
               private cityService: CityService) { }
 
   ngOnInit() {
@@ -45,31 +49,53 @@ export class CreatePropertyComponent implements OnInit {
     this.getFacilities();
     this.getPropertyTypes();
     this.getCountries();
-    this.getCities(this.selectedCountryId);
   }
 
-  public getCountries() {
-    this.countryService.getCountry().subscribe(res => {
-      this.countries = res;
+  getCountries() {
+    this.countryService.getCountry().subscribe((countriesarr) => {
+      this.countries = countriesarr;
+      this.selectedCountryId = countriesarr[0].id;
+      this.getCities(this.selectedCountryId);
     });
   }
-
-  public getCities(id: number) {
-    this.cityService.getCity(this.selectedCountryId).subscribe(res => {
-      this.cities = res;
-    });
+  changeCountry(id: number) {
+    this.selectedCountryId = id;
+    this.getCities(id);
+  }
+  changeCity(id: number) {
+    this.selectedCityId = id;
   }
 
-  public getPropertyTypes() {
-    this.propertyTypeService.getAllPropertyTypes().subscribe(res => {
-      this.propertyTypes = res;
+  getCities(countryId: number) {
+    this.cityService.getCity(countryId).subscribe((citiesarr) => {
+      this.cities = citiesarr;
+      if (citiesarr.length !== 0) {
+        this.selectedCityId = citiesarr[0].id;
+      }
     });
   }
-
-  public createProperty() {
-    this.propertyService.createProperty(this.propertyCreate).subscribe(res => {
-      alert('Property created');
+  getPropertyTypes() {
+    this.propertyTypeService.getAllPropertyTypes().subscribe((properties) => {
+      this.propertyTypes = properties;
+      this.selectedPropertyTypeId = properties[0].id;
     });
+  }
+  changePropertyTypes(id: number) {
+    this.selectedPropertyTypeId = id;
+  }
+  public createProperty(createPropertyForm: FormGroup) {
+    if (createPropertyForm.valid) {
+      this.propertyCreate.countryId = this.selectedCountryId;
+      this.propertyCreate.cityId = this.selectedCityId;
+      this.propertyCreate.propertyTypeId = this.selectedPropertyTypeId;
+      this.propertyService.createProperty(this.propertyCreate).subscribe(res => {
+        alert('Property created');
+      }, error => {
+         this.errorMessage = JSON.parse(error.error).message;
+        });
+    } else {
+      this.formValid = false;
+    }
   }
 
   public getFacilities() {
