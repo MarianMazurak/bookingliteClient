@@ -8,19 +8,26 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class ItemsSizeComponent implements OnInit {
 
   itemsSize:  number[] = [1, 3, 5]; 
-  selectedItemsSize: number= this.itemsSize[0];
+  selectedItemsSize: number;
 
   @Output() sentSelectedItemsSize = new EventEmitter<number>();
 
   constructor() { }
 
   ngOnInit() {
-    //if cookie works if(cookie exist){this.selectedItemsSize= cookie} else {selectedItemsSize=this.item.size=[0]}
-    this.onSelectedItemsSize();
+    if(  localStorage.getItem('selectedItemsSize')){
+      this.selectedItemsSize = Number (localStorage.getItem('selectedItemsSize'));
+      // this.onSelectedItemsSize();
+    }
+    else{
+      this.selectedItemsSize = this.itemsSize[0];
+      this.onSelectedItemsSize();
+    }
   }
 
   onSelectedItemsSize(): void {
-      this.sentSelectedItemsSize.emit(this.selectedItemsSize);
+    localStorage.setItem('selectedItemsSize', String(this.selectedItemsSize));
+    this.sentSelectedItemsSize.emit(this.selectedItemsSize);
     }
 
 }
