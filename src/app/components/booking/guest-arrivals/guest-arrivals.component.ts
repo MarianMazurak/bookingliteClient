@@ -21,7 +21,7 @@ export class GuestArrivalsComponent implements OnInit {
   ngOnInit() {
     this.authenticated = this.auth.isAuthenticated;
     this.getGuestArrivalsList();
-  }
+  } 
 
   public getGuestArrivalsList(): void {
     const id = +this.route.snapshot.paramMap.get('id');
@@ -34,8 +34,8 @@ export class GuestArrivalsComponent implements OnInit {
     return this.bookingService.isCanceled(bookingStatus);
   }
 
-  isCheckBookingDate(checkIn, checkOut): boolean {
-    return this.bookingService.isCheckBookingDate(checkIn, checkOut);
+  isBookingDateActual(checkIn, checkOut): boolean {
+    return this.bookingService.isBookingDateActual(checkIn, checkOut);
   }
 
   calculateNumberOfDates(checkIn, checkOut): number {

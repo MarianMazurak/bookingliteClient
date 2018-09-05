@@ -22,7 +22,7 @@ import {UserComponent} from './components/user/user.component';
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'bookings', component: ListBookingComponent},
+  {path: 'bookings/:filter', component: ListBookingComponent },
   {path: 'booking/:id', component: BookingComponent},
   {path: 'create-property', component: CreatePropertyComponent},
   {path: 'create-apartment', component: CreateApartmentComponent},

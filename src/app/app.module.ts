@@ -37,6 +37,12 @@ import { ReviewCreateComponent } from './components/review/review-create/review-
 import { OwnerPropertiesComponent } from './components/property/owner-properties/owner-properties.component';
 import { UserNavigationComponent } from './components/user/user-navigation/user-navigation.component';
 
+import { PaginationService } from './services/pagination/pagination.service';
+import { ItemsSizeComponent } from './components/pagination/items-size/items-size.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { PhotoPopupComponent } from './components/property/photo-popup/photo-popup.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -65,6 +71,9 @@ import { UserNavigationComponent } from './components/user/user-navigation/user-
     GuestArrivalsComponent,
     ReviewBookingComponent,
     ReviewCreateComponent,
+    PaginationComponent,
+    ItemsSizeComponent,
+    PhotoPopupComponent,
     OwnerPropertiesComponent,
     UserNavigationComponent
   ],
@@ -72,11 +81,12 @@ import { UserNavigationComponent } from './components/user/user-navigation/user-
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule.forRoot()
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    PropertyService,CountryService,CityService,ApartmentService,PropertyTypeService],
+    PropertyService, CountryService ,CityService,ApartmentService,PropertyTypeService, PaginationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
