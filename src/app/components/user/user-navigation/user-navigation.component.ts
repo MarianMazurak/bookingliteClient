@@ -15,7 +15,6 @@ export class UserNavigationComponent implements OnInit {
   ngOnInit() {
         this.auth.getUserFromBackEnd().subscribe(user => {
       this.user = user;
-      console.log(user);
     });
     this.uhref = window.location.href;
   }
