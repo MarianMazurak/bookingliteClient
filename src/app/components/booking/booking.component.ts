@@ -15,7 +15,7 @@ import { AuthService } from '../../services/authentication/auth.service';
 export class BookingComponent implements OnInit {
 
   @Input() booking: Booking;
-  private bookingsUrl = '/bookings';
+  private bookingsUrl = '/bookings/allBookings';
   private authenticated;
 
   constructor(private auth: AuthService,
