@@ -13,11 +13,10 @@ export class UserNavigationComponent implements OnInit {
   constructor(private auth: AuthService) { }
 
   ngOnInit() {
-    console.log('hi');
-    this.auth.getUserFromBackEnd().subscribe(user => {
+        this.auth.getUserFromBackEnd().subscribe(user => {
       this.user = user;
+      console.log(user);
     });
     this.uhref = window.location.href;
   }
-
 }

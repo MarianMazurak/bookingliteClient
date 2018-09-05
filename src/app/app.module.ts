@@ -36,14 +36,14 @@ import { ReviewBookingComponent } from './components/review/review-booking/revie
 import { ReviewCreateComponent } from './components/review/review-create/review-create.component';
 import { OwnerPropertiesComponent } from './components/property/owner-properties/owner-properties.component';
 import { UserNavigationComponent } from './components/user/user-navigation/user-navigation.component';
-
+import { UserPropertiesComponent } from './components/user/user-profile/user-properties/user-properties.component';
+import { UserApartmentsComponent } from './components/user/user-profile/user-properties/user-apartments/user-apartments.component';
+import { EditApartmentComponent } from './components/apartment/edit-apartment/edit-apartment.component';
 import { PaginationService } from './services/pagination/pagination.service';
 import { ItemsSizeComponent } from './components/pagination/items-size/items-size.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { PhotoPopupComponent } from './components/property/photo-popup/photo-popup.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,7 +75,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ItemsSizeComponent,
     PhotoPopupComponent,
     OwnerPropertiesComponent,
-    UserNavigationComponent
+    UserNavigationComponent,
+    UserPropertiesComponent,
+    UserApartmentsComponent,
+    EditApartmentComponent
   ],
   imports: [
     BrowserModule,

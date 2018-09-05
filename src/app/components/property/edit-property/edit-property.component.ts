@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, ParamMap} from '@angular/router';
-import {switchMap} from 'rxjs/operators';
+import {AuthService} from '../../../services/authentication/auth.service';
 
 @Component({
   selector: 'app-edit-property',
@@ -9,8 +9,10 @@ import {switchMap} from 'rxjs/operators';
 })
 export class EditPropertyComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  private authentication;
+  constructor(private route: ActivatedRoute, private auth: AuthService ) { }
 
-  ngOnInit() {}
-
+  ngOnInit() {
+    this.authentication = this.auth.isAuthenticated;
+  }
 }

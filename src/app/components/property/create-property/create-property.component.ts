@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup} from '@angular/forms';
+import {Route, Router} from '@angular/router';
 
 // models
 import { Country } from '../../../models/country';
@@ -40,7 +41,8 @@ export class CreatePropertyComponent implements OnInit {
               private propertyTypeService: PropertyTypeService,
               private facilityService: FacilityService,
               private countryService: CountryService,
-              private cityService: CityService) { }
+              private cityService: CityService,
+              private router: Router) { }
 
   ngOnInit() {
     this.authenticated = this.auth.isAuthenticated;
@@ -49,6 +51,7 @@ export class CreatePropertyComponent implements OnInit {
     this.getFacilities();
     this.getPropertyTypes();
     this.getCountries();
+
   }
 
   getCountries() {
@@ -89,10 +92,10 @@ export class CreatePropertyComponent implements OnInit {
       this.propertyCreate.cityId = this.selectedCityId;
       this.propertyCreate.propertyTypeId = this.selectedPropertyTypeId;
       this.propertyService.createProperty(this.propertyCreate).subscribe(res => {
-        alert('Property created');
-      }, error => {
+        }, error => {
          this.errorMessage = JSON.parse(error.error).message;
         });
+      this.onSubmit();
     } else {
       this.formValid = false;
     }
@@ -112,5 +115,8 @@ export class CreatePropertyComponent implements OnInit {
       return;
     }
     this.propertyCreate.facilityId.push(id);
+  }
+  onSubmit() {
+    this.router.navigate(['/myproperties']);
   }
 }
