@@ -19,6 +19,7 @@ import {OwnerPropertiesComponent} from './components/property/owner-properties/o
 import {GuestArrivalsComponent} from './components/booking/guest-arrivals/guest-arrivals.component';
 import {UserComponent} from './components/user/user.component';
 import {UserPropertiesComponent} from './components/user/user-profile/user-properties/user-properties.component';
+import {EditApartmentComponent} from './components/apartment/edit-apartment/edit-apartment.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -33,6 +34,7 @@ const routes: Routes = [
   {path: 'property/:id/apartment', component: CreateApartmentComponent},
   {path: 'search', component: SearchComponent},
   {path: 'edit-property/:id', component: EditPropertyComponent},
+  {path: 'property/:id/apartments/:id', component: EditApartmentComponent},
   {path: 'property-detailes/:id', component: PropertyComponent},
   {path: 'review-booking/:id', component: ReviewBookingComponent},
   {path: 'review-create/:id', component: ReviewCreateComponent},

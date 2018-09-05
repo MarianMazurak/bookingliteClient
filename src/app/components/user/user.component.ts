@@ -16,5 +16,4 @@ export class UserComponent implements OnInit {
       this.user = user;
     });
   }
-
 }

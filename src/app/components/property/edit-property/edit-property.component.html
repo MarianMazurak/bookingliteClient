@@ -7,53 +7,65 @@
       <article class="card-body">
         <h4 class="card-title mb-4 mt-1">Edit Property</h4>
 
+        <form #createPropertyForm=ngForm (ngSubmit)="updateProperty(createPropertyForm)"
+        [ngClass]="{'was-validated' : !formValid}">
+
         <div class="row">
           <div class="col-6">
+
             <div class="form-group">
               <label>Property Name</label>
-              <input name="name" required class="form-control"
-                     placeholder="Property Name" type="text">
-              <div class="invalid-feedback">Property Name is required!</div>
+              <input class="form-control" placeholder="Name" type="text"  required name="name"
+                     [(ngModel)]="property.name"
+                     [(ngModel)]="propertyUpdate.name">
+              <div class="invalid-feedback">Valid name is required!</div>
             </div>
 
             <div class="form-group">
               <label>Email</label>
-              <input class="form-control" required name="email"
-                     placeholder="Email" type="email">
+              <input class="form-control" placeholder="Email" type="email"  required name="email"
+                     [(ngModel)]="property.contactEmail"
+                     [(ngModel)]="propertyUpdate.contactEmail">
               <div class="invalid-feedback">Valid email is required!</div>
             </div>
 
             <div class="form-group">
               <label>Phone Number</label>
               <input name="phone number" required class="form-control"
-                     placeholder="phone number" type="text">
+                     placeholder="phone number" type="text"
+                     [(ngModel)]="property.phoneNumber"
+                     [(ngModel)]="propertyUpdate.phoneNumber">
               <div class="invalid-feedback">Phone Number is required!</div>
             </div>
 
             <div class="form-group">
               <label>Facilities</label>
-              <div class="custom-control custom-checkbox">
-                <!--<input type="checkbox" class="custom-control-input" id="customCheck{{facility.id}}"-->
-                <!--(change)="workWithCheckboxes(facility.id)">-->
-                <!--<label class="custom-control-label"-->
-                <!--for="customCheck{{facility.id}}">{{facility.name}}</label>-->
+              <div class="custom-control custom-checkbox"
+                   *ngFor="let facility of facilities">
+                <input type="checkbox" class="custom-control-input" id="customCheck{{facility.id}}"
+                       (change)=workWithCheckboxes(facility.id)>
+                <label class="custom-control-label"
+                       for="customCheck{{facility.id}}">{{facility.name}}</label>
               </div>
             </div>
-
           </div>
 
           <div class="col-6">
             <div class="form-group">
               <label>Description</label>
               <input name="description" class="form-control"
-                     placeholder="description" type="text">
+                     placeholder="description" type="text"
+                     [(ngModel)]="property.description"
+                     [(ngModel)]="propertyUpdate.description">
             </div>
+
             <div class="form-group">
               <label>Property Type</label>
               <select class="form-control" #selectPropertyType
-              >
-                <!--<option *ngFor="let propertyType of propertyTypes" value="{{propertyType.id}}">{{propertyType.name}}-->
-                <!--</option>-->
+                      (change)="changePropertyTypes(selectPropertyType.value)">
+                <option *ngFor="let propertyType of propertyTypes" value="{{propertyType.id}}">
+                  {{propertyType.name}}
+                </option>
               </select>
             </div>
 
@@ -61,16 +73,15 @@
         </div>
 
         <div class="form-group">
-          <button type="submit" class="btn btn-primary btn-block"
-          >Add Change
+          <button type="submit" class="btn btn-primary btn-block" (click)=updateProperty()>Add Change
           </button>
         </div>
-        <!--</form>-->
+        </form>
       </article>
     </div>
   </div>
 </div>
-<div class="box-photo">
 
+<div class="box-photo">
   <app-upload-photo-list></app-upload-photo-list>
 </div>

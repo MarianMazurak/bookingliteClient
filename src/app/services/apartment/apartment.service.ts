@@ -36,7 +36,6 @@ export class ApartmentService {
         'Content-Type': 'application/json'
       })
     };
-    console.log(model, 'JSON');
     return this.http.post(`api/property/1/apartment`, model, httpOptions);
   }
 

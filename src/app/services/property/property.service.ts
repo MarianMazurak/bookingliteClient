@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {HttpHeaders} from '@angular/common/http';
 
-// import { Property } from '../../models/property-create';
 import { Property } from '../../models/property';
 import {PropertyCreate} from '../../models/property-create';
 import {Observable} from 'rxjs';
@@ -12,7 +11,6 @@ import {Observable} from 'rxjs';
 })
 export class PropertyService {
 
-
   constructor(private http: HttpClient) { }
 
   public createProperty(model: PropertyCreate) {
@@ -21,8 +19,7 @@ export class PropertyService {
         'Content-Type': 'application/json'
       })
     };
-    console.log(model, 'JSON');
-    return this.http.post('api/property', model, httpOptions);
+     return this.http.post('api/property', model, httpOptions);
   }
 
   public getProperties(): Observable<Property[]> {
@@ -35,5 +32,14 @@ export class PropertyService {
 
   public getOwnerProperties(): Observable<Property[]> {
     return this.http.get<Property[]>('api/myproperties');
+  }
+
+  public updateProperty(model: PropertyCreate, id: number) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.put('api/property/' + id, model, httpOptions);
   }
 }
