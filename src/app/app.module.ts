@@ -45,7 +45,6 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { PhotoPopupComponent } from './components/property/photo-popup/photo-popup.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
 @NgModule({
   declarations: [
     AppComponent,
