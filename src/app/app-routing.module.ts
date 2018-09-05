@@ -19,6 +19,7 @@ import {OwnerPropertiesComponent} from './components/property/owner-properties/o
 import {GuestArrivalsComponent} from './components/booking/guest-arrivals/guest-arrivals.component';
 import {UserComponent} from './components/user/user.component';
 import {UserPropertiesComponent} from './components/user/user-profile/user-properties/user-properties.component';
+import {UserApartmentsComponent} from './components/user/user-profile/user-properties/user-apartments/user-apartments.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -41,7 +42,8 @@ const routes: Routes = [
   {path: 'owner-properties', component: OwnerPropertiesComponent},
   {path: 'guest-arrivals/:id', component: GuestArrivalsComponent},
   {path: 'user', component: UserComponent},
-  {path: 'myproperties', component: UserPropertiesComponent}
+  {path: 'myproperties', component: UserPropertiesComponent},
+  {path: 'properties/:id/apartments', component: UserApartmentsComponent}
 ];
 
 @NgModule({
