@@ -1,0 +1,5 @@
+<select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" 
+    [(ngModel)]=selectedItemsSize (ngModelChange)='onSelectedItemsSize()'>
+    <option [value]=" itemsSize[0]" selected>{{ itemsSize[0]}}</option>
+    <option *ngFor="let item of itemsSize.slice(1)"  [value]="item" >{{item}}</option>
+</select>

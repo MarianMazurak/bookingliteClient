@@ -8,7 +8,7 @@
         <a class="nav-link" routerLink="/bookings">Bookings</a>
       </li>
       <li class="nav-item" *ngIf="user && user.roles.length>1">
-        <a class="nav-link" routerLink="/myproperties">Properties</a>
+        <a [ngClass]="{'nav-link': true, 'active': uhref.includes('properties')}" routerLink="/myproperties">Properties</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Settings</a>

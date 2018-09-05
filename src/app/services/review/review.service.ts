@@ -10,6 +10,7 @@ import {User} from '../../models/user';
   providedIn: 'root'
 })
 export class ReviewService {
+
   private bookingUrl = '/api/booking';
   private propertyUrl = '/api/property'
 
@@ -40,6 +41,6 @@ export class ReviewService {
 
   public getUserDetails(): Observable<User> {
     return this.http.get<User>(`/api/hello`);
-
   }
 }
+

@@ -1,0 +1,31 @@
+<div *ngIf="itemOnPage">
+    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" 
+        [(ngModel)]=selectedItemOnPage (ngModelChange)='onSelectedItemOnPage()'>
+        <option [value]=" itemOnPage[0]" selected>{{ itemOnPage[0]}}</option>
+        <option *ngFor="let item of itemOnPage.slice(1)"  [value]="item" >{{item}}</option>
+    </select>
+</div>
+
+<div>
+    <div class="container">
+        <div class="text-center">
+            <ul  class="pagination"> 
+                <li class="page-item" [ngClass]="{disabled: currentPage === 1}">
+                    <p class="page-link"  (click)="onFirst()">First</p>
+                </li>
+                <li class="page-item" [ngClass]="{disabled: currentPage === 1}">
+                    <p class="page-link"  (click)="onPrev()">Previous</p>
+                </li>
+                <li class="page-item active" *ngFor="let pageNum of pagesToPagination" [ngClass]="{active: pageNum === currentPage}">
+                    <p class="page-link"  (click)="onPage(pageNum)">{{pageNum}}</p>
+                </li>
+                <li class="page-item" color="#blue" [ngClass]="{disabled: currentPage === totalPages}">
+                    <p class="page-link"  (click)="onNext()">Next</p>
+                </li>
+                <li class="page-item" [ngClass]="{disabled: currentPage === totalPages}">
+                    <p class="page-link"  (click)="onLast()">Last</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
