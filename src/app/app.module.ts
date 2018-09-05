@@ -39,7 +39,11 @@ import { UserNavigationComponent } from './components/user/user-navigation/user-
 import { UserPropertiesComponent } from './components/user/user-profile/user-properties/user-properties.component';
 import { UserApartmentsComponent } from './components/user/user-profile/user-properties/user-apartments/user-apartments.component';
 import { EditApartmentComponent } from './components/apartment/edit-apartment/edit-apartment.component';
-
+import { PaginationService } from './services/pagination/pagination.service';
+import { ItemsSizeComponent } from './components/pagination/items-size/items-size.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { PhotoPopupComponent } from './components/property/photo-popup/photo-popup.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,6 +71,9 @@ import { EditApartmentComponent } from './components/apartment/edit-apartment/ed
     GuestArrivalsComponent,
     ReviewBookingComponent,
     ReviewCreateComponent,
+    PaginationComponent,
+    ItemsSizeComponent,
+    PhotoPopupComponent,
     OwnerPropertiesComponent,
     UserNavigationComponent,
     UserPropertiesComponent,
@@ -77,11 +84,12 @@ import { EditApartmentComponent } from './components/apartment/edit-apartment/ed
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule.forRoot()
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    PropertyService, CountryService, CityService, ApartmentService, PropertyTypeService],
+    PropertyService, CountryService ,CityService,ApartmentService,PropertyTypeService, PaginationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

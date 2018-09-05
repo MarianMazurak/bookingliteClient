@@ -11,16 +11,17 @@ import {BookingCreate} from '../../models/booking-create';
 })
 export class BookingService {
 
-  private bookingsUrl = 'api/bookings';
-  private bookingUrl = 'api/booking';
 
+  private bookingUrl = 'api/booking';
+  private bookingByPageUrl = 'api/bookings' 
   private nowDate: Date;
 
   constructor(private http: HttpClient) {
   }
 
-  getBookings(): Observable<Booking[]> {
-    return this.http.get<Booking []>(this.bookingsUrl);
+  getBookingsByPage(pageNumber: number, pageSize: number, filterBookingsByDates: string): Observable<any> {
+    return this.http.get<Booking []>(
+      `${this.bookingByPageUrl}?getPageNumber=${pageNumber}&getPageSize=${pageSize}&filterBookingsByDates=${filterBookingsByDates}`);
   }
 
   getBooking(id: number): Observable<Booking> {
@@ -30,12 +31,12 @@ export class BookingService {
 
   cancelBookings(id: number) {
     const url = `${this.bookingUrl}/${id}`;
-    return this.http.put(url, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    })
-      .pipe(tap(res => console.log('cancel booking')));
+    const httpOption ={
+      headers: new HttpHeaders ({
+      'Content-Type':  'application/json' })
+    };
+    return this.http.put(url, httpOption)
+
   }
 
   isCanceled(bookingStatus: string): boolean {
@@ -54,9 +55,10 @@ export class BookingService {
     return Math.round((dateChackOut.getTime() - dateChackIn.getTime()) / (oneDay));
   }
 
-  isCheckBookingDate(checkIn, checkOut): boolean {
-    const dateChackIn = new Date(checkIn);
-    const dateChackOut = new Date(checkOut);
+
+  isBookingDateActual(checkIn, checkOut):boolean {
+    let dateChackIn = new Date (checkIn);
+    let dateChackOut = new Date (checkOut);
     this.nowDate = new Date();
     if (dateChackIn > this.nowDate || dateChackOut > this.nowDate) {
       return true;
@@ -64,7 +66,6 @@ export class BookingService {
       return false;
     }
   }
-
   public createBooking(bookingCreate: BookingCreate, apartmentId: number) {
     const url = `api/booking/${apartmentId}`;
     return this.http.post(url, bookingCreate, {

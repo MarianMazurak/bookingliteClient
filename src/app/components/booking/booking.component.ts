@@ -1,10 +1,10 @@
-import {Component, OnInit, Input} from '@angular/core';
-import {Observable} from 'rxjs';
+import { Component, OnInit, Input } from '@angular/core';
 import {Booking} from '../../models/booking';
 import {BookingService} from '../../services/booking/booking.service';
-import {AuthService} from '../../services/authentication/auth.service';
-import {ActivatedRoute} from '../../../../node_modules/@angular/router';
-import {Router} from '@angular/router';
+import { ActivatedRoute } from '../../../../node_modules/@angular/router';
+import { Router } from "@angular/router";
+import { AuthService } from '../../services/authentication/auth.service';
+
 
 
 @Component({
@@ -15,15 +15,17 @@ import {Router} from '@angular/router';
 export class BookingComponent implements OnInit {
 
   @Input() booking: Booking;
-  private bookingsUrl = '/bookings';
+  private bookingsUrl = '/bookings/allBookings';
+  private authenticated;
 
-  constructor(private route: ActivatedRoute,
-              private bookingService: BookingService,
-              private router: Router
-  ) {
-  }
+  constructor(private auth: AuthService,
+    private route: ActivatedRoute,
+    private bookingService: BookingService,
+    private router: Router 
+) {}
 
   ngOnInit() {
+    this.authenticated = this.auth.isAuthenticated;
     this.getBooking();
   }
 
@@ -40,8 +42,8 @@ export class BookingComponent implements OnInit {
       );
   }
 
-  isCheckBookingDate(checkIn, checkOut): boolean {
-    return this.bookingService.isCheckBookingDate(checkIn, checkOut);
+  isBookingDateActual(checkIn, checkOut):boolean {
+    return this.bookingService.isBookingDateActual(checkIn, checkOut)
   }
 
   isCanceled(bookingStatus: string): boolean {
