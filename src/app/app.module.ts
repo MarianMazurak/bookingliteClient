@@ -89,7 +89,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    PropertyService, CountryService ,CityService,ApartmentService,PropertyTypeService, PaginationService],
+    PropertyService, CountryService, CityService, ApartmentService, PropertyTypeService, PaginationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
