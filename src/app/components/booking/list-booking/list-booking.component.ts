@@ -22,6 +22,13 @@ export class ListBookingComponent implements OnInit {
   allBookingsString: string = "allBookings";
   actualBookingsString: string = "actualBookings";
   archieveBookingsString: string = "archieveBookings";
+  baseUrlToChangePageInPagination: string = window.location.protocol+ "//"
+                                              +window.location.host +"/"
+                                              +window.location.href.split('/')[3] +"/"
+                                              +window.location.href.split('/')[4] +"/";
+  baseUrlToFilterBookings: string = window.location.protocol+ "//"
+                       +window.location.host +"/"
+                       +window.location.href.split('/')[3] +"/"
   
 
   constructor(private auth: AuthService,
@@ -36,7 +43,9 @@ export class ListBookingComponent implements OnInit {
     else if(window.location.href.split('/')[4] == this.archieveBookingsString){
       this.filterBookingsByDates= this.archieveBookingsString;
     }
-    else    this.filterBookingsByDates= this.allBookingsString;
+    else{
+      this.filterBookingsByDates= this.allBookingsString;
+    }    
 
     if(localStorage.getItem('selectedItemsSize')){//if localStorage!=null, else get value from item-size comp
       this.selectedItemsSize = Number (localStorage.getItem('selectedItemsSize'));
@@ -66,65 +75,43 @@ export class ListBookingComponent implements OnInit {
   
   setSelectedItemsSize(n: number): void{ 
     this.selectedItemsSize= n;
-    let newUrl: string = window.location.protocol+ "//"
-                        + window.location.host +"/"
-                        +window.location.href.split('/')[3] +"/"
-                        +window.location.href.split('/')[4] +"/"
-                        + 1 ;                   
+    let newUrl: string = this.baseUrlToChangePageInPagination + "1";         
     history.pushState(null, null, newUrl);    
     this.getBookingsByPage();
   }
 
+  setUlrToLocalStorage(){
+    //////////////////////////
+  }
+
   goToPage(n: number): void {
-    let newUrl: string = window.location.protocol+ "//" //thisurl move to const Class!!!!!!!!!!
-                        + window.location.host +"/"
-                        +window.location.href.split('/')[3] +"/"
-                        +window.location.href.split('/')[4] +"/"
-                        + n ;                   
+    let newUrl: string = this.baseUrlToChangePageInPagination + "" + n; 
     history.pushState(null, null, newUrl);    
     this.getBookingsByPage();
   }
 
   onFirst(n: number): void {
-    this.currentPage= n;
-    let newUrl: string = window.location.protocol+ "//"
-                        + window.location.host +"/"
-                        +window.location.href.split('/')[3] +"/"
-                        +window.location.href.split('/')[4] +"/"
-                        + this.currentPage ;                   
+    let newUrl: string = this.baseUrlToChangePageInPagination + "" + n;           
     history.pushState(null, null, newUrl);    
     this.getBookingsByPage();
   }
 
   onPrev(): void {
     this.currentPage--;
-    let newUrl: string = window.location.protocol+ "//"
-                        + window.location.host +"/"
-                        +window.location.href.split('/')[3] +"/"
-                        +window.location.href.split('/')[4] +"/"
-                        + this.currentPage ;                        
+    let newUrl: string = this.baseUrlToChangePageInPagination + "" + this.currentPage;              
     history.pushState(null, null, newUrl);    
     this.getBookingsByPage();
 }
 
   onNext(): void {    
     this.currentPage++;
-    let newUrl: string = window.location.protocol+ "//"
-                        + window.location.host +"/"
-                        +window.location.href.split('/')[3] +"/"
-                        +window.location.href.split('/')[4] +"/"
-                        + this.currentPage ;                   
+    let newUrl: string = this.baseUrlToChangePageInPagination + "" + this.currentPage;         
     history.pushState(null, null, newUrl);    
     this.getBookingsByPage();
   }
 
   onLast(n: number): void {
-    this.currentPage= n;
-    let newUrl: string = window.location.protocol+ "//"
-                        + window.location.host +"/"
-                        +window.location.href.split('/')[3] +"/"
-                        +window.location.href.split('/')[4] +"/"
-                        + this.currentPage ;                   
+    let newUrl: string = this.baseUrlToChangePageInPagination + "" + n;    
     history.pushState(null, null, newUrl);    
     this.getBookingsByPage();
   }
@@ -142,12 +129,7 @@ export class ListBookingComponent implements OnInit {
   }
 
   filterAllBookings(){
-    console.log("filterAllBookings");
-    let newUrl: string = window.location.protocol+ "//"
-                        + window.location.host +"/"
-                        +window.location.href.split('/')[3] +"/"
-                        +this.allBookingsString +"/"
-                        + 1
+    let newUrl: string = this.baseUrlToFilterBookings + this.allBookingsString +"/" + "1";
     if(! window.location.href.includes(`${this.allBookingsString}`)){
       history.pushState(null, null, newUrl);
       this.filterBookingsByDates= this.allBookingsString;
@@ -155,14 +137,8 @@ export class ListBookingComponent implements OnInit {
     }      
   }
 
-  fiterActualBooking(){    
-    console.log("fiterActualBooking");
-    let url11 = window.location.href;
-    let newUrl: string = window.location.protocol+ "//"
-                        + window.location.host +"/"
-                        +window.location.href.split('/')[3] +"/"
-                        +this.actualBookingsString+"/"
-                        + 1
+  fiterActualBookings(){    
+    let newUrl: string = this.baseUrlToFilterBookings + this.actualBookingsString +"/" + "1";
     if(! window.location.href.includes(`${this.actualBookingsString}`)){
       history.pushState(null, null, newUrl);      
       this.filterBookingsByDates= this.actualBookingsString;
@@ -170,13 +146,8 @@ export class ListBookingComponent implements OnInit {
     }            
   }
 
-  filterArchieveBooking(){
-    console.log("filterArchieveBooking");
-    let newUrl: string = window.location.protocol+ "//"
-                        + window.location.host +"/"
-                        +window.location.href.split('/')[3] +"/"
-                        +this.archieveBookingsString+"/"
-                        + 1;
+  filterArchieveBookings(){
+    let newUrl: string = this.baseUrlToFilterBookings + this.archieveBookingsString +"/" + "1";
       if( ! window.location.href.includes(`${this.archieveBookingsString}`) ){
       history.pushState(null, null, newUrl);
       this.filterBookingsByDates= this.archieveBookingsString;
