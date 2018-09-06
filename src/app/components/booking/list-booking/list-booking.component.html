@@ -136,7 +136,7 @@
                             <small> *number of days: {{calculateNumberOfDates(booking.checkIn , booking.checkOut )}}</small>
                           </ul>
                           <br>
-                          <div>
+                          <div *ngIf="!booking.reviewDto">
                             <button type="button" routerLink="/review-create/{{booking.bookingId}}"
                                     class="btn btn-outline-primary">Write Review</button>
                           </div>
