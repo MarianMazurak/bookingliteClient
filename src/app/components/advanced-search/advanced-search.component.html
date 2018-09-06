@@ -1,0 +1,123 @@
+<div class="container">
+  <div class="row">
+
+    <!-- Main Search -->
+
+    <app-search-form></app-search-form>
+
+    <!-- Main Search -->
+
+    <!-- FILTER  -->
+
+      <div class="col-3 filter-form-container">
+        <form>
+          <h2>Filter</h2>
+          <div class="form-group">
+            <label>Property Name</label>
+            <input type="text" class="form-control" placeholder="Property Name">
+          </div>
+
+
+          <div class="form-group">
+            <h5>Facilities</h5>
+            <div class="custom-control custom-checkbox"
+                 *ngFor="let facility of facilities">
+              <input type="checkbox" class="custom-control-input" id="customCheck{{facility.id}}"
+                     >
+              <label class="custom-control-label" for="customCheck{{facility.id}}">{{facility.name}}</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <h5>Amenities</h5>
+            <div class="custom-control custom-checkbox"
+                 *ngFor="let am of amenities">
+              <input type="checkbox" class="custom-control-input" id="customCheck2{{am.id}}">
+              <label class="custom-control-label" for="customCheck2{{am.id}}">{{am.name}}</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Apply</button>
+          </div>
+        </form>
+      </div>
+
+    <!-- FILTER  -->
+
+    <!-- PROPERTY LIST -->
+
+    <div class="col-9">
+
+      <div *ngFor="let property of propertyList">
+        <div class="container">
+          <div class="row mb-3">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <img class="img-responsive" src={{property.photos[0].url}}
+                           onerror="this.src = 'assets/image/capture.PNG'">
+                    </div>
+                    <div class="col-md-5  card-body">
+                      <div class="list-title">
+                        <ul class="list-inline list-unstyled">
+                          <li class="list-inline-item"><h4>{{property.name}}</h4></li>
+                          <li class="list-inline-item text-warning"><i class="fa fa-star"></i><i
+                            class="fa fa-star"></i><i
+                            class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half"></i></li>
+                          <li class="list-inline-item text-success"><i class="fa fa-thumbs-up"></i></li>
+                          <ul>
+                            <li><p *ngFor="let facility of property.facilities">{{facility.name}}</p></li>
+                          </ul>
+                        </ul>
+                      </div>
+                      <div class="list-location">
+                        <small>{{property.description}}</small>
+                      </div>
+                      <div class="list-descrip">
+                        <small>{{property.contactEmail}}
+                        </small>
+                        <small>{{property.phoneNumber}}
+                        </small>
+                        <br>
+                        <small>{{property.propertyType.name}}
+                        </small>
+
+                      </div>
+                    </div>
+                    <div class="col-md-3 border-left card-body">
+                      <ul class="list-unstyled">
+                        <li><h3>Rating {{property.rating}}</h3></li>
+                        <li class="text-secondary">
+                          <small>{{property.id}} Reviews</small>
+                          <!--<small>{property.review}</small>-->
+                        </li>
+                      </ul>
+                      <button type="button"
+                              routerLink="{{property.id}}/reviews"
+                              class="btn btn-outline-primary">
+                        Review
+                      </button>
+                      <br><br>
+                      <button type="button"
+                              routerLink="{{property.id}}"
+                              class="btn btn-outline-primary">
+                        Select apartment
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROPERTY LIST -->
+
+
+  </div>
+</div>

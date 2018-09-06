@@ -11,7 +11,6 @@ export class SearchComponent implements OnInit {
   constructor(private propertyService: PropertyService) { }
 
   ngOnInit() {
-    this.propertyService.cleanSelectedParameters();
   }
 
 }

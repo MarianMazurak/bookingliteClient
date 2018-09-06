@@ -13,7 +13,6 @@ export class PropertyService {
 
   public url = 'api/addproperty';
   public searchUrl = 'api/property/advancesearch?';
-  private mainSearchParameters = null;
 
   constructor(private http: HttpClient) { }
 
@@ -47,26 +46,6 @@ export class PropertyService {
 
   public getPropertyById(id: number): Observable<Property> {
     return this.http.get<Property>(this.url + id);
-  }
-
-  public saveMainSearchParameters(countryId: number,
-                                  cityId: number,
-                                  checkIn: string,
-                                  checkOut: string,
-                                  numberOfGuests: number) {
-    this.mainSearchParameters = {countryId: countryId,
-      cityId: cityId,
-      checkIn: checkIn,
-      checkOut: checkOut,
-      numberOfGuests: numberOfGuests};
-  }
-
-  public get MainSearchParameters() {
-    return this.mainSearchParameters;
-  }
-
-  public cleanSelectedParameters() {
-    this.mainSearchParameters = null;
   }
 
 }

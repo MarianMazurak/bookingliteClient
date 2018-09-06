@@ -28,33 +28,11 @@ export class SearchFormComponent implements OnInit {
   constructor(private auth: AuthService,
               private countryService: CountryService,
               private cityService: CityService,
-              public propertyService: PropertyService,
-              private router: Router) { }
+              public propertyService: PropertyService) { }
 
   ngOnInit() {
-    // this.propertyService.cleanSelectedParameters();
-    if (this.propertyService.MainSearchParameters) {
-      this.selectedCountryId = this.propertyService.MainSearchParameters.countryId;
-      this.selectedCityId = this.propertyService.MainSearchParameters.cityId;
-      this.checkIn = this.propertyService.MainSearchParameters.checkIn;
-      this.checkOut = this.propertyService.MainSearchParameters.checkOut;
-      this.numberOfGuests = this.propertyService.MainSearchParameters.numberOfGuests;
-    }
     this.authenticated = this.auth.isAuthenticated;
     this.getCountries();
-    this.getCities(this.selectedCountryId);
-  }
-
-  public getCountries() {
-    this.countryService.getCountry().subscribe(res => {
-      this.countries = res;
-    });
-  }
-
-  public getCities(id: number) {
-    this.cityService.getCity(this.selectedCountryId).subscribe(res => {
-      this.cities = res;
-    });
   }
 
   public mainSearch() {
@@ -65,7 +43,32 @@ export class SearchFormComponent implements OnInit {
       this.numberOfGuests).subscribe(res => {
         this.properties = res;
     });
+  }
 
+  public getCountries() {
+    this.countryService.getCountry().subscribe((countriesarr) => {
+      this.countries = countriesarr;
+      this.selectedCountryId = countriesarr[0].id;  // !!!!!!!!!!!
+      this.getCities(this.selectedCountryId);
+    });
+  }
+
+  public changeCountry(id: number) {
+    this.selectedCountryId = id;
+    this.getCities(id);
+  }
+
+  public changeCity(id: number) {
+    this.selectedCityId = id;
+  }
+
+  public getCities(countryId: number) {
+    this.cityService.getCity(countryId).subscribe((citiesarr) => {
+      this.cities = citiesarr;
+      if (citiesarr.length !== 0) {
+        this.selectedCityId = citiesarr[0].id;
+      }
+    });
   }
 
 }
