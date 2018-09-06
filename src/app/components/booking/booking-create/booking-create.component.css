@@ -1,0 +1,10 @@
+form.createBooking{
+  border: 1px solid black;
+  margin: 50px;
+  padding: 20px;
+  width: 700px;
+}
+.success {
+  border-color: #4CAF50;
+  color: green;
+}

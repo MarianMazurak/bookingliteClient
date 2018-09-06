@@ -39,5 +39,8 @@ export class ApartmentService {
     console.log(model, 'JSON');
     return this.http.post(`api/property/1/apartment`, model, httpOptions);
   }
-
+  public getApartmentById(id: number): Observable<Apartment> {
+    console.log('service');
+    return this.http.get<Apartment>(`api/apartment/${id}`);
+  }
 }
