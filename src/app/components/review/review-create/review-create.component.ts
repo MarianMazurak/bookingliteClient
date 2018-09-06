@@ -19,6 +19,8 @@ export class ReviewCreateComponent implements OnInit {
   booking: Booking;
   formValid = true;
   errorMessage = '';
+  flag: boolean;
+
   constructor(private auth: AuthService,
               private reviewService: ReviewService,
               private route: ActivatedRoute,
@@ -28,6 +30,7 @@ export class ReviewCreateComponent implements OnInit {
   ngOnInit() {
     this.authenticated = this.auth.isAuthenticated;
     this.review = new CreateReview();
+this.getBooking();
   }
   createReview(createReviewForm: FormGroup) {
     const id = +this.route.snapshot.paramMap.get('id');
@@ -45,6 +48,8 @@ export class ReviewCreateComponent implements OnInit {
   }
   getBooking() {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.bookingService.getBooking(id).subscribe(b => {this.booking = b; } );
+    this.bookingService.getBooking(id).subscribe(b => {
+      this.booking = b;
+      this.flag = !!b.reviewDto; } );
   }
 }

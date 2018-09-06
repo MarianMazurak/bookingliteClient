@@ -1,4 +1,4 @@
-<div class="reviewDiv">
+<div class="reviewDiv" *ngIf="!flag">
   <form #createReviewForm=ngForm (ngSubmit)="createReview(createReviewForm)" [ngClass]="{'was-validated' : !formValid}">
    <label for="FormControlTextarea">Review : </label>
     <textarea class="form-control" id="FormControlTextarea" rows="4" placeholder="write your review..."
@@ -17,3 +17,13 @@
   </form>
 </div>
 
+
+<div class="reviewDiv" *ngIf="flag">
+    <label for="FormControlTextarea">Review : </label>
+    <textarea class="form-control"  rows="4">{{booking.reviewDto.message}}</textarea>
+    <hr>
+    <p>Rating : {{booking.reviewDto.rating}}</p>
+    <div class="form-row">
+      <button (click)="goBack()" class="btn-danger">Cancel</button>
+    </div>
+</div>
