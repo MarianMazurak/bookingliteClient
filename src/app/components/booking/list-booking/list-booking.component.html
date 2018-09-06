@@ -41,8 +41,9 @@
                           <ul class="list-inline list-unstyled">
                             <li class="list-inline-item">
                                 <a routerLink="/booking/{{booking.bookingId}}">
-                                    <h4><b>{{booking.apartmentDto.propertyDto.name}}, 
-                                      {{booking.apartmentDto.name}}</b>
+                                    <h4  (click)="setUlrToLocalStorage()">
+                                      <b>{{booking.apartmentDto.propertyDto.name}}, 
+                                       {{booking.apartmentDto.name}}</b>
                                     </h4>     
                                 </a>
                             </li>

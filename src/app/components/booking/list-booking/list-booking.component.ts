@@ -16,7 +16,7 @@ export class ListBookingComponent implements OnInit {
   currentPage: number ;
   selectedItemsSize: number;
   pagesToPagination : number [];//count page to show in pagination
-  totalPages: number; // all pages (to last pagiin pagination)
+  totalPages: number; // all pages (to last page in pagination)
   totalElements: number;// condition in html. If==0 you not have booking
   filterBookingsByDates: string; //selected filter(all, actual, archieve)
   allBookingsString: string = "allBookings";
@@ -81,7 +81,7 @@ export class ListBookingComponent implements OnInit {
   }
 
   setUlrToLocalStorage(){
-    //////////////////////////
+    localStorage.setItem('urlToButtonBackToListBookings', window.location.href);
   }
 
   goToPage(n: number): void {
