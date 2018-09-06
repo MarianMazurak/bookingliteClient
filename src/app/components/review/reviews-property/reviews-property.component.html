@@ -1,0 +1,10 @@
+<div class="reviewDiv">
+  <div class="align-items-center" *ngFor="let review of reviews">
+    <label for="FormControlTextarea"><strong>{{review.userDto.firstName}} : </strong> </label>
+    <span class="rating"><strong>Rating : </strong> {{review.rating}}</span>
+    <textarea class="form-control" id="FormControlTextarea" rows="4" readonly>{{review.message}}</textarea>
+    <hr>
+    <div class="form-row">
+    </div>
+  </div>
+</div>

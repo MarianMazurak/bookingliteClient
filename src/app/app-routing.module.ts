@@ -14,11 +14,11 @@ import {BookingComponent} from './components/booking/booking.component';
 import {ReviewBookingComponent} from './components/review/review-booking/review-booking.component';
 import {ReviewCreateComponent} from './components/review/review-create/review-create.component';
 import {BookingCreateComponent} from './components/booking/booking-create/booking-create.component';
-import {ReviewComponent} from './components/review/review.component';
 import {OwnerPropertiesComponent} from './components/property/owner-properties/owner-properties.component';
 import {GuestArrivalsComponent} from './components/booking/guest-arrivals/guest-arrivals.component';
 import {UserComponent} from './components/user/user.component';
 import {UserPropertiesComponent} from './components/user/user-profile/user-properties/user-properties.component';
+import {ReviewsPropertyComponent} from './components/review/reviews-property/reviews-property.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -37,10 +37,10 @@ const routes: Routes = [
   {path: 'review-booking/:id', component: ReviewBookingComponent},
   {path: 'review-create/:id', component: ReviewCreateComponent},
   {path: 'booking-create/:id', component: BookingCreateComponent},
-  {path: 'property/:id/reviews', component: ReviewComponent},
   {path: 'owner-properties', component: OwnerPropertiesComponent},
   {path: 'guest-arrivals/:id', component: GuestArrivalsComponent},
   {path: 'user', component: UserComponent},
+  {path: 'reviews-property/:id', component: ReviewsPropertyComponent},
   {path: 'myproperties', component: UserPropertiesComponent}
 ];
 
