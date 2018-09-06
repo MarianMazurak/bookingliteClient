@@ -17,6 +17,8 @@ export class ReviewCreateComponent implements OnInit {
   private authenticated;
   review: CreateReview;
   booking: Booking;
+  formValid = true;
+  errorMessage = '';
   constructor(private auth: AuthService,
               private reviewService: ReviewService,
               private route: ActivatedRoute,
@@ -27,12 +29,16 @@ export class ReviewCreateComponent implements OnInit {
     this.authenticated = this.auth.isAuthenticated;
     this.review = new CreateReview();
   }
-  createReview() {
+  createReview(createReviewForm: FormGroup) {
     const id = +this.route.snapshot.paramMap.get('id');
-    console.log('controller review', this.review);
-    this.reviewService.createReview(this.review, id).subscribe(res => {
-      alert('Review created');
-    });
+    if (createReviewForm.valid) {
+      this.reviewService.createReview(this.review, id).subscribe(res => {
+        alert('Review created'); } , error => {
+        this.errorMessage = JSON.parse(error.error).message;
+      });
+    } else {
+      this.formValid = false;
+    }
   }
   goBack() {
     this.location.back();

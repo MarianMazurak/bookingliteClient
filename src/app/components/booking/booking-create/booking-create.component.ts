@@ -19,6 +19,7 @@ export class BookingCreateComponent implements OnInit {
   today: Date;
   formValid = true;
   errorMessage = '';
+  flag: boolean;
 
   constructor(private auth: AuthService,
               private bookingService: BookingService,
@@ -31,6 +32,7 @@ export class BookingCreateComponent implements OnInit {
     this.booking = new BookingCreate();
     this.today = new Date();
     this.getApartmentById();
+    this.flag = true;
   }
 
   createBooking(createBookingForm: FormGroup) {
@@ -40,6 +42,7 @@ export class BookingCreateComponent implements OnInit {
         alert('booking created'); } , error => {
         this.errorMessage = JSON.parse(error.error).message;
       });
+      this.flag = false;
     } else {
       this.formValid = false;
     }

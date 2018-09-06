@@ -1,14 +1,18 @@
 <div class="reviewDiv">
-  <form>
-   <!-- <label>{{booking.apartment.name}} <p>Check-in : {{booking.checkIn}}  Check-out : {{booking.checkOut}}</p></label>
-    --><label for="FormControlTextarea">Review : </label>
+  <form #createReviewForm=ngForm (ngSubmit)="createReview(createReviewForm)" [ngClass]="{'was-validated' : !formValid}">
+   <label for="FormControlTextarea">Review : </label>
     <textarea class="form-control" id="FormControlTextarea" rows="4" placeholder="write your review..."
-              [(ngModel)]="review.message" name="message"></textarea>
+              [(ngModel)]="review.message" name="message" required="required"></textarea>
     <hr>
-    <p>Rating :<input type="number" min="1" max="10" [(ngModel)]="review.rating" name="rating" value="10" required></p>
+    <p>Rating :<input type="number" min="1" max="10" [(ngModel)]="review.rating" name="rating" value="10" required="required"></p>
+    <ng-container *ngIf="errorMessage !== ''">
+      <div class="alert alert-danger">
+        {{errorMessage}}
+      </div>
+    </ng-container>
     <div class="form-row">
       <button (click)="goBack()" class="btn-danger">Cancel</button>
-      <button (click)="createReview()">Save review</button>
+      <button type="submit" class="btn info">Save Review</button>
     </div>
   </form>
 </div>
