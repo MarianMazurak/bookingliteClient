@@ -15,7 +15,6 @@ export class UserApartmentsComponent implements OnInit {
     this.propertyService.getPropertyById(Number.parseInt(this.route.snapshot.paramMap.get('id')))
       .subscribe(property => {
         this.property = property;
-        //console.log(property);
       });
   }
 }
