@@ -1,6 +1,7 @@
 import { PropertyType } from './property-type';
 import { Facility } from './facility';
 import {Photo} from './photo';
+import {Apartment} from './apartment';
 
 export class Property {
   id: number;
@@ -12,5 +13,5 @@ export class Property {
   propertyType: PropertyType;
   facilities: Facility[];
   photos: Photo[];
-
+  apartments: Apartment[];
 }
