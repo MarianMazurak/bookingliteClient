@@ -16,7 +16,7 @@ export class ListBookingComponent implements OnInit {
   currentPage: number ;
   selectedItemsSize: number;
   pagesToPagination : number [];//count page to show in pagination
-  totalPages: number; // all pages with selected `selectedItemOnPage`
+  totalPages: number; // all pages (to last pagiin pagination)
   totalElements: number;// condition in html. If==0 you not have booking
   filterBookingsByDates: string; //selected filter(all, actual, archieve)
   allBookingsString: string = "allBookings";
@@ -29,8 +29,8 @@ export class ListBookingComponent implements OnInit {
               private paginationService: PaginationService) { }
   
   ngOnInit() {
-    this.authenticated = this.auth.isAuthenticated;// look here!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    if(window.location.href.split('/')[4] == this.actualBookingsString){ //all thischange on filterBookingsByDates= wind.location.href.get.[4]
+    this.authenticated = this.auth.isAuthenticated;
+    if(window.location.href.split('/')[4] == this.actualBookingsString){ //all this change on filterBookingsByDates= wind.location.href.get.[4]
       this.filterBookingsByDates= this.actualBookingsString;
     }
     else if(window.location.href.split('/')[4] == this.archieveBookingsString){
@@ -64,7 +64,7 @@ export class ListBookingComponent implements OnInit {
     }
   }
   
-  setSelectedItemsSize(n: number): void{ //check
+  setSelectedItemsSize(n: number): void{ 
     this.selectedItemsSize= n;
     let newUrl: string = window.location.protocol+ "//"
                         + window.location.host +"/"

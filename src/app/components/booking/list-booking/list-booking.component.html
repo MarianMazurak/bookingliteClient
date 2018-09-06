@@ -27,7 +27,6 @@
 
       <ul style="list-style: none">
         <li *ngFor="let booking of bookings">
-            <div *ngIf=" isBookingDateActual(booking.checkIn, booking.checkOut)">
           <div class="container">
             <div class="row mb-3">
               <div class="col-md-12">
@@ -74,69 +73,8 @@
                             <li><h3>Price: {{booking.totalPrice}}* </h3></li>
                             <small> *number of days: {{calculateNumberOfDates(booking.checkIn , booking.checkOut )}}</small>
                           </ul>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        </li>
-      </ul>
-
-      <ul style="list-style: none">
-        <li *ngFor="let booking of bookings">
-            <div *ngIf="!isBookingDateActual(booking.checkIn, booking.checkOut)">
-          <div class="container">
-            <div class="row mb-3">
-              <div class="col-md-12">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <img class="img-responsive" alt="No Photo" src={{booking.apartmentDto.propertyDto.photos[0].url}}>
-                            </div>
-                      <div class="col-md-6  card-body">
-                        <div class="list-title">
-                          <ul class="list-inline list-unstyled">
-                            <li class="list-inline-item">
-                                <a routerLink="/booking/{{booking.bookingId}}">
-                                  <h4><b>{{booking.apartmentDto.propertyDto.name}}, 
-                                    {{booking.apartmentDto.name}}</b>
-                                  </h4> 
-                                </a>
-                            </li>
-                            <li class="list-inline-item text-warning"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                              class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half"></i></li>
-                            <li class="list-inline-item text-success"><i class="fa fa-thumbs-up"></i></li>
-                          </ul>
-                        </div>
-                        <div class="list-location">
-                          <small>Dates: {{booking.checkIn | date:'dd-MM-yyyy' }} - {{booking.checkOut | date:'dd-MM-yyyy' }}
-                          </small>
-                      </div>
-                      <div class="list-descrip">
-                        <small>Number of guests: {{booking.apartmentDto.numberOfGuests}}
-                        </small>
-                        <br>
-                        <small>Apartment type: {{booking.apartmentDto.apartmentType.name}}
-                        </small>
-                      </div>
-                    </div>
-                      <div class="col-md-3 border-left card-body">
-                          <ul class="list-unstyled">
-                            <li>
-                              <h4>Status:
-                                <b *ngIf="isCanceled(booking.bookingStatus.name)" style="color:red">{{booking.bookingStatus.name}}</b>
-                                <b *ngIf="!isCanceled(booking.bookingStatus.name)"style="color:green">{{booking.bookingStatus.name}}</b>
-                              </h4>
-                            </li>                    
-                            <li><h3>Price: {{booking.totalPrice}}* </h3></li>
-                            <small> *number of days: {{calculateNumberOfDates(booking.checkIn , booking.checkOut )}}</small>
-                          </ul>
                           <br>
-                          <div>
+                          <div *ngIf="!isBookingDateActual(booking.checkIn, booking.checkOut)">
                             <button type="button" routerLink="/review-create/{{booking.bookingId}}"
                                     class="btn btn-outline-primary">Write Review</button>
                           </div>
@@ -147,7 +85,6 @@
               </div>
             </div>
           </div>
-        </div>
         </li>
       </ul>
 

@@ -17,7 +17,6 @@ export class ItemsSizeComponent implements OnInit {
   ngOnInit() {
     if(  localStorage.getItem('selectedItemsSize')){
       this.selectedItemsSize = Number (localStorage.getItem('selectedItemsSize'));
-      // this.onSelectedItemsSize();
     }
     else{
       this.selectedItemsSize = this.itemsSize[0];
