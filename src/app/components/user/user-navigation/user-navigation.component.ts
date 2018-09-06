@@ -13,13 +13,6 @@ export class UserNavigationComponent implements OnInit {
   constructor(public auth: AuthService) { }
 
   ngOnInit() {
-<<<<<<< HEAD
-        this.auth.getUserFromBackEnd().subscribe(user => {
-      this.user = user;
-    });
-    this.uhref = window.location.href;
-=======
     this.href = window.location.href;
->>>>>>> master
   }
 }
