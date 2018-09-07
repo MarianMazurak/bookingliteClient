@@ -2,9 +2,8 @@ import {Injectable} from '@angular/core';
 import {Review} from '../../models/review';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {HttpHeaders} from '../../../../node_modules/@angular/common/http';
+import {HttpHeaders} from '@angular/common/http';
 import {CreateReview} from '../../models/create-review';
-import {User} from '../../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +25,6 @@ export class ReviewService {
   }
 
   public createReview(review: CreateReview, id: number): Observable<any> {
-    console.log('service review', review);
     return this.http.post(`${this.bookingUrl}/${id}/review`, review, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'

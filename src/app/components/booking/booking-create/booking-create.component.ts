@@ -39,10 +39,11 @@ export class BookingCreateComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     if (createBookingForm.valid) {
       this.bookingService.createBooking(this.booking, id).subscribe(res => {
-        alert('booking created'); } , error => {
+        alert('booking created');
+        this.flag = false;
+      }, error => {
         this.errorMessage = JSON.parse(error.error).message;
       });
-      this.flag = false;
     } else {
       this.formValid = false;
     }
@@ -54,9 +55,12 @@ export class BookingCreateComponent implements OnInit {
       this.apartment = apart;
     });
   }
-  calculate(checkIn, checkOut): number {
+
+  calculatePriceByDates(checkIn, checkOut): number {
     if ((checkOut > checkIn) && checkOut != null && checkIn != null) {
       return (this.apartment.price * this.bookingService.calculateNumberOfDates(checkIn, checkOut));
-    } else { return 0; }
+    } else {
+      return 0;
+    }
   }
 }

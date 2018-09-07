@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
 import {Booking} from '../../models/booking';
 import {BookingCreate} from '../../models/booking-create';
 
@@ -78,13 +77,7 @@ export class BookingService {
     });
   }
 
-  getGuestArrivalsList(id: number): Observable<Booking[]> {
-    return this.http.get<Booking []>('api/guestArrivals/' + id);
-  }
-
   getPageGuestArrivalsList(id: number, page: number, size: number, filterBooking: string): Observable<Booking[]> {
-    console.log('service--------------', 'api/guestArrivals/' + id + '?filterBooking=' + filterBooking + '&page=' +
-      page + '&size=' + size);
     return this.http.get<Booking []>('api/guestArrivals/' + id + '?filterBooking=' + filterBooking + '&page=' +
       page + '&size=' + size);
   }

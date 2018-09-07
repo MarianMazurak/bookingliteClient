@@ -15,9 +15,9 @@ export class GuestArrivalsComponent implements OnInit {
   guestArrivalsList: Booking[];
   currentPage = 1;
   selectedItemsSize: number;
-  pagesToPagination: number []; // count page to show in pagination
-  totalPages: number; // all pages with selected `selectedItemOnPage`
-  totalElements: number; // condition in html. If==0 you not have booking
+  pagesToPagination: number [];
+  totalPages: number;
+  totalElements: number;
   filterBookings: string;
   futureBookings = 'futureBookings';
   actualBookings = 'actualBookings';
@@ -31,7 +31,6 @@ export class GuestArrivalsComponent implements OnInit {
 
   ngOnInit() {
     this.authenticated = this.auth.isAuthenticated;
-    console.log('4---------', window.location.href.split('/')[4]);
     if (window.location.href.split('/')[5] === this.actualBookings) {
       this.filterBookings = this.actualBookings;
     } else if (window.location.href.split('/')[5] === this.pastBookings) {
@@ -40,10 +39,6 @@ export class GuestArrivalsComponent implements OnInit {
       this.filterBookings = this.futureBookings;
     }
     this.getBookingsByPage();
-  }
-
-  isBookingDateActual(checkIn, checkOut): boolean {
-    return this.bookingService.isBookingDateActual(checkIn, checkOut);
   }
 
   calculateNumberOfDates(checkIn, checkOut): number {
@@ -95,7 +90,7 @@ export class GuestArrivalsComponent implements OnInit {
   }
 
   filterFutureBookings() {
-    let newUrl: string = window.location.protocol + '//'
+    const newUrl: string = window.location.protocol + '//'
       + window.location.host + '/'
       + window.location.href.split('/')[4] + '/'
       + this.futureBookings;
@@ -110,7 +105,7 @@ export class GuestArrivalsComponent implements OnInit {
   }
 
   fiterActualBooking() {
-    let newUrl: string = window.location.protocol + '//'
+    const newUrl: string = window.location.protocol + '//'
       + window.location.host + '/'
       + window.location.href.split('/')[4] + '/'
       + this.actualBookings;
@@ -125,7 +120,7 @@ export class GuestArrivalsComponent implements OnInit {
   }
 
   filterPastBooking() {
-    let newUrl: string = window.location.protocol + '//'
+    const newUrl: string = window.location.protocol + '//'
       + window.location.host + '/'
       + window.location.href.split('/')[4] + '/'
       + this.pastBookings;

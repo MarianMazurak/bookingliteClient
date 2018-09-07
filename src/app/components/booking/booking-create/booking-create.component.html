@@ -23,7 +23,7 @@
               <label for="price" class="col-sm-2 col-form-label">Total price : </label>
               <div class="col-sm-5">
                 <input type="text" readonly class="form-control-plaintext" id="price"
-                       value="{{calculate(booking.checkIn,booking.checkOut)}} $">
+                       value="{{calculatePriceByDates(booking.checkIn,booking.checkOut)}} $">
               </div>
             </div>
             <form #createBookingForm=ngForm (ngSubmit)="createBooking(createBookingForm)"
@@ -80,7 +80,7 @@
               <label for="Aprice" class="col-sm-2 col-form-label">Total price : </label>
               <div class="col-sm-5">
                 <input type="text" readonly class="form-control-plaintext" id="Aprice"
-                       value="{{calculate(booking.checkIn,booking.checkOut)}} $">
+                       value="{{calculatePriceByDates(booking.checkIn,booking.checkOut)}} $">
               </div>
             </div>
               <div class="form-group row">

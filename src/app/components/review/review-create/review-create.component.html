@@ -20,10 +20,10 @@
 
 <div class="reviewDiv" *ngIf="flag">
     <label for="FormControlTextarea">Review : </label>
-    <textarea class="form-control"  rows="4">{{booking.reviewDto.message}}</textarea>
+    <textarea class="form-control"  readonly rows="4">{{booking.reviewDto.message}}</textarea>
     <hr>
     <p>Rating : {{booking.reviewDto.rating}}</p>
     <div class="form-row">
-      <button (click)="goBack()" class="btn-danger">Cancel</button>
+      <button (click)="goBack()" class="btn-danger">Back</button>
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, enableProdMode } from '@angular/core';
+import {Component, OnInit, enableProdMode} from '@angular/core';
 import {AuthService} from '../../../services/authentication/auth.service';
 import {ReviewService} from '../../../services/review/review.service';
 import {ActivatedRoute} from '@angular/router';
@@ -25,31 +25,39 @@ export class ReviewCreateComponent implements OnInit {
               private reviewService: ReviewService,
               private route: ActivatedRoute,
               private bookingService: BookingService,
-              private location: Location) { }
+              private location: Location) {
+  }
 
   ngOnInit() {
     this.authenticated = this.auth.isAuthenticated;
     this.review = new CreateReview();
-this.getBooking();
+    this.getBooking();
+
   }
+
   createReview(createReviewForm: FormGroup) {
     const id = +this.route.snapshot.paramMap.get('id');
     if (createReviewForm.valid) {
       this.reviewService.createReview(this.review, id).subscribe(res => {
-        alert('Review created'); } , error => {
+        alert('Review created');
+        this.getBooking();
+      }, error => {
         this.errorMessage = JSON.parse(error.error).message;
       });
     } else {
       this.formValid = false;
     }
   }
+
   goBack() {
     this.location.back();
   }
+
   getBooking() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.bookingService.getBooking(id).subscribe(b => {
       this.booking = b;
-      this.flag = !!b.reviewDto; } );
+      this.flag = !!b.reviewDto;
+    });
   }
 }
