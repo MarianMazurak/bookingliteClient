@@ -35,10 +35,6 @@ export class ReviewService {
     });
   }
 
-  public getAllReviewsByProperty(id: number): Observable<Review[]> {
-    return this.http.get<Review[]>(`${this.propertyUrl}/${id}/reviews`);
-  }
-
   public getPageAllReviewsByProperty(id: number, page: number, size: number): Observable<Review[]> {
     return this.http.get<Review[]>(`${this.propertyUrl}/${id}/reviews?page=${page}&size=${size}`);
   }

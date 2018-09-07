@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Review} from '../../../models/review';
 import {AuthService} from '../../../services/authentication/auth.service';
 import {ActivatedRoute} from '@angular/router';
@@ -18,28 +18,27 @@ export class ReviewsPropertyComponent implements OnInit {
   pagesToPagination: number []; // count page to show in pagination
   totalPages: number; // all pages with selected `selectedItemOnPage`
   totalElements: number; // condition in html. If==0 you have not booking
-  constructor( private auth: AuthService,
-               private route: ActivatedRoute,
-               private reviewService: ReviewService,
-               private paginationService: PaginationService) { }
+  constructor(private auth: AuthService,
+              private route: ActivatedRoute,
+              private reviewService: ReviewService,
+              private paginationService: PaginationService) {
+  }
+
   ngOnInit() {
     this.authenticated = this.auth.isAuthenticated;
     this.getReviewsByPage();
   }
-  /*getReviewsByProperty() {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.reviewService.getAllReviewsByProperty(id).subscribe(r => this.reviews = r);
-  }*/
+
   getReviewsByPage(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     if (this.selectedItemsSize) {
-      this.reviewService.getPageAllReviewsByProperty(id, this.currentPage - 1, this.selectedItemsSize,)
+      this.reviewService.getPageAllReviewsByProperty(id, this.currentPage - 1, this.selectedItemsSize)
         .subscribe(data => {
-        this.reviews = data['content'];
-        this.totalPages = data['totalPages'];
-        this.totalElements = data['totalElements'];
-        this.pagesToPagination = this.paginationService.calculatePages(this.currentPage, this.totalPages);
-      });
+          this.reviews = data['content'];
+          this.totalPages = data['totalPages'];
+          this.totalElements = data['totalElements'];
+          this.pagesToPagination = this.paginationService.calculatePages(this.currentPage, this.totalPages);
+        });
     }
   }
 
