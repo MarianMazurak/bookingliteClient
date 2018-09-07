@@ -41,7 +41,7 @@ const routes: Routes = [
   {path: 'review-create/:id', component: ReviewCreateComponent},
   {path: 'booking-create/:id', component: BookingCreateComponent},
   {path: 'owner-properties', component: OwnerPropertiesComponent},
-  {path: 'guest-arrivals/:id', component: GuestArrivalsComponent},
+  {path: 'guest-arrivals/:id/:filter', component: GuestArrivalsComponent},
   {path: 'reviews-property/:id', component: ReviewsPropertyComponent},
   {path: 'user', component: UserComponent, canActivate: [AuthGuardService]},
   {path: 'myproperties', component: UserPropertiesComponent},

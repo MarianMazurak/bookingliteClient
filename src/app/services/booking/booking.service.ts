@@ -13,7 +13,7 @@ export class BookingService {
 
 
   private bookingUrl = 'api/booking';
-  private bookingByPageUrl = 'api/bookings' 
+  private bookingByPageUrl = 'api/bookings';
   private nowDate: Date;
 
   constructor(private http: HttpClient) {
@@ -31,11 +31,12 @@ export class BookingService {
 
   cancelBookings(id: number) {
     const url = `${this.bookingUrl}/${id}`;
-    const httpOption ={
-      headers: new HttpHeaders ({
-      'Content-Type':  'application/json' })
+    const httpOption = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
     };
-    return this.http.put(url, httpOption)
+    return this.http.put(url, httpOption);
 
   }
 
@@ -56,9 +57,9 @@ export class BookingService {
   }
 
 
-  isBookingDateActual(checkIn, checkOut):boolean {
-    let dateChackIn = new Date (checkIn);
-    let dateChackOut = new Date (checkOut);
+  isBookingDateActual(checkIn, checkOut): boolean {
+    let dateChackIn = new Date(checkIn);
+    let dateChackOut = new Date(checkOut);
     this.nowDate = new Date();
     if (dateChackIn > this.nowDate || dateChackOut > this.nowDate) {
       return true;
@@ -66,6 +67,7 @@ export class BookingService {
       return false;
     }
   }
+
   public createBooking(bookingCreate: BookingCreate, apartmentId: number) {
     const url = `api/booking/${apartmentId}`;
     return this.http.post(url, bookingCreate, {
@@ -78,5 +80,12 @@ export class BookingService {
 
   getGuestArrivalsList(id: number): Observable<Booking[]> {
     return this.http.get<Booking []>('api/guestArrivals/' + id);
+  }
+
+  getPageGuestArrivalsList(id: number, page: number, size: number, filterBooking: string): Observable<Booking[]> {
+    console.log('service--------------', 'api/guestArrivals/' + id + '?filterBooking=' + filterBooking + '&page=' +
+      page + '&size=' + size);
+    return this.http.get<Booking []>('api/guestArrivals/' + id + '?filterBooking=' + filterBooking + '&page=' +
+      page + '&size=' + size);
   }
 }
