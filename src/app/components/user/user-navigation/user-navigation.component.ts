@@ -9,13 +9,10 @@ import {AuthService} from '../../../services/authentication/auth.service';
 })
 export class UserNavigationComponent implements OnInit {
   user: User;
-  uhref = '';
-  constructor(private auth: AuthService) { }
+  href = '';
+  constructor(public auth: AuthService) { }
 
   ngOnInit() {
-        this.auth.getUserFromBackEnd().subscribe(user => {
-      this.user = user;
-    });
-    this.uhref = window.location.href;
+    this.href = window.location.href;
   }
 }
