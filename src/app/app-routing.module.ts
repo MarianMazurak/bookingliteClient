@@ -19,9 +19,9 @@ import {OwnerPropertiesComponent} from './components/property/owner-properties/o
 import {GuestArrivalsComponent} from './components/booking/guest-arrivals/guest-arrivals.component';
 import {UserComponent} from './components/user/user.component';
 import {UserPropertiesComponent} from './components/user/user-profile/user-properties/user-properties.component';
-import {EditApartmentComponent} from './components/apartment/edit-apartment/edit-apartment.component';
 import {UserApartmentsComponent} from './components/user/user-profile/user-properties/user-apartments/user-apartments.component';
 import {AuthGuardService} from './services/authentication/auth-guard.service';
+import {RoleGuardService} from './services/authentication/role-guard.service';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -35,8 +35,7 @@ const routes: Routes = [
   {path: 'apartment-list', component: ListApartmentComponent},
   {path: 'property/:id/apartment', component: CreateApartmentComponent},
   {path: 'search', component: SearchComponent},
-  {path: 'edit-property/:id', component: EditPropertyComponent},
-  {path: 'property/:id/apartments/:id', component: EditApartmentComponent},
+  {path: 'edit-property/:id', component: EditPropertyComponent, canActivate: [AuthGuardService, RoleGuardService], data: {expectedRole: 'ROLE_OWNER'}},
   {path: 'property-detailes/:id', component: PropertyComponent},
   {path: 'review-booking/:id', component: ReviewBookingComponent},
   {path: 'review-create/:id', component: ReviewCreateComponent},
@@ -45,8 +44,8 @@ const routes: Routes = [
   {path: 'owner-properties', component: OwnerPropertiesComponent},
   {path: 'guest-arrivals/:id', component: GuestArrivalsComponent},
   {path: 'user', component: UserComponent, canActivate: [AuthGuardService]},
-  {path: 'myproperties', component: UserPropertiesComponent},
-  {path: 'property/:id/apartments', component: UserApartmentsComponent, canActivate: [AuthGuardService]}
+  {path: 'myproperties', component: UserPropertiesComponent, canActivate: [AuthGuardService, RoleGuardService], data: {expectedRole: 'ROLE_OWNER'}},
+  {path: 'myproperty/:id/apartments', component: UserApartmentsComponent, canActivate: [AuthGuardService, RoleGuardService], data: {expectedRole: 'ROLE_OWNER'}}
 ];
 
 @NgModule({

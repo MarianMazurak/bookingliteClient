@@ -84,7 +84,7 @@ export class AuthService {
         observer.next(this._currentUser);
       } else {
         this.loadUser().subscribe( res => {
-          observer.next(this.currentUser);
+          observer.next(res);
         });
       }
     });
