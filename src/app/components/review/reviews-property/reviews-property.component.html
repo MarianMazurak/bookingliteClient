@@ -1,10 +1,36 @@
-<div class="reviewDiv">
-  <div class="align-items-center" *ngFor="let review of reviews">
-    <label for="FormControlTextarea"><strong>{{review.userDto.firstName}} : </strong> </label>
-    <span class="rating"><strong>Rating : </strong> {{review.rating}}</span>
-    <textarea class="form-control" id="FormControlTextarea" rows="4" readonly>{{review.message}}</textarea>
-    <hr>
-    <div class="form-row">
+<app-user-navigation></app-user-navigation>
+<br>
+<div *ngIf="totalElements !=0 ">
+  <div class="container">
+    <h4>Bookings on page:</h4>
+    <app-items-size
+      (sentSelectedItemsSize)="setSelectedItemsSize($event)">
+    </app-items-size>
+    <br><br>
+    <div class="reviewDiv">
+      <div class="align-items-center" *ngFor="let review of reviews">
+        <label for="FormControlTextarea"><strong>{{review.userDto.firstName}} : </strong> </label>
+        <span class="rating"><strong>Rating : </strong> {{review.rating}}</span>
+        <textarea class="form-control" id="FormControlTextarea" rows="4" readonly>{{review.message}}</textarea>
+        <hr>
+        <div class="form-row">
+        </div>
+      </div>
     </div>
+    <app-pagination
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      [pagesToPagination]="pagesToPagination"
+      (goFirst)="onFirst($event)"
+      (goPrev)="onPrev()"
+      (goNext)="onNext()"
+      (goLast)="onLast($event)"
+      (goPage)="goToPage($event)">
+    </app-pagination>
+
+  </div>
+
+  <div *ngIf="totalElements ===0 ">
+    <h3>You not have booking yet!</h3>
   </div>
 </div>

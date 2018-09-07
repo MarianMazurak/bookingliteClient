@@ -40,14 +40,6 @@ export class GuestArrivalsComponent implements OnInit {
       this.filterBookings = this.futureBookings;
     }
     this.getBookingsByPage();
-    this.getGuestArrivalsList();
-  }
-
-  public getGuestArrivalsList(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.bookingService.getGuestArrivalsList(id).subscribe(bookings => {
-      this.guestArrivalsList = bookings;
-    });
   }
 
   isBookingDateActual(checkIn, checkOut): boolean {

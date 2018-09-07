@@ -12,7 +12,7 @@ import {User} from '../../models/user';
 export class ReviewService {
 
   private bookingUrl = '/api/booking';
-  private propertyUrl = '/api/property'
+  private propertyUrl = '/api/property';
 
   constructor(private http: HttpClient) {
   }
@@ -39,8 +39,8 @@ export class ReviewService {
     return this.http.get<Review[]>(`${this.propertyUrl}/${id}/reviews`);
   }
 
-  public getUserDetails(): Observable<User> {
-    return this.http.get<User>(`/api/hello`);
+  public getPageAllReviewsByProperty(id: number, page: number, size: number): Observable<Review[]> {
+    return this.http.get<Review[]>(`${this.propertyUrl}/${id}/reviews?page=${page}&size=${size}`);
   }
 }
 
