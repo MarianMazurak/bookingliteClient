@@ -21,6 +21,7 @@ import {UserPropertiesComponent} from './components/user/user-profile/user-prope
 import {ReviewsPropertyComponent} from './components/review/reviews-property/reviews-property.component';
 import {UserApartmentsComponent} from './components/user/user-profile/user-properties/user-apartments/user-apartments.component';
 import {AuthGuardService} from './services/authentication/auth-guard.service';
+import {RoleGuardService} from './services/authentication/role-guard.service';
 
 
 const routes: Routes = [
@@ -35,7 +36,12 @@ const routes: Routes = [
   {path: 'apartment-list', component: ListApartmentComponent},
   {path: 'property/:id/apartment', component: CreateApartmentComponent},
   {path: 'search', component: SearchComponent},
-  {path: 'edit-property/:id', component: EditPropertyComponent},
+  {
+    path: 'edit-property/:id',
+    component: EditPropertyComponent,
+    canActivate: [AuthGuardService, RoleGuardService],
+    data: {expectedRole: 'ROLE_OWNER'}
+  },
   {path: 'property-detailes/:id', component: PropertyComponent},
   {path: 'review-booking/:id', component: ReviewBookingComponent},
   {path: 'review-create/:id', component: ReviewCreateComponent},
@@ -44,8 +50,18 @@ const routes: Routes = [
   {path: 'guest-arrivals/:id/:filter', component: GuestArrivalsComponent},
   {path: 'reviews-property/:id', component: ReviewsPropertyComponent},
   {path: 'user', component: UserComponent, canActivate: [AuthGuardService]},
-  {path: 'myproperties', component: UserPropertiesComponent},
-  {path: 'property/:id/apartments', component: UserApartmentsComponent, canActivate: [AuthGuardService]}
+  {
+    path: 'myproperties',
+    component: UserPropertiesComponent,
+    canActivate: [AuthGuardService, RoleGuardService],
+    data: {expectedRole: 'ROLE_OWNER'}
+  },
+  {
+    path: 'myproperty/:id/apartments',
+    component: UserApartmentsComponent,
+    canActivate: [AuthGuardService, RoleGuardService],
+    data: {expectedRole: 'ROLE_OWNER'}
+  }
 
 ];
 
