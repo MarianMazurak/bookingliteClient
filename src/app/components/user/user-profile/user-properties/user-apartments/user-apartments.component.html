@@ -1,3 +1,26 @@
-<p>
-  user-apartments works!
-</p>
+<app-user-navigation></app-user-navigation>
+<div class="container">
+  <button routerLink="/property/{{property.id}}/apartment" type="button" class="btn btn-primary" id="addApartment">New Apartment</button>
+  <table class="table">
+    <thead class="thead-light">
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">name</th>
+      <th scope="col">price</th>
+      <th scope="col">guests</th>
+      <th scope="col">type</th>
+      <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody *ngIf="property">
+    <tr *ngFor="let ap of property.apartments">
+      <th scope="row">{{ap.id}}</th>
+      <td>{{ap.name}}</td>
+      <td>{{ap.price}}</td>
+      <td>{{ap.numberOfGuests}}</td>
+      <td>{{ap.apartmentType.name}}</td>
+      <td><button type="button" class="btn btn-primary">Edit</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

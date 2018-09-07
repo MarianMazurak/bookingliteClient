@@ -20,6 +20,8 @@ import {GuestArrivalsComponent} from './components/booking/guest-arrivals/guest-
 import {UserComponent} from './components/user/user.component';
 import {UserPropertiesComponent} from './components/user/user-profile/user-properties/user-properties.component';
 import {EditApartmentComponent} from './components/apartment/edit-apartment/edit-apartment.component';
+import {UserApartmentsComponent} from './components/user/user-profile/user-properties/user-apartments/user-apartments.component';
+import {AuthGuardService} from './services/authentication/auth-guard.service';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -42,8 +44,9 @@ const routes: Routes = [
   {path: 'property/:id/reviews', component: ReviewComponent},
   {path: 'owner-properties', component: OwnerPropertiesComponent},
   {path: 'guest-arrivals/:id', component: GuestArrivalsComponent},
-  {path: 'user', component: UserComponent},
-  {path: 'myproperties', component: UserPropertiesComponent}
+  {path: 'user', component: UserComponent, canActivate: [AuthGuardService]},
+  {path: 'myproperties', component: UserPropertiesComponent},
+  {path: 'property/:id/apartments', component: UserApartmentsComponent, canActivate: [AuthGuardService]}
 ];
 
 @NgModule({
