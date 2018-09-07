@@ -40,6 +40,7 @@ export class EditPropertyComponent implements OnInit {
     this.getPropertyTypes();
     this.propertyUpdate.facilityId = [];
     this.getFacilities();
+    this.selectedPropertyTypeId = 1;
   }
   public getPropertyById() {
     const id = +this.route.snapshot.paramMap.get('id');
@@ -55,27 +56,29 @@ export class EditPropertyComponent implements OnInit {
   }
 
   public updateProperty(createPropertyForm: FormGroup) {
+    console.log(createPropertyForm.valid);
     if (createPropertyForm.valid) {
       const id = +this.route.snapshot.paramMap.get('id');
       this.propertyUpdate.propertyTypeId = this.selectedPropertyTypeId;
+      this.propertyUpdate.name = this.property.name;
+      this.propertyUpdate.description = this.property.description;
+      this.propertyUpdate.contactEmail = this.property.contactEmail;
+      this.propertyUpdate.phoneNumber = this.property.phoneNumber;
       this.propertyService.updateProperty(this.propertyUpdate, id).subscribe(res => {
+         this.onSubmit();
       }, error => {
         this.errorMessage = JSON.parse(error.error).message;
       });
-      this.onSubmit();
-    } else {
+       } else {
       this.formValid = false;
     }
   }
-
-
   public getFacilities() {
     this.facilityService.getAllFacilities().subscribe(facility => {
       this.facilities = facility;
       console.log('Facility: ', facility);
     });
   }
-
   public workWithCheckboxes(id: number) {
     const index = this.propertyUpdate.facilityId.indexOf(id);
     if (index !== -1) {

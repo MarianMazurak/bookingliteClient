@@ -7,38 +7,35 @@
       <article class="card-body">
         <h4 class="card-title mb-4 mt-1">Edit Property</h4>
 
-        <form #createPropertyForm=ngForm (ngSubmit)="updateProperty(createPropertyForm)"
+        <form #createPropertyForm=ngForm (ngSubmit)=updateProperty(createPropertyForm)
         [ngClass]="{'was-validated' : !formValid}">
 
         <div class="row">
           <div class="col-6">
 
-            <div class="form-group">
+            <div class="form-group" *ngIf="property">
               <label>Property Name</label>
-              <input class="form-control" placeholder="Name" type="text"  required name="name"
-                     [(ngModel)]="property.name"
-                     [(ngModel)]="propertyUpdate.name">
+              <input class="form-control" placeholder="Name" type="text" required name="name"
+                     [(ngModel)]="property.name">
               <div class="invalid-feedback">Valid name is required!</div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" *ngIf="property">
               <label>Email</label>
               <input class="form-control" placeholder="Email" type="email"  required name="email"
-                     [(ngModel)]="property.contactEmail"
-                     [(ngModel)]="propertyUpdate.contactEmail">
+                     [(ngModel)]="property.contactEmail">
               <div class="invalid-feedback">Valid email is required!</div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" *ngIf="property">
               <label>Phone Number</label>
               <input name="phone number" required class="form-control"
                      placeholder="phone number" type="text"
-                     [(ngModel)]="property.phoneNumber"
-                     [(ngModel)]="propertyUpdate.phoneNumber">
+                     [(ngModel)]="property.phoneNumber">
               <div class="invalid-feedback">Phone Number is required!</div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" *ngIf="facilities">
               <label>Facilities</label>
               <div class="custom-control custom-checkbox"
                    *ngFor="let facility of facilities">
@@ -50,16 +47,15 @@
             </div>
           </div>
 
-          <div class="col-6">
+          <div class="col-6" *ngIf="property">
             <div class="form-group">
               <label>Description</label>
               <input name="description" class="form-control"
                      placeholder="description" type="text"
-                     [(ngModel)]="property.description"
-                     [(ngModel)]="propertyUpdate.description">
+                     [(ngModel)]="property.description">
             </div>
 
-            <div class="form-group">
+            <div class="form-group" *ngIf="propertyTypes">
               <label>Property Type</label>
               <select class="form-control" #selectPropertyType
                       (change)="changePropertyTypes(selectPropertyType.value)">
@@ -73,7 +69,7 @@
         </div>
 
         <div class="form-group">
-          <button type="submit" class="btn btn-primary btn-block" (click)=updateProperty()>Add Change
+          <button type="submit" class="btn btn-primary btn-block">Add Change
           </button>
         </div>
         </form>

@@ -40,6 +40,8 @@ export class PropertyService {
         'Content-Type': 'application/json'
       })
     };
+    console.log('api/property/' + id);
+    console.log(model);
     return this.http.put('api/property/' + id, model, httpOptions);
   }
 }
