@@ -8,11 +8,12 @@ import {AuthService} from '../../../services/authentication/auth.service';
   styleUrls: ['./user-navigation.component.css']
 })
 export class UserNavigationComponent implements OnInit {
-  user: User;
+  isOwner = false;
   href = '';
   constructor(public auth: AuthService) { }
 
   ngOnInit() {
+    this.auth.isOwner.subscribe( res => this.isOwner = res);
     this.href = window.location.href;
   }
 }
