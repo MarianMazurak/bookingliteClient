@@ -23,9 +23,7 @@ export class UserComponent implements OnInit {
       this.isOwner = isOwner;
       if (isOwner) {
         this.propertyService.getOwnerProperties().subscribe( properties => {
-          console.log('property count:' + properties.length);
           this.myPropertyCount = properties.length;
-          console.log('property count:' + this.myPropertyCount);
           let myApartmentCount = 0;
           properties.forEach(property => myApartmentCount += property.apartments.length );
           this.myApartmentCount = myApartmentCount; });
