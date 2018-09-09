@@ -4,7 +4,7 @@
     <h1 class="display-4">BookingLite</h1>
     <div class="card">
       <article class="card-body">
-        <h4 class="card-title mb-4 mt-1">Create Property</h4>
+        <h4 class="card-title mb-2 mt-1">Create Property</h4>
 
         <form #createPropertyForm=ngForm (ngSubmit)="createProperty(createPropertyForm)"
               [ngClass]="{'was-validated' : !formValid}">
@@ -20,15 +20,15 @@
               <div class="form-group">
                 <label>Email</label>
                 <input class="form-control" required name="email" [(ngModel)]="propertyCreate.contactEmail"
-                       placeholder="Email" type="email">
+                       placeholder="Email" type="email" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
                 <div class="invalid-feedback">Valid email is required!</div>
               </div>
 
               <div class="form-group">
                 <label>Phone Number</label>
-                <input name="phone number" required class="form-control" [(ngModel)]="propertyCreate.phoneNumber"
-                       placeholder="phone number" type="text">
-                <div class="invalid-feedback">Phone Number is required!</div>
+                <input name="phone number" class="form-control" [(ngModel)]="propertyCreate.phoneNumber"
+                       placeholder="phone number" type="text" required pattern="[0-9]{10}">
+                <div class="invalid-feedback">Phone Number can hold only number format and 10 digits!</div>
               </div>
 
               <div class="form-group">
@@ -78,18 +78,18 @@
 
               <div class="form-group">
                 <label>Zip</label>
-                <input class="form-control" required maxlength="5" minlength="5" name="zip"
-                       [(ngModel)]="propertyCreate.zip" placeholder="12345" type="text">
-                <div class="invalid-feedback">Valid zip is required!</div>
+                <input class="form-control" required name="zip"
+                       [(ngModel)]="propertyCreate.zip" placeholder="12345" type="text" required pattern="[0-9]{5}">
+                <div class="invalid-feedback">Zip can hold only number format and 5 digits!</div>
               </div>
 
               <div class="form-group">
                 <label>Description</label>
-                <input name="description" class="form-control" [(ngModel)]="propertyCreate.description"
-                       placeholder="description" type="text">
+              <textarea class="form-control" id="FormControlTextarea" rows="4" placeholder="write your descrition..."
+                        [(ngModel)]="propertyCreate.description" name="message"></textarea>
               </div>
-
             </div>
+
           </div>
           <ng-container *ngIf="errorMessage !== ''">
             <div class="alert alert-danger">

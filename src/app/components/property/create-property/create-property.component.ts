@@ -88,10 +88,10 @@ export class CreatePropertyComponent implements OnInit {
       this.propertyCreate.cityId = this.selectedCityId;
       this.propertyCreate.propertyTypeId = this.selectedPropertyTypeId;
       this.propertyService.createProperty(this.propertyCreate).subscribe(res => {
+        this.onSubmit();
         }, error => {
          this.errorMessage = JSON.parse(error.error).message;
         });
-      this.onSubmit();
     } else {
       this.formValid = false;
     }

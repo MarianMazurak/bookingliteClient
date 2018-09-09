@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {ApartmentType} from '../../../models/apartment-type';
 import {Amenity} from '../../../models/amenity';
-import {Apartment} from '../../../models/apartment';
 import {ApartmentService} from '../../../services/apartment/apartment.service';
 import {AuthService} from '../../../services/authentication/auth.service';
 import {CreateApartment} from '../../../models/create-apartment';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-create-apartment',
@@ -19,40 +19,51 @@ export class CreateApartmentComponent implements OnInit {
   amenities: Amenity[];
   createdApartment: CreateApartment;
   public selectedTypeId: number;
+  formValid = true;
+  errorMessage = '';
 
   constructor(private auth: AuthService,
               private apartmentService: ApartmentService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
     this.authenticated = this.auth.isAuthenticated;
-    this.getApartmentType();
+    this.getApartmentTypes();
     this.getAmenities();
     this.createdApartment = new CreateApartment();
     this.createdApartment.amenitiesId = [];
   }
-
-  public getApartmentType() {
-    this.apartmentService.getApartmentType().subscribe(type => {
-      this.apartmentTypes = type;
-      console.log('Apartment Tepes: ', type);
+  getApartmentTypes() {
+    this.apartmentService.getApartmentType().subscribe((apType) => {
+      this.apartmentTypes = apType;
+      this.selectedTypeId = this.apartmentTypes[0].id;
     });
   }
-
+  changeApartmentType(id: number) {
+    this.selectedTypeId = id;
+  }
   public getAmenities() {
     this.apartmentService.getAmenities().subscribe(amenity => {
       this.amenities = amenity;
       console.log('Amenities: ', amenity);
     });
   }
-
-  public createApartments() {
+  public createApartment(createApartmentForm: FormGroup) {
+    if (createApartmentForm.valid) {
     const id = +this.route.snapshot.paramMap.get('id');
+    this.createdApartment.apartmentTypeId = this.selectedTypeId;
+    console.log(this.createdApartment.numberOfGuests);
+    console.log(this.createdApartment);
     this.apartmentService.createApartment(this.createdApartment, id).subscribe(res => {
-      alert('Apartment created');
+      this.onSubmit();
+      }, error => {
+      this.errorMessage = JSON.parse(error.error).message;
     });
+    } else {
+      this.formValid = false;
+    }
   }
-
   public workWithCheckboxes(id: number) {
     const index = this.createdApartment.amenitiesId.indexOf(id);
     if (index !== -1) {
@@ -61,5 +72,8 @@ export class CreateApartmentComponent implements OnInit {
     }
     this.createdApartment.amenitiesId.push(id);
   }
-
+  onSubmit() {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.router.navigate(['/myproperty/' + id + '/apartments']);
+  }
 }

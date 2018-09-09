@@ -5,61 +5,71 @@
     <h1 class="display-8">BookingLite</h1>
     <div class="card">
       <article class="card-body">
-
         <h4 class="card-title mb-4 mt-1">Edit Apartment</h4>
+
+        <form #createApartmentForm=ngForm (ngSubmit)=updateApartment(createApartmentForm)
+              [ngClass]="{'was-validated' : !formValid}">
+
         <div class="row">
           <div class="col-6">
 
-            <div class="form-group">
+            <div class="form-group" *ngIf="apartment">
               <label>Apartment Name</label>
-              <input name="name" required class="form-control"
-                     placeholder="Apartment Name" type="text">
+              <input class="form-control" placeholder="Name" type="text" required name="name"
+                     placeholder="Name" [(ngModel)]="apartment.name">
               <div class="invalid-feedback">Apartment Name is required!</div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" *ngIf="apartment">
               <label>Price</label>
-              <input class="form-control" required name="price"
-                     placeholder="Price" type="text">
-              <div class="invalid-feedback">Valid email is required!</div>
+              <input class="form-control" name="price" [(ngModel)]="apartment.price"
+                     placeholder="Price" type="text" required pattern="^\d{0,8}(\.\d{1,4})?$">
+              <div class="invalid-feedback">Price only number format, and (between 1 and 99999999)</div>
             </div>
 
-            <div class="form-group">
-              <label>Number of guests</label>
-              <select class="form-control">
-
-              </select>
+            <div class="form-group" *ngIf="apartment">
+              <label>Number of guests  (between 1 and 8):</label>
+              <input class="form-control" name="numberOfGuests"
+                     [(ngModel)]="apartment.numberOfGuests"
+                     placeholder="Number of guests" type="text" required pattern="[1-8]">
+              <div class="invalid-feedback">Number have be number type and (between 1 and 8)!</div>
             </div>
+
+
+
           </div>
-
           <div class="col-6">
-
             <div class="form-group">
-              <label>Apartment type</label>
-              <select class="form-control">
 
+              <label>Apartment Type</label>
+              <select class="form-control" #selectApartmentType
+                      (change)="changeApartmentTypes(selectApartmentType.value)">
+                <option *ngFor="let ap of apartmentTypes" value="{{ap.id}}">{{ap.name}}
+                </option>
               </select>
             </div>
 
-            <div class="form-group">
-              <label>Facilities</label>
-              <div class="custom-control custom-checkbox">
-                <!--<input type="checkbox" class="custom-control-input" id="customCheck{{facility.id}}"-->
-                <!--(change)="workWithCheckboxes(facility.id)">-->
-                <!--<label class="custom-control-label"-->
-                <!--for="customCheck{{facility.id}}">{{facility.name}}</label>-->
+            <div class="form-group" *ngIf="amenities && apartment">
+              <label>Amenities</label>
+              <div class="custom-control custom-checkbox"
+                   *ngFor="let amenity of amenities">
+                <input  type="checkbox" class="custom-control-input" id="customCheck{{amenity.id}}"
+                        (change)=workWithCheckboxes(amenity.id)>
+                <label class="custom-control-label"
+                       for="customCheck{{amenity.id}}">{{amenity.name}}</label>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary btn-block"
-          >Add Change
-          </button>
-        </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Add Change
+            </button>
+          </div>
 
+        </form>
       </article>
     </div>
   </div>
 </div>
+

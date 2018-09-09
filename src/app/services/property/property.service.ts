@@ -33,15 +33,12 @@ export class PropertyService {
   public getOwnerProperties(): Observable<Property[]> {
     return this.http.get<Property[]>('api/myproperties');
   }
-
   public updateProperty(model: PropertyCreate, id: number) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    console.log('api/property/' + id);
-    console.log(model);
     return this.http.put('api/property/' + id, model, httpOptions);
   }
 }

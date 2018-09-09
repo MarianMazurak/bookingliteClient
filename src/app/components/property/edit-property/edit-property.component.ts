@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {AuthService} from '../../../services/authentication/auth.service';
 import {Property} from '../../../models/property';
@@ -7,7 +7,7 @@ import {PropertyTypeService} from '../../../services/propertyTypy/property-type.
 import {PropertyType} from '../../../models/property-type';
 import { FacilityService } from '../../../services/facility/facility.service';
 import {Facility} from '../../../models/facility';
-import {FormGroup} from '@angular/forms';
+import { FormGroup} from '@angular/forms';
 import {PropertyCreate} from '../../../models/property-create';
 
 @Component({
@@ -17,6 +17,7 @@ import {PropertyCreate} from '../../../models/property-create';
 })
 export class EditPropertyComponent implements OnInit {
 
+
   formValid = true;
   errorMessage = '';
   private authentication;
@@ -25,6 +26,7 @@ export class EditPropertyComponent implements OnInit {
   public facilities: Facility[];
   public propertyUpdate: PropertyCreate;
   public selectedPropertyTypeId: number;
+  options = Array<Facility>();
 
   constructor(private route: ActivatedRoute,
               private auth: AuthService,
@@ -37,14 +39,15 @@ export class EditPropertyComponent implements OnInit {
     this.authentication = this.auth.isAuthenticated;
     this.propertyUpdate = new PropertyCreate();
     this.getPropertyById();
+    this.getFacilities();
     this.getPropertyTypes();
     this.propertyUpdate.facilityId = [];
-    this.getFacilities();
     this.selectedPropertyTypeId = 1;
   }
-  public getPropertyById() {
+  public getPropertyById(): Property {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.propertyService.getPropertyById(id).subscribe(res => this.property = res);
+     this.propertyService.getPropertyById(id).subscribe(res => this.property = res);
+    return this.property;
   }
   public getPropertyTypes() {
     this.propertyTypeService.getAllPropertyTypes().subscribe(res => {
@@ -56,7 +59,6 @@ export class EditPropertyComponent implements OnInit {
   }
 
   public updateProperty(createPropertyForm: FormGroup) {
-    console.log(createPropertyForm.valid);
     if (createPropertyForm.valid) {
       const id = +this.route.snapshot.paramMap.get('id');
       this.propertyUpdate.propertyTypeId = this.selectedPropertyTypeId;
@@ -76,7 +78,6 @@ export class EditPropertyComponent implements OnInit {
   public getFacilities() {
     this.facilityService.getAllFacilities().subscribe(facility => {
       this.facilities = facility;
-      console.log('Facility: ', facility);
     });
   }
   public workWithCheckboxes(id: number) {
@@ -87,6 +88,32 @@ export class EditPropertyComponent implements OnInit {
     }
     this.propertyUpdate.facilityId.push(id);
   }
+
+  // public isChecked(): boolean {
+  //   this.facilities.forEach(res => {
+  //     this.property.facilities.forEach(alreadyChecked => {
+  //       console.log(alreadyChecked.id + 'my');
+  //       if ( res.id === alreadyChecked.id) {
+  //         console.log('збіглося');
+  //         return true;
+  //            } else {
+  //         console.log('NE-збіглося');
+  //         return false;
+  //       }
+  //     });
+  //   });
+  //   return false;
+  // }
+  //
+  // public check() {
+  //   console.log(this.getPropertyById().facilities[0].id);
+  //   this.getPropertyById().facilities.forEach(value => {
+  //     const element = this.options.find(x => x.id === value.id);
+  //     if (element) {
+  //       element.checked = true;
+  //     }
+  //   });
+  // }
   onSubmit() {
     this.router.navigate(['/myproperties']);
   }
