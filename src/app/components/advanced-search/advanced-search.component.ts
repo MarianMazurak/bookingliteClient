@@ -129,7 +129,7 @@ export class AdvancedSearchComponent implements OnInit {
       let n: number = facUrl.split('&').length ; // we skip first argument ('facilities&')
       console.log("length uri fac ", n);
       let newurl: string;
-      let facititiesUri: string= "facilities" +"&" ;
+      let facititiesUri: string= "facilities" ;
       console.log("facititiesUri start ", facititiesUri);
       console.log("current url ", window.location.href);
 
@@ -137,32 +137,25 @@ export class AdvancedSearchComponent implements OnInit {
         console.log("symbol ", i, " = ", facUrl.split('&')[i]);
         console.log("symbol ", i, " = ", facUrl.split('&')[i], ", id=",id );
         if(Number(facUrl.split('&')[i]) !== id){
-          if(i !== n-1){
             console.log("in if ");
             arrFac.push( Number(facUrl.split('&')[i]) );
-            facititiesUri = facititiesUri + i + "&";
-            console.log("facititiesUri if= ", i, " = ", facititiesUri);
-          }
-          else {
-            console.log("in else ");
-            arrFac.push( Number(facUrl.split('&')[i]) );
-            facititiesUri = facititiesUri + i;
-            console.log("facititiesUri else= ", i, " = ", facititiesUri);
-          }          
+            facititiesUri = facititiesUri + "&" + facUrl.split('&')[i] ;
+            console.log("facititiesUri if= ", i, " = ", facititiesUri);       
         }         
       }
       console.log("array ", arrFac);
       console.log("facititiesUri= ", facititiesUri);
       this.arrayFacility= arrFac;
+     
       newurl= window.location.protocol+ "//"
-              +window.location.host +"/"
-              +window.location.href.split('/')[3] +"/"
-              +window.location.href.split('/')[4] +"/"
-              +window.location.href.split('/')[5] +"/"
-              +window.location.href.split('/')[6] +"/"
-              +window.location.href.split('/')[7] +"/"
-              +window.location.href.split('/')[8] +"/"
-              + facititiesUri;
+        +window.location.host +"/"
+        +window.location.href.split('/')[3] +"/"
+        +window.location.href.split('/')[4] +"/"
+        +window.location.href.split('/')[5] +"/"
+        +window.location.href.split('/')[6] +"/"
+        +window.location.href.split('/')[7] +"/"
+        +window.location.href.split('/')[8] +"/"
+        + facititiesUri;        
       history.pushState(null, null, newurl);
       
     }
