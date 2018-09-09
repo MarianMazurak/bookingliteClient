@@ -42,7 +42,8 @@
             <div class="custom-control custom-checkbox"
                  *ngFor="let am of amenities">
               <input type="checkbox" class="custom-control-input" id="customCheck2{{am.id}}">
-              <label class="custom-control-label" for="customCheck2{{am.id}}">{{am.name}}</label>
+              <label class="custom-control-label"  (click)= changeCheckBoxA(am.id) 
+              for="customCheck2{{am.id}}">{{am.name}}</label>
             </div>
           </div>
 
