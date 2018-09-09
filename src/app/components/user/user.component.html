@@ -26,12 +26,14 @@
           <td>phone:</td>
           <td>{{user.phoneNumber}}</td>
         </tr>
-        <ng-container *ngIf="user">
-          <tr *ngFor="let role of user.roles">
-            <td>role:</td>
-            <td>{{role.name}}</td>
-          </tr>
-        </ng-container>
+        <tr *ngIf="isOwner">
+          <td>Number of your properties:</td>
+          <td>{{myPropertyCount}}</td>
+        </tr>
+        <tr *ngIf="isOwner">
+          <td>Number of your apartments:</td>
+          <td>{{myApartmentCount}}</td>
+        </tr>
         </tbody>
       </table>
     </div>
