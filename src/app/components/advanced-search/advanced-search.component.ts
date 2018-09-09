@@ -32,6 +32,8 @@ export class AdvancedSearchComponent implements OnInit {
   public checkOut: string;
   public numberOfGuests: number;
 
+  public arrayFacility: Array <number>;
+
   constructor(private propertyService: PropertyService,
               private apartmentService: ApartmentService,
               private route: ActivatedRoute,
@@ -113,4 +115,93 @@ export class AdvancedSearchComponent implements OnInit {
     history.pushState(null, null, newUrl);
   }
 
+  changeCheckBox(id: number){
+    console.log("click on # ", id);
+    // console.log("22222 ", window.location.href.split('/') [9]); //facilities (#ofGuest -8)
+    //this.arrayFacility
+    console.log("checkIfUrlHasFacilities() ", this.checkIfUrlHasFacilities(id));
+   
+    if( window.location.href.split('/') [9] && this.checkIfUrlHasFacilities(id) ){
+      let facUrl: string =  window.location.href.split('/') [9] ;
+      // console.log("length ", facUrl.split('&').length);
+      let arrFac = new Array;
+      console.log("newarray ", arrFac);
+      let n: number = facUrl.split('&').length ; // we skip first argument ('facilities&')
+      console.log("length uri fac ", n);
+      let newurl: string;
+      let facititiesUri: string= "facilities" +"&" ;
+      console.log("facititiesUri start ", facititiesUri);
+      console.log("current url ", window.location.href);
+
+      for(let i=1; i<n; i++){ 
+        console.log("symbol ", i, " = ", facUrl.split('&')[i]);
+        console.log("symbol ", i, " = ", facUrl.split('&')[i], ", id=",id );
+        if(Number(facUrl.split('&')[i]) !== id){
+          if(i !== n-1){
+            console.log("in if ");
+            arrFac.push( Number(facUrl.split('&')[i]) );
+            facititiesUri = facititiesUri + i + "&";
+            console.log("facititiesUri if= ", i, " = ", facititiesUri);
+          }
+          else {
+            console.log("in else ");
+            arrFac.push( Number(facUrl.split('&')[i]) );
+            facititiesUri = facititiesUri + i;
+            console.log("facititiesUri else= ", i, " = ", facititiesUri);
+          }          
+        }         
+      }
+      console.log("array ", arrFac);
+      console.log("facititiesUri= ", facititiesUri);
+      this.arrayFacility= arrFac;
+      newurl= window.location.protocol+ "//"
+              +window.location.host +"/"
+              +window.location.href.split('/')[3] +"/"
+              +window.location.href.split('/')[4] +"/"
+              +window.location.href.split('/')[5] +"/"
+              +window.location.href.split('/')[6] +"/"
+              +window.location.href.split('/')[7] +"/"
+              +window.location.href.split('/')[8] +"/"
+              + facititiesUri;
+      history.pushState(null, null, newurl);
+      
+    }
+    else{
+      if( !window.location.href.split('/') [9]){
+        // console.log("helooooooooo ");
+        let newurl: string= window.location.href +"/"
+        + "facilities" +"&" 
+        + id ;
+        history.pushState(null, null, newurl);
+      }
+      else{
+        // console.log("helooooooooo2 ");
+        let newurl: string= window.location.href +"&"+ id ;
+        history.pushState(null, null, newurl);
+      }
+      
+    }
+  }
+
+  checkIfUrlHasFacilities(id: number): boolean {
+    // console.log("----------- ");
+    let res: boolean =false;
+    if( window.location.href.split('/') [9]){
+
+      let facUrl: string =  window.location.href.split('/') [9] ;
+      let n: number = facUrl.split('&').length;
+      // console.log("length uri fac ", n);
+      // console.log("current url ", window.location.href);      
+
+      for(let i=1; i<n; i++){ //first we propuskaem
+        // console.log("symbol ", i, " = ", facUrl.split('&')[i]);
+        if( Number(facUrl.split('&')[i]) == id){
+          res = true;
+          // console.log("true ");
+        }
+      }
+    }    
+    // console.log("----------- ");
+    return res;
+  }  
 }

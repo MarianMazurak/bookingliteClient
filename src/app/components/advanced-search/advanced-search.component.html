@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row">
+  <!-- <div class="row"> -->
 
     <!-- Main Search -->
 
@@ -16,9 +16,18 @@
             <label>Property Name</label>
             <input type="text" class="form-control" placeholder="Property Name">
           </div>
-
-
+          
           <div class="form-group">
+            <h5>Facilities</h5>
+            <div class="custom-control custom-checkbox"
+                 *ngFor="let facility of facilities">
+              <input type="checkbox" class="custom-control-input" id="customCheck{{facility.id}}">
+              <label class="custom-control-label" (click)= changeCheckBox(facility.id)
+              for="customCheck{{facility.id}}">{{facility.name}}</label>
+            </div>
+          </div>
+
+          <!-- <div class="form-group">
             <h5>Facilities</h5>
             <div class="custom-control custom-checkbox"
                  *ngFor="let facility of facilities">
@@ -26,7 +35,7 @@
                      >
               <label class="custom-control-label" for="customCheck{{facility.id}}">{{facility.name}}</label>
             </div>
-          </div>
+          </div> -->
 
           <div class="form-group">
             <h5>Amenities</h5>
@@ -119,5 +128,5 @@
     <!-- PROPERTY LIST -->
 
 
-  </div>
+  <!-- </div> -->
 </div>
