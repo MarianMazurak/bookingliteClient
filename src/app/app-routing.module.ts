@@ -26,7 +26,7 @@ import {RoleGuardService} from './services/authentication/role-guard.service';
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'bookings/:filter', component: ListBookingComponent },
+  {path: 'bookings/:filter/:page', component: ListBookingComponent },
   {path: 'booking/:id', component: BookingComponent},
   {path: 'create-property', component: CreatePropertyComponent},
   {path: 'create-apartment', component: CreateApartmentComponent},
