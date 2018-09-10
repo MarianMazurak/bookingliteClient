@@ -13,15 +13,22 @@ export class ListBookingComponent implements OnInit {
 
   private authenticated;
   bookings: Booking[];
-  currentPage: number = 1;
+  currentPage: number ;
   selectedItemsSize: number;
   pagesToPagination : number [];//count page to show in pagination
-  totalPages: number; // all pages with selected `selectedItemOnPage`
+  totalPages: number; // all pages (to last page in pagination)
   totalElements: number;// condition in html. If==0 you not have booking
-  filterBookingsByDates: string; //= "allBookings"; //move to url + color active  
+  filterBookingsByDates: string; //selected filter(all, actual, archieve)
   allBookingsString: string = "allBookings";
   actualBookingsString: string = "actualBookings";
   archieveBookingsString: string = "archieveBookings";
+  baseUrlToChangePageInPagination: string = window.location.protocol+ "//"
+                                              +window.location.host +"/"
+                                              +window.location.href.split('/')[3] +"/"
+                                              +window.location.href.split('/')[4] +"/";
+  baseUrlToFilterBookings: string = window.location.protocol+ "//"
+                       +window.location.host +"/"
+                       +window.location.href.split('/')[3] +"/"
   
 
   constructor(private auth: AuthService,
@@ -30,56 +37,82 @@ export class ListBookingComponent implements OnInit {
   
   ngOnInit() {
     this.authenticated = this.auth.isAuthenticated;
-    if(window.location.href.split('/')[4] == this.actualBookingsString){ //get 'filter' from url from Router
+    if(window.location.href.split('/')[4] == this.actualBookingsString){ //all this change on filterBookingsByDates= wind.location.href.get.[4]
       this.filterBookingsByDates= this.actualBookingsString;
     }
     else if(window.location.href.split('/')[4] == this.archieveBookingsString){
       this.filterBookingsByDates= this.archieveBookingsString;
     }
-    else    this.filterBookingsByDates= this.allBookingsString;
+    else{
+      this.filterBookingsByDates= this.allBookingsString;
+    }    
+
+    if(localStorage.getItem('selectedItemsSize')){//if localStorage!=null, else get value from item-size comp
+      this.selectedItemsSize = Number (localStorage.getItem('selectedItemsSize'));
+    }
+
+    if( Number( window.location.href.split('/')[5]) != 1){//when you back with booking to list-bokings      
+      this.currentPage=  Number( window.location.href.split('/')[5]); 
+    }
+    else{     
+      this.currentPage= 1; 
+    }
     this.getBookingsByPage();
   }
 
   getBookingsByPage(): void { 
     if(this.selectedItemsSize){
-      this.bookingService.getBookingsByPage(this.currentPage -1, this.selectedItemsSize,
-           this.filterBookingsByDates).subscribe(data =>   {
-        this.bookings= data['content'];
-        this.totalPages= data['totalPages'];
-        this.totalElements=  data['totalElements'];
-        this.pagesToPagination= this.paginationService.calculatePages(this.currentPage, this.totalPages);
+      this.currentPage= Number( window.location.href.split('/')[5]); 
+      this.bookingService.getBookingsByPage( this.currentPage -1, this.selectedItemsSize,
+        this.filterBookingsByDates).subscribe(data =>   {
+          this.bookings= data['content'];
+          this.totalPages= data['totalPages'];
+          this.totalElements=  data['totalElements'];
+          this.pagesToPagination= this.paginationService.calculatePages(this.currentPage, this.totalPages);
       } ); 
     }
   }
   
-  setSelectedItemsSize(n: number): void{
+  setSelectedItemsSize(n: number): void{ 
     this.selectedItemsSize= n;
-    this.currentPage= 1;
+    let newUrl: string = this.baseUrlToChangePageInPagination + "1";         
+    history.pushState(null, null, newUrl);    
     this.getBookingsByPage();
   }
 
+  setUlrToLocalStorage(){
+    localStorage.setItem('urlToButtonBackToListBookings', window.location.href);
+  }
+
   goToPage(n: number): void {
-    this.currentPage = n;
+    let newUrl: string = this.baseUrlToChangePageInPagination + "" + n; 
+    history.pushState(null, null, newUrl);    
     this.getBookingsByPage();
   }
 
   onFirst(n: number): void {
-    this.currentPage = n;
+    let newUrl: string = this.baseUrlToChangePageInPagination + "" + n;           
+    history.pushState(null, null, newUrl);    
     this.getBookingsByPage();
   }
 
   onPrev(): void {
     this.currentPage--;
+    let newUrl: string = this.baseUrlToChangePageInPagination + "" + this.currentPage;              
+    history.pushState(null, null, newUrl);    
     this.getBookingsByPage();
 }
 
-  onNext(): void {
+  onNext(): void {    
     this.currentPage++;
+    let newUrl: string = this.baseUrlToChangePageInPagination + "" + this.currentPage;         
+    history.pushState(null, null, newUrl);    
     this.getBookingsByPage();
   }
 
   onLast(n: number): void {
-    this.currentPage = n;
+    let newUrl: string = this.baseUrlToChangePageInPagination + "" + n;    
+    history.pushState(null, null, newUrl);    
     this.getBookingsByPage();
   }
 
@@ -96,46 +129,27 @@ export class ListBookingComponent implements OnInit {
   }
 
   filterAllBookings(){
-    let newUrl: string = window.location.protocol+ "//"
-                        + window.location.host +"/"
-                        +window.location.href.split('/')[3] +"/"
-                        +this.allBookingsString
-    if(window.location.href != newUrl){
+    let newUrl: string = this.baseUrlToFilterBookings + this.allBookingsString +"/" + "1";
+    if(! window.location.href.includes(`${this.allBookingsString}`)){
       history.pushState(null, null, newUrl);
-      if(this.filterBookingsByDates != this.allBookingsString){
-        this.currentPage = 1;
-      }
       this.filterBookingsByDates= this.allBookingsString;
       this.getBookingsByPage();
     }      
   }
 
-  fiterActualBooking(){    
-    let url11 = window.location.href;
-    let newUrl: string = window.location.protocol+ "//"
-                        + window.location.host +"/"
-                        +window.location.href.split('/')[3] +"/"
-                        +this.actualBookingsString
-    if(window.location.href != newUrl){
-      history.pushState(null, null, newUrl);
-      if(this.filterBookingsByDates != this.actualBookingsString){
-        this.currentPage = 1;
-      }
+  fiterActualBookings(){    
+    let newUrl: string = this.baseUrlToFilterBookings + this.actualBookingsString +"/" + "1";
+    if(! window.location.href.includes(`${this.actualBookingsString}`)){
+      history.pushState(null, null, newUrl);      
       this.filterBookingsByDates= this.actualBookingsString;
       this.getBookingsByPage();
     }            
   }
 
-  filterArchieveBooking(){
-    let newUrl: string = window.location.protocol+ "//"
-                        + window.location.host +"/"
-                        +window.location.href.split('/')[3] +"/"
-                        +this.archieveBookingsString
-    if(window.location.href != newUrl){
+  filterArchieveBookings(){
+    let newUrl: string = this.baseUrlToFilterBookings + this.archieveBookingsString +"/" + "1";
+      if( ! window.location.href.includes(`${this.archieveBookingsString}`) ){
       history.pushState(null, null, newUrl);
-      if(this.filterBookingsByDates != this.archieveBookingsString){
-        this.currentPage = 1;
-      }
       this.filterBookingsByDates= this.archieveBookingsString;
       this.getBookingsByPage();
     }      
