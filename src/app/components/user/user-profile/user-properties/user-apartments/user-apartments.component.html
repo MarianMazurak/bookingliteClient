@@ -10,8 +10,8 @@
       <th scope="col">id</th>
       <th scope="col">name</th>
       <th scope="col">price</th>
-      <th scope="col">guests</th>
       <th scope="col">type</th>
+      <th scope="col">Number of guests</th>
       <th scope="col">Action</th>
     </tr>
     </thead>
@@ -20,10 +20,12 @@
       <th scope="row">{{ap.id}}</th>
       <td>{{ap.name}}</td>
       <td>{{ap.price}}</td>
-      <td>{{ap.numberOfGuests}}</td>
       <td>{{ap.apartmentType.name}}</td>
-      <td><button type="button" class="btn btn-primary">Edit</button></td>
+      <td>{{ap.numberOfGuests}}</td>
+      <td><button type="button" class="btn btn-primary"
+                  routerLink="/property/{{property.id}}/edit-apartment/{{ap.id}}">Edit</button></td>
     </tr>
+
     </tbody>
   </table>
 </div>

@@ -44,6 +44,7 @@ import { ItemsSizeComponent } from './components/pagination/items-size/items-siz
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { PhotoPopupComponent } from './components/property/photo-popup/photo-popup.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,

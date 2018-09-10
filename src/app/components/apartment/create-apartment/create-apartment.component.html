@@ -1,41 +1,72 @@
-<div class="container">
-  <fieldset>
-    <h4>Create Apartment</h4>
+<app-user-navigation></app-user-navigation>
+<div id="menucard" class="main-box">
+  <div class="box" id="inner-box">
+    <h1 class="display-4">BookingLite</h1>
+    <div class="card" id="card-id">
+      <article class="card-body">
+        <h4 class="card-title mb-2 mt-1">Create Apartment</h4>
 
-    <div class="form-group">
-      <label class="col-form-label">Apartment Name</label>
-      <input type="text" class="form-control"[(ngModel)]="createdApartment.name">
+        <form #createApartmentForm=ngForm (ngSubmit)="createApartment(createApartmentForm)"
+              [ngClass]="{'was-validated' : !formValid}">
+          <div class="row">
+            <div class="col-6">
+
+              <div class="form-group">
+                <label>Apartment Name</label>
+                <input name="name" #name="ngModel" required [(ngModel)]="createdApartment.name" class="form-control"
+                       maxlength="32" pattern="[A-Za-z]"
+                       placeholder="Apartment Name" type="text">
+                <div class="invalid-feedback">Apartment Name is required!</div>
+              </div>
+
+              <div class="form-group">
+                <label>Price</label>
+                <input class="form-control" name="price" [(ngModel)]="createdApartment.price"
+                       placeholder="Price" type="text" required pattern="^\d{0,8}(\.\d{1,4})?$">
+                <div class="invalid-feedback">Price only number format, and (between 1 and 99999999)</div>
+              </div>
+
+
+              <div class="form-group">
+                <label>Number of guests  (between 1 and 8):</label>
+                    <input class="form-control" name="numberOfGuests" #name="ngModel"
+                           [(ngModel)]="createdApartment.numberOfGuests"
+                       placeholder="Number of guests" type="text" required pattern="[1-8]">
+                <div class="invalid-feedback">Number have be number type and (between 1 and 8)!</div>
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label>Apartment Type</label>
+              <select class="form-control" #selectApartmentType
+                      (change)="changeApartmentType(selectApartmentType.value)">
+                <option *ngFor="let ap of apartmentTypes" value="{{ap.id}}">{{ap.name}}
+                </option>
+              </select>
+
+              <div class="form-group" id="amen-box">
+                <label>Amenities</label>
+                <div class="custom-control custom-checkbox"
+                     *ngFor="let am of amenities">
+                  <input type="checkbox" class="custom-control-input" id="customCheck{{am.id}}"
+                         (change)="workWithCheckboxes(am.id)">
+                  <label class="custom-control-label"
+                         for="customCheck{{am.id}}">{{am.name}}</label>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <ng-container *ngIf="errorMessage !== ''">
+            <div class="alert alert-danger">
+              {{errorMessage}}
+            </div>
+          </ng-container>
+          <div class="form-group" id="btn">
+            <button type="submit" class="btn btn-primary btn-block">Create</button>
+          </div>
+        </form>
+      </article>
     </div>
-
-    <div class="form-group">
-      <label class="col-form-label">Price</label>
-      <input type="text" class="form-control" [(ngModel)]="createdApartment.price">
-    </div>
-
-    <div class="form-group">
-      <label class="col-form-label">Apartment Type</label>
-      <br>
-      <select
-              [(ngModel)]='selectedTypeId'
-              [(ngModel)]='createdApartment.apartmentTypeId'>
-        <option *ngFor="let type of apartmentTypes" [(value)]="type.id">
-          {{type.name}}
-        </option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <h5>Amenities</h5>
-      <div class="custom-control custom-checkbox"
-           *ngFor="let am of amenities">
-        <input type="checkbox" class="custom-control-input" id="customCheck{{am.id}}"
-          (change)="workWithCheckboxes(am.id)">
-        <label class="custom-control-label" for="customCheck{{am.id}}">{{am.name}}</label>
-      </div>
-    </div>
-
-    <button type="submit" class="btn btn-primary" (click)="createApartments()">save</button>
-  </fieldset>
+  </div>
 </div>
-
-

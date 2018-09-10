@@ -43,7 +43,6 @@ export class CreatePropertyComponent implements OnInit {
               private countryService: CountryService,
               private cityService: CityService,
               private router: Router) { }
-
   ngOnInit() {
     this.authenticated = this.auth.isAuthenticated;
     this.propertyCreate = new PropertyCreate();
@@ -51,9 +50,7 @@ export class CreatePropertyComponent implements OnInit {
     this.getFacilities();
     this.getPropertyTypes();
     this.getCountries();
-
   }
-
   getCountries() {
     this.countryService.getCountry().subscribe((countriesarr) => {
       this.countries = countriesarr;
@@ -68,7 +65,6 @@ export class CreatePropertyComponent implements OnInit {
   changeCity(id: number) {
     this.selectedCityId = id;
   }
-
   getCities(countryId: number) {
     this.cityService.getCity(countryId).subscribe((citiesarr) => {
       this.cities = citiesarr;
@@ -92,22 +88,19 @@ export class CreatePropertyComponent implements OnInit {
       this.propertyCreate.cityId = this.selectedCityId;
       this.propertyCreate.propertyTypeId = this.selectedPropertyTypeId;
       this.propertyService.createProperty(this.propertyCreate).subscribe(res => {
+        this.onSubmit();
         }, error => {
          this.errorMessage = JSON.parse(error.error).message;
         });
-      this.onSubmit();
     } else {
       this.formValid = false;
     }
   }
-
   public getFacilities() {
     this.facilityService.getAllFacilities().subscribe(facility => {
       this.facilities = facility;
-      console.log('Facility: ', facility);
     });
   }
-
   public workWithCheckboxes(id: number) {
     const index = this.propertyCreate.facilityId.indexOf(id);
     if (index !== -1) {

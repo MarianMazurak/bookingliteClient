@@ -27,3 +27,4 @@ export class UserPropertiesComponent implements OnInit {
     });
   }
 }
+
