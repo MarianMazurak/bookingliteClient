@@ -43,7 +43,7 @@ const routes: Routes = [
   { path: 'review-create/:id', component: ReviewCreateComponent},
   { path: 'booking-create/:id', component: BookingCreateComponent},
   { path: 'property/:id/reviews', component: ReviewComponent },
-  { path: '**', redirectTo: '/'}
+  { path: '**', redirectTo: '/search'}
 
 ];
 

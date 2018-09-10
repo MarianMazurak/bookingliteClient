@@ -43,7 +43,15 @@ export class AdvancedSearchComponent implements OnInit {
                             +window.location.href.split('/')[7] +"/"
                             +window.location.href.split('/')[8] +"/"
                             + "facilities" +"/"
-                            + "amenities";      
+                            + "amenities"; 
+  public baseUrlToFacilitiesAndAmenities= window.location.protocol+ "//"
+                                          +window.location.host +"/"
+                                          +window.location.href.split('/')[3] +"/"
+                                          +window.location.href.split('/')[4] +"/"
+                                          +window.location.href.split('/')[5] +"/"
+                                          +window.location.href.split('/')[6] +"/"
+                                          +window.location.href.split('/')[7] +"/"
+                                          +window.location.href.split('/')[8] +"/";                            
 
   constructor(private propertyService: PropertyService,
               private apartmentService: ApartmentService,
@@ -127,212 +135,103 @@ export class AdvancedSearchComponent implements OnInit {
     history.pushState(null, null, newUrl);
   }
 
-  changeCheckBox(id: number){
-    console.log("click on # ", id);
-    // console.log("22222 ", window.location.href.split('/') [9]); //facilities (#ofGuest -8)
-    //this.arrayFacility
-    console.log("checkIfUrlHasFacilities() ", this.checkIfUrlHasFacilities(id));
-   
+  changeCheckBoxFacilities(id: number){   
     if( window.location.href.split('/') [9] && this.checkIfUrlHasFacilities(id) ){
-      let facUrl: string =  window.location.href.split('/') [9] ;
-      // console.log("length ", facUrl.split('&').length);
+      let facilityUrl: string =  window.location.href.split('/') [9] ;
       let arrFac = new Array;
-      console.log("newarray ", arrFac);
-      let n: number = facUrl.split('&').length ; // we skip first argument ('facilities&')
-      console.log("length uri fac ", n);
+      let n: number = facilityUrl.split('&').length ; // we skip first argument ('facilities&')
       let newurl: string;
       let facititiesUri: string= "facilities" ;
-      console.log("facititiesUri start ", facititiesUri);
-      console.log("current url ", window.location.href);
-
       for(let i=1; i<n; i++){ 
-        console.log("symbol ", i, " = ", facUrl.split('&')[i]);
-        console.log("symbol ", i, " = ", facUrl.split('&')[i], ", id=",id );
-        if(Number(facUrl.split('&')[i]) !== id){
-            console.log("in if ");
-            arrFac.push( Number(facUrl.split('&')[i]) );
-            facititiesUri = facititiesUri + "&" + facUrl.split('&')[i] ;
-            console.log("facititiesUri if= ", i, " = ", facititiesUri);       
+        if(Number(facilityUrl.split('&')[i]) !== id){
+            arrFac.push( Number(facilityUrl.split('&')[i]) );
+            facititiesUri = facititiesUri + "&" + facilityUrl.split('&')[i] ;
         }         
       }
-      console.log("array ", arrFac);
-      console.log("facititiesUri= ", facititiesUri);
-      this.arrayFacilities= arrFac;
-     
-      newurl= window.location.protocol+ "//"
-        +window.location.host +"/"
-        +window.location.href.split('/')[3] +"/"
-        +window.location.href.split('/')[4] +"/"
-        +window.location.href.split('/')[5] +"/"
-        +window.location.href.split('/')[6] +"/"
-        +window.location.href.split('/')[7] +"/"
-        +window.location.href.split('/')[8] +"/"
-        + facititiesUri+"/"
-        + window.location.href.split('/')[10];          
-      history.pushState(null, null, newurl);
-      
-    }
-    else{// add new fac to url (if first case)
-      if( window.location.href.split('/') [9] == "facilities"){ // other condition
-        //  console.log("helooooooooo ");
-        let newurl: string = window.location.protocol+ "//"
-        +window.location.host +"/"
-        +window.location.href.split('/')[3] +"/"
-        +window.location.href.split('/')[4] +"/"
-        +window.location.href.split('/')[5] +"/"
-        +window.location.href.split('/')[6] +"/"
-        +window.location.href.split('/')[7] +"/"
-        +window.location.href.split('/')[8] +"/"
-        + "facilities" +"&"  + id  +"/"
-        + window.location.href.split('/')[10];     
-        // let newurl: string= window.location.href +"/"
-        // + "facilities" +"&" 
-        // + id ;
-        history.pushState(null, null, newurl);
-      }
-      else{// if url has fsc we only add new
-        //  console.log("helooooooooo2 ");
-        let newurl: string = window.location.protocol+ "//"
-        +window.location.host +"/"
-        +window.location.href.split('/')[3] +"/"
-        +window.location.href.split('/')[4] +"/"
-        +window.location.href.split('/')[5] +"/"
-        +window.location.href.split('/')[6] +"/"
-        +window.location.href.split('/')[7] +"/"
-        +window.location.href.split('/')[8] +"/"
-        +window.location.href.split('/')[9] +"&" + id  +"/"
-        + window.location.href.split('/')[10];     
-        // let newurl: string= window.location.href +"&"+ id ;
-        history.pushState(null, null, newurl);
-      }
-      
-    }
-  }
-
-  checkIfUrlHasFacilities(id: number): boolean {//if has, we need delete his (0n click->check out checkBox)
-    // console.log("----------- ");
-    let res: boolean =false;
-    if( window.location.href.split('/') [9]){
-
-      let facUrl: string =  window.location.href.split('/') [9] ;
-      let n: number = facUrl.split('&').length;
-      // console.log("length uri fac ", n);
-      // console.log("current url ", window.location.href);      
-
-      for(let i=1; i<n; i++){ //first we propuskaem
-        // console.log("symbol ", i, " = ", facUrl.split('&')[i]);
-        if( Number(facUrl.split('&')[i]) == id){
-          res = true;
-          // console.log("true ");
-        }
-      }
-    }    
-    // console.log("----------- ");
-    return res;
-  }  
-
-
-  changeCheckBoxA(id: number){
-    console.log("click on # ", id);
-    // console.log("22222 ", window.location.href.split('/') [9]); //facilities (#ofGuest -8)
-    //this.arrayFacility
-    console.log("checkIfUrlHasAmenities() ", this.checkIfUrlHasAmenities(id));
-   
-    if( window.location.href.split('/') [10] && this.checkIfUrlHasAmenities(id) ){
-      let facUrl: string =  window.location.href.split('/') [10] ;
-      // console.log("length ", facUrl.split('&').length);
-      let arrAm = new Array;
-      console.log("newarray ", arrAm);
-      let n: number = facUrl.split('&').length ; // we skip first argument ('facilities&')
-      console.log("length uri am ", n);
-      let newurl: string;
-      let amenitiesUri: string= "amenities" ;
-      console.log("amenitiesUri start ", amenitiesUri);
-      console.log("current url ", window.location.href);
-
-      for(let i=1; i<n; i++){ 
-        console.log("symbol ", i, " = ", facUrl.split('&')[i]);
-        console.log("symbol ", i, " = ", facUrl.split('&')[i], ", id=",id );
-        if(Number(facUrl.split('&')[i]) !== id){
-            console.log("in if ");
-            arrAm.push( Number(facUrl.split('&')[i]) );
-            amenitiesUri = amenitiesUri + "&" + facUrl.split('&')[i] ;
-            console.log("amenitiesUri if= ", i, " = ", amenitiesUri);       
-        }         
-      }
-      console.log("array ", arrAm);
-      console.log("facititiesUri= ", amenitiesUri);
-      this.arrayAmenities= arrAm;
-     
-      newurl= window.location.protocol+ "//"
-        +window.location.host +"/"
-        +window.location.href.split('/')[3] +"/"
-        +window.location.href.split('/')[4] +"/"
-        +window.location.href.split('/')[5] +"/"
-        +window.location.href.split('/')[6] +"/"
-        +window.location.href.split('/')[7] +"/"
-        +window.location.href.split('/')[8] +"/"
-        +window.location.href.split('/')[9] +"/"
-        + amenitiesUri;        
+      this.arrayFacilities= arrFac;     
+      newurl= this.baseUrlToFacilitiesAndAmenities
+            + facititiesUri+"/"
+            + window.location.href.split('/')[10];          
       history.pushState(null, null, newurl);
       
     }
     else{
-      if( window.location.href.split('/') [10] == "amenities"){ // other condition
-        //  console.log("helooooooooo ");
-        let newurl: string = window.location.protocol+ "//"
-        +window.location.host +"/"
-        +window.location.href.split('/')[3] +"/"
-        +window.location.href.split('/')[4] +"/"
-        +window.location.href.split('/')[5] +"/"
-        +window.location.href.split('/')[6] +"/"
-        +window.location.href.split('/')[7] +"/"
-        +window.location.href.split('/')[8] +"/"
-        +window.location.href.split('/')[9] +"/"
-        + "amenities" +"&"  + id  ;     
-        // let newurl: string= window.location.href +"/"
-        // + "facilities" +"&" 
-        // + id ;
+      if( window.location.href.split('/') [9] == "facilities"){ // add new facilities to url (if first case)
+        let newurl: string = this.baseUrlToFacilitiesAndAmenities
+                              + "facilities" +"&"  + id  +"/"
+                              + window.location.href.split('/')[10];     
         history.pushState(null, null, newurl);
       }
-      else{// if url has fsc we only add new
-        //  console.log("helooooooooo2 ");
-        let newurl: string = window.location.protocol+ "//"
-        +window.location.host +"/"
-        +window.location.href.split('/')[3] +"/"
-        +window.location.href.split('/')[4] +"/"
-        +window.location.href.split('/')[5] +"/"
-        +window.location.href.split('/')[6] +"/"
-        +window.location.href.split('/')[7] +"/"
-        +window.location.href.split('/')[8] +"/"
-        +window.location.href.split('/')[9] +"/"
-        + window.location.href.split('/')[10] +"&" + id;     
-        // let newurl: string= window.location.href +"&"+ id ;
+      else{// if url has facilities we only add new
+        let newurl: string = this.baseUrlToFacilitiesAndAmenities
+                            +window.location.href.split('/')[9] +"&" + id  +"/"
+                            +window.location.href.split('/')[10];     
+        history.pushState(null, null, newurl);
+      }      
+    }
+  }
+
+  checkIfUrlHasFacilities(id: number): boolean {//if has, we need delete his (0n click->check out checkBox)
+    let result: boolean =false;
+    if( window.location.href.split('/') [9]){
+      let facilityUrl: string =  window.location.href.split('/') [9] ;
+      let n: number = facilityUrl.split('&').length;   
+      for(let i=1; i<n; i++){ 
+        if( Number(facilityUrl.split('&')[i]) == id){
+          result = true;
+        }
+      }
+    }    
+    return result;
+  }  
+
+
+  changeCheckBoxAmenities(id: number){   
+    if( window.location.href.split('/') [10] && this.checkIfUrlHasAmenities(id) ){
+      let amenitiesUrl: string =  window.location.href.split('/') [10] ;
+      let arrAm = new Array;
+      let n: number = amenitiesUrl.split('&').length ; // we skip first argument ('amenities&')
+      let newurl: string;
+      let amenitiesUri: string= "amenities" ;      
+      for(let i=1; i<n; i++){ 
+        if(Number(amenitiesUrl.split('&')[i]) !== id){
+            arrAm.push( Number(amenitiesUrl.split('&')[i]) );
+            amenitiesUri = amenitiesUri + "&" + amenitiesUrl.split('&')[i] ;   
+        }         
+      }
+      this.arrayAmenities= arrAm;     
+      newurl= this.baseUrlToFacilitiesAndAmenities
+              +window.location.href.split('/')[9] +"/"
+              +amenitiesUri;        
+      history.pushState(null, null, newurl);      
+    }
+    else{
+      if( window.location.href.split('/') [10] == "amenities"){// add new amenities to url (if first case)
+        let newurl: string = this.baseUrlToFacilitiesAndAmenities
+                              +window.location.href.split('/')[9] +"/"
+                              +"amenities" +"&"  + id  ;     
         history.pushState(null, null, newurl);
       }
-      
+      else{// if url has amenities we only add new
+        let newurl: string = this.baseUrlToFacilitiesAndAmenities
+                              +window.location.href.split('/')[9] +"/"
+                              + window.location.href.split('/')[10] +"&" + id;     
+        history.pushState(null, null, newurl);
+      }      
     }
   }
 
   checkIfUrlHasAmenities(id: number): boolean {//if has, we need delete his (0n click->check out checkBox)
-    // console.log("----------- ");
-    let res: boolean =false;
+    let result: boolean =false;
     if( window.location.href.split('/') [10]){
-
       let amUrl: string =  window.location.href.split('/') [10] ;
       let n: number = amUrl.split('&').length;
-      // console.log("length uri fac ", n);
-      // console.log("current url ", window.location.href);      
-
-      for(let i=1; i<n; i++){ //first we propuskaem
-        // console.log("symbol ", i, " = ", facUrl.split('&')[i]);
+      for(let i=1; i<n; i++){ 
         if( Number(amUrl.split('&')[i]) == id){
-          res = true;
-          // console.log("true ");
+          result = true;
         }
       }
     }    
-    // console.log("----------- ");
-    return res;
+    return result;
   }  
 }
