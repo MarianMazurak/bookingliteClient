@@ -11,21 +11,18 @@ import {PaginationService} from '../../../services/pagination/pagination.service
   styleUrls: ['./reviews-property.component.css']
 })
 export class ReviewsPropertyComponent implements OnInit {
-  private authenticated;
   reviews: Review [];
   currentPage = 1;
   selectedItemsSize: number;
   pagesToPagination: number []; // count page to show in pagination
   totalPages: number; // all pages with selected `selectedItemOnPage`
   totalElements: number; // condition in html. If==0 you have not booking
-  constructor(private auth: AuthService,
-              private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
               private reviewService: ReviewService,
               private paginationService: PaginationService) {
   }
 
   ngOnInit() {
-    this.authenticated = this.auth.isAuthenticated;
     this.getReviewsByPage();
   }
 

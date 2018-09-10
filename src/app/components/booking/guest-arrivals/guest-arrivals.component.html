@@ -8,7 +8,7 @@
         <p class="page-link" (click)="filterFutureBookings()">Future bookings</p>
       </li>
       <li class="page-item active" [ngClass]="{active: filterBookings == actualBookings }">
-        <p class="page-link" (click)="fiterActualBooking()">Actual bookings</p>
+        <p class="page-link" (click)="filterActualBooking()">Actual bookings</p>
       </li>
       <li class="page-item active" [ngClass]="{active: filterBookings == pastBookings }">
         <p class="page-link" (click)="filterPastBooking()">Past bookings</p>
@@ -34,9 +34,8 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-3">
-                      <img class="img-responsive" alt="No Photo"
-                           src="http://res.cloudinary.com/lv326/image/upload/v1535107395/properties/38ac382d-0bed-4280-8e93-8643057c15ca.jpg">
-                    </div>
+                      <img class="img-responsive" alt="No Photo" src={{booking.apartmentDto.propertyDto.photos[0].url}}>
+                           </div>
                     <div class="col-md-6  card-body">
                       <div class="list-title">
                         <ul class="list-inline list-unstyled">

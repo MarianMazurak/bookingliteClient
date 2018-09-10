@@ -11,7 +11,6 @@ import {PaginationService} from '../../../services/pagination/pagination.service
   styleUrls: ['./guest-arrivals.component.css']
 })
 export class GuestArrivalsComponent implements OnInit {
-  private authenticated;
   guestArrivalsList: Booking[];
   currentPage = 1;
   selectedItemsSize: number;
@@ -23,14 +22,12 @@ export class GuestArrivalsComponent implements OnInit {
   actualBookings = 'actualBookings';
   pastBookings = 'pastBookings';
 
-  constructor(private auth: AuthService,
-              private bookingService: BookingService,
+  constructor(private bookingService: BookingService,
               private route: ActivatedRoute,
               private paginationService: PaginationService) {
   }
 
   ngOnInit() {
-    this.authenticated = this.auth.isAuthenticated;
     if (window.location.href.split('/')[5] === this.actualBookings) {
       this.filterBookings = this.actualBookings;
     } else if (window.location.href.split('/')[5] === this.pastBookings) {
@@ -90,9 +87,10 @@ export class GuestArrivalsComponent implements OnInit {
   }
 
   filterFutureBookings() {
-    const newUrl: string = window.location.protocol + '//'
-      + window.location.host + '/'
-      + window.location.href.split('/')[4] + '/'
+    const newUrl: string = window.location.protocol + '//' + window.location.host + '/'
+      + window.location.pathname.split('/')[1] + '/'
+      + window.location.pathname.split('/')[2] + '/'
+      + window.location.pathname.split('/')[3] + '/'
       + this.futureBookings;
     if (window.location.href !== newUrl) {
       history.pushState(null, null, newUrl);
@@ -104,10 +102,11 @@ export class GuestArrivalsComponent implements OnInit {
     }
   }
 
-  fiterActualBooking() {
-    const newUrl: string = window.location.protocol + '//'
-      + window.location.host + '/'
-      + window.location.href.split('/')[4] + '/'
+  filterActualBooking() {
+    const newUrl: string = window.location.protocol + '//' + window.location.host + '/'
+      + window.location.pathname.split('/')[1] + '/'
+      + window.location.pathname.split('/')[2] + '/'
+      + window.location.pathname.split('/')[3] + '/'
       + this.actualBookings;
     if (window.location.href !== newUrl) {
       history.pushState(null, null, newUrl);
@@ -120,9 +119,10 @@ export class GuestArrivalsComponent implements OnInit {
   }
 
   filterPastBooking() {
-    const newUrl: string = window.location.protocol + '//'
-      + window.location.host + '/'
-      + window.location.href.split('/')[4] + '/'
+    const newUrl: string = window.location.protocol + '//' + window.location.host + '/'
+      + window.location.pathname.split('/')[1] + '/'
+      + window.location.pathname.split('/')[2] + '/'
+      + window.location.pathname.split('/')[3] + '/'
       + this.pastBookings;
     if (window.location.href !== newUrl) {
       history.pushState(null, null, newUrl);

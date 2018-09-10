@@ -16,10 +16,6 @@ export class ReviewService {
   constructor(private http: HttpClient) {
   }
 
-  public getReviewCountByPropertyId(id: number): Observable<number> {
-    return this.http.get<number>('${this.propertyUrl}/${id}/reviews/count');
-  }
-
   public getReviewByBooking(id: number): Observable<Review> {
     return this.http.get<Review>(`${this.bookingUrl}/${id}/review`);
   }

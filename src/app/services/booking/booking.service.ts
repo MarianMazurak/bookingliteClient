@@ -13,6 +13,7 @@ export class BookingService {
 
   private bookingUrl = 'api/booking';
   private bookingByPageUrl = 'api/bookings';
+  private myPropertiesUrl = 'api/myProperties';
   private nowDate: Date;
 
   constructor(private http: HttpClient) {
@@ -78,7 +79,7 @@ export class BookingService {
   }
 
   getPageGuestArrivalsList(id: number, page: number, size: number, filterBooking: string): Observable<Booking[]> {
-    return this.http.get<Booking []>('api/guestArrivals/' + id + '?filterBooking=' + filterBooking + '&page=' +
-      page + '&size=' + size);
+    return this.http.get<Booking []>(
+      `${this.myPropertiesUrl}/${id}/guestArrivals?page=${page}&size=${size}&filterBooking=${filterBooking}`);
   }
 }

@@ -13,7 +13,6 @@ import {FormGroup} from '@angular/forms';
   styleUrls: ['./booking-create.component.css']
 })
 export class BookingCreateComponent implements OnInit {
-  private authenticated;
   booking: BookingCreate = new BookingCreate();
   apartment: Apartment;
   today: Date;
@@ -21,14 +20,12 @@ export class BookingCreateComponent implements OnInit {
   errorMessage = '';
   flag: boolean;
 
-  constructor(private auth: AuthService,
-              private bookingService: BookingService,
+  constructor(private bookingService: BookingService,
               private apartmentService: ApartmentService,
               private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.authenticated = this.auth.isAuthenticated;
     this.booking = new BookingCreate();
     this.today = new Date();
     this.getApartmentById();

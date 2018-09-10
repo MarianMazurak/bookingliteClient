@@ -1,28 +1,22 @@
-/*form.createBooking{
-  border: 1px solid black;
-  margin: 50px;
-  padding: 20px;
-  width: 700px;
-}
-.success {
-  border-color: #4CAF50;
-  color: green;
-}*/
-.display-4{
+
+.display-4 {
   text-align: center;
 }
-.card{
+
+.card {
   width: 850px;
   height: 680px;
 }
 
-.form-control{
+.form-control {
   width: 350px;
   height: 50px;
 }
-label{
+
+label {
   font-size: 19px;
 }
-.card{
+
+.card {
   margin-top: 10px;
 }

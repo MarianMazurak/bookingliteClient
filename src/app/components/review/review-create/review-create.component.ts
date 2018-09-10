@@ -1,5 +1,4 @@
 import {Component, OnInit, enableProdMode} from '@angular/core';
-import {AuthService} from '../../../services/authentication/auth.service';
 import {ReviewService} from '../../../services/review/review.service';
 import {ActivatedRoute} from '@angular/router';
 import {FormGroup} from '@angular/forms';
@@ -14,22 +13,19 @@ import {BookingService} from '../../../services/booking/booking.service';
   styleUrls: ['./review-create.component.css']
 })
 export class ReviewCreateComponent implements OnInit {
-  private authenticated;
   review: CreateReview;
   booking: Booking;
   formValid = true;
   errorMessage = '';
   flag: boolean;
 
-  constructor(private auth: AuthService,
-              private reviewService: ReviewService,
+  constructor(private reviewService: ReviewService,
               private route: ActivatedRoute,
               private bookingService: BookingService,
               private location: Location) {
   }
 
   ngOnInit() {
-    this.authenticated = this.auth.isAuthenticated;
     this.review = new CreateReview();
     this.getBooking();
 

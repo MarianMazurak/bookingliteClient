@@ -27,7 +27,7 @@ import {RoleGuardService} from './services/authentication/role-guard.service';
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'bookings/:filter', component: ListBookingComponent },
+  {path: 'bookings/:filter', component: ListBookingComponent},
   {path: 'booking/:id', component: BookingComponent},
   {path: 'create-property', component: CreatePropertyComponent},
   {path: 'create-apartment', component: CreateApartmentComponent},
@@ -36,20 +36,25 @@ const routes: Routes = [
   {path: 'apartment-list', component: ListApartmentComponent},
   {path: 'property/:id/apartment', component: CreateApartmentComponent},
   {path: 'search', component: SearchComponent},
+  {path: 'property-detailes/:id', component: PropertyComponent},
+  {path: 'review-booking/:id', component: ReviewBookingComponent, canActivate: [AuthGuardService]},
+  {path: 'review-create/:id', component: ReviewCreateComponent, canActivate: [AuthGuardService]},
+  {path: 'booking-create/:id', component: BookingCreateComponent, canActivate: [AuthGuardService]},
+  {path: 'owner-properties', component: OwnerPropertiesComponent, canActivate: [AuthGuardService]},
+  {path: 'reviews-property/:id', component: ReviewsPropertyComponent, canActivate: [AuthGuardService]},
+  {path: 'user', component: UserComponent, canActivate: [AuthGuardService]},
   {
     path: 'edit-property/:id',
     component: EditPropertyComponent,
     canActivate: [AuthGuardService, RoleGuardService],
     data: {expectedRole: 'ROLE_OWNER'}
   },
-  {path: 'property-detailes/:id', component: PropertyComponent},
-  {path: 'review-booking/:id', component: ReviewBookingComponent},
-  {path: 'review-create/:id', component: ReviewCreateComponent},
-  {path: 'booking-create/:id', component: BookingCreateComponent},
-  {path: 'owner-properties', component: OwnerPropertiesComponent},
-  {path: 'guest-arrivals/:id/:filter', component: GuestArrivalsComponent},
-  {path: 'reviews-property/:id', component: ReviewsPropertyComponent},
-  {path: 'user', component: UserComponent, canActivate: [AuthGuardService]},
+  {
+    path: 'myProperties/:id/guest-arrivals/:filter',
+    component: GuestArrivalsComponent,
+    canActivate: [AuthGuardService, RoleGuardService],
+    data: {expectedRole: 'ROLE_OWNER'}
+  },
   {
     path: 'myproperties',
     component: UserPropertiesComponent,
