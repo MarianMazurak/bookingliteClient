@@ -12,7 +12,7 @@ import {Observable} from 'rxjs';
 export class PropertyService {
 
   public url = 'api/addproperty';
-  public searchUrl = 'api/property/advancesearch?';
+  public searchUrl = 'api/property/search?';
 
   constructor(private http: HttpClient) { }
 

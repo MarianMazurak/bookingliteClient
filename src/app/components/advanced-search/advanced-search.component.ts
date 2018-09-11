@@ -76,8 +76,10 @@ export class AdvancedSearchComponent implements OnInit {
     const checkIn = this.route.snapshot.paramMap.get('checkIn');
     const checkOut = this.route.snapshot.paramMap.get('checkOut');
     const numberOfGuests = +this.route.snapshot.paramMap.get('numberOfGuests');
-    this.propertyService.search(countryId, cityId, checkIn, checkOut, numberOfGuests).subscribe(res =>
-    this.propertyList = res);
+    this.propertyService.search(countryId, cityId, checkIn, checkOut, numberOfGuests).subscribe(res =>{
+    this.propertyList = res
+    console.log("111111111", this.propertyList);
+  });
   }
 
   public getCountries() {
