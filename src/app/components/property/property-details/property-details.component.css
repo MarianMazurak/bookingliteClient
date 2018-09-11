@@ -1,0 +1,22 @@
+#image-photo {
+
+  width: 300px;
+
+  /*    display: flex;*/
+  margin-left: 900px;
+  position: absolute;
+}
+img {
+  padding: 10px;
+  margin: 0 auto;
+  border-radius: 10px;
+  justify-content: center;
+  width: 260px;
+}
+#desc{
+  width: 700px;
+}
+button{
+  margin-left: 100px;
+  margin-bottom: 30px;
+}

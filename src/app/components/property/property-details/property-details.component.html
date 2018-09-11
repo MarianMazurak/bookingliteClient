@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="col-xs-5">
+    <div class="row">
+
+      <div class="col-md-3 border-left card-body" id="image-photo" *ngIf="property.photos">
+        <img class="img-responsive"
+             alt="No Photo" *ngIf="property.photos.length > 0"
+             src={{property.photos[0].url}}>
+        <img class="img-responsive"
+             alt="No Photo" *ngIf="property.photos.length === 0"
+             src="assets/image/Capture.PNG">
+
+        <img class="img-responsive"
+             alt="No Photo" *ngIf="property.photos.length > 0"
+             src={{property.photos[1].url}}>
+        <img class="img-responsive"
+             alt="No Photo" *ngIf="property.photos.length === 0"
+             src="assets/image/Capture.PNG">
+        <img class="img-responsive"
+             alt="No Photo" *ngIf="property.photos.length > 0"
+             src={{property.photos[2].url}}>
+        <img class="img-responsive"
+             alt="No Photo" *ngIf="property.photos.length === 0"
+             src="assets/image/Capture.PNG">
+
+        <app-photo-popup style="margin-left: 28px"
+                         [booking]="booking">
+        </app-photo-popup> <!-- add conditionng ngIf-->
+      </div>
+
+      <div class="text-center">
+        <ul class="pagination" style="justify-content: center; padding-left: 20px">
+          <li class="page-item active" style="margin-left: 20px">
+            <p class="page-link" style="margin-left:20px">Info about apartments and price</p>
+          </li>
+          <li class="page-item active">
+            <p class="page-link" style="margin-left:20px">Show all reviews</p>
+          </li>
+          <li class="page-item active">
+            <p class="page-link" style="margin-left:20px">Book now</p>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+    <img src="assets/image/pin.png" style="width: 50px">
+    <span style="font-size: 20px; font-style:italic">Location : {{property.address.addressLine}},zip : {{property.address.zip}}, {{property.address.city.name}}, {{property.address.city.country.name}}</span>
+    <div class="col-xs-9">
+      <h2 *ngIf="property">Name : {{property.name}}
+        <span style="font-size: 20px; margin-left: 250px">Property Type : {{property.propertyType.name}}</span></h2>
+      <img class="img-responsive"
+           alt="No Photo" *ngIf="property.photos.length > 0"
+           src={{property.photos[0].url}} style="width: 780px; background-color: #1f2e2e" >
+
+      <div>
+      <img src="assets/image/medal.png" style="width: 50px;
+      display: inline; margin-left: 10px;">
+      <span style="font-size: 18px; color: #ffa535; font-style:oblique">One of our most popular lodging in
+        {{property.address.city.name}}, {{property.address.city.country.name}}</span>
+      </div>
+
+      <ul class="menu-items">
+        <li> Contact Email : {{property.contactEmail}}</li>
+        <li>Phone Number : {{property.phoneNumber}}</li>
+        <li>Property Type : {{property.propertyType.name}}</li>
+        <li>Address Line : {{property.address.addressLine}}</li>
+        <li>City : {{property.address.city.name}}</li>
+        <li>Country : {{property.address.city.country.name}}</li>
+      </ul>
+
+      <div id="desc" style="border-top:1px solid silver">
+
+        <h6>
+          {{property.description}}
+          All rooms feature simple furnishings. They come with a TV with satellite channels, a hairdryer and all the
+          necessary amenities for making coffee / tea. All rooms at this hotel also have their own bathroom with a range
+          of toiletries.
+          The spacious lounge area offers light snacks and a variety of drinks. Guests can also visit the modern
+          cocktail bar. Every morning, the hotel serves a full breakfast.
+          From Queensway Station, the Metro to Oxford Street shopping is a 5-minute walk, and Buckingham Palace is 20
+          minutes away. Paddington Rail Station, which provides express services to Heathrow Airport, is a 15-minute
+          walk from the hotel.
+          Westminster is a great choice for travelers who are interested in shopping, visiting parks and history.
+          This place especially likes couples - they rated it at 8.2 for a trip together
+        </h6>
+
+        <small>
+          <ul>
+            <li>WIFI</li>
+            <li>PARKING</li>
+            <li>WIFI</li>
+            <li>PARKING</li>
+            <li>WIFI</li>
+            <li>PARKING</li>
+          </ul>
+        </small>
+
+      </div>
+    </div>
+  </div>
+</div>

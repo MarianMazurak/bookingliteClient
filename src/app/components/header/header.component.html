@@ -1,5 +1,5 @@
-<div class="container">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<!--<div class="container">-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style = "height: 90px">
     <a class="navbar-brand" routerLink="search">Bookinglite</a>
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav mr-auto">
@@ -9,7 +9,7 @@
       </ul>
       <ng-container *ngIf="this.auth.isAuthenticated; else loginbot">
         <a class="nav-link" routerLink="#"><i class="icon ion-md-body hed-buts"></i></a>
-        <a class="nav-link" routerLink="#"><span class="hed-buts">My profile</span></a>
+        <a class="nav-link" routerLinsk="#"><span class="hed-buts">My profile</span></a>
         <a class="nav-link" routerLink="login"><span class="hed-buts">Log out</span></a>
       </ng-container>
       <ng-template #loginbot>
@@ -17,4 +17,4 @@
       </ng-template>
     </div>
   </nav>
-</div>
+<!--</div>-->
