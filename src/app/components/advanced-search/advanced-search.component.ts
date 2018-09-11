@@ -32,8 +32,8 @@ export class AdvancedSearchComponent implements OnInit {
   public checkOut: string;
   public numberOfGuests: number;
 
-  public arrayFacilities: Array <number>;
-  public arrayAmenities: Array <number>;
+  public arrayFacilities: number[];
+  public arrayAmenities: number[]; //Array <number>
   public startUrl: string = window.location.protocol+ "//"
                             +window.location.host +"/"
                             +window.location.href.split('/')[3] +"/"
@@ -77,8 +77,7 @@ export class AdvancedSearchComponent implements OnInit {
     const checkOut = this.route.snapshot.paramMap.get('checkOut');
     const numberOfGuests = +this.route.snapshot.paramMap.get('numberOfGuests');
     this.propertyService.search(countryId, cityId, checkIn, checkOut, numberOfGuests).subscribe(res =>{
-    this.propertyList = res
-    console.log("111111111", this.propertyList);
+    this.propertyList = res;
   });
   }
 
@@ -126,6 +125,27 @@ export class AdvancedSearchComponent implements OnInit {
     });
   }
 
+public advanceSearch(){
+  this.selectedCountryId= Number(window.location.href.split('/')[4]);
+  this.selectedCityId= Number(window.location.href.split('/')[5]);
+  this.checkIn= window.location.href.split('/')[6];
+  this.checkOut= window.location.href.split('/')[7];
+  this.numberOfGuests= Number(window.location.href.split('/')[8]);
+  console.log("this.arrayFacilities ", this.arrayFacilities);
+  console.log("this.arrayAmenities ", this.arrayAmenities);
+this.propertyService.advanceSearch(this.selectedCountryId,
+                  this.selectedCityId,
+                  this.checkIn,
+                  this.checkOut,
+                  this.numberOfGuests,
+                  130,
+                  this.arrayFacilities,
+                  this.arrayAmenities).subscribe(res => {
+  this.propertyList = res;
+  console.log("advanse s ", res);
+});
+}
+
   public workWithCheckboxes(id: number) {
     const index = this.facilitiesId.indexOf(id);
     if (index !== -1) {
@@ -159,12 +179,19 @@ export class AdvancedSearchComponent implements OnInit {
     }
     else{
       if( window.location.href.split('/') [9] == "facilities"){ // add new facilities to url (if first case)
+        let arrFac = new Array;
+        arrFac.push(id);
+        this.arrayFacilities= arrFac;     
         let newurl: string = this.baseUrlToFacilitiesAndAmenities
                               + "facilities" +"&"  + id  +"/"
                               + window.location.href.split('/')[10];     
         history.pushState(null, null, newurl);
       }
       else{// if url has facilities we only add new
+        // let arrFac = new Array;
+        // arrFac = this.arrayFacilities;
+        // arrFac.push(id);
+        this.arrayFacilities.push(id);
         let newurl: string = this.baseUrlToFacilitiesAndAmenities
                             +window.location.href.split('/')[9] +"&" + id  +"/"
                             +window.location.href.split('/')[10];     
@@ -209,12 +236,16 @@ export class AdvancedSearchComponent implements OnInit {
     }
     else{
       if( window.location.href.split('/') [10] == "amenities"){// add new amenities to url (if first case)
+        let arrAm = new Array;
+        arrAm.push(id);
+        this.arrayAmenities= arrAm; 
         let newurl: string = this.baseUrlToFacilitiesAndAmenities
                               +window.location.href.split('/')[9] +"/"
                               +"amenities" +"&"  + id  ;     
         history.pushState(null, null, newurl);
       }
       else{// if url has amenities we only add new
+        this.arrayAmenities.push(id);
         let newurl: string = this.baseUrlToFacilitiesAndAmenities
                               +window.location.href.split('/')[9] +"/"
                               + window.location.href.split('/')[10] +"&" + id;     

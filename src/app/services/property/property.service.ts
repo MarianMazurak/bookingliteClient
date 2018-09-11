@@ -13,6 +13,7 @@ export class PropertyService {
 
   public url = 'api/addproperty';
   public searchUrl = 'api/property/search?';
+  public advanceSearchUrl = 'api/property/advancesearch?';
 
   constructor(private http: HttpClient) { }
 
@@ -39,6 +40,35 @@ export class PropertyService {
       '&numberOfGuests=' + numberOfGuests +
       '&price&facilities&amenities');
   }
+
+  public advanceSearch(selectedCountryId: number,
+          selectedCityId: number,
+          checkIn: string,
+          checkOut: string,
+          numberOfGuests: number,
+          price: number,
+          arrayFacilities: number[],
+          arrayAmenities: number[] ): Observable<Property[]> {
+            let url: string= this.advanceSearchUrl +
+            'countryId=' + selectedCountryId +
+            '&cityId=' + selectedCityId +
+            '&checkIn=' + checkIn +
+            '&checkOut=' + checkOut +
+            '&numberOfGuests=' + numberOfGuests +
+            '&price=' + price+
+            '&facilityIds='+ arrayFacilities +
+            '&amenityIds='+ arrayAmenities;
+            console.log("url advance s", url);
+      return this.http.get<Property[]>(this.advanceSearchUrl +
+      'countryId=' + selectedCountryId +
+      '&cityId=' + selectedCityId +
+      '&checkIn=' + checkIn +
+      '&checkOut=' + checkOut +
+      '&numberOfGuests=' + numberOfGuests +
+      '&price=' + price+
+      '&facilityIds='+ arrayFacilities +
+      '&amenityIds='+ arrayAmenities);
+}
 
   public getProperties(): Observable<Property[]> {
     return this.http.get<Property[]>(this.url);
