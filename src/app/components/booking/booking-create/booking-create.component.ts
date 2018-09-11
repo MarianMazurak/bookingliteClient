@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AuthService} from '../../../services/authentication/auth.service';
 import {ActivatedRoute} from '@angular/router';
 import {BookingService} from '../../../services/booking/booking.service';
 import {Apartment} from '../../../models/apartment';
@@ -48,7 +47,7 @@ export class BookingCreateComponent implements OnInit {
 
   getApartmentById(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.apartmentService.getApartmentById(id).subscribe(apart => {
+    this.apartmentService.getApartmentByIdApartment(id).subscribe(apart => {
       this.apartment = apart;
     });
   }

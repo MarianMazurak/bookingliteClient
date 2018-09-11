@@ -32,9 +32,8 @@ export class BookingService {
   cancelBookings(id: number) {
     const url = `${this.bookingUrl}/${id}`;
     const httpOption = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
+      headers: new HttpHeaders ({
+      'Content-Type':  'application/json' })
     };
     return this.http.put(url, httpOption);
 
@@ -58,8 +57,8 @@ export class BookingService {
 
 
   isBookingDateActual(checkIn, checkOut): boolean {
-    let dateChackIn = new Date(checkIn);
-    let dateChackOut = new Date(checkOut);
+    let dateChackIn = new Date (checkIn);
+    let dateChackOut = new Date (checkOut);
     this.nowDate = new Date();
     if (dateChackIn > this.nowDate || dateChackOut > this.nowDate) {
       return true;
