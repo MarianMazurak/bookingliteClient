@@ -24,7 +24,6 @@ import { UploadPhotoListComponent } from './components/property/create-property/
 import { PropertyItemComponent } from './components/property/list-property/property-item/property-item.component';
 import { PropertyService } from './services/property/property.service';
 import { PropertyTypeService } from './services/propertyTypy/property-type.service';
-import { ReviewComponent } from './components/review/review.component';
 import { ApartmentService } from './services/apartment/apartment.service';
 import { CountryService } from './services/country/coutry.service';
 import { CityService } from './services/city/city.service';
@@ -44,7 +43,7 @@ import { ItemsSizeComponent } from './components/pagination/items-size/items-siz
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { PhotoPopupComponent } from './components/property/photo-popup/photo-popup.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { ReviewsPropertyComponent } from './components/review/reviews-property/reviews-property.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +64,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     PhotoListComponent,
     UploadPhotoListComponent,
     PropertyItemComponent,
-    ReviewComponent,
     SearchFormComponent,
     EditPropertyComponent,
     BookingCreateComponent,
@@ -79,7 +77,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UserNavigationComponent,
     UserPropertiesComponent,
     UserApartmentsComponent,
-    EditApartmentComponent
+    EditApartmentComponent,
+    ReviewsPropertyComponent
   ],
   imports: [
     BrowserModule,

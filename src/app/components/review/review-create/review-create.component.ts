@@ -1,5 +1,4 @@
-import { Component, OnInit, enableProdMode } from '@angular/core';
-import {AuthService} from '../../../services/authentication/auth.service';
+import {Component, OnInit, enableProdMode} from '@angular/core';
 import {ReviewService} from '../../../services/review/review.service';
 import {ActivatedRoute} from '@angular/router';
 import {FormGroup} from '@angular/forms';
@@ -14,31 +13,47 @@ import {BookingService} from '../../../services/booking/booking.service';
   styleUrls: ['./review-create.component.css']
 })
 export class ReviewCreateComponent implements OnInit {
-  private authenticated;
   review: CreateReview;
   booking: Booking;
-  constructor(private auth: AuthService,
-              private reviewService: ReviewService,
+  formValid = true;
+  errorMessage = '';
+  flag: boolean;
+
+  constructor(private reviewService: ReviewService,
               private route: ActivatedRoute,
               private bookingService: BookingService,
-              private location: Location) { }
+              private location: Location) {
+  }
 
   ngOnInit() {
-    this.authenticated = this.auth.isAuthenticated;
     this.review = new CreateReview();
+    this.getBooking();
+
   }
-  createReview() {
+
+  createReview(createReviewForm: FormGroup) {
     const id = +this.route.snapshot.paramMap.get('id');
-    console.log('controller review', this.review);
-    this.reviewService.createReview(this.review, id).subscribe(res => {
-      alert('Review created');
-    });
+    if (createReviewForm.valid) {
+      this.reviewService.createReview(this.review, id).subscribe(res => {
+        alert('Review created');
+        this.getBooking();
+      }, error => {
+        this.errorMessage = JSON.parse(error.error).message;
+      });
+    } else {
+      this.formValid = false;
+    }
   }
+
   goBack() {
     this.location.back();
   }
+
   getBooking() {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.bookingService.getBooking(id).subscribe(b => {this.booking = b; } );
+    this.bookingService.getBooking(id).subscribe(b => {
+      this.booking = b;
+      this.flag = !!b.reviewDto;
+    });
   }
 }

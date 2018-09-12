@@ -14,11 +14,11 @@ import {BookingComponent} from './components/booking/booking.component';
 import {ReviewBookingComponent} from './components/review/review-booking/review-booking.component';
 import {ReviewCreateComponent} from './components/review/review-create/review-create.component';
 import {BookingCreateComponent} from './components/booking/booking-create/booking-create.component';
-import {ReviewComponent} from './components/review/review.component';
 import {OwnerPropertiesComponent} from './components/property/owner-properties/owner-properties.component';
 import {GuestArrivalsComponent} from './components/booking/guest-arrivals/guest-arrivals.component';
 import {UserComponent} from './components/user/user.component';
 import {UserPropertiesComponent} from './components/user/user-profile/user-properties/user-properties.component';
+import {ReviewsPropertyComponent} from './components/review/reviews-property/reviews-property.component';
 import {UserApartmentsComponent} from './components/user/user-profile/user-properties/user-apartments/user-apartments.component';
 import {AuthGuardService} from './services/authentication/auth-guard.service';
 import {RoleGuardService} from './services/authentication/role-guard.service';
@@ -36,15 +36,14 @@ const routes: Routes = [
   {path: 'apartment-list', component: ListApartmentComponent},
   {path: 'property/:id/apartment', component: CreateApartmentComponent},
   {path: 'search', component: SearchComponent},
-  {path: 'edit-property/:id', component: EditPropertyComponent, canActivate: [AuthGuardService, RoleGuardService], data: {expectedRole: 'ROLE_OWNER'}},
   {path: 'property-detailes/:id', component: PropertyComponent},
-  {path: 'review-booking/:id', component: ReviewBookingComponent},
-  {path: 'review-create/:id', component: ReviewCreateComponent},
-  {path: 'booking-create/:id', component: BookingCreateComponent},
-  {path: 'property/:id/reviews', component: ReviewComponent},
-  {path: 'owner-properties', component: OwnerPropertiesComponent},
-  {path: 'guest-arrivals/:id', component: GuestArrivalsComponent},
+  {path: 'review-booking/:id', component: ReviewBookingComponent, canActivate: [AuthGuardService]},
+  {path: 'review-create/:id', component: ReviewCreateComponent, canActivate: [AuthGuardService]},
+  {path: 'booking-create/:id', component: BookingCreateComponent, canActivate: [AuthGuardService]},
+  {path: 'owner-properties', component: OwnerPropertiesComponent, canActivate: [AuthGuardService]},
+  {path: 'reviews-property/:id', component: ReviewsPropertyComponent, canActivate: [AuthGuardService]},
   {path: 'user', component: UserComponent, canActivate: [AuthGuardService]},
+  {path: 'myproperties/:id/guest-arrivals/:filter', component: GuestArrivalsComponent, canActivate: [AuthGuardService, RoleGuardService], data: {expectedRole: 'ROLE_OWNER'}},
   {path: 'myproperties', component: UserPropertiesComponent, canActivate: [AuthGuardService, RoleGuardService], data: {expectedRole: 'ROLE_OWNER'}},
   {path: 'myproperty/:id/apartments', component: UserApartmentsComponent, canActivate: [AuthGuardService, RoleGuardService], data: {expectedRole: 'ROLE_OWNER'}},
   {path: 'property/:pid/edit-apartment/:apid', component: EditApartmentComponent, canActivate: [AuthGuardService, RoleGuardService], data: {expectedRole: 'ROLE_OWNER'}}

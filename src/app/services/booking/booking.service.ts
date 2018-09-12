@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
 import {Booking} from '../../models/booking';
 import {BookingCreate} from '../../models/booking-create';
 
@@ -14,6 +13,7 @@ export class BookingService {
 
   private bookingUrl = 'api/booking';
   private bookingByPageUrl = 'api/bookings';
+  private myPropertiesUrl = 'api/myproperties';
   private nowDate: Date;
 
   constructor(private http: HttpClient) {
@@ -32,8 +32,9 @@ export class BookingService {
   cancelBookings(id: number) {
     const url = `${this.bookingUrl}/${id}`;
     const httpOption = {
-      headers: new HttpHeaders ({
-      'Content-Type':  'application/json' })
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
     };
     return this.http.put(url, httpOption);
 
@@ -57,8 +58,8 @@ export class BookingService {
 
 
   isBookingDateActual(checkIn, checkOut): boolean {
-    let dateChackIn = new Date (checkIn);
-    let dateChackOut = new Date (checkOut);
+    let dateChackIn = new Date(checkIn);
+    let dateChackOut = new Date(checkOut);
     this.nowDate = new Date();
     if (dateChackIn > this.nowDate || dateChackOut > this.nowDate) {
       return true;
@@ -66,6 +67,7 @@ export class BookingService {
       return false;
     }
   }
+
   public createBooking(bookingCreate: BookingCreate, apartmentId: number) {
     const url = `api/booking/${apartmentId}`;
     return this.http.post(url, bookingCreate, {
@@ -76,7 +78,8 @@ export class BookingService {
     });
   }
 
-  getGuestArrivalsList(id: number): Observable<Booking[]> {
-    return this.http.get<Booking []>('api/guestArrivals/' + id);
+  getPageGuestArrivalsList(id: number, page: number, size: number, filterBooking: string): Observable<Booking[]> {
+    return this.http.get<Booking []>(
+      `${this.myPropertiesUrl}/${id}/guestArrivals?page=${page}&size=${size}&filterBooking=${filterBooking}`);
   }
 }
