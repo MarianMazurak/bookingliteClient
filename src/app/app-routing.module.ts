@@ -26,6 +26,7 @@ import {EditApartmentComponent} from './components/apartment/edit-apartment/edit
 import {PropertyDetailsComponent} from './components/property/property-details/property-details.component';
 
 const routes: Routes = [
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'bookings/:filter/:page', component: ListBookingComponent },
