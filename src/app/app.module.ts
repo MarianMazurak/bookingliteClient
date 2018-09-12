@@ -45,6 +45,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { PhotoPopupComponent } from './components/property/photo-popup/photo-popup.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PropertyDetailsComponent } from './components/property/property-details/property-details.component';
+import { AdvancedSearchComponent } from './components/advanced-search/advanced-search.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { PropertyDetailsComponent } from './components/property/property-details
     UserPropertiesComponent,
     UserApartmentsComponent,
     EditApartmentComponent,
-    PropertyDetailsComponent
+    PropertyDetailsComponent,
+    AdvancedSearchComponent
   ],
   imports: [
     BrowserModule,

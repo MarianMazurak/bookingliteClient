@@ -1,4 +1,6 @@
-
+*{
+  box-sizing: border-box;
+}
 li {
     float: left;
     margin-right: 5px;

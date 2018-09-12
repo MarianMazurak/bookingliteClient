@@ -47,8 +47,10 @@
       </div>
 
     </div>
+
     <img src="assets/image/pin.png" style="width: 60px; margin-left: 60px">
-    <span *ngIf="property" style="font-size: 21px; font-style:italic">Location : {{property.address.addressLine}},zip : {{property.address.zip}}, {{property.address.city.name}}, {{property.address.city.country.name}}</span>
+    <span *ngIf="property" style="font-size: 21px; font-style:italic">Location : {{property.address.addressLine}},
+      zip : {{property.address.zip}}, {{property.address.city.name}}, {{property.address.city.country.name}}</span>
 
     <div class="col-xs-9" *ngIf="property">
 

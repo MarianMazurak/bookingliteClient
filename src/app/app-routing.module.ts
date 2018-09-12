@@ -24,6 +24,7 @@ import {AuthGuardService} from './services/authentication/auth-guard.service';
 import {RoleGuardService} from './services/authentication/role-guard.service';
 import {EditApartmentComponent} from './components/apartment/edit-apartment/edit-apartment.component';
 import {PropertyDetailsComponent} from './components/property/property-details/property-details.component';
+import {AdvancedSearchComponent} from './components/advanced-search/advanced-search.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -38,6 +39,7 @@ const routes: Routes = [
   {path: 'apartment-list', component: ListApartmentComponent},
   {path: 'property/:id/apartment', component: CreateApartmentComponent},
   {path: 'search', component: SearchComponent},
+  {path: 'advanced-search', component: AdvancedSearchComponent, canActivate: [AuthGuardService]},
   {path: 'edit-property/:id', component: EditPropertyComponent, canActivate: [AuthGuardService, RoleGuardService], data: {expectedRole: 'ROLE_OWNER'}},
   {path: 'property-detailes/:id', component: PropertyDetailsComponent, canActivate: [AuthGuardService] },
   {path: 'review-booking/:id', component: ReviewBookingComponent},

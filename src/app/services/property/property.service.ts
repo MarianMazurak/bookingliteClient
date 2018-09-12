@@ -41,4 +41,17 @@ export class PropertyService {
     };
     return this.http.put('api/property/' + id, model, httpOptions);
   }
+  public search(selectedCountryId: number,
+                selectedCityId: number,
+                checkIn: string,
+                checkOut: string,
+                numberOfGuests: number): Observable<Property[]> {
+    return this.http.get<Property[]>('api/property/search?' +
+      'countryId=' + selectedCountryId +
+      '&cityId=' + selectedCityId +
+      '&checkIn=' + checkIn +
+      '&checkOut=' + checkOut +
+      '&numberOfGuests=' + numberOfGuests);
+  }
+
 }

@@ -8,7 +8,10 @@
 
 
 .img-responsive {
-  width: 210px;
-  height: 180px;
-  position: relative ;
+  margin-left: -14px;
+  margin-top: 5px;
+  width: 280px;
+  height: 205px;
+  position: absolute ;
+  border-radius: 15px;
 }
