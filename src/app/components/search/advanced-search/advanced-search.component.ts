@@ -8,6 +8,7 @@ import {PropertyService} from '../../../services/property/property.service';
 import {CountryService} from '../../../services/country/coutry.service';
 import {CityService} from '../../../services/city/city.service';
 import {FacilityService} from '../../../services/facility/facility.service';
+import {HttpParams} from '@angular/common/http';
 
 @Component ({
   selector: 'app-advanced-search',
@@ -15,6 +16,7 @@ import {FacilityService} from '../../../services/facility/facility.service';
   styleUrls: ['./advanced-search.component.css']
 })
 export class AdvancedSearchComponent implements OnInit {
+  public NOT_SELECT_DATA_MESSAGE = 'Please, select country, city, checkin, checkout and number of guests';
   errorMsg: string;
   propertyList: Property[];
   public facilities: Facility[];
@@ -46,7 +48,7 @@ export class AdvancedSearchComponent implements OnInit {
         this.mainSearch();
       }
     } else {
-      this.errorMsg = 'Please, select country, city, checkin, checkout and number of guests';
+      this.errorMsg = this.NOT_SELECT_DATA_MESSAGE;
     }
     this.getFacilities();
     this.getAmenities();
@@ -153,16 +155,23 @@ export class AdvancedSearchComponent implements OnInit {
   }
 
   public onApply() {
-    this.router.navigate(['/advanced-search'], { queryParams:
-        {
-          country: this.selectedCountryId,
-          city: this.selectedCityId,
-          checkin: this.checkIn,
-          checkout: this.checkOut,
-          num_of_guests: this.selectedNumberOfGuests,
-          facilities: this.selectedFasilityIds.toString(),
-          amenities: this.selectedAmenityIds.toString()
-        }});
+    let facilitiesValue;
+    if (this.selectedFasilityIds.length > 0) {
+      facilitiesValue = this.selectedFasilityIds.join(',');
+    }
+    let amenitiesValue;
+    if (this.selectedAmenityIds.length > 0) {
+      amenitiesValue = this.selectedAmenityIds.join(',');
+    }
+    this.router.navigate(['/advanced-search'], { queryParams: {
+        country: this.selectedCountryId,
+        city: this.selectedCityId,
+        checkin: this.checkIn,
+        checkout: this.checkOut,
+        num_of_guests: this.selectedNumberOfGuests,
+        facilities: facilitiesValue,
+        amenities: amenitiesValue
+      }});
     this.advancedSearch();
   }
 }
