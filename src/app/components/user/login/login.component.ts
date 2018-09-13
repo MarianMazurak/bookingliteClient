@@ -12,20 +12,20 @@ export class LoginComponent implements OnInit {
   loginDto: LoginDto = new LoginDto();
   formValid = true;
   errorMessage = '';
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService,
+              private router: Router) { }
 
   ngOnInit() {
     this.signOut();
   }
-
   signIn(form: FormGroup) {
     if (form.valid) {
     this.auth.signIn(this.loginDto)
       .subscribe(res => {
         this.auth.saveToken(res);
         this.auth.loadUser();
-        this.router.navigate(['/']);
-      }, error => {
+        this.onSubmit();
+        }, error => {
         console.log(error);
         this.errorMessage = JSON.parse(error.error).message;
       });
@@ -33,14 +33,10 @@ export class LoginComponent implements OnInit {
       this.formValid = false;
     }
   }
-
-
-  getToken() {
-    console.log('in getToken component');
-    console.log('in getToken component111', this.auth.getToken());
-  }
-
   signOut() {
     this.auth.signOut();
+  }
+  onSubmit() {
+    this.router.navigate(['/search']);
   }
 }

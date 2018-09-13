@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router} from '@angular/router';
 import { AuthService } from '../../../services/authentication/auth.service';
 import { RegisterDto } from '../../../models/registerDto';
-import { Observable } from 'rxjs';
 import { Country } from '../../../models/country';
 import { CountryService } from '../../../services/country/coutry.service';
 import { City } from '../../../models/city';
 import { CityService } from '../../../services/city/city.service';
+
 
 @Component({
   selector: 'app-register',
@@ -21,7 +22,10 @@ export class RegisterComponent implements OnInit {
   selectedCountry: number;
   formValid = true;
   errorMessage = '';
-  constructor(private auth: AuthService, private countryService: CountryService, private cityService: CityService) { }
+  constructor(private auth: AuthService,
+              private countryService: CountryService,
+              private cityService: CityService,
+              private router: Router) { }
 
   ngOnInit() {
     this.getCountries();
@@ -41,7 +45,6 @@ export class RegisterComponent implements OnInit {
   changeCity(id: number) {
     this.selectedCity = id;
   }
-
   getCities(countryId: number) {
     this.cityService.getCity(countryId).subscribe((citiesarr) => {
       this.cities = citiesarr;
@@ -52,12 +55,11 @@ export class RegisterComponent implements OnInit {
   }
     signUp(registerForm: FormGroup) {
     if (registerForm.valid) {
-    console.log(JSON.stringify(this.registerDto));
-    this.registerDto.address.city.id = this.selectedCity;
-    this.registerDto.address.city.country.id = this.selectedCountry;
-    this.auth.signUp(this.registerDto).subscribe((result) => {
-      console.log(result);
-    }, error => {
+      this.registerDto.address.city.id = this.selectedCity;
+      this.registerDto.address.city.country.id = this.selectedCountry;
+      this.auth.signUp(this.registerDto).subscribe((result) => {
+      this.onSubmit();
+      }, error => {
       console.log(error);
       this.errorMessage = JSON.parse(error.error).message;
     });
@@ -65,5 +67,7 @@ export class RegisterComponent implements OnInit {
       this.formValid = false;
     }
   }
-
+  onSubmit() {
+    this.router.navigate(['/login']);
+  }
 }

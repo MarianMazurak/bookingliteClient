@@ -44,6 +44,8 @@ import { ItemsSizeComponent } from './components/pagination/items-size/items-siz
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { PhotoPopupComponent } from './components/property/photo-popup/photo-popup.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PropertyDetailsComponent } from './components/property/property-details/property-details.component';
+import { AdvancedSearchComponent } from './components/advanced-search/advanced-search.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +81,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UserNavigationComponent,
     UserPropertiesComponent,
     UserApartmentsComponent,
-    EditApartmentComponent
+    EditApartmentComponent,
+    PropertyDetailsComponent,
+    AdvancedSearchComponent
   ],
   imports: [
     BrowserModule,

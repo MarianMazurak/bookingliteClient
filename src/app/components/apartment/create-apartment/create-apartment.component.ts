@@ -46,15 +46,12 @@ export class CreateApartmentComponent implements OnInit {
   public getAmenities() {
     this.apartmentService.getAmenities().subscribe(amenity => {
       this.amenities = amenity;
-      console.log('Amenities: ', amenity);
     });
   }
   public createApartment(createApartmentForm: FormGroup) {
     if (createApartmentForm.valid) {
     const id = +this.route.snapshot.paramMap.get('id');
     this.createdApartment.apartmentTypeId = this.selectedTypeId;
-    console.log(this.createdApartment.numberOfGuests);
-    console.log(this.createdApartment);
     this.apartmentService.createApartment(this.createdApartment, id).subscribe(res => {
       this.onSubmit();
       }, error => {
