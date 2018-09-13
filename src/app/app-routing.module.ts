@@ -23,6 +23,7 @@ import {UserApartmentsComponent} from './components/user/user-profile/user-prope
 import {AuthGuardService} from './services/authentication/auth-guard.service';
 import {RoleGuardService} from './services/authentication/role-guard.service';
 import {EditApartmentComponent} from './components/apartment/edit-apartment/edit-apartment.component';
+import {AdvancedSearchComponent} from './components/search/advanced-search/advanced-search.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -47,7 +48,8 @@ const routes: Routes = [
   {path: 'user', component: UserComponent, canActivate: [AuthGuardService]},
   {path: 'myproperties', component: UserPropertiesComponent, canActivate: [AuthGuardService, RoleGuardService], data: {expectedRole: 'ROLE_OWNER'}},
   {path: 'myproperty/:id/apartments', component: UserApartmentsComponent, canActivate: [AuthGuardService, RoleGuardService], data: {expectedRole: 'ROLE_OWNER'}},
-  {path: 'property/:pid/edit-apartment/:apid', component: EditApartmentComponent, canActivate: [AuthGuardService, RoleGuardService], data: {expectedRole: 'ROLE_OWNER'}}
+  {path: 'property/:pid/edit-apartment/:apid', component: EditApartmentComponent, canActivate: [AuthGuardService, RoleGuardService], data: {expectedRole: 'ROLE_OWNER'}},
+  {path: 'advanced-search', component: AdvancedSearchComponent, canActivate: [AuthGuardService]}
 ];
 
 @NgModule({

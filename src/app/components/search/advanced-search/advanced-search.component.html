@@ -1,0 +1,42 @@
+<div class="container">
+
+  <app-search-form (mainDataChange)='onMainDataChange($event)'></app-search-form>
+  <div *ngIf="errorMsg" class="alert alert-danger" role="alert">{{errorMsg}}</div>
+
+  <div class="col-3 filter-form-container">
+    <form>
+      <h2>Filter</h2>
+      <div class="form-group">
+        <label>Property Name</label>
+        <input type="text" class="form-control" placeholder="Property Name">
+      </div>
+
+      <div class="form-group">
+        <h5>Facilities</h5>
+        <div class="custom-control custom-checkbox"
+             *ngFor="let facility of facilities">
+          <input [checked]="selectedFasilityIds.includes(facility.id.toString())" type="checkbox" class="custom-control-input" id="customCheck{{facility.id}}" (click)="onFacilitySelect(facility.id)">
+          <label class="custom-control-label"
+                 for="customCheck{{facility.id}}">{{facility.name}}</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <h5>Amenities</h5>
+        <div class="custom-control custom-checkbox"
+             *ngFor="let amenity of amenities">
+          <input [checked]="selectedAmenityIds.includes(amenity.id.toString())" type="checkbox" class="custom-control-input" id="customCheck2{{amenity.id}}" (click)="onAmenitySelect(amenity.id)">
+          <label class="custom-control-label"
+                 for="customCheck2{{amenity.id}}">{{amenity.name}}</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" (click)="onApply()">Apply</button>
+      </div>
+    </form>
+  </div>
+
+  <app-list-property [propertyList]="propertyList"></app-list-property>
+
+</div>

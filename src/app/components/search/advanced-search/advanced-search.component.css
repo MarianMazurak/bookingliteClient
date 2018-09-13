@@ -1,0 +1,33 @@
+*{
+  box-sizing: border-box;
+}
+.img-responsive {
+  width: 210px;
+  height: 180px;
+  position: relative ;
+}
+.card-body {
+  height: 230px;
+}
+#navbarRightSide {
+  justify-content: flex-end;
+}
+.searchform {
+  border: 5px solid #f8f9fa;
+  border-radius: 10px;
+  padding: 5px;
+  display: inline-flex
+}
+.search-bar {
+  margin-top:30px;
+  display: flex;
+  justify-content: center;
+}
+.result-property-list-container {
+  margin-top: 50px;
+}
+.filter-form-container {
+  padding-top: 5px;
+  border: 3px solid #f8f9fa;
+  border-radius: 10px;
+}
