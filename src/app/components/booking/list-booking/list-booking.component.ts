@@ -3,6 +3,7 @@ import { Booking } from '../../../models/booking';
 import { BookingService } from '../../../services/booking/booking.service';
 import { PaginationService } from '../../../services/pagination/pagination.service';
 import { AuthService } from '../../../services/authentication/auth.service';
+import {BookingDto} from '../../../models/bookingDto';
 
 @Component({
   selector: 'app-list-booking',
@@ -12,7 +13,7 @@ import { AuthService } from '../../../services/authentication/auth.service';
 export class ListBookingComponent implements OnInit {
 
   private authenticated;
-  bookings: Booking[];
+  bookings: BookingDto[];
   currentPage: number ;
   selectedItemsSize: number;
   pagesToPagination : number [];//count page to show in pagination
