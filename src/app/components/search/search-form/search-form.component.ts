@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {CountryService} from '../../../services/country/coutry.service';
 import {CityService} from '../../../services/city/city.service';
 import {Country} from '../../../models/country';
@@ -19,7 +19,7 @@ export class SearchFormComponent implements OnInit {
   public checkIn: string;
   public checkOut: string;
   public selectedNumberOfGuests: number;
-
+  @Output() mainDataChange = new EventEmitter();
   constructor(private countryService: CountryService,
               private cityService: CityService,
               private router: Router,
@@ -73,5 +73,11 @@ export class SearchFormComponent implements OnInit {
           checkout: this.checkOut,
           num_of_guests: this.selectedNumberOfGuests
         }});
+    this.mainDataChange.emit({
+      country: this.selectedCountryId,
+      city: this.selectedCityId,
+      checkin: this.checkIn,
+      checkout: this.checkOut,
+      num_of_guests: this.selectedNumberOfGuests});
   }
 }

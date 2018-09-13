@@ -5,14 +5,16 @@
     <div class="form-group mr-2">
       <select class="form-control" value="" #country (change)="onCountrySelect(country.value)">
         <option disabled>Country</option>
-        <option *ngFor="let country of countries" [selected]="country.id === this.selectedCountryId" value="{{country.id}}">{{country.name}}</option>
+        <option *ngFor="let country of countries" [selected]="country.id === this.selectedCountryId"
+                value="{{country.id}}">{{country.name}}</option>
       </select>
     </div>
 
     <div *ngIf="cities" class="form-group mr-2">
       <select class="form-control" #city (change)="onCitySelect(city.value)">
         <option disabled>City</option>
-        <option *ngFor="let city of cities" [selected]="city.id === this.selectedCityId" value="{{city.id}}">{{city.name}}</option>
+        <option *ngFor="let city of cities" [selected]="city.id === this.selectedCityId"
+                value="{{city.id}}">{{city.name}}</option>
       </select>
     </div>
 
