@@ -28,6 +28,7 @@ export class BookingCreateComponent implements OnInit {
   ngOnInit() {
     this.booking = new BookingCreate();
     this.today = new Date();
+    this.booking.numberOfGuests = 1;
     this.getApartmentById();
     this.flag = true;
   }
@@ -51,6 +52,12 @@ export class BookingCreateComponent implements OnInit {
     this.apartmentService.getApartmentByIdApartment(id).subscribe(apart => {
       this.apartment = apart;
     });
+  }
+
+  calculateTotalDays(checkIn, checkOut): number {
+    if (this.bookingService.calculateNumberOfDates(checkIn, checkOut) > 0) {
+      return this.bookingService.calculateNumberOfDates(checkIn, checkOut);
+    } else { return 0; }
   }
 
   calculatePriceByDates(checkIn, checkOut): number {

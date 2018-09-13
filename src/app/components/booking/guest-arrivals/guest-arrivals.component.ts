@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Booking} from '../../../models/booking';
-import {AuthService} from '../../../services/authentication/auth.service';
 import {BookingService} from '../../../services/booking/booking.service';
 import {ActivatedRoute} from '@angular/router';
 import {PaginationService} from '../../../services/pagination/pagination.service';
@@ -13,7 +12,7 @@ import {PaginationService} from '../../../services/pagination/pagination.service
 export class GuestArrivalsComponent implements OnInit {
   guestArrivalsList: Booking[];
   currentPage = 1;
-  selectedItemsSize: number;
+  selectedItemsSize = 10;
   pagesToPagination: number [];
   totalPages: number;
   totalElements: number;

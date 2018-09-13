@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Review} from '../../../models/review';
-import {AuthService} from '../../../services/authentication/auth.service';
 import {ActivatedRoute} from '@angular/router';
 import {ReviewService} from '../../../services/review/review.service';
 import {PaginationService} from '../../../services/pagination/pagination.service';
@@ -13,10 +12,11 @@ import {PaginationService} from '../../../services/pagination/pagination.service
 export class ReviewsPropertyComponent implements OnInit {
   reviews: Review [];
   currentPage = 1;
-  selectedItemsSize: number;
-  pagesToPagination: number []; // count page to show in pagination
-  totalPages: number; // all pages with selected `selectedItemOnPage`
-  totalElements: number; // condition in html. If==0 you have not booking
+  selectedItemsSize = 10;
+  pagesToPagination: number [];
+  totalPages: number;
+  totalElements: number;
+
   constructor(private route: ActivatedRoute,
               private reviewService: ReviewService,
               private paginationService: PaginationService) {

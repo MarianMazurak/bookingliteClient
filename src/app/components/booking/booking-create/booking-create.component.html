@@ -7,54 +7,65 @@
         <div *ngIf="apartment">
           <div class="beforeCreate" *ngIf="flag">
             <div class="form-group row">
-              <label for="prName" class="col-sm-2 col-form-label">Property Name : </label>
+            <div class="form-group">
+              <label >Property Name : </label>
               <div class="col-sm-5">
-                <input type="text" readonly class="form-control-plaintext" id="prName" value="{{apartment.propertyDto.name}}">
+                <textarea class="form-control" readonly >{{apartment.propertyDto.name}}</textarea>
               </div>
             </div>
-            <div class="form-group row">
-              <label for="phone" class="col-sm-2 col-form-label">Contact phone number : </label>
+            <div class="form-group">
+              <label>Contact phone number : </label>
               <div class="col-sm-5">
-                <input type="text" class="form-control-plaintext" id="phone"
-                       value="{{apartment.propertyDto.phoneNumber}}">
+                <textarea class="form-control" readonly >{{apartment.propertyDto.phoneNumber}}</textarea>
               </div>
             </div>
+            </div>
             <div class="form-group row">
-              <label for="price" class="col-sm-2 col-form-label">Total price : </label>
-              <div class="col-sm-5">
-                <input type="text" readonly class="form-control-plaintext" id="price"
-                       value="{{calculatePriceByDates(booking.checkIn,booking.checkOut)}} $">
+              <div class="form-group">
+              <label>Total days : </label>
+                <div class="col-sm-5">
+              <textarea class="form-control" readonly >{{calculateTotalDays(booking.checkIn,booking.checkOut)}} day(s)</textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                  <label>Total price : </label>
+                  <div class="col-sm-5">
+                    <textarea class="form-control" readonly >{{calculatePriceByDates(booking.checkIn,booking.checkOut)}} $</textarea>
+                  </div>
+
               </div>
             </div>
             <form #createBookingForm=ngForm (ngSubmit)="createBooking(createBookingForm)"
                   [ngClass]="{'was-validated' : !formValid}">
               <div class="form-group row">
-                <label for="in" class="col-sm-2 col-form-label">Check In : </label>
+              <div class="form-group">
+                <label>Check In : </label>
                 <div class="col-sm-5">
                   <input type="date" class="form-control" id="in" name="checkIn" min="{{today | date:'yyyy-MM-dd' }}"
                          [(ngModel)]="booking.checkIn" required="required">
                 </div>
               </div>
-              <div class="form-group row">
-                <label for="out" class="col-sm-2 col-form-label">Check Out : </label>
+              <div class="form-group">
+                <label>Check Out : </label>
                 <div class="col-sm-5">
                   <input type="date" class="form-control" id="out" name="checkOut" min="{{today | date:'yyyy-MM-dd' }}"
                          [(ngModel)]="booking.checkOut" required="required">
                 </div>
               </div>
-              <div class="form-group row">
-                <label for="numberOfGuests" class="col-sm-2 col-form-label">Number of Guests : </label>
-                <div class="col-sm-5">
-                  <input type="number" min="1" max="100" class="form-control-plaintext" id="numberOfGuests"
-                         name="numberOfGuests"
-                         [(ngModel)]="booking.numberOfGuests" required="required">
-                </div>
+              </div>
+              <div class="form-group">
+                <label>Number of guests  (between 1 and 8):</label>
+                <input class="form-control" name="numberOfGuests" #name="ngModel" [minlength]="1" [maxlength]="1"
+                       [(ngModel)]="booking.numberOfGuests"
+                       type="text" required pattern="[1-8]" >
+                <div class="invalid-feedback">Number of guests must be a number type between 1 and 8 !!!</div>
               </div>
               <ng-container *ngIf="errorMessage !== ''">
                 <div class="alert alert-danger">
                   {{errorMessage}}
                 </div>
               </ng-container>
+              <hr>
               <div class="form-group row">
                 <button type="submit" class="btn info">Submit booking</button>
               </div>
@@ -96,13 +107,13 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="numberOfGuests" class="col-sm-2 col-form-label">Number of Guests : </label>
+                <label class="col-sm-2 col-form-label">Number of Guests : </label>
                 <div class="col-sm-5">
                   {{booking.numberOfGuests}}
                 </div>
               </div>
               <div class="form-group row">
-                <button type="button" routerLink="/bookings/allBookings"
+                <button type="button" routerLink="/bookings/allBookings/1"
                         class="btn btn-outline-primary">My Bookings</button>
               </div>
           </div>
