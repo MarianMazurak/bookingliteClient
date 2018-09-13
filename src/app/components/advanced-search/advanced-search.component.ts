@@ -21,6 +21,7 @@ export class AdvancedSearchComponent implements OnInit {
   propertyList: Property[];
   public facilities: Facility[];
   public amenities: Amenity[];
+  public selectedPrice = 9999;
   public selectedCountryId: number;
   public selectedCityId: number;
   public checkIn: string;
@@ -81,6 +82,10 @@ export class AdvancedSearchComponent implements OnInit {
       && (this.route.snapshot.queryParamMap.get('amenities').length !== 0)) {
       this.selectedAmenityIds = this.route.snapshot.queryParamMap.get('amenities').split(',');
     }
+    if (this.route.snapshot.queryParamMap.has('price')
+      && (this.route.snapshot.queryParamMap.get('price').length !== 0)) {
+      this.selectedPrice = Number.parseInt(this.route.snapshot.queryParamMap.get('price'));
+    }
   }
 
   public mainSearch() {
@@ -97,6 +102,7 @@ export class AdvancedSearchComponent implements OnInit {
       this.checkIn,
       this.checkOut,
       this.selectedNumberOfGuests,
+      this.selectedPrice,
       this.selectedFasilityIds,
       this.selectedAmenityIds
     ).subscribe( properties => this.propertyList = properties);
@@ -169,6 +175,7 @@ export class AdvancedSearchComponent implements OnInit {
         checkin: this.checkIn,
         checkout: this.checkOut,
         num_of_guests: this.selectedNumberOfGuests,
+        price: this.selectedPrice,
         facilities: facilitiesValue,
         amenities: amenitiesValue
       }});
