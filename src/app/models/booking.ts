@@ -5,6 +5,7 @@ import {BookingStatus} from './booking-status';
 
 
 export class Booking {
+  reviewDto: any;
   bookingId: number;
   apartment: Apartment;
   user: User;

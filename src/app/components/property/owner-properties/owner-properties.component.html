@@ -38,19 +38,15 @@
                 <div class="col-md-3 border-left card-body">
                   <ul class="list-unstyled">
                     <li><h3>Rating {{property.rating}}</h3></li>
-                    <li class="text-secondary">
-                      <small>{{property.id}} Reviews</small>
-                      <!--<small>{property.review}</small>-->
-                    </li>
                   </ul>
                   <button type="button"
-                          routerLink="{{property.id}}/reviews"
+                          routerLink="/reviews-property/{{property.id}}"
                           class="btn btn-outline-primary">
-                    Review
+                    Reviews
                   </button>
                   <br><br>
                   <button type="button"
-                          routerLink="/guest-arrivals/{{property.id}}"
+                          routerLink="/myproperties/{{property.id}}/guest-arrivals/futureBookings"
                           class="btn btn-outline-primary">
                     Guest Arrivals
                   </button>

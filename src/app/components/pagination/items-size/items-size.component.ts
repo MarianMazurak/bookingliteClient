@@ -7,7 +7,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class ItemsSizeComponent implements OnInit {
 
-  itemsSize:  number[] = [1, 3, 5]; 
+  itemsSize:  number[] = [5, 10, 25];
   selectedItemsSize: number;
 
   @Output() sentSelectedItemsSize = new EventEmitter<number>();

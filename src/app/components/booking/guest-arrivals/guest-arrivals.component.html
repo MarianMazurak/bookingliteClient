@@ -1,112 +1,93 @@
-<h1>Guest Arrivals List</h1>
+<app-user-navigation></app-user-navigation>
+<br>
 
-<ul style="list-style: none">
-  <li *ngFor="let booking of guestArrivalsList">
-    <div *ngIf=" isBookingDateActual(booking.checkIn, booking.checkOut)">
-      <div class="container">
-        <div class="row mb-3">
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-md-3">
-                    <img class="img-responsive" alt="No Photo"
-                         src="http://res.cloudinary.com/lv326/image/upload/v1535107395/properties/38ac382d-0bed-4280-8e93-8643057c15ca.jpg">
-                  </div>
-                  <div class="col-md-6  card-body">
-                    <div class="list-title">
-                      <ul class="list-inline list-unstyled">
-                        <li class="list-inline-item">
-                          <a routerLink="/booking/{{booking.bookingId}}">
-                            <h4>{{booking.userDto.email}}</h4>
-                          </a>
-                        </li>
-                        <li class="list-inline-item text-warning"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                          class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half"></i></li>
-                        <li class="list-inline-item text-success"><i class="fa fa-thumbs-up"></i></li>
-                      </ul>
-                    </div>
-                    <div class="list-location">
-                      Dates: {{booking.checkIn | date:'dd-MM-yyyy' }} - {{booking.checkOut | date:'dd-MM-yyyy' }}
-                    </div>
-                    <div class="list-descrip">
-                      <small>Number of guests: {{booking.apartmentDto.numberOfGuests}}
-                      </small>
-                      <br>
-                      <small>Apartment type: {{booking.apartmentDto.apartmentType.name}}
-                      </small>
-                      <ul class="list-unstyled">
-                        <li><h3>Price: {{booking.totalPrice}}* </h3></li>
-                        <small> *number of days: {{calculateNumberOfDates(booking.checkIn , booking.checkOut )}}</small>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </li>
-
-  <div class="container">
-    <br>
-    <hr>
-    <h2>Past bookings : </h2>
-    <br>
+<div class="container">
+  <div class="text-center">
+    <ul class="pagination">
+      <li class="page-item active" [ngClass]="{active: filterBookings == futureBookings}">
+        <p class="page-link" (click)="filterFutureBookings()">Future bookings</p>
+      </li>
+      <li class="page-item active" [ngClass]="{active: filterBookings == actualBookings }">
+        <p class="page-link" (click)="filterActualBooking()">Actual bookings</p>
+      </li>
+      <li class="page-item active" [ngClass]="{active: filterBookings == pastBookings }">
+        <p class="page-link" (click)="filterPastBooking()">Past bookings</p>
+      </li>
+    </ul>
   </div>
-</ul>
-<ul style="list-style: none">
-  <li *ngFor="let booking of guestArrivalsList">
-    <div *ngIf="!isBookingDateActual(booking.checkIn, booking.checkOut)">
-      <div class="container">
-        <div class="row mb-3">
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-md-3">
-                    <img class="img-responsive" alt="No Photo"
-                         src="http://res.cloudinary.com/lv326/image/upload/v1535107395/properties/38ac382d-0bed-4280-8e93-8643057c15ca.jpg">
-                  </div>
-                  <div class="col-md-6  card-body">
-                    <div class="list-title">
-                      <ul class="list-inline list-unstyled">
-                        <li class="list-inline-item">
-                          <a routerLink="/booking/{{booking.bookingId}}">
-                            <h4>{{booking.userDto.email}}</h4>
-                          </a>
-                        </li>
-                        <li class="list-inline-item text-warning"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                          class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half"></i></li>
-                        <li class="list-inline-item text-success"><i class="fa fa-thumbs-up"></i></li>
-                      </ul>
+</div>
+
+<div *ngIf="totalElements !=0 ">
+  <div class="container">
+    <h4>Bookings on page:</h4>
+    <app-items-size
+      (sentSelectedItemsSize)="setSelectedItemsSize($event)">
+    </app-items-size>
+    <br><br>
+
+    <ul style="list-style: none">
+      <li *ngFor="let booking of guestArrivalsList">
+        <div class="container">
+          <div class="row mb-3">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <img class="img-responsive" alt="No Photo" src={{booking.apartmentDto.propertyDto.photos[0].url}}>
+                           </div>
+                    <div class="col-md-6  card-body">
+                      <div class="list-title">
+                        <ul class="list-inline list-unstyled">
+                          <li class="list-inline-item">
+                            <a routerLink="/booking/{{booking.bookingId}}">
+                              <h4>{{booking.userDto.email}}</h4>
+                            </a>
+                          </li>
+                          <li class="list-inline-item text-warning"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                            class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half"></i></li>
+                          <li class="list-inline-item text-success"><i class="fa fa-thumbs-up"></i></li>
+                        </ul>
+                      </div>
+                      <div class="list-location">
+                        Dates: {{booking.checkIn | date:'dd-MM-yyyy' }} - {{booking.checkOut | date:'dd-MM-yyyy' }}
+                      </div>
+                      <div class="list-descrip">
+                        <small>Number of guests: {{booking.apartmentDto.numberOfGuests}}
+                        </small>
+                        <br>
+                        <small>Apartment type: {{booking.apartmentDto.apartmentType.name}}
+                        </small>
+                        <ul class="list-unstyled">
+                          <li><h3>Price: {{booking.totalPrice}}* </h3></li>
+                          <small> *number of days: {{calculateNumberOfDates(booking.checkIn , booking.checkOut )}}
+                          </small>
+                        </ul>
+                      </div>
                     </div>
-                    <div class="list-location">
-                      Dates: {{booking.checkIn | date:'dd-MM-yyyy' }} - {{booking.checkOut | date:'dd-MM-yyyy' }}
-                    </div>
-                    <div class="list-descrip">
-                      <small>Number of guests: {{booking.apartmentDto.numberOfGuests}}
-                      </small>
-                      <br>
-                      <small>Apartment type: {{booking.apartmentDto.apartmentType.name}}
-                      </small>
-                      <ul class="list-unstyled">
-                        <li><h3>Price: {{booking.totalPrice}}* </h3></li>
-                        <small> *number of days: {{calculateNumberOfDates(booking.checkIn , booking.checkOut )}}</small>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="col-md-3 border-left card-body">
-                    <p>{{booking.reviewDto.message}}</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </li>
-</ul>
+      </li>
+    </ul>
+
+    <app-pagination
+      [currentPage]="currentPage"
+      [totalPages]= "totalPages"
+      [pagesToPagination]= "pagesToPagination"
+      (goFirst)="onFirst($event)"
+      (goPrev)="onPrev()"
+      (goNext)="onNext()"
+      (goLast)="onLast($event)"
+      (goPage)="goToPage($event)">
+    </app-pagination>
+
+  </div>
+
+  <div *ngIf="totalElements ===0 ">
+    <h3>You not have booking yet!</h3>
+  </div>
+</div>

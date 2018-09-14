@@ -1,4 +1,3 @@
-
 <div class="container">
 
   <div class="col-xs-5" style="margin-left: -200px">
@@ -41,9 +40,8 @@
           </li>
           <li class="page-item active">
             <p class="page-link" style="margin-left:20px;  width: 270px; font-size: 20px">
-              <a style="text-decoration: none; color: white;"  routerLink="/property/{{property.id}}/reviews">
+              <a style="text-decoration: none; color: white;"  routerLink="/reviews-property/{{property.id}}">
                 Show all review</a></p>
-
           </li>
           <li class="page-item active">
             <p class="page-link" style="margin-left:20px;  width: 200px; font-size: 20px"> <a style="text-decoration: none; color: white;"  routerLink="/property/{{property.id}}/apartments" [queryParams]="queryParams">
@@ -73,7 +71,6 @@
         <span style="font-size: 21px; color: #ff671d; font-style:oblique">One of our most popular lodging in
         {{property.address.city.name}}, {{property.address.city.country.name}}</span>
       </div>
-
 
       <div style="display: flex">
         <ul class="menu-items" style="list-style: none">
