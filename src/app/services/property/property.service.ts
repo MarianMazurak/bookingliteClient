@@ -53,5 +53,22 @@ export class PropertyService {
       '&checkOut=' + checkOut +
       '&numberOfGuests=' + numberOfGuests);
   }
-
+  public advancedSearch(selectedCountryId: number,
+                        selectedCityId: number,
+                        checkIn: string,
+                        checkOut: string,
+                        numberOfGuests: number,
+                        selectedPrice: number,
+                        facilityIds: string[],
+                        amenityIds: string[]): Observable<Property[]> {
+    return this.http.get<Property[]>('api/property/advancesearch?' +
+      'countryId=' + selectedCountryId +
+      '&cityId=' + selectedCityId +
+      '&checkIn=' + checkIn +
+      '&checkOut=' + checkOut +
+      '&numberOfGuests=' + numberOfGuests +
+      '&price=' + selectedPrice +
+      '&facilityIds=' + facilityIds +
+      '&amenityIds=' + amenityIds);
+  }
 }

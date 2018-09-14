@@ -1,14 +1,14 @@
-
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Property} from '../../models/property';
-import {ActivatedRoute} from '@angular/router';
+import {Facility} from '../../models/facility';
+import {Amenity} from '../../models/amenity';
 import {PropertyService} from '../../services/property/property.service';
+import {ApartmentService} from '../../services/apartment/apartment.service';
 import {CountryService} from '../../services/country/coutry.service';
 import {CityService} from '../../services/city/city.service';
 import {FacilityService} from '../../services/facility/facility.service';
-import {Facility} from '../../models/facility';
-import {Amenity} from '../../models/amenity';
-import {ApartmentService} from '../../services/apartment/apartment.service';
+
 
 @Component ({
   selector: 'app-advanced-search',
@@ -16,37 +16,46 @@ import {ApartmentService} from '../../services/apartment/apartment.service';
   styleUrls: ['./advanced-search.component.css']
 })
 export class AdvancedSearchComponent implements OnInit {
+  public NOT_SELECT_DATA_MESSAGE = 'Please, select country, city, checkin, checkout and number of guests';
   errorMsg: string;
   propertyList: Property[];
   public facilities: Facility[];
   public amenities: Amenity[];
+  public selectedPrice = 9999;
   public selectedCountryId: number;
   public selectedCityId: number;
   public checkIn: string;
   public checkOut: string;
   public selectedNumberOfGuests: number;
+  public selectedFasilityIds: string[] = [];
+  public selectedAmenityIds: string[] = [];
 
   constructor(private propertyService: PropertyService,
               private apartmentService: ApartmentService,
               private route: ActivatedRoute,
               private countryService: CountryService,
               private cityService: CityService,
-              private facilityService: FacilityService) {
+              private facilityService: FacilityService,
+              private router: Router) {
   }
 
   public ngOnInit() {
-    this.errorMsg = undefined;
-    console.log('hello', this.selectedNumberOfGuests);
-    this.readMainSalectedData();
+    this.readMainData();
+    this.readAdvancedData();
     if (this.selectedCountryId && this.selectedCityId && this.checkIn && this.checkOut && this.selectedNumberOfGuests) {
-      this.mainSearch();
+      if ((this.selectedFasilityIds.length !== 0) || (this.selectedAmenityIds.length !== 0)) {
+        this.advancedSearch();
+      } else {
+        this.mainSearch();
+      }
     } else {
-      this.errorMsg = 'Please, select country, city, checkin, checkout and number of guests';
+      this.errorMsg = this.NOT_SELECT_DATA_MESSAGE;
     }
     this.getFacilities();
     this.getAmenities();
   }
-  public readMainSalectedData() {
+
+  public readMainData() {
     if (this.route.snapshot.queryParamMap.has('country')) {
       this.selectedCountryId = Number.parseInt(this.route.snapshot.queryParamMap.get('country'));
       if (this.route.snapshot.queryParamMap.has('city')) {
@@ -63,43 +72,41 @@ export class AdvancedSearchComponent implements OnInit {
       this.selectedNumberOfGuests = Number.parseInt(this.route.snapshot.queryParamMap.get('num_of_guests'));
     }
   }
+
+  public readAdvancedData() {
+    if (this.route.snapshot.queryParamMap.has('facilities')
+      && (this.route.snapshot.queryParamMap.get('facilities').length !== 0)) {
+      this.selectedFasilityIds = this.route.snapshot.queryParamMap.get('facilities').split(',');
+    }
+    if (this.route.snapshot.queryParamMap.has('amenities')
+      && (this.route.snapshot.queryParamMap.get('amenities').length !== 0)) {
+      this.selectedAmenityIds = this.route.snapshot.queryParamMap.get('amenities').split(',');
+    }
+    if (this.route.snapshot.queryParamMap.has('price')
+      && (this.route.snapshot.queryParamMap.get('price').length !== 0)) {
+      this.selectedPrice = Number.parseInt(this.route.snapshot.queryParamMap.get('price'));
+    }
+  }
+
   public mainSearch() {
     this.propertyService.search(this.selectedCountryId, this.selectedCityId, this.checkIn, this.checkOut, this.selectedNumberOfGuests)
       .subscribe(properties => {
         this.propertyList = properties;
-        console.log(properties);
       });
   }
 
-  /*public getCountries() {
-    const countryId = +this.route.snapshot.paramMap.get('countryId');
-    console.log(countryId, ' country id !!!!!!!!!!');
-    this.countryService.getCountry().subscribe((countriesarr) => {
-      this.countries = countriesarr;
-      this.selectedCountryId = countryId;
-      this.getCities(this.selectedCountryId);
-    });
-  }*/
-
-  /*public changeCountry(id: number) {
-    this.selectedCountryId = id;
-    this.getCities(id);
-  }*/
-
-  /*public changeCity(id: number) {
-    this.selectedCityId = id;
-  }*/
-
-  /*public getCities(countryId: number) {
-    const cityId = +this.route.snapshot.paramMap.get('cityId');
-    console.log(cityId, ' city id !!!!');
-    this.cityService.getCity(countryId).subscribe((citiesarr) => {
-      this.cities = citiesarr;
-      if (citiesarr.length !== 0) {
-        this.selectedCityId = cityId;
-      }
-    });
-  }*/
+  public advancedSearch() {
+    this.propertyService.advancedSearch(
+      this.selectedCountryId,
+      this.selectedCityId,
+      this.checkIn,
+      this.checkOut,
+      this.selectedNumberOfGuests,
+      this.selectedPrice,
+      this.selectedFasilityIds,
+      this.selectedAmenityIds
+    ).subscribe( properties => this.propertyList = properties);
+  }
 
   public getFacilities() {
     this.facilityService.getAllFacilities().subscribe(facility => {
@@ -113,114 +120,65 @@ export class AdvancedSearchComponent implements OnInit {
     });
   }
 
-  /*public workWithCheckboxes(id: number) {
-    const index = this.facilitiesId.indexOf(id);
+  public onMainDataChange(newMainData) {
+    this.resetData();
+    this.selectedCountryId = newMainData.country;
+    this.selectedCityId = newMainData.city;
+    this.checkIn = newMainData.checkin;
+    this.checkOut = newMainData.checkout;
+    this.selectedNumberOfGuests = newMainData.num_of_guests;
+    this.mainSearch();
+  }
+
+  public resetData() {
+    this.errorMsg = null;
+    this.propertyList = undefined;
+    this.selectedCountryId = undefined;
+    this.selectedCityId = undefined;
+    this.checkIn = undefined;
+    this.checkOut = undefined;
+    this.selectedNumberOfGuests = undefined;
+    this.selectedFasilityIds = [];
+    this.selectedAmenityIds = [];
+  }
+
+  public onFacilitySelect(id: number) {
+    const index = this.selectedFasilityIds.indexOf(id.toString());
     if (index !== -1) {
-      this.facilitiesId.splice(index, 1);
+      this.selectedFasilityIds.splice(index, 1);
       return;
     }
-    this.facilitiesId.push(id);
-    const newUrl: string = window.location.href + '/' + id;
-    history.pushState(null, null, newUrl);
-  }*/
+    this.selectedFasilityIds.push(id.toString());
+  }
 
-  /*changeCheckBoxFacilities(id: number) {
-    if ( window.location.href.split('/') [9] && this.checkIfUrlHasFacilities(id) ) {
-      let facilityUrl: string =  window.location.href.split('/') [9] ;
-      let arrFac = new Array;
-      let n: number = facilityUrl.split('&').length ; // we skip first argument ('facilities&')
-      let newurl: string;
-      let facititiesUri: string = "facilities" ;
-      for (let i = 1; i < n; i++) {
-        if (Number(facilityUrl.split('&')[i]) !== id) {
-            arrFac.push( Number(facilityUrl.split('&')[i]) );
-            facititiesUri = facititiesUri + "&" + facilityUrl.split('&')[i] ;
-        }
-      }
-      this.arrayFacilities = arrFac;
-      newurl = this.baseUrlToFacilitiesAndAmenities
-            + facititiesUri+"/"
-            + window.location.href.split('/')[10];
-      history.pushState(null, null, newurl);
+  public onAmenitySelect(id: number) {
+    const index = this.selectedAmenityIds.indexOf(id.toString());
+    if (index !== -1) {
+      this.selectedAmenityIds.splice(index, 1);
+      return;
+    }
+    this.selectedAmenityIds.push(id.toString());
+  }
 
+  public onApply() {
+    let facilitiesValue;
+    if (this.selectedFasilityIds.length > 0) {
+      facilitiesValue = this.selectedFasilityIds.join(',');
     }
-    else{
-      if( window.location.href.split('/') [9] == "facilities"){ // add new facilities to url (if first case)
-        let newurl: string = this.baseUrlToFacilitiesAndAmenities
-                              + "facilities" +"&"  + id  +"/"
-                              + window.location.href.split('/')[10];
-        history.pushState(null, null, newurl);
-      }
-      else{// if url has facilities we only add new
-        let newurl: string = this.baseUrlToFacilitiesAndAmenities
-                            +window.location.href.split('/')[9] +"&" + id  +"/"
-                            +window.location.href.split('/')[10];
-        history.pushState(null, null, newurl);
-      }
+    let amenitiesValue;
+    if (this.selectedAmenityIds.length > 0) {
+      amenitiesValue = this.selectedAmenityIds.join(',');
     }
-  }*/
-
-  /*checkIfUrlHasFacilities(id: number): boolean {//if has, we need delete his (0n click->check out checkBox)
-    let result: boolean =false;
-    if( window.location.href.split('/') [9]){
-      let facilityUrl: string =  window.location.href.split('/') [9] ;
-      let n: number = facilityUrl.split('&').length;
-      for(let i=1; i<n; i++){
-        if( Number(facilityUrl.split('&')[i]) == id){
-          result = true;
-        }
-      }
-    }
-    return result;
-  } */
-
-
-  /*changeCheckBoxAmenities(id: number){
-    if( window.location.href.split('/') [10] && this.checkIfUrlHasAmenities(id) ){
-      let amenitiesUrl: string =  window.location.href.split('/') [10] ;
-      let arrAm = new Array;
-      let n: number = amenitiesUrl.split('&').length ; // we skip first argument ('amenities&')
-      let newurl: string;
-      let amenitiesUri: string= "amenities" ;
-      for(let i=1; i<n; i++){
-        if(Number(amenitiesUrl.split('&')[i]) !== id){
-            arrAm.push( Number(amenitiesUrl.split('&')[i]) );
-            amenitiesUri = amenitiesUri + "&" + amenitiesUrl.split('&')[i] ;
-        }
-      }
-      this.arrayAmenities= arrAm;
-      newurl= this.baseUrlToFacilitiesAndAmenities
-              +window.location.href.split('/')[9] +"/"
-              +amenitiesUri;
-      history.pushState(null, null, newurl);
-    }
-    else{
-      if( window.location.href.split('/') [10] == "amenities"){// add new amenities to url (if first case)
-        let newurl: string = this.baseUrlToFacilitiesAndAmenities
-                              +window.location.href.split('/')[9] +"/"
-                              +"amenities" +"&"  + id  ;
-        history.pushState(null, null, newurl);
-      }
-      else{// if url has amenities we only add new
-        let newurl: string = this.baseUrlToFacilitiesAndAmenities
-                              +window.location.href.split('/')[9] +"/"
-                              + window.location.href.split('/')[10] +"&" + id;
-        history.pushState(null, null, newurl);
-      }
-    }
-  }*/
-
-  /*checkIfUrlHasAmenities(id: number): boolean {//if has, we need delete his (0n click->check out checkBox)
-    let result: boolean =false;
-    if( window.location.href.split('/') [10]){
-      let amUrl: string =  window.location.href.split('/') [10] ;
-      let n: number = amUrl.split('&').length;
-      for(let i=1; i<n; i++){
-        if( Number(amUrl.split('&')[i]) == id){
-          result = true;
-        }
-      }
-    }
-    return result;
-  }  */
+    this.router.navigate(['/advanced-search'], { queryParams: {
+        country: this.selectedCountryId,
+        city: this.selectedCityId,
+        checkin: this.checkIn,
+        checkout: this.checkOut,
+        num_of_guests: this.selectedNumberOfGuests,
+        price: this.selectedPrice,
+        facilities: facilitiesValue,
+        amenities: amenitiesValue
+      }});
+    this.advancedSearch();
+  }
 }

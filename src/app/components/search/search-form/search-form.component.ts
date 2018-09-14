@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {CountryService} from '../../../services/country/coutry.service';
 import {CityService} from '../../../services/city/city.service';
 import {Country} from '../../../models/country';
@@ -11,7 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./search-form.component.css']
 })
 export class SearchFormComponent implements OnInit {
-  public numsOfGuests = [1, 2, 3, 4];
+  public numsOfGuests = [1, 2, 3, 4, 5, 6, 7, 8];
   public countries: Country[] = [];
   public cities: City[] = [];
   public selectedCountryId: number;
@@ -19,7 +19,8 @@ export class SearchFormComponent implements OnInit {
   public checkIn: string;
   public checkOut: string;
   public selectedNumberOfGuests: number;
-
+  formValid = true;
+  @Output() mainDataChange = new EventEmitter();
   constructor(private countryService: CountryService,
               private cityService: CityService,
               private router: Router,
@@ -64,7 +65,12 @@ export class SearchFormComponent implements OnInit {
   public onNumOfGuestsSelect(numOfGuests: number) {
     this.selectedNumberOfGuests = numOfGuests;
   }
-  public onSearch(searchForm) {
+  public onSearch() {
+    this.formValid = true;
+    if (!this.selectedCityId || !this.checkIn || !this.checkOut || !this.checkOut || !this.selectedNumberOfGuests) {
+      this.formValid = false;
+      return;
+    }
     this.router.navigate(['/advanced-search'], { queryParams:
         {
           country: this.selectedCountryId,
@@ -73,5 +79,11 @@ export class SearchFormComponent implements OnInit {
           checkout: this.checkOut,
           num_of_guests: this.selectedNumberOfGuests
         }});
+    this.mainDataChange.emit({
+      country: this.selectedCountryId,
+      city: this.selectedCityId,
+      checkin: this.checkIn,
+      checkout: this.checkOut,
+      num_of_guests: this.selectedNumberOfGuests});
   }
 }
