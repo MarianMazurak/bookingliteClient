@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {BookingService} from '../../../services/booking/booking.service';
 import {Apartment} from '../../../models/apartment';
 import {ApartmentService} from '../../../services/apartment/apartment.service';
@@ -21,7 +21,8 @@ export class BookingCreateComponent implements OnInit {
 
   constructor(private bookingService: BookingService,
               private apartmentService: ApartmentService,
-              private route: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -31,13 +32,15 @@ export class BookingCreateComponent implements OnInit {
     this.getApartmentById();
     this.flag = true;
   }
+   onSubmit() {
+     this.router.navigate(['/bookings/allBookings/1']);
+   }
 
   createBooking(createBookingForm: FormGroup) {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = +this.activatedRoute.snapshot.paramMap.get('id');
     if (createBookingForm.valid) {
       this.bookingService.createBooking(this.booking, id).subscribe(res => {
-        alert('booking created');
-        this.flag = false;
+        this.onSubmit();
       }, error => {
         this.errorMessage = JSON.parse(error.error).message;
       });
@@ -47,7 +50,7 @@ export class BookingCreateComponent implements OnInit {
   }
 
   getApartmentById(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = +this.activatedRoute.snapshot.paramMap.get('id');
     this.apartmentService.getApartmentByIdApartment(id).subscribe(apart => {
       this.apartment = apart;
     });

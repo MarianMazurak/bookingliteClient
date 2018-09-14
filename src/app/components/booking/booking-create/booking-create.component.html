@@ -75,64 +75,6 @@
               </div>
             </form>
           </div>
-
-
-          <div class="afterCreate" *ngIf="!flag">
-            <div class="form-group row">
-              <div class="form-group">
-                <label>Property Name : </label>
-                <div class="col-sm-5">
-                  <textarea class="form-control" readonly>{{apartment.propertyDto.name}}</textarea>
-                </div>
-              </div>
-              <div class="form-group">
-                <label>Contact phone number : </label>
-                <div class="col-sm-5">
-                  <textarea class="form-control" readonly>{{apartment.propertyDto.phoneNumber}}</textarea>
-                </div>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="form-group">
-                <label>Total days : </label>
-                <div class="col-sm-5">
-                  <textarea class="form-control" readonly>{{calculateTotalDays(booking.checkIn,booking.checkOut)}} day(s)</textarea>
-                </div>
-              </div>
-              <div class="form-group">
-                <label>Total price : </label>
-                <div class="col-sm-5">
-                  <textarea class="form-control"
-                            readonly>{{calculatePriceByDates(booking.checkIn,booking.checkOut)}} $</textarea>
-                </div>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="form-group">
-                <label>Check In : </label>
-                <div class="col-sm-5">
-                  <textarea class="form-control" readonly>{{booking.checkIn | date:'yyyy-MM-dd' }}</textarea>
-                </div>
-              </div>
-              <div class="form-group">
-                <label>Check Out : </label>
-                <div class="col-sm-5">
-                  <textarea class="form-control" readonly>{{booking.checkOut | date:'yyyy-MM-dd' }}</textarea>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Number of Guests : </label>
-              <div class="col-sm-5">
-                <textarea class="form-control" readonly>{{booking.numberOfGuests}}</textarea>
-              </div>
-            </div>
-            <div class="form-group row">
-              <button type="button" routerLink="/bookings/allBookings/1"
-                      class="btn btn-outline-primary">My Bookings
-              </button>
-            </div>
-          </div>
         </div>
       </article>
     </div>

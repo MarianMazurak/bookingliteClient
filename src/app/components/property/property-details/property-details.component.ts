@@ -20,6 +20,7 @@ export class PropertyDetailsComponent implements OnInit {
   public getPropertyById(): Property {
     const id = +this.route.snapshot.paramMap.get('id');
     this.propertyService.getPropertyById(id).subscribe(res => this.property = res);
+    console.log('----------', this.property.name);
     return this.property;
   }
 }
