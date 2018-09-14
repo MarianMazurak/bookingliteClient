@@ -1,0 +1,48 @@
+<div class="search">
+  <app-search-form (mainDataChange)='onMainDataChange($event)'></app-search-form>
+  <div *ngIf="errorMsg" class="alert alert-danger" role="alert">{{errorMsg}}</div>
+</div>
+
+<div class="main-box" style="display: flex; justify-content: space-around">
+
+
+<div class="col-3 filter-form-container" style="margin-left: 60px">
+  <form>
+    <h2>Filter</h2>
+    <div class="form-group">
+      <label for="formControlRange">Maximal Price: {{selectedPrice}}</label>
+      <input type="range" class="form-control-range" id="formControlRange" min="0" max="9999" step="1" [(ngModel)]="selectedPrice" name="priceInput">
+    </div>
+
+    <div class="form-group">
+      <h5>Facilities</h5>
+      <div class="custom-control custom-checkbox"
+           *ngFor="let facility of facilities">
+        <input [checked]="selectedFasilityIds.includes(facility.id.toString())"
+               (click)="onFacilitySelect(facility.id)" type="checkbox" class="custom-control-input"
+               id="customCheck{{facility.id}}">
+        <label class="custom-control-label"
+               for="customCheck{{facility.id}}">{{facility.name}}</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <h5>Amenities</h5>
+      <div class="custom-control custom-checkbox"
+           *ngFor="let am of amenities">
+        <input [checked]="selectedAmenityIds.includes(am.id.toString())" (click)="onAmenitySelect(am.id)"
+               type="checkbox" class="custom-control-input" id="customCheck2{{am.id}}">
+        <label class="custom-control-label"
+               for="customCheck2{{am.id}}">{{am.name}}</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary" (click)="onApply()">Apply</button>
+    </div>
+  </form>
+</div>
+
+<div class="property" style="width: 60%; margin-left: -600px">
+  <app-list-property [propertyList]="propertyList"></app-list-property>
+</div>

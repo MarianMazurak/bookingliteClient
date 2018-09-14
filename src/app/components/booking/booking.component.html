@@ -70,24 +70,24 @@
                       
                   </div>
                 </div>  
-                <div class="col-md-3 border-left card-body">
-                  <img *ngIf="booking.apartmentDto.propertyDto.photos[0]" class="img-responsive" 
-                  alt="No Photo" src={{booking.apartmentDto.propertyDto.photos[0].url}}>
-                  <br><br>
-                  <img *ngIf="booking.apartmentDto.propertyDto.photos[1]" class="img-responsive" 
-                  alt="No Photo" src={{booking.apartmentDto.propertyDto.photos[1].url}}>
-                  <br><br>
-                  <img *ngIf="booking.apartmentDto.propertyDto.photos[2]" class="img-responsive" 
-                  alt="No Photo" src={{booking.apartmentDto.propertyDto.photos[2].url}}>
-                  <br><br>
+                  <div class="col-md-3 border-left card-body">
+                    <img *ngIf="booking.apartmentDto.propertyDto.photos[0]" class="img-responsive"
+                    alt="No Photo" src={{booking.apartmentDto.propertyDto.photos[0].url}}>
+                    <br><br>
+                    <img *ngIf="booking.apartmentDto.propertyDto.photos[1]" class="img-responsive"
+                    alt="No Photo" src={{booking.apartmentDto.propertyDto.photos[1].url}}>
+                    <br><br>
+                    <img *ngIf="booking.apartmentDto.propertyDto.photos[2]" class="img-responsive"
+                    alt="No Photo" src={{booking.apartmentDto.propertyDto.photos[2].url}}>
+                    <br><br>
 
-                  <app-photo-popup
-                  [booking]="booking">
-                  </app-photo-popup> <!-- add conditionng ngIf-->
-                  <br>
+                    <app-photo-popup
+                    [booking]="booking">
+                    </app-photo-popup> <!-- add conditionng ngIf-->
+                    <br>
 
-                  <a href="#">More photos</a>
-                  </div>
+                    <a href="#">More photos</a>
+                    </div>
               </div>
               <hr>    
               <div >

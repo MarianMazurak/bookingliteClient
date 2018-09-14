@@ -44,6 +44,9 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { PhotoPopupComponent } from './components/property/photo-popup/photo-popup.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReviewsPropertyComponent } from './components/review/reviews-property/reviews-property.component';
+import { PropertyDetailsComponent } from './components/property/property-details/property-details.component';
+import { AdvancedSearchComponent } from './components/advanced-search/advanced-search.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,7 +81,9 @@ import { ReviewsPropertyComponent } from './components/review/reviews-property/r
     UserPropertiesComponent,
     UserApartmentsComponent,
     EditApartmentComponent,
-    ReviewsPropertyComponent
+    ReviewsPropertyComponent,
+    PropertyDetailsComponent,
+    AdvancedSearchComponent
   ],
   imports: [
     BrowserModule,

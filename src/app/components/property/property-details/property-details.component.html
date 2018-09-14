@@ -1,0 +1,110 @@
+
+<div class="container">
+
+  <div class="col-xs-5" style="margin-left: -200px">
+    <div class="row">
+
+      <div class="col-md-3 border-left card-body" id="image-photo" *ngIf="property" style="margin-left: 1100px">
+
+        <img class="img-responsive"
+             alt="No Photo" *ngIf="property.photos.length > 0"
+             src={{property.photos[0].url}}>
+        <img class="img-responsive"
+             alt="No Photo" *ngIf="property.photos.length === 0"
+             src="assets/image/Capture.PNG">
+
+        <img class="img-responsive"
+             alt="No Photo" *ngIf="property.photos.length > 0"
+             src={{property.photos[1].url}}>
+        <img class="img-responsive"
+             alt="No Photo" *ngIf="property.photos.length === 0"
+             src="assets/image/Capture.PNG">
+
+        <img class="img-responsive"
+             alt="No Photo" *ngIf="property.photos.length > 0"
+             src={{property.photos[2].url}}>
+        <img class="img-responsive"
+             alt="No Photo" *ngIf="property.photos.length === 0"
+             src="assets/image/Capture.PNG">
+
+        <app-photo-popup style="margin-left: 28px"
+                         [booking]="booking">
+        </app-photo-popup> <!-- add conditionng ngIf-->
+      </div>
+
+      <div class="text-center" style="margin-left: 100px; margin-top: 35px">
+        <ul class="pagination" style="justify-content: space-between">
+          <li class="page-item active" style="margin-left: 20px">
+            <p class="page-link" style="margin-left:20px; width: 350px; font-size: 20px">Info about apartments and price</p>
+          </li>
+          <li class="page-item active">
+            <p class="page-link" style="margin-left:20px;  width: 270px; font-size: 20px">Show all reviews</p>
+          </li>
+          <li class="page-item active">
+            <p class="page-link" style="margin-left:20px;  width: 200px; font-size: 20px">Book now</p>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <img src="assets/image/pin.png" style="width: 60px; margin-left: 60px">
+    <span *ngIf="property" style="font-size: 21px; font-style:italic">Location : {{property.address.addressLine}},
+      zip : {{property.address.zip}}, {{property.address.city.name}}, {{property.address.city.country.name}}</span>
+
+    <div class="col-xs-9" *ngIf="property">
+
+      <h2 style="margin-left: 80px" *ngIf="property">{{property.name}}
+        <span style="font-size: 20px; margin-left: 250px">Property Type : {{property.propertyType.name}}</span></h2>
+
+      <img class="img-responsive"
+           alt="No Photo" *ngIf="property.photos.length > 0"
+           src={{property.photos[0].url}} style="width: 930px;height: 500px; background-color: #1f2e2e; margin-left: 50px">
+
+      <div>
+        <img src="assets/image/medal.png" style="width: 50px;
+          display: inline; margin-left: 14px;">
+        <span style="font-size: 21px; color: #ff671d; font-style:oblique">One of our most popular lodging in
+        {{property.address.city.name}}, {{property.address.city.country.name}}</span>
+      </div>
+
+
+      <div style="display: flex">
+        <ul class="menu-items" style="list-style: none">
+          <li style="font-size: 28px; color: #bb5500" >Information about property</li>
+          <li style="font-family: 'Bitstream Vera Sans'; font-size: 20px"> Contact Email : {{property.contactEmail}}</li>
+          <li style="font-family: 'Bitstream Vera Sans'; font-size: 20px">Phone Number : {{property.phoneNumber}}</li>
+          <li style="font-family: 'Bitstream Vera Sans'; font-size: 20px">Property Type : {{property.propertyType.name}}</li>
+          <li style="font-family: 'Bitstream Vera Sans'; font-size: 20px">Address Line : {{property.address.addressLine}}</li>
+          <li style="font-family: 'Bitstream Vera Sans'; font-size: 20px">City : {{property.address.city.name}}</li>
+          <li style="font-family: 'Bitstream Vera Sans'; font-size: 20px">Country : {{property.address.city.country.name}}</li>
+        </ul>
+
+        <div style="margin-left: 300px">
+          <li style="font-size: 23px; color:#bb5500; list-style: none; margin-left: 30px" >Facilities </li>
+          <ul style="list-style: none" *ngFor="let facility of property.facilities">
+            <li style="font-size: 20px">{{facility.name}}</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div id="desc" style="border-top:2px solid silver; width: 90%">
+        <h6 style="font-family: 'Fira Code';color: #300027; font-size: 21px;margin-top: 17px;">
+          {{property.description}}
+          All rooms feature simple furnishings. They come with a TV with satellite channels, a hairdryer and all the
+          necessary amenities for making coffee / tea. All rooms at this hotel also have their own bathroom with a range
+          of toiletries.
+          The spacious lounge area offers light snacks and a variety of drinks. Guests can also visit the modern
+          cocktail bar. Every morning, the hotel serves a full breakfast.
+          From Queensway Station, the Metro to Oxford Street shopping is a 5-minute walk, and Buckingham Palace is 20
+          minutes away. Paddington Rail Station, which provides express services to Heathrow Airport, is a 15-minute
+          walk from the hotel.
+          Westminster is a great choice for travelers who are interested in shopping, visiting parks and history.
+          This place especially likes couples - they rated it at 8.2 for a trip together
+        </h6>
+      </div>
+
+    </div>
+  </div>
+</div>

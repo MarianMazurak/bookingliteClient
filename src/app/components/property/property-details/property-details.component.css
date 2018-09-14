@@ -1,0 +1,19 @@
+#image-photo {
+
+  margin-left: 900px;
+  position: absolute;
+}
+img {
+  padding: 15px;
+  /*margin: 0 auto;*/
+  border-radius: 28px;
+
+  width: 360px;
+}
+#desc{
+  width: 700px;
+}
+button{
+  margin-left: 150px;
+  margin-bottom: 30px;
+}
