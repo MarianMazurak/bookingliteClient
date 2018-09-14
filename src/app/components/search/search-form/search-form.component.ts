@@ -20,6 +20,7 @@ export class SearchFormComponent implements OnInit {
   public checkOut: string;
   public selectedNumberOfGuests: number;
   formValid = true;
+
   @Output() mainDataChange = new EventEmitter();
   constructor(private countryService: CountryService,
               private cityService: CityService,
@@ -45,12 +46,12 @@ export class SearchFormComponent implements OnInit {
     }
     this.initCountries();
   }
-  public initCountries() {
+    public initCountries() {
     this.countryService.getCountry().subscribe(countries => {
       this.countries = countries;
     });
   }
-  public initCities(CountryId: number) {
+    public initCities(CountryId: number) {
     this.cityService.getCity(CountryId).subscribe(cities => {
       this.cities = cities;
     });

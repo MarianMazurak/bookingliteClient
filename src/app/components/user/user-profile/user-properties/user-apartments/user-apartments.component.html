@@ -1,6 +1,6 @@
 <app-user-navigation></app-user-navigation>
 <div class="container">
-  <button *ngIf="property" routerLink="/property/{{property.id}}/apartment" type="button" class="btn btn-primary" id="addApartment">New Apartment</button>
+  <button *ngIf="property" routerLink="/property/{{property.id}}/create-apartment" type="button" class="btn btn-primary" id="addApartment">New Apartment</button>
   <div *ngIf="property" class="alert alert-info" role="alert">
     <strong>{{property.name}}</strong> have <strong>{{property.apartments.length}}</strong> apartments
   </div>
