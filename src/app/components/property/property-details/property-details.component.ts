@@ -11,11 +11,18 @@ import {ActivatedRoute} from '@angular/router';
 export class PropertyDetailsComponent implements OnInit {
 
   property: Property;
-
+  public queryParams = {
+    checkin: '',
+    checkout: '',
+    num_of_guests: ''
+  }
   constructor(private route: ActivatedRoute, private propertyService: PropertyService) { }
 
   ngOnInit() {
     this.getPropertyById();
+    this.queryParams.checkin = this.route.snapshot.queryParamMap.get('checkin');
+    this.queryParams.checkout = this.route.snapshot.queryParamMap.get('checkout');
+    this.queryParams.num_of_guests = this.route.snapshot.queryParamMap.get('num_of_guests');
   }
   public getPropertyById(): Property {
     const id = +this.route.snapshot.paramMap.get('id');
