@@ -15,8 +15,16 @@
 
 label {
   font-size: 19px;
+  margin-left: 20px;
 }
 
 .card {
   margin-top: 10px;
+}
+div#menucard{
+  padding: 10px;
+  margin-top: 2%;
+}
+button{
+  margin-left: 73%;
 }
