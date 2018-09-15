@@ -30,7 +30,11 @@ export class BookingCreateComponent implements OnInit {
     this.today = new Date();
     this.booking.numberOfGuests = 1;
     this.getApartmentById();
-    this.flag = true;
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.booking.checkIn = params['checkin'];
+      this.booking.checkOut = params['checkout'];
+      this.booking.numberOfGuests = params['num_of_guests'];
+    });
   }
    onSubmit() {
      this.router.navigate(['/bookings/allBookings/1']);
