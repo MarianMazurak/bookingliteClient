@@ -8,10 +8,9 @@
 
 
 .img-responsive {
-  margin-left: -14px;
-  margin-top: 5px;
-  width: 280px;
-  height: 205px;
+  padding-bottom: 4%;
+  width: 250px;
+  height: 170px;
   position: absolute ;
   border-radius: 15px;
 }

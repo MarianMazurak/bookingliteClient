@@ -1,56 +1,69 @@
-<div class="search">
-  <app-search-form (mainDataChange)='onMainDataChange($event)'></app-search-form>
-  <div *ngIf="errorMsg" class="alert alert-danger" role="alert">{{errorMsg}}</div>
-</div>
+<div class="container">
+  <div class="row">
 
-<div class="main-box" style="display: flex; justify-content: space-around">
-  <div class="col-3 filter-form-container" style="margin-left: 60px">
-    <form>
-      <h2>Filter</h2>
-      <div class="form-group">
-        <label for="formControlRange">Maximal Price: {{selectedPrice}}</label>
-        <input type="range" class="form-control-range" id="formControlRange" min="0" max="9999" step="1"
-               [(ngModel)]="selectedPrice" name="priceInput">
-      </div>
+    <div class="col-md-3">
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <div class="card bg-warning">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <h3>Search</h3>
+                </div>
+              </div>
 
+              <div class="row">
+                <div class="col-md-12">
+                  <form>
+                    <div class="form-group">
+                      <select class="form-control" id="conditionsselect1">
+                        <option>Conditions</option>
+                        <option>New</option>
+                        <option>Used</option>
+                      </select>
+                    </div>
 
-      <div class="form-group">
-        <h5>Facilities</h5>
-        <div class="custom-control custom-checkbox"
-             *ngFor="let facility of facilities">
-          <input [checked]="selectedFasilityIds.includes(facility.id.toString())"
-                 (click)="onFacilitySelect(facility.id)" type="checkbox" class="custom-control-input"
-                 id="customCheck{{facility.id}}">
-          <label class="custom-control-label"
-                 for="customCheck{{facility.id}}">{{facility.name}}</label>
+                    <div class="form-group">
+                      <select class="form-control" id="make1">
+                        <option>Transmission</option>
+                        <option>Automatic</option>
+                        <option>Manaul</option>
+                        <option>Semi-Automatic</option>
+                      </select>
+                    </div>
+                    <hr>
+                    <button type="btn" class="btn btn-primary">Find Now</button>
+                    <button type="btn" class="btn btn-primary">Reset All</button>
+                    <div class="pb-3"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
       </div>
-
-      <div class="form-group">
-        <h5>Amenities</h5>
-        <div class="custom-control custom-checkbox"
-             *ngFor="let am of amenities">
-          <input [checked]="selectedAmenityIds.includes(am.id.toString())" (click)="onAmenitySelect(am.id)"
-                 type="checkbox" class="custom-control-input" id="customCheck2{{am.id}}">
-          <label class="custom-control-label"
-                 for="customCheck2{{am.id}}">{{am.name}}</label>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary" (click)="onApply()">Apply</button>
-      </div>
-    </form>
-  </div>
-
-  <div class="property" style="width: 60%; margin-left: -600px">
-    <app-list-property [propertyList]="propertyList"></app-list-property>
-  </div>
-
-  <div id="spinner-background" *ngIf="isLoad">
-    <div id="booking-spinner">
-      <app-spinner></app-spinner>
     </div>
-  </div>
+    <div class="col-md-9">
 
+      <app-search-form (mainDataChange)='onMainDataChange($event)'></app-search-form>
+      <div *ngIf="errorMsg" class="alert alert-danger" role="alert">{{errorMsg}}</div>
+
+
+      <!--  PROPERTY LIST  -->
+      <app-list-property [propertyList]="propertyList">
+        <!--  PROPERTY LIST  -->
+
+        <!--    PAGINATION     -->
+        <div class="row">
+          <div class="col-md-12">
+            <ul class="pagination">
+              <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </div>
+        </div>
+        <!--    PAGINATION     -->
+        <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
