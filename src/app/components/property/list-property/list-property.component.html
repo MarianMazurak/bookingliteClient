@@ -47,14 +47,14 @@
                     <li><h3>Rating {{property.rating}}</h3></li>
                   </ul>
 
-                  <a routerLink="/property-detailes/{{property.id}}" class="btn btn-outline-primary">
+                  <a routerLink="/property-detailes/{{property.id}}" [queryParams]="queryParams" class="btn btn-outline-primary">
                     Property Details
                   </a>
 
                   <br><br>
 
                   <button type="button"
-                          routerLink="/property/{{property.id}}/apartments"
+              routerLink="/property/{{property.id}}/apartments" [queryParams]="queryParams"
                           class="btn btn-outline-primary">
                     Select apartment
                   </button>

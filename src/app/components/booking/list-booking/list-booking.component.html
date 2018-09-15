@@ -70,15 +70,17 @@
                             <b *ngIf="isCanceled(booking.bookingStatus.name)" style="color:red">{{booking.bookingStatus.name}}</b>
                             <b *ngIf="!isCanceled(booking.bookingStatus.name)"style="color:green">{{booking.bookingStatus.name}}</b>
                           </h4>
-                          </li>                    
+                          </li>
                             <li><h3>Price: {{booking.totalPrice}}* </h3></li>
                             <small> *number of days: {{calculateNumberOfDates(booking.checkIn , booking.checkOut )}}</small>
                           </ul>
                           <br>
-                          <div *ngIf="!isBookingDateActual(booking.checkIn, booking.checkOut)">
+                        <div *ngIf=" !isBookingDateActual(booking.checkIn, booking.checkOut)">
+                          <div *ngIf="!booking.reviewDto">
                             <button type="button" routerLink="/review-create/{{booking.bookingId}}"
                                     class="btn btn-outline-primary">Write Review</button>
                           </div>
+                        </div>
                         </div>
                     </div>
                   </div>
@@ -104,4 +106,5 @@
 
 <div *ngIf="totalElements ===0 ">
   <h3>You not have booking yet!</h3>
+</div>
 </div>

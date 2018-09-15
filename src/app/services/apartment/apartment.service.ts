@@ -44,4 +44,8 @@ export class ApartmentService {
     };
     return this.http.put('api/apartment/' + id, model, httpOptions);
   }
+
+  public getApartmentByIdApartment(id: number): Observable<Apartment> {
+    return this.http.get<Apartment>(`api/apartment/${id}`);
+  }
 }

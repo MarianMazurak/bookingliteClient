@@ -16,7 +16,11 @@ export class ListApartmentComponent implements OnInit {
   private authenticated;
   aprtmentsList: Apartment[];
   @Input() property: Property;
-
+  public queryParams = {
+    checkin: '',
+    checkout: '',
+    num_of_guests: ''
+  }
   constructor(private apartmentService: ApartmentService,
               private propertyService: PropertyService,
               private auth: AuthService,
@@ -25,6 +29,9 @@ export class ListApartmentComponent implements OnInit {
   ngOnInit() {
     this.authenticated = this.auth.isAuthenticated;
     this.getApartmentsByPropertyId();
+    this.queryParams.checkin = this.route.snapshot.queryParamMap.get('checkin');
+    this.queryParams.checkout = this.route.snapshot.queryParamMap.get('checkout');
+    this.queryParams.num_of_guests = this.route.snapshot.queryParamMap.get('num_of_guests');
   }
 
   public getApartmentsByPropertyId() {

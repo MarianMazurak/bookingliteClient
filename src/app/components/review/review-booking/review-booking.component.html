@@ -1,7 +1,8 @@
-<div *ngIf="review" style="height: 300px ;width: 500px; border: 1px solid black;padding: 30px">
+<div class="reviewBooking" *ngIf="review" >
   <p>{{review.message}}</p>
-  <hr><p>Rating : {{review.rating}}</p>
+  <hr>
+  <p>Rating : {{review.rating}}</p>
 </div>
-<div *ngIf="!review" style="height: 300px ;width: 500px; border: 1px solid black">
+<div class="reviewBooking" class="reviewBooking" *ngIf="!review" style="height: 300px ;width: 500px; border: 1px solid black">
   <h1>No review</h1>
 </div>
