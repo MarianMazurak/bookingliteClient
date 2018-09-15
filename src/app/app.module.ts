@@ -47,6 +47,7 @@ import { ReviewsPropertyComponent } from './components/review/reviews-property/r
 import { PropertyDetailsComponent } from './components/property/property-details/property-details.component';
 import { AdvancedSearchComponent } from './components/advanced-search/advanced-search.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
     ReviewsPropertyComponent,
     PropertyDetailsComponent,
     AdvancedSearchComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

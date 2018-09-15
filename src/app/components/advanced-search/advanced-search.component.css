@@ -1,3 +1,22 @@
 .form-control-range{
   width: 40%;
 }
+#spinner-background{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  background: rgba(255,255,255,0.5);
+}
+#booking-spinner{
+  position: fixed;
+  z-index: 99;
+  opacity: 1;
+  margin: auto;
+}
+
+
