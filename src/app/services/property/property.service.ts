@@ -41,34 +41,45 @@ export class PropertyService {
     };
     return this.http.put('api/property/' + id, model, httpOptions);
   }
+
   public search(selectedCountryId: number,
-                selectedCityId: number,
-                checkIn: string,
-                checkOut: string,
-                numberOfGuests: number): Observable<Property[]> {
-    return this.http.get<Property[]>('api/property/search?' +
-      'countryId=' + selectedCountryId +
-      '&cityId=' + selectedCityId +
-      '&checkIn=' + checkIn +
-      '&checkOut=' + checkOut +
-      '&numberOfGuests=' + numberOfGuests);
+    selectedCityId: number,
+    checkIn: string,
+    checkOut: string,
+    numberOfGuests: number,
+    pageNumber: number,
+    pageSize: number): Observable<Property[]> {
+return this.http.get<Property[]>('api/property/search?' +
+    'countryId=' + selectedCountryId +
+    '&cityId=' + selectedCityId +
+    '&checkIn=' + checkIn +
+    '&checkOut=' + checkOut +
+    '&numberOfGuests=' + numberOfGuests+
+    '&pageNumber=' + pageNumber+
+    '&pageSize=' + pageSize);
   }
+
   public advancedSearch(selectedCountryId: number,
-                        selectedCityId: number,
-                        checkIn: string,
-                        checkOut: string,
-                        numberOfGuests: number,
-                        selectedPrice: number,
-                        facilityIds: string[],
-                        amenityIds: string[]): Observable<Property[]> {
-    return this.http.get<Property[]>('api/property/advancesearch?' +
-      'countryId=' + selectedCountryId +
-      '&cityId=' + selectedCityId +
-      '&checkIn=' + checkIn +
-      '&checkOut=' + checkOut +
-      '&numberOfGuests=' + numberOfGuests +
-      '&price=' + selectedPrice +
-      '&facilityIds=' + facilityIds +
-      '&amenityIds=' + amenityIds);
-  }
+                          selectedCityId: number,
+                          checkIn: string,
+                          checkOut: string,
+                          numberOfGuests: number,
+                          selectedPrice: number,
+                          facilityIds: string[],
+                          amenityIds: string[],
+                          pageNumber: number,
+                          pageSize: number): Observable<Property[]> {
+      return this.http.get<Property[]>('api/property/advancesearch?' +
+        'countryId=' + selectedCountryId +
+        '&cityId=' + selectedCityId +
+        '&checkIn=' + checkIn +
+        '&checkOut=' + checkOut +
+        '&numberOfGuests=' + numberOfGuests +
+        '&price=' + selectedPrice +
+        '&facilityIds=' + facilityIds +
+        '&amenityIds=' + amenityIds+
+        '&pageNumber=' + pageNumber+
+        '&pageSize=' + pageSize);
+    }
+
 }
