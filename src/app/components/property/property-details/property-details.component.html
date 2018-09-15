@@ -3,7 +3,7 @@
   <div class="col-xs-5" style="margin-left: -200px">
     <div class="row">
 
-      <div class="col-md-3 border-left card-body" id="image-photo" *ngIf="property" style="margin-left: 1100px">
+      <div class="col-md-3 border-left card-body" id="image-photo" *ngIf='property' style="margin-left: 1100px">
 
         <img class="img-responsive"
              alt="No Photo" *ngIf="property.photos.length > 0"
@@ -32,7 +32,7 @@
       </div>
 
 
-      <div class="text-center" style="margin-left: 100px; margin-top: 35px">
+      <div class="text-center" style="margin-left: 100px; margin-top: 35px" *ngIf="property">
         <ul class="pagination" style="justify-content: space-between">
           <li class="page-item active" style="margin-left: 20px">
             <p class="page-link" style="margin-left:20px; width: 350px; font-size: 20px">
