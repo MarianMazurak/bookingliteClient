@@ -9,7 +9,6 @@ import {CountryService} from '../../services/country/coutry.service';
 import {CityService} from '../../services/city/city.service';
 import {FacilityService} from '../../services/facility/facility.service';
 
-
 @Component ({
   selector: 'app-advanced-search',
   templateUrl: './advanced-search.component.html',
@@ -17,11 +16,13 @@ import {FacilityService} from '../../services/facility/facility.service';
 })
 export class AdvancedSearchComponent implements OnInit {
   public NOT_SELECT_DATA_MESSAGE = 'Please, select country, city, checkin, checkout and number of guests';
+  public isLoad = false;
   errorMsg: string;
   propertyList: Property[];
   public facilities: Facility[];
   public amenities: Amenity[];
-  public selectedPrice = 9999;
+  private DEFAULT_PRICE = 9999;
+  public selectedPrice = this.DEFAULT_PRICE;
   public selectedCountryId: number;
   public selectedCityId: number;
   public checkIn: string;
@@ -43,7 +44,7 @@ export class AdvancedSearchComponent implements OnInit {
     this.readMainData();
     this.readAdvancedData();
     if (this.selectedCountryId && this.selectedCityId && this.checkIn && this.checkOut && this.selectedNumberOfGuests) {
-      if ((this.selectedFasilityIds.length !== 0) || (this.selectedAmenityIds.length !== 0)) {
+      if ((this.selectedFasilityIds.length !== 0) || (this.selectedAmenityIds.length !== 0) || this.selectedPrice !== this.DEFAULT_PRICE) {
         this.advancedSearch();
       } else {
         this.mainSearch();
@@ -89,13 +90,18 @@ export class AdvancedSearchComponent implements OnInit {
   }
 
   public mainSearch() {
+    this.isLoad = true;
     this.propertyService.search(this.selectedCountryId, this.selectedCityId, this.checkIn, this.checkOut, this.selectedNumberOfGuests)
       .subscribe(properties => {
         this.propertyList = properties;
+        this.isLoad = false;
+      }, error => {
+        this.isLoad = false;
       });
   }
 
   public advancedSearch() {
+    this.isLoad = true;
     this.propertyService.advancedSearch(
       this.selectedCountryId,
       this.selectedCityId,
@@ -105,7 +111,12 @@ export class AdvancedSearchComponent implements OnInit {
       this.selectedPrice,
       this.selectedFasilityIds,
       this.selectedAmenityIds
-    ).subscribe( properties => this.propertyList = properties);
+    ).subscribe( properties => {
+      this.propertyList = properties;
+      this.isLoad = false;
+    }, error => {
+      this.isLoad = false;
+    });
   }
 
   public getFacilities() {
