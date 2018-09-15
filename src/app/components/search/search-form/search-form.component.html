@@ -1,7 +1,7 @@
-<div class="row">
-  <div class="col-md-12">
+<div class="row" style="background-color: #ff671d; margin: 0 auto">
+  <div class="col-md-12" style="background-color: red; ">
 
-    <form class="form-inline searchform">
+    <form class="form-inline searchform" style="background-color: green">
 
       <div class="form-group mr-2">
         <select class="form-control" value="" #country (change)="onCountrySelect(country.value)" required>
@@ -46,54 +46,6 @@
         Please, select Country, city, check in, check out and number of guests
       </div>
     </form>
-
-
   </div>
 </div>
 
-
-<!--<div class="container search-bar" style="padding-left: 150px">-->
-
-<!--<form class="form-inline searchform">-->
-
-<!--<div class="form-group mr-2">-->
-<!--<select class="form-control" value="" #country (change)="onCountrySelect(country.value)" required>-->
-<!--<option disabled>Country</option>-->
-<!--<option *ngFor="let country of countries" [selected]="country.id === this.selectedCountryId"-->
-<!--value="{{country.id}}">{{country.name}}</option>-->
-<!--</select>-->
-<!--</div>-->
-
-<!--<div *ngIf="cities" class="form-group mr-2">-->
-<!--<select class="form-control" #city (change)="onCitySelect(city.value)" required>-->
-<!--<option disabled>City</option>-->
-<!--<option *ngFor="let city of cities" [selected]="city.id === this.selectedCityId"-->
-<!--value="{{city.id}}">{{city.name}}</option>-->
-<!--</select>-->
-<!--</div>-->
-
-<!--<div class="form-group mr-2">-->
-<!--<input placeholder="Check-in" class="form-control" type="date" [(ngModel)]="checkIn" name="in" required>-->
-<!--</div>-->
-
-
-<!--<div class="form-group mr-2">-->
-<!--<input placeholder="Check-out" class="form-control" type="date" [(ngModel)]="checkOut" name="out" required>-->
-<!--</div>-->
-
-<!--<div class="form-group mr-2">-->
-<!--<select class="form-control" #numOfGuestsSelect (change)="onNumOfGuestsSelect(numOfGuestsSelect.value)" required>-->
-<!--<option disabled>Number of guests</option>-->
-<!--<option *ngFor="let num of numsOfGuests" [selected]="num === this.selectedNumberOfGuests">{{num}}</option>-->
-<!--</select>-->
-<!--</div>-->
-
-
-<!--<div class="btn-group btn-group-justified">-->
-<!--<button type="submit" class="btn btn-primary" (click)="onSearch()">Search</button>-->
-<!--</div>-->
-<!--<div class="alert alert-danger" role="alert" *ngIf="!formValid">-->
-<!--Please, select Country, city, check in, check out and number of guests-->
-<!--</div>-->
-<!--</form>-->
-<!--</div>-->

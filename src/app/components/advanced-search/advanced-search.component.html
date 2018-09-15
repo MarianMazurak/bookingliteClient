@@ -1,41 +1,52 @@
 <div class="container">
   <div class="row">
-
+    <!--SIDE BAR START-->
     <div class="col-md-3">
       <div class="row mb-3">
         <div class="col-md-12">
           <div class="card bg-warning">
             <div class="card-body">
               <div class="row">
-                <div class="col-md-12">
-                  <h3>Search</h3>
-                </div>
-              </div>
 
+                <div class="col-md-12">
+                  <h3>Advance Search</h3>
+                </div>
+
+              </div>
               <div class="row">
                 <div class="col-md-12">
-                  <form>
-                    <div class="form-group">
-                      <select class="form-control" id="conditionsselect1">
-                        <option></option>
-                        <option>aaNew</option>
-                        <option>Used</option>
-                      </select>
-                    </div>
+                  <div class="form-group">
+                    <label for="formControlRange">Maximal Price: {{selectedPrice}}</label>
+                    <input type="range" class="form-control-range" id="formControlRange" min="0" max="9999" step="1"
+                           [(ngModel)]="selectedPrice" name="priceInput">
+                  </div>
 
-                    <div class="form-group">
-                      <select class="form-control" id="make1">
-                        <option>Transmission</option>
-                        <option>Automatic</option>
-                        <option>Manaul</option>
-                        <option>Semi-Automatic</option>
-                      </select>
+                  <div class="form-group">
+                    <h5>Facilities</h5>
+                    <div class="custom-control custom-checkbox"
+                         *ngFor="let facility of facilities">
+                      <input [checked]="selectedFasilityIds.includes(facility.id.toString())"
+                             (click)="onFacilitySelect(facility.id)" type="checkbox" class="custom-control-input"
+                             id="customCheck{{facility.id}}">
+                      <label class="custom-control-label"
+                             for="customCheck{{facility.id}}">{{facility.name}}</label>
                     </div>
-                    <hr>
-                    <button type="btn" class="btn btn-primary">Find Now</button>
-                    <button type="btn" class="btn btn-primary">Reset All</button>
-                    <div class="pb-3"></div>
-                  </form>
+                  </div>
+
+                  <div class="form-group">
+                    <h5>Amenities</h5>
+                    <div class="custom-control custom-checkbox"
+                         *ngFor="let am of amenities">
+                      <input [checked]="selectedAmenityIds.includes(am.id.toString())" (click)="onAmenitySelect(am.id)"
+                             type="checkbox" class="custom-control-input" id="customCheck2{{am.id}}">
+                      <label class="custom-control-label"
+                             for="customCheck2{{am.id}}">{{am.name}}</label>
+                    </div>
+                  </div>
+                  <hr>
+                  <button type="submit" class="btn btn-primary" (click)="onApply()">Apply</button>
+                  <div class="pb-3"></div>
+
                 </div>
               </div>
             </div>
@@ -43,43 +54,41 @@
         </div>
       </div>
     </div>
+
+    <!--SIDE BAR END-->
     <div class="col-md-9">
 
       <app-search-form (mainDataChange)='onMainDataChange($event)'></app-search-form>
       <div *ngIf="errorMsg" class="alert alert-danger" role="alert">{{errorMsg}}</div>
 
 
-      <!--  PROPERTY LIST  -->
-      <app-list-property *ngIf="totalElements !=0 " [propertyList]="propertyList">
+      <!--  PROPERTY LIST START  -->
+      <app-list-property [propertyList]="propertyList"></app-list-property>
+      <div *ngIf="totalElements == 0 ">
+        <h3>In this city we not find such properties. </h3>
+      </div>
+      <!--  PROPERTY LIST END -->
 
-        <div *ngIf="totalElements == 0 ">
-          <h3>In this city we not find such properties. </h3>
+      <!--    PAGINATION  START   -->
+      <div class="row" *ngIf="totalElements !=0">
+        <ul class="pagination" style="margin-left: 25%">
+          <app-pagination
+            [currentPage]="currentPage"
+            [totalPages]="totalPages"
+            [pagesToPagination]="pagesToPagination"
+            (goFirst)="onFirst($event)"
+            (goPrev)="onPrev()"
+            (goNext)="onNext()"
+            (goLast)="onLast($event)"
+            (goPage)="goToPage($event)">
+          </app-pagination>
+        </ul>
+      </div>
+      <!--    PAGINATION   END  -->
+
+      <div id="spinner-background" *ngIf="isLoad">
+        <div id="booking-spinner">
+          <app-spinner></app-spinner>
         </div>
-        <!--  PROPERTY LIST  -->
-
-        <!--    PAGINATION     -->
-        <div class="row" *ngIf="totalElements !=0">
-          <div class="col-md-12">
-            <ul class="pagination">
-              <app-pagination
-                [currentPage]="currentPage"
-                [totalPages]="totalPages"
-                [pagesToPagination]="pagesToPagination"
-                (goFirst)="onFirst($event)"
-                (goPrev)="onPrev()"
-                (goNext)="onNext()"
-                (goLast)="onLast($event)"
-                (goPage)="goToPage($event)">
-              </app-pagination>
-
-              <!--<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>-->
-
-              <!--<li class="page-item"><a class="page-link" href="#">Next</a></li>-->
-            </ul>
-          </div>
-        </div>
-        <!--    PAGINATION     -->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
+      </div>
 
