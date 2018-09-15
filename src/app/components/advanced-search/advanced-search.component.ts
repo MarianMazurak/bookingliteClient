@@ -8,6 +8,7 @@ import {ApartmentService} from '../../services/apartment/apartment.service';
 import {CountryService} from '../../services/country/coutry.service';
 import {CityService} from '../../services/city/city.service';
 import {FacilityService} from '../../services/facility/facility.service';
+import { PaginationService } from '../../services/pagination/pagination.service';
 
 
 @Component ({
@@ -30,16 +31,24 @@ export class AdvancedSearchComponent implements OnInit {
   public selectedFasilityIds: string[] = [];
   public selectedAmenityIds: string[] = [];
 
+  public currentPage: number ;
+  public selectedItemsSize: number = 5;
+  public pagesToPagination : number [];
+  public totalPages: number; 
+  public totalElements: number;
+
   constructor(private propertyService: PropertyService,
               private apartmentService: ApartmentService,
               private route: ActivatedRoute,
               private countryService: CountryService,
               private cityService: CityService,
               private facilityService: FacilityService,
-              private router: Router) {
+              private router: Router,
+              private paginationService: PaginationService) {
   }
 
   public ngOnInit() {
+    this.currentPage= 1;
     this.readMainData();
     this.readAdvancedData();
     if (this.selectedCountryId && this.selectedCityId && this.checkIn && this.checkOut && this.selectedNumberOfGuests) {
@@ -52,7 +61,7 @@ export class AdvancedSearchComponent implements OnInit {
       this.errorMsg = this.NOT_SELECT_DATA_MESSAGE;
     }
     this.getFacilities();
-    this.getAmenities();
+    this.getAmenities();     
   }
 
   public readMainData() {
@@ -86,26 +95,6 @@ export class AdvancedSearchComponent implements OnInit {
       && (this.route.snapshot.queryParamMap.get('price').length !== 0)) {
       this.selectedPrice = Number.parseInt(this.route.snapshot.queryParamMap.get('price'));
     }
-  }
-
-  public mainSearch() {
-    this.propertyService.search(this.selectedCountryId, this.selectedCityId, this.checkIn, this.checkOut, this.selectedNumberOfGuests)
-      .subscribe(properties => {
-        this.propertyList = properties;
-      });
-  }
-
-  public advancedSearch() {
-    this.propertyService.advancedSearch(
-      this.selectedCountryId,
-      this.selectedCityId,
-      this.checkIn,
-      this.checkOut,
-      this.selectedNumberOfGuests,
-      this.selectedPrice,
-      this.selectedFasilityIds,
-      this.selectedAmenityIds
-    ).subscribe( properties => this.propertyList = properties);
   }
 
   public getFacilities() {
@@ -181,4 +170,75 @@ export class AdvancedSearchComponent implements OnInit {
       }});
     this.advancedSearch();
   }
+
+  public mainSearch() {
+    this.propertyService.search(this.selectedCountryId, this.selectedCityId, this.checkIn, this.checkOut,
+         this.selectedNumberOfGuests, this.currentPage -1, this.selectedItemsSize )
+      .subscribe(data => {
+        this.propertyList = data['content'];
+        this.totalPages= data['totalPages'];
+        this.totalElements=  data['totalElements'];
+        this.pagesToPagination= this.paginationService.calculatePages(this.currentPage, this.totalPages);
+      });
+  }
+
+  public advancedSearch() {
+      this.propertyService.advancedSearch(
+        this.selectedCountryId,
+        this.selectedCityId,
+        this.checkIn,
+        this.checkOut,
+        this.selectedNumberOfGuests,
+        this.selectedPrice,
+        this.selectedFasilityIds,
+        this.selectedAmenityIds, 
+        this.currentPage -1, 
+        this.selectedItemsSize).subscribe(data => {
+          this.propertyList = data['content'];
+          this.totalPages= data['totalPages'];
+          this.totalElements=  data['totalElements'];
+          this.pagesToPagination= this.paginationService.calculatePages(this.currentPage, this.totalPages);
+        });
+  }
+
+  goToPage(n: number): void {
+    this.currentPage=n;  
+    if(this.selectedFasilityIds.length == 0 && this.selectedAmenityIds.length == 0){
+      this.mainSearch();
+    }
+    else this.advancedSearch();
+  }
+
+  onFirst(n: number): void {
+    this.currentPage=n;    
+    if(this.selectedFasilityIds.length == 0 && this.selectedAmenityIds.length == 0){
+      this.mainSearch();
+    }
+    else this.advancedSearch();
+  }
+
+  onPrev(): void {
+    this.currentPage--;  
+    if(this.selectedFasilityIds.length == 0 && this.selectedAmenityIds.length == 0){
+      this.mainSearch();
+    }
+    else this.advancedSearch();
+}
+
+  onNext(): void {    
+    this.currentPage++;    
+    if(this.selectedFasilityIds.length == 0 && this.selectedAmenityIds.length == 0){
+      this.mainSearch();
+    }
+    else this.advancedSearch();
+  }
+
+  onLast(n: number): void {
+    this.currentPage=n;  
+    if(this.selectedFasilityIds.length == 0 && this.selectedAmenityIds.length == 0){
+      this.mainSearch();
+    }
+    else this.advancedSearch();
+  }
+
 }

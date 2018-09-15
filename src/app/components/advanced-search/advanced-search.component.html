@@ -41,8 +41,29 @@
         <button type="submit" class="btn btn-primary" (click)="onApply()">Apply</button>
       </div>
     </form>
+</div>
+
+
+  <div *ngIf="totalElements !=0 " class="property" style="width: 60%; margin-left: -600px">
+    <app-list-property [propertyList]="propertyList"></app-list-property>
+  </div>    
+
+  <div *ngIf="totalElements ==0 ">
+    <h3>In this city we not find such properties. </h3>
+  </div>
   </div>
 
-  <div class="property" style="width: 60%; margin-left: -600px">
-    <app-list-property [propertyList]="propertyList"></app-list-property>
-  </div>
+<div *ngIf="totalElements !=0" style="margin-left: 800px; width: 300px;">
+   <app-pagination  
+      [currentPage]="currentPage"
+      [totalPages]= "totalPages"
+      [pagesToPagination]= "pagesToPagination"    
+      (goFirst)="onFirst($event)"
+      (goPrev)="onPrev()"
+      (goNext)="onNext()"
+      (goLast)="onLast($event)"
+      (goPage)="goToPage($event)">
+   </app-pagination>
+</div>
+
+  
