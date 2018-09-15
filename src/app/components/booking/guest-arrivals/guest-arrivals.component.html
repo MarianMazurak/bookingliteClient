@@ -19,61 +19,34 @@
 
 <div *ngIf="totalElements !=0 ">
   <div class="container">
-    <h4>Bookings on page:</h4>
+    <div class="form-group row">
+    <h4 style="margin-right: 5%">Bookings on page:</h4>
     <app-items-size
       (sentSelectedItemsSize)="setSelectedItemsSize($event)">
     </app-items-size>
+    </div>
     <br><br>
 
-    <ul style="list-style: none">
-      <li *ngFor="let booking of guestArrivalsList">
-        <div class="container">
-          <div class="row mb-3">
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <img class="img-responsive" alt="No Photo" src={{booking.apartmentDto.propertyDto.photos[0].url}}>
-                           </div>
-                    <div class="col-md-6  card-body">
-                      <div class="list-title">
-                        <ul class="list-inline list-unstyled">
-                          <li class="list-inline-item">
-                            <a routerLink="/booking/{{booking.bookingId}}">
-                              <h4>{{booking.userDto.email}}</h4>
-                            </a>
-                          </li>
-                          <li class="list-inline-item text-warning"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                            class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half"></i></li>
-                          <li class="list-inline-item text-success"><i class="fa fa-thumbs-up"></i></li>
-                        </ul>
-                      </div>
-                      <div class="list-location">
-                        Dates: {{booking.checkIn | date:'dd-MM-yyyy' }} - {{booking.checkOut | date:'dd-MM-yyyy' }}
-                      </div>
-                      <div class="list-descrip">
-                        <small>Number of guests: {{booking.apartmentDto.numberOfGuests}}
-                        </small>
-                        <br>
-                        <small>Apartment type: {{booking.apartmentDto.apartmentType.name}}
-                        </small>
-                        <ul class="list-unstyled">
-                          <li><h3>Price: {{booking.totalPrice}}* </h3></li>
-                          <small> *number of days: {{calculateNumberOfDates(booking.checkIn , booking.checkOut )}}
-                          </small>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </li>
-    </ul>
-
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th scope="col">Apartment name </th>
+        <th scope="col">Check In</th>
+        <th scope="col">Check out</th>
+        <th scope="col">Number of Guests</th>
+        <th scope="col">Name and Surname Guest</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let booking of guestArrivalsList">
+      <tr>
+        <th >{{booking.apartmentDto.name}}</th>
+        <td>{{booking.checkIn | date:'dd-MM-yyyy'}}</td>
+        <td>{{booking.checkOut | date:'dd-MM-yyyy'}}</td>
+        <td>{{booking.apartmentDto.numberOfGuests}}</td>
+        <td>{{booking.userDto.lastName}} {{booking.userDto.firstName}}</td>
+      </tr>
+      </tbody>
+    </table>
     <app-pagination
       [currentPage]="currentPage"
       [totalPages]= "totalPages"

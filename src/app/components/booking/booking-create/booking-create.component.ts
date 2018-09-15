@@ -28,7 +28,6 @@ export class BookingCreateComponent implements OnInit {
   ngOnInit() {
     this.booking = new BookingCreate();
     this.today = new Date();
-    this.booking.numberOfGuests = 1;
     this.getApartmentById();
     this.activatedRoute.queryParams.subscribe(params => {
       this.booking.checkIn = params['checkin'];

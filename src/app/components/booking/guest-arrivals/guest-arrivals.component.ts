@@ -12,7 +12,7 @@ import {PaginationService} from '../../../services/pagination/pagination.service
 export class GuestArrivalsComponent implements OnInit {
   guestArrivalsList: Booking[];
   currentPage = 1;
-  selectedItemsSize = 10;
+  selectedItemsSize = 5;
   pagesToPagination: number [];
   totalPages: number;
   totalElements: number;
@@ -35,10 +35,6 @@ export class GuestArrivalsComponent implements OnInit {
       this.filterBookings = this.futureBookings;
     }
     this.getBookingsByPage();
-  }
-
-  calculateNumberOfDates(checkIn, checkOut): number {
-    return this.bookingService.calculateNumberOfDates(checkIn, checkOut);
   }
 
   getBookingsByPage(): void {
