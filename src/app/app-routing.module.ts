@@ -25,6 +25,7 @@ import {RoleGuardService} from './services/authentication/role-guard.service';
 import {EditApartmentComponent} from './components/apartment/edit-apartment/edit-apartment.component';
 import {PropertyDetailsComponent} from './components/property/property-details/property-details.component';
 import {AdvancedSearchComponent} from './components/advanced-search/advanced-search.component';
+import {NotfoundComponent} from './components/notfound/notfound.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -49,7 +50,8 @@ const routes: Routes = [
   {path: 'myproperties/:id/guest-arrivals/:filter', component: GuestArrivalsComponent, canActivate: [AuthGuardService, RoleGuardService], data: {expectedRole: 'ROLE_OWNER'}},
   {path: 'myproperties', component: UserPropertiesComponent, canActivate: [AuthGuardService, RoleGuardService], data: {expectedRole: 'ROLE_OWNER'}},
   {path: 'myproperty/:id/apartments', component: UserApartmentsComponent, canActivate: [AuthGuardService, RoleGuardService], data: {expectedRole: 'ROLE_OWNER'}},
-  {path: 'property/:pid/edit-apartment/:apid', component: EditApartmentComponent, canActivate: [AuthGuardService, RoleGuardService], data: {expectedRole: 'ROLE_OWNER'}}
+  {path: 'property/:pid/edit-apartment/:apid', component: EditApartmentComponent, canActivate: [AuthGuardService, RoleGuardService], data: {expectedRole: 'ROLE_OWNER'}},
+  {path: '**', component: NotfoundComponent}
 ];
 
 @NgModule({
