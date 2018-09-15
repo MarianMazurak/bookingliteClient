@@ -15,7 +15,7 @@ import { AuthService } from '../../services/authentication/auth.service';
 export class BookingComponent implements OnInit {
 
   @Input() booking: Booking;
-  private bookingsUrl = '/bookings/allBookings/1'; 
+  private bookingsUrl = '/bookings'; 
   private authenticated;
 
   constructor(private auth: AuthService,
@@ -61,10 +61,7 @@ export class BookingComponent implements OnInit {
   backToBookings() {
     if( localStorage.getItem('urlToButtonBackToListBookings') ){
       let urlFromLocalStorage: string = localStorage.getItem('urlToButtonBackToListBookings');
-      let urlBackToListBooking: string = "/"+ urlFromLocalStorage.split('/')[3] +"/"
-                        +urlFromLocalStorage.split('/')[4] +"/"
-                        +urlFromLocalStorage.split('/')[5];
-      this.router.navigateByUrl( urlBackToListBooking );
+      this.router.navigateByUrl( urlFromLocalStorage.split('/')[3] );
     }
     else{
       this.router.navigate([this.bookingsUrl]);
