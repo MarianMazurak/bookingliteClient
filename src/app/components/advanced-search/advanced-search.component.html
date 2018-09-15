@@ -46,3 +46,8 @@
   <div class="property" style="width: 60%; margin-left: -600px">
     <app-list-property [propertyList]="propertyList"></app-list-property>
   </div>
+  <div id="spinner-background" *ngIf="isLoad">
+    <div id="booking-spinner">
+      <app-spinner></app-spinner>
+    </div>
+  </div>

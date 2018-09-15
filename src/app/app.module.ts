@@ -46,6 +46,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReviewsPropertyComponent } from './components/review/reviews-property/reviews-property.component';
 import { PropertyDetailsComponent } from './components/property/property-details/property-details.component';
 import { AdvancedSearchComponent } from './components/advanced-search/advanced-search.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { AdvancedSearchComponent } from './components/advanced-search/advanced-s
     EditApartmentComponent,
     ReviewsPropertyComponent,
     PropertyDetailsComponent,
-    AdvancedSearchComponent
+    AdvancedSearchComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
