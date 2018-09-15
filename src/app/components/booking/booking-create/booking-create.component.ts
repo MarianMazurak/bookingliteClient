@@ -17,7 +17,6 @@ export class BookingCreateComponent implements OnInit {
   today: Date;
   formValid = true;
   errorMessage = '';
-  flag: boolean;
 
   constructor(private bookingService: BookingService,
               private apartmentService: ApartmentService,
