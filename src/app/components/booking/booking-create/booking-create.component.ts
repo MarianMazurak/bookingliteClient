@@ -42,6 +42,7 @@ export class BookingCreateComponent implements OnInit {
     const id = +this.activatedRoute.snapshot.paramMap.get('id');
     if (createBookingForm.valid) {
       this.bookingService.createBooking(this.booking, id).subscribe(res => {
+        alert('Your booking created successful!');
         this.onSubmit();
       }, error => {
         this.errorMessage = JSON.parse(error.error).message;
