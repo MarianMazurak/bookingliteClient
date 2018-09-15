@@ -65,10 +65,7 @@
       (goPage)="goToPage($event)">
    </app-pagination>
 </div>
+<app-spinner *ngIf="isLoading"></app-spinner>
 
-  <div id="spinner-background" *ngIf="isLoad">
-    <div id="booking-spinner">
-      <app-spinner></app-spinner>
-    </div>
-  </div>
+
 
