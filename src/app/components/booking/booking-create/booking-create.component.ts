@@ -17,7 +17,6 @@ export class BookingCreateComponent implements OnInit {
   today: Date;
   formValid = true;
   errorMessage = '';
-  flag: boolean;
 
   constructor(private bookingService: BookingService,
               private apartmentService: ApartmentService,
@@ -28,9 +27,12 @@ export class BookingCreateComponent implements OnInit {
   ngOnInit() {
     this.booking = new BookingCreate();
     this.today = new Date();
-    this.booking.numberOfGuests = 1;
     this.getApartmentById();
-    this.flag = true;
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.booking.checkIn = params['checkin'];
+      this.booking.checkOut = params['checkout'];
+      this.booking.numberOfGuests = params['num_of_guests'];
+    });
   }
    onSubmit() {
      this.router.navigate(['/bookings/allBookings/1']);
