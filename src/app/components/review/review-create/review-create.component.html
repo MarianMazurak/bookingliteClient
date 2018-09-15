@@ -1,17 +1,17 @@
 <div class="reviewDiv" *ngIf="!flag">
   <form #createReviewForm=ngForm (ngSubmit)="createReview(createReviewForm)" [ngClass]="{'was-validated' : !formValid}">
-    <label for="FormControlTextarea">Review : </label>
+    <label for="FormControlTextarea">Your Review : </label>
     <textarea class="form-control" id="FormControlTextarea" rows="4" placeholder="write your review..."
               [(ngModel)]="review.message" name="message" required="required"></textarea>
     <hr>
-    <p>Rating :<input type="number" min="1" max="10" [(ngModel)]="review.rating" name="rating" value="10"
+    <p>Rating :<input type="number" min="1" max="10" [(ngModel)]="review.rating" name="rating"
                       required="required"></p>
     <ng-container *ngIf="errorMessage !== ''">
       <div class="alert alert-danger">
         {{errorMessage}}
       </div>
     </ng-container>
-    <div class="form-row">
+    <div class="form-row" id="btns">
       <button (click)="goBack()" class="btn-danger">Cancel</button>
       <button type="submit" class="btn info">Save Review</button>
     </div>

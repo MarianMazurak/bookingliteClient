@@ -27,6 +27,7 @@ export class ReviewCreateComponent implements OnInit {
 
   ngOnInit() {
     this.review = new CreateReview();
+    this.review.rating = 5;
     this.getBooking();
 
   }
