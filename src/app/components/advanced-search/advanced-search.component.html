@@ -1,6 +1,12 @@
 <div class="container">
-  <div class="row">
+  <app-search-form (mainDataChange)='onMainDataChange($event)'></app-search-form>
+  <div *ngIf="errorMsg" class="alert alert-danger" role="alert">{{errorMsg}}</div>
+
+  <div class="row" style="margin-top: 5px">
     <!--SIDE BAR START-->
+
+
+
     <div class="col-md-3">
       <div class="row mb-3">
         <div class="col-md-12">
@@ -55,11 +61,12 @@
       </div>
     </div>
 
+
+
     <!--SIDE BAR END-->
     <div class="col-md-9">
 
-      <app-search-form (mainDataChange)='onMainDataChange($event)'></app-search-form>
-      <div *ngIf="errorMsg" class="alert alert-danger" role="alert">{{errorMsg}}</div>
+
 
 
       <!--  PROPERTY LIST START  -->
