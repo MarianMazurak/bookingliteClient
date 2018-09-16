@@ -1,6 +1,6 @@
-<ng-template #content let-modal>
+<ng-template #bookingContent let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Photos {{booking.apartmentDto.propertyDto.name}}</h4>
+    <h4 class="modal-title" id="modal-booking">Photos {{booking.apartmentDto.propertyDto.name}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -22,11 +22,36 @@
       </div>
     </form>
   </div>
-  <!-- <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-    </div> -->
 </ng-template>
 
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)">More photos</button>
+<ng-template #propertyContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-property">Photos {{property.name}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <div *ngIf= "property">    
+          <div class="row ">  
+            <div class="col-4" *ngFor="let photo of property.photos" (click)="openPhoto(photo.url)">
+              <app-photo [photoUrl]='photo.url'></app-photo>
+            </div>
+            <ng-container *ngIf="opened">
+              <div id="blocker" (click)="closePhoto()"><img id="zoom-img" [src]="openedPhotoUrl" (click)="closePhoto()">
+              </div>
+            </ng-container>
+          </div>
+        </div>  
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+
+<button class="btn btn-lg btn-outline-primary" (click)="open(bookingContent, propertyContent)">
+  More photos</button>
 
 
