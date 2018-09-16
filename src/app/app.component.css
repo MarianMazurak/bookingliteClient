@@ -11,3 +11,6 @@ ul {
 nav { 
     height: 30px;
 }
+app-spinner {
+  display: contents;
+}

@@ -1,20 +1,24 @@
-<!--<div class="container">-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style = "height: 90px">
-    <a class="navbar-brand" routerLink="search">Bookinglite</a>
-    <div class="collapse navbar-collapse" id="navbarColor01">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item" *ngIf="this.auth.isAuthenticated">
-          <a class="nav-link" routerLink="#">My bookings</a>
-        </li>
-      </ul>
-      <ng-container *ngIf="this.auth.isAuthenticated; else loginbot">
-        <a class="nav-link" routerLink="#"><i class="icon ion-md-body hed-buts"></i></a>
-        <a class="nav-link" routerLink="user"><span class="hed-buts">My profile</span></a>
-        <a class="nav-link" routerLink="login"><span class="hed-buts">Log out</span></a>
-      </ng-container>
-      <ng-template #loginbot>
-        <a class="nav-link" routerLink="login"><span class="hed-buts">Log in</span></a>
-      </ng-template>
-    </div>
-  </nav>
-<!--</div>-->
+<nav class="navbar navbar-expand navbar-light bg-light">
+  <a class="navbar-brand" href="#" routerLink="/search">
+    <img src="assets/image/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+    Bookinglite
+  </a>
+  <div class="collapse navbar-collapse" >
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" *ngIf="auth.isAuthenticated" routerLink="/bookings/allBookings/5">Bookings</a>
+      </li>
+    </ul>
+  </div>
+  <div class="collapse navbar-collapse" id="navbarRightSide" >
+    <ul class="navbar-nav ">
+      <a class="navbar-brand" routerLink="/user" *ngIf="auth.isAuthenticated">
+        <img src="assets/image/profile.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      </a>
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/login" *ngIf="auth.isAuthenticated">Logout</a>
+        <a class="nav-link" routerLink="/login" *ngIf="!auth.isAuthenticated">Login</a>
+      </li>
+    </ul>
+  </div>
+</nav>

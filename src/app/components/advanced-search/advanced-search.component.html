@@ -69,6 +69,7 @@
       </div>
       <!--  PROPERTY LIST END -->
 
+
       <!--    PAGINATION  START   -->
       <div class="row" *ngIf="totalElements !=0">
         <ul class="pagination" style="margin-left: 25%">
@@ -86,9 +87,5 @@
       </div>
       <!--    PAGINATION   END  -->
 
-      <div id="spinner-background" *ngIf="isLoad">
-        <div id="booking-spinner">
-          <app-spinner></app-spinner>
-        </div>
-      </div>
-
+    </div>
+    <app-spinner *ngIf="isLoading"></app-spinner>
