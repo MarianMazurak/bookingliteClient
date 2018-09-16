@@ -17,6 +17,7 @@ export class BookingComponent implements OnInit {
   @Input() booking: Booking;
   private bookingsUrl = '/bookings'; 
   private authenticated;
+  public isLoading = false;
 
   constructor(private auth: AuthService,
     private route: ActivatedRoute,
@@ -30,16 +31,21 @@ export class BookingComponent implements OnInit {
   }
 
   getBooking(): void {
+    this.isLoading = true;
     const id = +this.route.snapshot.paramMap.get('id');
     this.bookingService.getBooking(id)
-      .subscribe(booking => this.booking = booking);
+      .subscribe(booking => {
+        this.booking = booking;
+        this.isLoading = false;}, error => this.isLoading = false);
   }
 
   cancelBooking() {
+    this.isLoading = true;
     const id = +this.route.snapshot.paramMap.get('id');
     this.bookingService.cancelBookings(id)
-      .subscribe(res => this.backToBookings()
-      );
+      .subscribe(res => {
+        this.isLoading = false;
+        this.backToBookings()}, error => this.isLoading = false);
   }
 
   isBookingDateActual(checkIn, checkOut):boolean {

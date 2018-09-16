@@ -13,6 +13,7 @@ import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
 export class ListBookingComponent implements OnInit {
 
   private authenticated;
+  public isLoading = false;
   public bookings: BookingDto[];
   public currentPage: number ;
   public selectedItemsSize: number;
@@ -62,13 +63,15 @@ constructor(private auth: AuthService,
   }
 
   getBookingsByPage(): void { 
+    this.isLoading = true;
       this.bookingService.getBookingsByPage( this.currentPage -1, this.selectedItemsSize,
         this.filterBookingsByDates).subscribe(data =>   {
           this.bookings= data['content'];
           this.totalPages= data['totalPages'];
           this.totalElements=  data['totalElements'];
           this.pagesToPagination= this.paginationService.calculatePages(this.currentPage, this.totalPages);
-      } ); 
+          this.isLoading = false;
+      }, error => this.isLoading = false ); 
   }
   
   setSelectedItemsSize(n: number): void{ 
