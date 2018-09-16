@@ -17,7 +17,7 @@ import { PaginationService } from '../../services/pagination/pagination.service'
 })
 export class AdvancedSearchComponent implements OnInit {
   public NOT_SELECT_DATA_MESSAGE = 'Please, select country, city, checkin, checkout and number of guests';
-  public isLoad = false;
+  public isLoading = false;
   errorMsg: string;
   propertyList: Property[];
   public facilities: Facility[];
@@ -173,6 +173,7 @@ export class AdvancedSearchComponent implements OnInit {
   }
 
   public mainSearch() {
+    this.isLoading = true;
     this.propertyService.search(this.selectedCountryId, this.selectedCityId, this.checkIn, this.checkOut,
          this.selectedNumberOfGuests, this.currentPage -1, this.selectedItemsSize )
       .subscribe(data => {
@@ -180,12 +181,13 @@ export class AdvancedSearchComponent implements OnInit {
         this.totalPages= data['totalPages'];
         this.totalElements=  data['totalElements'];
         this.pagesToPagination= this.paginationService.calculatePages(this.currentPage, this.totalPages);
-      }, error => {
-        this.isLoad= false;
-      });
+        this.isLoading = false
+        }, error => this.isLoading = false
+      );
   }
 
   public advancedSearch() {
+    this.isLoading = true;
       this.propertyService.advancedSearch(
         this.selectedCountryId,
         this.selectedCityId,
@@ -201,9 +203,9 @@ export class AdvancedSearchComponent implements OnInit {
           this.totalPages= data['totalPages'];
           this.totalElements=  data['totalElements'];
           this.pagesToPagination= this.paginationService.calculatePages(this.currentPage, this.totalPages);
-        }, error => {
-          this.isLoad=false;
-        });
+          this.isLoading = false;
+        }, error => this.isLoading = false
+      );
   }
 
   goToPage(n: number): void {
