@@ -3,21 +3,15 @@
   <div *ngIf="errorMsg" class="alert alert-danger" role="alert">{{errorMsg}}</div>
 
   <div class="row" style="margin-top: 5px">
-    <!--SIDE BAR START-->
-
-
-
     <div class="col-md-3">
       <div class="row mb-3">
         <div class="col-md-12">
           <div class="card bg-warning">
             <div class="card-body">
               <div class="row">
-
                 <div class="col-md-12">
                   <h3>Advance Search</h3>
                 </div>
-
               </div>
               <div class="row">
                 <div class="col-md-12">
@@ -61,23 +55,13 @@
       </div>
     </div>
 
-
-
-    <!--SIDE BAR END-->
     <div class="col-md-9">
 
-
-
-
-      <!--  PROPERTY LIST START  -->
       <app-list-property [propertyList]="propertyList"></app-list-property>
       <div *ngIf="totalElements == 0 ">
         <h3>In this city we not find such properties. </h3>
       </div>
-      <!--  PROPERTY LIST END -->
 
-
-      <!--    PAGINATION  START   -->
       <div class="row" *ngIf="totalElements !=0">
         <ul class="pagination" style="margin-left: 25%">
           <app-pagination
@@ -92,7 +76,6 @@
           </app-pagination>
         </ul>
       </div>
-      <!--    PAGINATION   END  -->
 
     </div>
     <app-spinner *ngIf="isLoading"></app-spinner>
