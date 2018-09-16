@@ -11,9 +11,9 @@ import { BookingService } from '../../services/booking/booking.service';
 export class PaginationComponent implements OnInit {
 
   private firstPage = 1;
-  @Input() currentPage: number; // the current page
-  @Input() totalPages : number;  //all page
-  @Input() pagesToPagination : number []; //count page to show in pagination
+  @Input() currentPage: number;
+  @Input() totalPages: number;
+  @Input() pagesToPagination: number [];
 
   @Output() goFirst = new EventEmitter<number>();
   @Output() goPrev = new EventEmitter<boolean>();
