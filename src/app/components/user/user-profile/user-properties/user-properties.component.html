@@ -2,7 +2,7 @@
   <app-user-navigation></app-user-navigation>
   <table class="table">
     <thead class="thead-light">
-    <a href="#" routerLink="/create-property" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new property</a>
+    <a href="#" routerLink="/create-property" class="btn btn-primary btn-xs pull-right new-appartment"><b>+</b> Add new property</a>
     <tr>
       <th scope="col">Name</th>
       <th scope="col">ContactEmail</th>
@@ -20,15 +20,15 @@
       <td>{{property.phoneNumber}}</td>
       <td>{{property.propertyType.name}}</td>
       <td class="text-center">
-        <a class='btn btn-info btn-xs' routerLink="/edit-property/{{property.id}}">
+        <a class='btn btn-info btn-xs action' routerLink="/edit-property/{{property.id}}">
         <span class="glyphicon glyphicon-edit"></span>Edit</a>
       </td>
       <td>
-        <a class='btn btn-info btn-xs' routerLink="/myproperty/{{property.id}}/apartments">
+        <a class='btn btn-info btn-xs action' routerLink="/myproperty/{{property.id}}/apartments">
           <span class="glyphicon glyphicon-edit"></span>Apartments</a>
       </td>
       <td>
-        <a class='btn btn-info btn-xs' routerLink="/myproperties/{{property.id}}/guest-arrivals/futureBookings">
+        <a class='btn btn-info btn-xs action' routerLink="/myproperties/{{property.id}}/guest-arrivals/futureBookings">
           <span class="glyphicon glyphicon-edit"></span>Guest Arrivals</a>
       </td>
     </tr>
