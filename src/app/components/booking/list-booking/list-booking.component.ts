@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Booking } from '../../../models/booking';
 import { BookingService } from '../../../services/booking/booking.service';
 import { PaginationService } from '../../../services/pagination/pagination.service';
 import { AuthService } from '../../../services/authentication/auth.service';
 import {BookingDto} from '../../../models/bookingDto';
+import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-list-booking',
@@ -13,36 +13,31 @@ import {BookingDto} from '../../../models/bookingDto';
 export class ListBookingComponent implements OnInit {
 
   private authenticated;
-  bookings: BookingDto[];
-  currentPage: number ;
-  selectedItemsSize: number;
-  pagesToPagination : number [];//count page to show in pagination
-  totalPages: number; // all pages (to last page in pagination)
-  totalElements: number;// condition in html. If==0 you not have booking
-  filterBookingsByDates: string; //selected filter(all, actual, archieve)
-  allBookingsString: string = "allBookings";
-  actualBookingsString: string = "actualBookings";
-  archieveBookingsString: string = "archieveBookings";
-  baseUrlToChangePageInPagination: string = window.location.protocol+ "//"
-                                              +window.location.host +"/"
-                                              +window.location.href.split('/')[3] +"/"
-                                              +window.location.href.split('/')[4] +"/";
-  baseUrlToFilterBookings: string = window.location.protocol+ "//"
+  public isLoading = false;
+  public bookings: BookingDto[];
+  public currentPage: number ;
+  public selectedItemsSize: number;
+  public pagesToPagination : number [];//count page to show in pagination
+  public totalPages: number; // all pages (to last page in pagination)
+  public totalElements: number;// condition in html. If==0 you not have booking
+  public filterBookingsByDates: string; //selected filter(all, actual, archieve)
+  public allBookingsString: string = "allBookings";
+  public actualBookingsString: string = "actualBookings";
+  public archieveBookingsString: string = "archieveBookings";
+  public baseBookingUrl: string = window.location.protocol+ "//"
                        +window.location.host +"/"
-                       +window.location.href.split('/')[3] +"/"
+                       + "bookings" ;                     
   
 
-  constructor(private auth: AuthService,
+constructor(private auth: AuthService,
               private bookingService: BookingService,
-              private paginationService: PaginationService) { }
+              private paginationService: PaginationService,
+              private route: ActivatedRoute) { }
   
   ngOnInit() {
     this.authenticated = this.auth.isAuthenticated;
-    if(window.location.href.split('/')[4] == this.actualBookingsString){ //all this change on filterBookingsByDates= wind.location.href.get.[4]
-      this.filterBookingsByDates= this.actualBookingsString;
-    }
-    else if(window.location.href.split('/')[4] == this.archieveBookingsString){
-      this.filterBookingsByDates= this.archieveBookingsString;
+    if( this.route.snapshot.queryParamMap.get('filter') ){
+      this.filterBookingsByDates=  this.route.snapshot.queryParamMap.get('filter');
     }
     else{
       this.filterBookingsByDates= this.allBookingsString;
@@ -52,31 +47,37 @@ export class ListBookingComponent implements OnInit {
       this.selectedItemsSize = Number (localStorage.getItem('selectedItemsSize'));
     }
 
-    if( Number( window.location.href.split('/')[5]) != 1){//when you back with booking to list-bokings      
-      this.currentPage=  Number( window.location.href.split('/')[5]); 
+    if( Number(this.route.snapshot.queryParamMap.get('page')) ){//when you back with booking to list-bokings      
+      this.currentPage= Number(this.route.snapshot.queryParamMap.get('page')); 
     }
-    else{     
-      this.currentPage= 1; 
+    else{
+    this.currentPage= 1;     
     }
+
+    if( !Number(this.route.snapshot.queryParamMap.get('page'))
+          && !this.route.snapshot.queryParamMap.get('filter')){
+      let newUrl: string = this.getUrlWithPageAndFilter(this.currentPage, this.filterBookingsByDates);        
+      history.pushState(null, null, newUrl);    
+    }    
     this.getBookingsByPage();
   }
 
   getBookingsByPage(): void { 
-    if(this.selectedItemsSize){
-      this.currentPage= Number( window.location.href.split('/')[5]); 
+    this.isLoading = true;
       this.bookingService.getBookingsByPage( this.currentPage -1, this.selectedItemsSize,
         this.filterBookingsByDates).subscribe(data =>   {
           this.bookings= data['content'];
           this.totalPages= data['totalPages'];
           this.totalElements=  data['totalElements'];
           this.pagesToPagination= this.paginationService.calculatePages(this.currentPage, this.totalPages);
-      } ); 
-    }
+          this.isLoading = false;
+      }, error => this.isLoading = false ); 
   }
   
   setSelectedItemsSize(n: number): void{ 
     this.selectedItemsSize= n;
-    let newUrl: string = this.baseUrlToChangePageInPagination + "1";         
+    this.currentPage= 1; 
+    let newUrl: string = this.getUrlWithPageAndFilter(1, this.filterBookingsByDates);                
     history.pushState(null, null, newUrl);    
     this.getBookingsByPage();
   }
@@ -86,33 +87,36 @@ export class ListBookingComponent implements OnInit {
   }
 
   goToPage(n: number): void {
-    let newUrl: string = this.baseUrlToChangePageInPagination + "" + n; 
+    this.currentPage= n;
+    let newUrl: string = this.getUrlWithPageAndFilter(this.currentPage, this.filterBookingsByDates);    
     history.pushState(null, null, newUrl);    
     this.getBookingsByPage();
   }
 
   onFirst(n: number): void {
-    let newUrl: string = this.baseUrlToChangePageInPagination + "" + n;           
+    this.currentPage= n;
+    let newUrl: string = this.getUrlWithPageAndFilter(this.currentPage, this.filterBookingsByDates);            
     history.pushState(null, null, newUrl);    
     this.getBookingsByPage();
   }
 
   onPrev(): void {
     this.currentPage--;
-    let newUrl: string = this.baseUrlToChangePageInPagination + "" + this.currentPage;              
+    let newUrl: string = this.getUrlWithPageAndFilter(this.currentPage, this.filterBookingsByDates);               
     history.pushState(null, null, newUrl);    
     this.getBookingsByPage();
 }
 
   onNext(): void {    
     this.currentPage++;
-    let newUrl: string = this.baseUrlToChangePageInPagination + "" + this.currentPage;         
+    let newUrl: string = this.getUrlWithPageAndFilter(this.currentPage, this.filterBookingsByDates);   
     history.pushState(null, null, newUrl);    
     this.getBookingsByPage();
   }
 
   onLast(n: number): void {
-    let newUrl: string = this.baseUrlToChangePageInPagination + "" + n;    
+    this.currentPage= n;
+    let newUrl: string = this.getUrlWithPageAndFilter(this.currentPage, this.filterBookingsByDates);
     history.pushState(null, null, newUrl);    
     this.getBookingsByPage();
   }
@@ -130,8 +134,9 @@ export class ListBookingComponent implements OnInit {
   }
 
   filterAllBookings(){
-    let newUrl: string = this.baseUrlToFilterBookings + this.allBookingsString +"/" + "1";
-    if(! window.location.href.includes(`${this.allBookingsString}`)){
+    let newUrl: string = this.getUrlWithPageAndFilter(1, this.allBookingsString);
+    if( this.route.snapshot.queryParamMap.get('filter') != this.allBookingsString ){
+      this.currentPage= 1; 
       history.pushState(null, null, newUrl);
       this.filterBookingsByDates= this.allBookingsString;
       this.getBookingsByPage();
@@ -139,8 +144,9 @@ export class ListBookingComponent implements OnInit {
   }
 
   fiterActualBookings(){    
-    let newUrl: string = this.baseUrlToFilterBookings + this.actualBookingsString +"/" + "1";
-    if(! window.location.href.includes(`${this.actualBookingsString}`)){
+    let newUrl: string = this.getUrlWithPageAndFilter(1, this.actualBookingsString);
+    if( this.route.snapshot.queryParamMap.get('filter') != this.actualBookingsString ){
+      this.currentPage= 1; 
       history.pushState(null, null, newUrl);      
       this.filterBookingsByDates= this.actualBookingsString;
       this.getBookingsByPage();
@@ -148,11 +154,16 @@ export class ListBookingComponent implements OnInit {
   }
 
   filterArchieveBookings(){
-    let newUrl: string = this.baseUrlToFilterBookings + this.archieveBookingsString +"/" + "1";
-      if( ! window.location.href.includes(`${this.archieveBookingsString}`) ){
+    let newUrl: string = this.getUrlWithPageAndFilter(1, this.archieveBookingsString);
+      if( this.route.snapshot.queryParamMap.get('filter') != this.archieveBookingsString ){
+      this.currentPage= 1; 
       history.pushState(null, null, newUrl);
       this.filterBookingsByDates= this.archieveBookingsString;
       this.getBookingsByPage();
     }      
+  }
+
+  getUrlWithPageAndFilter(page: number, filter: string): string{
+    return this.baseBookingUrl  + "?page="+ page +"&filter="+ filter;
   }
 }

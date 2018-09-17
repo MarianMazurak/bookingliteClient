@@ -48,7 +48,6 @@
       </div>
     </div>
 
-    <!-- Proto List Start -->
     <div class="col-md-4 border-left card-body" id="photo-list" *ngIf='property'>
       <ul class="media-list main-list">
         <li class="media">
@@ -79,13 +78,12 @@
                src={{property.photos[2].url}}>
         </li>
       </ul>
-      <!--         <app-photo-popup style="margin-left: 28px"
-                            [booking]="booking">
-                          </app-photo-popup> <!-- add conditionng ngIf-->
+      <app-photo-popup style="margin-left: 28px"
+                       [property]="property">
+      </app-photo-popup>
     </div>
-    <!-- Proto List END -->
 
-    <div class="col-md-5" style = "margin-top: -11%">
+    <div class="col-md-5" style="margin-top: -11%">
       <ul class="menu-items" style="list-style: none">
         <li style="font-size: 18px; color: #bb5500">Information about property</li>
         <li style="font-family: 'Bitstream Vera Sans'; font-size: 14px"> Contact Email : {{property.contactEmail}}

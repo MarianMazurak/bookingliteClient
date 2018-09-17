@@ -31,7 +31,7 @@ const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'bookings/:filter/:page', component: ListBookingComponent },
+  {path: 'bookings', component: ListBookingComponent },
   {path: 'booking/:id', component: BookingComponent},
   {path: 'create-property', component: CreatePropertyComponent, canActivate: [AuthGuardService, RoleGuardService], data: {expectedRole: 'ROLE_OWNER'}},
   {path: 'property', component: ListPropertyComponent},
