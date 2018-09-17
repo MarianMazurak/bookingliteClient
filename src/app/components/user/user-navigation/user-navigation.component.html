@@ -6,7 +6,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" [ngClass]="{'nav-link': true, 'active': href.includes('bookings')}"
-         routerLink="/bookings/allBookings/1">Bookings</a>
+         routerLink="/bookings">Bookings</a>
       </li>
       <li class="nav-item" *ngIf="isOwner">
         <a [ngClass]="{'nav-link': true, 'active': href.includes('properties')}" routerLink="/myproperties">Properties</a>

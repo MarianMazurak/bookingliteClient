@@ -11,6 +11,7 @@ import { Property } from '../../../../models/property';
 })
 export class UserPropertiesComponent implements OnInit {
 
+  public isLoading = false;
   private authentication;
   propertyList: Property[];
 
@@ -22,9 +23,12 @@ export class UserPropertiesComponent implements OnInit {
   }
 
   public getOwnerProperties() {
+    this.isLoading = true;
     this.propertyService.getOwnerProperties().subscribe(properties => {
       this.propertyList = properties;
-    });
+      this.isLoading = false;
+      },
+      error => this.isLoading = false);
   }
 }
 

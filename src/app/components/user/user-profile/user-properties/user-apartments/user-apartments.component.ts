@@ -9,12 +9,17 @@ import {Property} from '../../../../../models/property';
   styleUrls: ['./user-apartments.component.css']
 })
 export class UserApartmentsComponent implements OnInit {
+
+  public isLoading = false;
   property: Property;
   constructor(private route: ActivatedRoute, private propertyService: PropertyService) { }
   ngOnInit() {
+    this.isLoading = true;
     this.propertyService.getPropertyById(Number.parseInt(this.route.snapshot.paramMap.get('id')))
       .subscribe(property => {
         this.property = property;
-      });
+        this.isLoading = false;
+      },
+        error => this.isLoading = false);
   }
 }
