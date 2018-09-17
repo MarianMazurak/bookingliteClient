@@ -1,44 +1,47 @@
 <div class="container" *ngIf="property">
   <div class="row">
-    <div class="col-md-8" style="margin-top: 4px" *ngIf="property">
-      <ul class="pagination">
-        <li class="page-item active">
-          <p class="page-link" style="width: 100%; font-size: 13px">
-            <a style="text-decoration: none; color: white;" routerLink="/property/{{property.id}}/apartments"
-               [queryParams]="queryParams">
-              Info about apartments and price</a></p>
-        </li>
-
-        <li class="page-item active" style="margin-left: 5%">
-          <p class="page-link" style="width: 110%; font-size: 13px">
-            <a style="text-decoration: none; color: white;" routerLink="/reviews-property/{{property.id}}">
-              Show all review</a></p>
-        </li>
-
-        <li class="page-item active" style="margin-left: 5%">
-          <p class="page-link" style="width: 110%; font-size: 13px"><a
-            style="text-decoration: none; color: white;" routerLink="/property/{{property.id}}/apartments"
-            [queryParams]="queryParams">Book now</a></p>
-        </li>
-
-      </ul>
-    </div>
-
 
     <div class="col-md-8">
-      <h2 style="width: 90%; margin-left: 3%;margin-top: -2%"><a href="#" style="text-decoration: none;"
+      <h2 style="width: 90%; margin-left: 3%; margin-top: 1%"><a href="#" style="text-decoration: none;"
                                                                  *ngIf="property"
                                                                  routerLink="/property/{{property.id}}/apartments">
         <b>{{property.name}}</b></a><span
-        style="font-size: 14px; margin-left: 25%">Type: {{property.propertyType.name}}</span>
+        style="font-size: 14px; margin-left: 17%">Type: {{property.propertyType.name}}</span>
+        <span style="font-size: 13px; margin-left: 10%">Ranking: {{property.rating}}</span>
       </h2>
       <img src="assets/image/pin.png" style="width: 25px">
       <span *ngIf="property" style="font-size: 14px; font-style:italic">Location : {{property.address.addressLine}},
-          zip : {{property.address.zip}}, {{property.address.city.name}}, {{property.address.city.country.name}}</span>
+          zip : {{property.address.zip}}, {{property.address.city.name}}, {{property.address.city.country.name}} <span style="margin-left: 10%">
+          Review:{{countReview}}
+        </span></span>
 
       <div class="featured-article">
         <img class="thumb" alt="No Photo" *ngIf="property.photos.length > 0"
              src={{property.photos[0].url}}>
+        <div class="col-md-8" style="margin-top: 4px" *ngIf="property">
+          <ul class="pagination">
+            <li class="page-item active">
+              <p class="page-link" style="width: 100%; font-size: 13px">
+                <a style="text-decoration: none; color: white;" routerLink="/property/{{property.id}}/apartments"
+                   [queryParams]="queryParams">
+                  Info about apartments and price</a></p>
+            </li>
+
+            <li class="page-item active" style="margin-left: 5%">
+              <p class="page-link" style="width: 110%; font-size: 13px">
+                <a style="text-decoration: none; color: white;" routerLink="/reviews-property/{{property.id}}">
+                  Show all review</a></p>
+            </li>
+
+            <li class="page-item active" style="margin-left: 5%">
+              <p class="page-link" style="width: 110%; font-size: 13px"><a
+                style="text-decoration: none; color: white;" routerLink="/property/{{property.id}}/apartments"
+                [queryParams]="queryParams">Book now</a></p>
+            </li>
+
+          </ul>
+        </div>
+
         <div class="block-title" style="margin-top: 1%">
           <img src="assets/image/medal.png" style="width: 25px;
              display: inline; margin-left: 10px;">
@@ -58,7 +61,6 @@
           <img class="media-object"
                alt="No Photo" *ngIf="property.photos.length === 0"
                src="assets/image/Capture.PNG">
-
         </li>
         <li class="media">
           <img class="media-object"

@@ -1,7 +1,6 @@
 <div class="container">
   <app-search-form (mainDataChange)='onMainDataChange($event)'></app-search-form>
   <div *ngIf="errorMsg" class="alert alert-danger" role="alert">{{errorMsg}}</div>
-
   <div class="row" style="margin-top: 5px">
     <div class="col-md-3">
       <div class="row mb-3">
@@ -46,7 +45,6 @@
                   <hr>
                   <button type="submit" class="btn btn-primary" (click)="onApply()">Apply</button>
                   <div class="pb-3"></div>
-
                 </div>
               </div>
             </div>
@@ -76,6 +74,5 @@
           </app-pagination>
         </ul>
       </div>
-
     </div>
     <app-spinner *ngIf="isLoading"></app-spinner>

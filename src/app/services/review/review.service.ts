@@ -32,5 +32,8 @@ export class ReviewService {
   public getPageAllReviewsByProperty(id: number, page: number, size: number): Observable<Review[]> {
     return this.http.get<Review[]>(`${this.propertyUrl}/${id}/reviews?page=${page}&size=${size}`);
   }
+  public getCountReviewByPropertyId(id: number): Observable<number> {
+    return this.http.get<number>('/api/property/' + id + '/reviews/count');
+  }
 }
 
