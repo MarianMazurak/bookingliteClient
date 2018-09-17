@@ -1,5 +1,4 @@
-
-<div class="container" *ngIf="booking" style="margin-top: 3%">
+<div class="container" *ngIf="booking" style="margin-top: 2%">
   <div class="row">
 
     <div class="col-md-8">
@@ -80,20 +79,17 @@
               <button class="btn btn-secondary btn-block" (click)="cancelBooking()">Cancel Booking</button>
             </div>                      
         </div>
-
     </div>
 
     <div class="col-md-4 border-left card-body" id="photo-list" *ngIf='booking'>
       <ul class="media-list main-list">
         <li class="media">
-
           <img class="media-object"
                alt="No Photo" *ngIf="booking.apartmentDto.propertyDto.photos.length > 0"
                src={{booking.apartmentDto.propertyDto.photos[0].url}}>
           <img class="media-object"
                alt="No Photo" *ngIf="booking.apartmentDto.propertyDto.photos.length === 0"
                src="assets/image/Capture.PNG">
-
         </li>
         <li class="media">
           <img class="media-object"
@@ -103,7 +99,6 @@
                alt="No Photo" *ngIf="booking.apartmentDto.propertyDto.photos.length === 0"
                src="assets/image/Capture.PNG">
         </li>
-
         <li class="media">
           <img class="media-object"
                alt="No Photo" *ngIf="booking.apartmentDto.propertyDto.photos.length === 0"
@@ -117,7 +112,6 @@
                        [booking]="booking">
       </app-photo-popup>
     </div>
-
   </div>
 </div>
 <app-spinner *ngIf="isLoading"></app-spinner>
