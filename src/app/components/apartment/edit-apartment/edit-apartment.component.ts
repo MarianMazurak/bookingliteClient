@@ -69,6 +69,7 @@ export class EditApartmentComponent implements OnInit {
       this.apartmentUpdate.price = this.apartment.price;
       this.apartmentUpdate.numberOfGuests = this.apartment.numberOfGuests;
       this.apartmentUpdate.apartmentTypeId = this.selectApartmentType;
+      console.log(this);
       this.apartmentService.updateApartment(this.apartmentUpdate, id).subscribe(res => {
       this.onSubmit();
       }, error => {

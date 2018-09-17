@@ -10,9 +10,13 @@
 
 }
 
-
+#photo-list{
+  min-height: 580px;
+  max-height: 580px;
+}
 .media-object {
   width: 250px;
+  min-height: 125px;
   margin: 10px;
   border-radius: 20px;
   border: 2px double black;
