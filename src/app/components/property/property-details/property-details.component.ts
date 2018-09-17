@@ -10,6 +10,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class PropertyDetailsComponent implements OnInit {
 
+  public isLoading = false;
   property: Property;
   public queryParams = {
     checkin: '',
@@ -25,8 +26,12 @@ export class PropertyDetailsComponent implements OnInit {
     this.queryParams.num_of_guests = this.route.snapshot.queryParamMap.get('num_of_guests');
   }
   public getPropertyById(): Property {
+    this.isLoading = true;
     const id = +this.route.snapshot.paramMap.get('id');
-    this.propertyService.getPropertyById(id).subscribe(res => this.property = res);
+    this.propertyService.getPropertyById(id).subscribe(res => {this.property = res
+    this.isLoading = false;
+    },
+      error => this.isLoading = false);
     return this.property;
   }
 }
