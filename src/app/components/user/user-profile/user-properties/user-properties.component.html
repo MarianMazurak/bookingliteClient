@@ -8,7 +8,9 @@
       <th scope="col">ContactEmail</th>
       <th scope="col">PhoneNumber</th>
       <th scope="col">Property Type</th>
-      <th class="text-center">Action</th>
+      <th class="text-center">Edit</th>
+      <th class="text-center">Apartments</th>
+      <th class="text-center">Guest Arrivals</th>
     </tr>
     </thead>
     <tbody>
@@ -20,8 +22,15 @@
       <td class="text-center">
         <a class='btn btn-info btn-xs' routerLink="/edit-property/{{property.id}}">
         <span class="glyphicon glyphicon-edit"></span>Edit</a>
+      </td>
+      <td>
         <a class='btn btn-info btn-xs' routerLink="/myproperty/{{property.id}}/apartments">
-        <span class="glyphicon glyphicon-edit"></span>Apartments</a>
+          <span class="glyphicon glyphicon-edit"></span>Apartments</a>
+      </td>
+      <td>
+        <a class='btn btn-info btn-xs' routerLink="/myproperties/{{property.id}}/guest-arrivals/futureBookings">
+          <span class="glyphicon glyphicon-edit"></span>Guest Arrivals</a>
+      </td>
     </tr>
     </tbody>
   </table>
