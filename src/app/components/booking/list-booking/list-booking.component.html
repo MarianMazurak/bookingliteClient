@@ -96,10 +96,9 @@
                             <b *ngIf="!isCanceled(booking.bookingStatus.name)"style="color:green">{{booking.bookingStatus.name}}</b>
                             </h2>
                         </li>
-                        <li><h4>Price:</h4></li>
-                        <li><h4>{{booking.totalPrice}}*
-                          <p style="font-size: 14px">*number of days: {{calculateNumberOfDates(booking.checkIn , booking.checkOut )}}</p>
-                         </h4></li>
+                        <li><h4>Price: {{booking.totalPrice}}*
+                            <p style="font-size: 14px">*number of days: {{calculateNumberOfDates(booking.checkIn , booking.checkOut )}}</p>
+                        </h4></li>
                         </ul>
                       <div *ngIf=" !isBookingDateActual(booking.checkIn, booking.checkOut)">
                         <div *ngIf="!booking.reviewDto">
