@@ -11,20 +11,22 @@
 .form-control {
   width: 350px;
   height: 50px;
-}
-
-label {
-  font-size: 19px;
   margin-left: 20px;
 }
+
+
 
 .card {
   margin-top: 10px;
 }
 div#menucard{
-  padding: 10px;
-  margin-top: 2%;
+  padding: 30px;
+  margin-top: 10px;
+  height: auto;
 }
 button{
   margin-left: 73%;
+}
+label.createBooking{
+  margin-left: 32px;
 }

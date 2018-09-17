@@ -17,6 +17,7 @@ export class BookingCreateComponent implements OnInit {
   today: Date;
   formValid = true;
   errorMessage = '';
+  public isLoading = false;
 
   constructor(private bookingService: BookingService,
               private apartmentService: ApartmentService,
@@ -35,20 +36,24 @@ export class BookingCreateComponent implements OnInit {
     });
   }
    onSubmit() {
-     this.router.navigate(['/bookings/allBookings/1']);
+     this.router.navigate(['/bookings']);
    }
 
   createBooking(createBookingForm: FormGroup) {
+    this.isLoading = true;
     const id = +this.activatedRoute.snapshot.paramMap.get('id');
     if (createBookingForm.valid) {
       this.bookingService.createBooking(this.booking, id).subscribe(res => {
         alert('Your booking created successful!');
         this.onSubmit();
+        this.isLoading = false;
       }, error => {
+        this.isLoading = false;
         this.errorMessage = JSON.parse(error.error).message;
       });
     } else {
       this.formValid = false;
+      this.isLoading = false;
     }
   }
 

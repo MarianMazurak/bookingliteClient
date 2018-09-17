@@ -3,6 +3,8 @@ import {Booking} from '../../../models/booking';
 import {BookingService} from '../../../services/booking/booking.service';
 import {ActivatedRoute} from '@angular/router';
 import {PaginationService} from '../../../services/pagination/pagination.service';
+import {PropertyService} from '../../../services/property/property.service';
+import {Property} from '../../../models/property';
 
 @Component({
   selector: 'app-guest-arrivals',
@@ -20,10 +22,13 @@ export class GuestArrivalsComponent implements OnInit {
   futureBookings = 'futureBookings';
   actualBookings = 'actualBookings';
   pastBookings = 'pastBookings';
+  public isLoading = false;
+  property: Property;
 
   constructor(private bookingService: BookingService,
               private route: ActivatedRoute,
-              private paginationService: PaginationService) {
+              private paginationService: PaginationService,
+              private propertyService: PropertyService) {
   }
 
   ngOnInit() {
@@ -35,9 +40,11 @@ export class GuestArrivalsComponent implements OnInit {
       this.filterBookings = this.futureBookings;
     }
     this.getBookingsByPage();
+    this.getProperty();
   }
 
   getBookingsByPage(): void {
+    this.isLoading = true;
     const id = +this.route.snapshot.paramMap.get('id');
     if (this.selectedItemsSize) {
       this.bookingService.getPageGuestArrivalsList(id, this.currentPage - 1, this.selectedItemsSize,
@@ -46,6 +53,7 @@ export class GuestArrivalsComponent implements OnInit {
         this.totalPages = data['totalPages'];
         this.totalElements = data['totalElements'];
         this.pagesToPagination = this.paginationService.calculatePages(this.currentPage, this.totalPages);
+        this.isLoading = false;
       });
     }
   }
@@ -127,5 +135,9 @@ export class GuestArrivalsComponent implements OnInit {
       this.filterBookings = this.pastBookings;
       this.getBookingsByPage();
     }
+  }
+  getProperty(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.propertyService.getPropertyById(id).subscribe(pr => this.property = pr);
   }
 }

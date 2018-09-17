@@ -3,7 +3,12 @@ span.rating {
 }
 
 div.reviewDiv {
-  margin-top: 30px;
+  margin-top: 1px;
   margin-left: 10%;
   margin-right: 10%;
 }
+div#items-size{
+  margin-left: 10%;
+  margin-right: 15%;
+}
+
