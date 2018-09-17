@@ -1,4 +1,10 @@
 #navbarRightSide {
   justify-content: flex-end;
 }
+.user-dropdown {
+  display: block;
+}
+.dropdown-toggle {
+  cursor: pointer;
+}
 

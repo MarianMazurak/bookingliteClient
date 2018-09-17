@@ -18,6 +18,7 @@ export class ReviewCreateComponent implements OnInit {
   formValid = true;
   errorMessage = '';
   flag: boolean;
+  public isLoading = false;
 
   constructor(private reviewService: ReviewService,
               private route: ActivatedRoute,

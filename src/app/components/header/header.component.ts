@@ -8,7 +8,14 @@ import {AuthService} from '../../services/authentication/auth.service';
 })
 export class HeaderComponent implements OnInit {
   constructor(public auth: AuthService) { }
-
-  ngOnInit() {}
-
+  isOpen = false;
+  isOwner: boolean;
+  href = '';
+  ngOnInit() {
+    this.auth.isOwner.subscribe( isOwner => this.isOwner = isOwner );
+  }
+  onClick() {
+    this.href = window.location.href;
+    this.isOpen = !this.isOpen;
+  }
 }

@@ -1,6 +1,6 @@
 div.reviewDiv {
   height: auto;
-  width: 450px;
+  width: 750px;
   border: 1px solid silver;
   padding: 30px;
   position: absolute;
@@ -8,4 +8,10 @@ div.reviewDiv {
   left: 50%;
   transform: translate(-50%, -50%);
 
+}
+div#btns{
+  margin-left: 40%;
+}
+button{
+  width: 200px;
 }

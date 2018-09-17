@@ -3,6 +3,8 @@ import {Review} from '../../../models/review';
 import {ActivatedRoute} from '@angular/router';
 import {ReviewService} from '../../../services/review/review.service';
 import {PaginationService} from '../../../services/pagination/pagination.service';
+import {Property} from '../../../models/property';
+import {PropertyService} from '../../../services/property/property.service';
 
 @Component({
   selector: 'app-reviews-property',
@@ -11,19 +13,23 @@ import {PaginationService} from '../../../services/pagination/pagination.service
 })
 export class ReviewsPropertyComponent implements OnInit {
   reviews: Review [];
+  property: Property;
   currentPage = 1;
   selectedItemsSize = 10;
   pagesToPagination: number [];
   totalPages: number;
   totalElements: number;
+  public isLoading = false;
 
   constructor(private route: ActivatedRoute,
               private reviewService: ReviewService,
-              private paginationService: PaginationService) {
+              private paginationService: PaginationService,
+              private propertyService: PropertyService) {
   }
 
   ngOnInit() {
     this.getReviewsByPage();
+    this.getProperty();
   }
 
   getReviewsByPage(): void {
@@ -68,5 +74,10 @@ export class ReviewsPropertyComponent implements OnInit {
   onLast(n: number): void {
     this.currentPage = n;
     this.getReviewsByPage();
+  }
+
+  getProperty(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.propertyService.getPropertyById(id).subscribe(pr => this.property = pr);
   }
 }
