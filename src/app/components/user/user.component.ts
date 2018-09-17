@@ -9,6 +9,7 @@ import {PropertyService} from '../../services/property/property.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
+  isLoading = false;
   user: User;
   myPropertyCount = 0;
   myApartmentCount = 0;
@@ -16,9 +17,11 @@ export class UserComponent implements OnInit {
   constructor(private auth: AuthService, private propertyService: PropertyService) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.auth.getUserFromBackEnd().subscribe(user => {
       this.user = user;
-    });
+      this.isLoading = false;
+    }, error => this.isLoading = false );
     this.auth.isOwner.subscribe( isOwner => {
       this.isOwner = isOwner;
       if (isOwner) {
