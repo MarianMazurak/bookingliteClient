@@ -7,7 +7,6 @@
     <table class="table">
     <thead class="thead-light">
     <tr>
-      <th scope="col">id</th>
       <th scope="col">name</th>
       <th scope="col">price</th>
       <th scope="col">type</th>
@@ -16,16 +15,14 @@
     </tr>
     </thead>
     <tbody *ngIf="property">
-    <tr *ngFor="let ap of property.apartments">
-      <th scope="row">{{ap.id}}</th>
-      <td>{{ap.name}}</td>
-      <td>{{ap.price}}</td>
-      <td>{{ap.apartmentType.name}}</td>
-      <td>{{ap.numberOfGuests}}</td>
-      <td><button type="button" class="btn btn-primary"
-                  routerLink="/property/{{property.id}}/edit-apartment/{{ap.id}}">Edit</button></td>
-    </tr>
-
+      <tr *ngFor="let ap of property.apartments">
+        <td>{{ap.name}}</td>
+        <td>{{ap.price}}</td>
+        <td>{{ap.apartmentType.name}}</td>
+        <td>{{ap.numberOfGuests}}</td>
+        <td><button type="button" class="btn btn-primary"
+                    routerLink="/property/{{property.id}}/edit-apartment/{{ap.id}}">Edit</button></td>
+      </tr>
     </tbody>
   </table>
 </div>
