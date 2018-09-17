@@ -2,14 +2,17 @@
 <br>
 <div *ngIf="totalElements !=0 ">
   <div class="container">
-    <h4>Bookings on page:</h4>
-    <app-items-size
-      (sentSelectedItemsSize)="setSelectedItemsSize($event)">
-    </app-items-size>
+    <div class="form-group row" id="items-size">
+      <h2 style="margin-right: 2%; height: content-box">Reviews on page:</h2>
+      <app-items-size
+        (sentSelectedItemsSize)="setSelectedItemsSize($event)">
+      </app-items-size>
+      <h1 style="margin-left: 20%">{{property.name}} : {{property.rating | number: '1.1'}}</h1>
+    </div>
     <br><br>
     <div class="reviewDiv">
       <div class="align-items-center" *ngFor="let review of reviews">
-        <label for="FormControlTextarea"><strong>{{review.userDto.firstName}} : </strong> </label>
+        <label for="FormControlTextarea"><strong style="margin-left: 20px">{{review.userDto.firstName}} : </strong> </label>
         <span class="rating"><strong>Rating : </strong> {{review.rating}}</span>
         <textarea class="form-control" id="FormControlTextarea" rows="4" readonly>{{review.message}}</textarea>
         <hr>
@@ -34,3 +37,4 @@
     <h3>You not have booking yet!</h3>
   </div>
 </div>
+<app-spinner *ngIf="isLoading"></app-spinner>

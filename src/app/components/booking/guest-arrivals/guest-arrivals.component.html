@@ -16,30 +16,34 @@
     </ul>
   </div>
 </div>
+<div *ngIf="totalElements == 0 " class="container">
+  <h1 style="color: #07B3F9">You do not have bookings !</h1>
+</div>
 
 <div *ngIf="totalElements !=0 ">
   <div class="container">
-    <div class="form-group row">
-    <h4 style="margin-right: 5%">Bookings on page:</h4>
-    <app-items-size
-      (sentSelectedItemsSize)="setSelectedItemsSize($event)">
-    </app-items-size>
+    <div class="form-group row" id="items-size">
+      <h2 style="margin-right: 2%; height: content-box">Reviews on page:</h2>
+      <app-items-size
+        (sentSelectedItemsSize)="setSelectedItemsSize($event)">
+      </app-items-size>
+      <h1 style="margin-left: 20%">{{property.name}} : {{property.rating | number: '1.1'}}</h1>
     </div>
     <br><br>
 
     <table class="table table-hover">
       <thead>
       <tr>
-        <th scope="col">Apartment name </th>
+        <th scope="col">Apartment name</th>
         <th scope="col">Check In</th>
         <th scope="col">Check out</th>
         <th scope="col">Number of Guests</th>
-        <th scope="col">Name and Surname Guest</th>
+        <th scope="col">Surname and Name</th>
       </tr>
       </thead>
       <tbody *ngFor="let booking of guestArrivalsList">
       <tr>
-        <th >{{booking.apartmentDto.name}}</th>
+        <th>{{booking.apartmentDto.name}}</th>
         <td>{{booking.checkIn | date:'dd-MM-yyyy'}}</td>
         <td>{{booking.checkOut | date:'dd-MM-yyyy'}}</td>
         <td>{{booking.apartmentDto.numberOfGuests}}</td>
@@ -49,8 +53,8 @@
     </table>
     <app-pagination
       [currentPage]="currentPage"
-      [totalPages]= "totalPages"
-      [pagesToPagination]= "pagesToPagination"
+      [totalPages]="totalPages"
+      [pagesToPagination]="pagesToPagination"
       (goFirst)="onFirst($event)"
       (goPrev)="onPrev()"
       (goNext)="onNext()"
@@ -60,7 +64,8 @@
 
   </div>
 
-  <div *ngIf="totalElements ===0 ">
-    <h3>You not have booking yet!</h3>
+  <div *ngIf="totalElements == 0 ">
+    <h3>You do not have any bookings !</h3>
   </div>
 </div>
+<app-spinner *ngIf="isLoading"></app-spinner>
