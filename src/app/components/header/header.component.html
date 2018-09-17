@@ -11,14 +11,21 @@
     </ul>
   </div>
   <div class="collapse navbar-collapse" id="navbarRightSide" >
-<ul class="navbar-nav ">
-<a class="navbar-brand" routerLink="/user" *ngIf="auth.isAuthenticated">
-  <img src="assets/image/profile.png" width="30" height="30" class="d-inline-block align-top" alt="">
-</a>
-  <li class="nav-item active">
-    <a class="nav-link" routerLink="/login" *ngIf="auth.isAuthenticated">Logout</a>
-    <a class="nav-link" routerLink="/login" *ngIf="!auth.isAuthenticated">Login</a>
-  </li>
-</ul>
+    <ul class="navbar-nav ">
+      <div class="dropdown show" (click)="onClick()">
+        <a class="navbar-brand dropdown-toggle" role="button" *ngIf="auth.isAuthenticated">
+          <img src="assets/image/profile.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" [ngClass]="{'user-dropdown' : isOpen}">
+          <a [ngClass]="{'dropdown-item' : true, 'active' : href.includes('user')}" routerLink="/user">Profile</a>
+          <a [ngClass]="{'dropdown-item' : true, 'active' : href.includes('bookings')}" routerLink="/bookings">Bookings</a>
+          <a [ngClass]="{'dropdown-item' : true, 'active' : href.includes('properties')}" routerLink="/myproperties" *ngIf="isOwner">Properies</a>
+        </div>
+      </div>
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/login" *ngIf="auth.isAuthenticated">Logout</a>
+        <a class="nav-link" routerLink="/login" *ngIf="!auth.isAuthenticated">Login</a>
+      </li>
+    </ul>
   </div>
 </nav>
