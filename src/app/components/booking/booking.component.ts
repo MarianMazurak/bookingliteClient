@@ -15,8 +15,9 @@ import { AuthService } from '../../services/authentication/auth.service';
 export class BookingComponent implements OnInit {
 
   @Input() booking: Booking;
-  private bookingsUrl = '/bookings/allBookings/1'; 
+  private bookingsUrl = '/bookings'; 
   private authenticated;
+  public isLoading = false;
 
   constructor(private auth: AuthService,
     private route: ActivatedRoute,
@@ -30,16 +31,21 @@ export class BookingComponent implements OnInit {
   }
 
   getBooking(): void {
+    this.isLoading = true;
     const id = +this.route.snapshot.paramMap.get('id');
     this.bookingService.getBooking(id)
-      .subscribe(booking => this.booking = booking);
+      .subscribe(booking => {
+        this.booking = booking;
+        this.isLoading = false;}, error => this.isLoading = false);
   }
 
   cancelBooking() {
+    this.isLoading = true;
     const id = +this.route.snapshot.paramMap.get('id');
     this.bookingService.cancelBookings(id)
-      .subscribe(res => this.backToBookings()
-      );
+      .subscribe(res => {
+        this.isLoading = false;
+        this.backToBookings()}, error => this.isLoading = false);
   }
 
   isBookingDateActual(checkIn, checkOut):boolean {
@@ -61,10 +67,7 @@ export class BookingComponent implements OnInit {
   backToBookings() {
     if( localStorage.getItem('urlToButtonBackToListBookings') ){
       let urlFromLocalStorage: string = localStorage.getItem('urlToButtonBackToListBookings');
-      let urlBackToListBooking: string = "/"+ urlFromLocalStorage.split('/')[3] +"/"
-                        +urlFromLocalStorage.split('/')[4] +"/"
-                        +urlFromLocalStorage.split('/')[5];
-      this.router.navigateByUrl( urlBackToListBooking );
+      this.router.navigateByUrl( urlFromLocalStorage.split('/')[3] );
     }
     else{
       this.router.navigate([this.bookingsUrl]);

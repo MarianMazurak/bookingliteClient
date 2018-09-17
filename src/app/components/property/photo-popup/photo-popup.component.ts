@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Booking } from '../../../models/booking';
+import { Property } from '../../../models/property';
 
 @Component({
   selector: 'app-photo-popup',
@@ -10,6 +11,7 @@ import { Booking } from '../../../models/booking';
 export class PhotoPopupComponent implements OnInit {
 
   @Input() booking: Booking;
+  @Input() property: Property;
   openedPhotoUrl = '';
   opened = false;
   
@@ -18,9 +20,14 @@ export class PhotoPopupComponent implements OnInit {
   ngOnInit() {
   }
 
-  open(content) {
+  open(bookingContent, propertyContent) {
     this.opened = false;
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size: 'lg'})
+    if(this.booking){
+      this.modalService.open(bookingContent, {ariaLabelledBy: 'modal-booking', size: 'lg'})
+    }
+    else if(this.property){
+      this.modalService.open(propertyContent, {ariaLabelledBy: 'modal-property', size: 'lg'})
+    }
   }
 
   openPhoto(url: string) {

@@ -25,8 +25,8 @@
              src="assets/image/Capture.PNG">
 
         <app-photo-popup style="margin-left: 28px"
-                         [booking]="booking">
-        </app-photo-popup> <!-- add conditionng ngIf-->
+                         [property]="property">
+        </app-photo-popup> 
       </div>
 
 
@@ -69,8 +69,7 @@
            style="width: 930px;height: 500px; background-color: #1f2e2e; margin-left: 50px">
 
       <div>
-        <img src="assets/image/medal.png" style="width: 50px;
-          display: inline; margin-left: 14px;">
+        <img src="assets/image/medal.png" style="width: 50px; margin-left: 14px;">
         <span style="font-size: 21px; color: #ff671d; font-style:oblique">One of our most popular lodging in
         {{property.address.city.name}}, {{property.address.city.country.name}}</span>
       </div>
