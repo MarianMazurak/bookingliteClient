@@ -26,11 +26,11 @@
                         <li class="page-item active" [ngClass]="{active: filterBookingsByDates == allBookingsString }">
                             <p class="page-link"  (click)="filterAllBookings()">All bookings</p>
                         </li>
-                        <li class="page-item active" [ngClass]="{active: filterBookingsByDates == actualBookingsString }">
-                            <p class="page-link"  (click)="fiterActualBookings()">Actual bookings</p>
+                        <li class="page-item active" [ngClass]="{active: filterBookingsByDates == currentBookingsString }">
+                            <p class="page-link"  (click)="fiterCurrentBookings()">Current bookings</p>
                         </li>
-                        <li class="page-item active" [ngClass]="{active: filterBookingsByDates == archieveBookingsString }">
-                            <p class="page-link"  (click)="filterArchieveBookings()">Archieve bookings</p>
+                        <li class="page-item active" [ngClass]="{active: filterBookingsByDates == archievedBookingsString }">
+                            <p class="page-link"  (click)="filterArchievedBookings()">Archieved bookings</p>
                         </li>
                       </ul>
                     </div>
