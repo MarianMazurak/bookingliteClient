@@ -1,5 +1,5 @@
-<br><br>
-<div class="container" *ngIf="booking">
+
+<div class="container" *ngIf="booking" style="margin-top: 3%">
   <div class="row">
 
     <div class="col-md-8">
@@ -42,6 +42,25 @@
               <li *ngFor= "let am of booking.apartmentDto.amenities">{{am.name}};</li></ul>
             </li>
             <br>
+
+            <li style="font-size: 18px; color: #bb5500">Properties</li>
+            <li style="font-family: 'Bitstream Vera Sans'; font-size: 14px">Rating:
+              {{booking.apartmentDto.propertyDto.rating}}</li>
+            <li style="font-family: 'Bitstream Vera Sans'; font-size: 14px">Address:
+              {{booking.apartmentDto.propertyDto.address.addressLine}}, 
+              {{booking.apartmentDto.propertyDto.address.city.name}},
+              {{booking.apartmentDto.propertyDto.address.city.country.name}}</li>
+            <li style="font-family: 'Bitstream Vera Sans'; font-size: 14px">Phone number:
+              {{booking.apartmentDto.propertyDto.phoneNumber}}</li>
+            <li style="font-family: 'Bitstream Vera Sans'; font-size: 14px">Email:
+              {{booking.apartmentDto.propertyDto.contactEmail}}</li>
+            <li style="font-family: 'Bitstream Vera Sans'; font-size: 14px">Facilities:
+              <ul>
+              <li *ngFor= "let facilitie of booking.apartmentDto.propertyDto.facilities">
+                {{facilitie.name}};</li></ul>
+            </li>
+            <li style="font-family: 'Bitstream Vera Sans'; font-size: 14px">Description:
+                {{booking.apartmentDto.propertyDto.description}}</li>
           </ul>
 
           <ul *ngIf= "booking?.reviewDto" class="menu-items" style="list-style: none; margin-left: -8%">
