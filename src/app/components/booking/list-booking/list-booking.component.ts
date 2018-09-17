@@ -20,10 +20,10 @@ export class ListBookingComponent implements OnInit {
   public pagesToPagination : number [];//count page to show in pagination
   public totalPages: number; // all pages (to last page in pagination)
   public totalElements: number;// condition in html. If==0 you not have booking
-  public filterBookingsByDates: string; //selected filter(all, actual, archieve)
+  public filterBookingsByDates: string; //selected filter(all, current, archieved)
   public allBookingsString: string = "allBookings";
-  public actualBookingsString: string = "actualBookings";
-  public archieveBookingsString: string = "archieveBookings";
+  public currentBookingsString: string = "currentBookings";
+  public archievedBookingsString: string = "archievedBookings";
   public baseBookingUrl: string = window.location.protocol+ "//"
                        +window.location.host +"/"
                        + "bookings" ;                     
@@ -143,22 +143,22 @@ constructor(private auth: AuthService,
     }      
   }
 
-  fiterActualBookings(){    
-    let newUrl: string = this.getUrlWithPageAndFilter(1, this.actualBookingsString);
-    if( this.route.snapshot.queryParamMap.get('filter') != this.actualBookingsString ){
+  fiterCurrentBookings(){    
+    let newUrl: string = this.getUrlWithPageAndFilter(1, this.currentBookingsString);
+    if( this.route.snapshot.queryParamMap.get('filter') != this.currentBookingsString ){
       this.currentPage= 1; 
       history.pushState(null, null, newUrl);      
-      this.filterBookingsByDates= this.actualBookingsString;
+      this.filterBookingsByDates= this.currentBookingsString;
       this.getBookingsByPage();
     }            
   }
 
-  filterArchieveBookings(){
-    let newUrl: string = this.getUrlWithPageAndFilter(1, this.archieveBookingsString);
-      if( this.route.snapshot.queryParamMap.get('filter') != this.archieveBookingsString ){
+  filterArchievedBookings(){
+    let newUrl: string = this.getUrlWithPageAndFilter(1, this.archievedBookingsString);
+      if( this.route.snapshot.queryParamMap.get('filter') != this.archievedBookingsString ){
       this.currentPage= 1; 
       history.pushState(null, null, newUrl);
-      this.filterBookingsByDates= this.archieveBookingsString;
+      this.filterBookingsByDates= this.archievedBookingsString;
       this.getBookingsByPage();
     }      
   }

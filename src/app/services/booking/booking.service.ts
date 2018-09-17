@@ -19,18 +19,18 @@ export class BookingService {
   constructor(private http: HttpClient) {
   }
 
-  getBookingsByPage(pageNumber: number, pageSize: number, filterBookingsByDates: string): Observable<any> {
+  public getBookingsByPage(pageNumber: number, pageSize: number, filterBookingsByDates: string): Observable<any> {
     return this.http.get<Booking []>(
       `${this.bookingByPageUrl}?pageNumber=${pageNumber}&pageSize=${pageSize}
       &filterBookingsByDates=${filterBookingsByDates}`);
   }
 
-  getBooking(id: number): Observable<Booking> {
+  public getBooking(id: number): Observable<Booking> {
     const url = `${this.bookingUrl}/${id}`;
     return this.http.get<Booking>(url);
   }
 
-  cancelBookings(id: number) {
+  public cancelBookings(id: number) {
     const url = `${this.bookingUrl}/${id}`;
     const httpOption = {
       headers: new HttpHeaders({
@@ -41,7 +41,7 @@ export class BookingService {
 
   }
 
-  isCanceled(bookingStatus: string): boolean {
+  public isCanceled(bookingStatus: string): boolean {
     const canceledStatus = 'Canceled';
     if (bookingStatus === canceledStatus) {
       return true;
@@ -50,7 +50,7 @@ export class BookingService {
     }
   }
 
-  calculateNumberOfDates(checkIn, checkOut): number {
+  public calculateNumberOfDates(checkIn, checkOut): number {
     const dateChackIn = new Date(checkIn);
     const dateChackOut = new Date(checkOut);
     const oneDay = 24 * 60 * 60 * 1000;
@@ -58,7 +58,7 @@ export class BookingService {
   }
 
 
-  isBookingDateActual(checkIn, checkOut): boolean {
+  public isBookingDateActual(checkIn, checkOut): boolean {
     let dateChackIn = new Date(checkIn);
     let dateChackOut = new Date(checkOut);
     this.nowDate = new Date();
@@ -79,7 +79,7 @@ export class BookingService {
     });
   }
 
-  getPageGuestArrivalsList(id: number, page: number, size: number, filterBooking: string): Observable<Booking[]> {
+  public getPageGuestArrivalsList(id: number, page: number, size: number, filterBooking: string): Observable<Booking[]> {
     return this.http.get<Booking []>(
       `${this.myPropertiesUrl}/${id}/guestArrivals?page=${page}&size=${size}&filterBooking=${filterBooking}`);
   }

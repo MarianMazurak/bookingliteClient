@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="margin-top: 2%">
   <div class="row">
     <div class="col-md-3">
       <div class="row mb-3">
@@ -23,11 +23,11 @@
                         <li class="page-item active" [ngClass]="{active: filterBookingsByDates == allBookingsString }">
                             <p class="page-link"  (click)="filterAllBookings()">All bookings</p>
                         </li>
-                        <li class="page-item active" [ngClass]="{active: filterBookingsByDates == actualBookingsString }">
-                            <p class="page-link"  (click)="fiterActualBookings()">Actual bookings</p>
+                        <li class="page-item active" [ngClass]="{active: filterBookingsByDates == currentBookingsString }">
+                            <p class="page-link"  (click)="fiterCurrentBookings()">Current bookings</p>
                         </li>
-                        <li class="page-item active" [ngClass]="{active: filterBookingsByDates == archieveBookingsString }">
-                            <p class="page-link"  (click)="filterArchieveBookings()">Archieve bookings</p>
+                        <li class="page-item active" [ngClass]="{active: filterBookingsByDates == archievedBookingsString }">
+                            <p class="page-link"  (click)="filterArchievedBookings()">Archieved bookings</p>
                         </li>
                       </ul>
                     </div>
@@ -93,10 +93,9 @@
                             <b *ngIf="!isCanceled(booking.bookingStatus.name)"style="color:green">{{booking.bookingStatus.name}}</b>
                             </h2>
                         </li>
-                        <li><h4>Price:</h4></li>
-                        <li><h4>{{booking.totalPrice}}*
-                          <p style="font-size: 14px">*number of days: {{calculateNumberOfDates(booking.checkIn , booking.checkOut )}}</p>
-                         </h4></li>
+                        <li><h4>Price: {{booking.totalPrice}}*
+                            <p style="font-size: 14px">*number of days: {{calculateNumberOfDates(booking.checkIn , booking.checkOut )}}</p>
+                        </h4></li>
                         </ul>
                       <div *ngIf=" !isBookingDateActual(booking.checkIn, booking.checkOut)">
                         <div *ngIf="!booking.reviewDto">

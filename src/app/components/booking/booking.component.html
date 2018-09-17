@@ -1,106 +1,118 @@
-<ul *ngIf="booking" style="list-style: none">
-    <div class="container">
-      <div class="row mb-3">
-        <div class="col-md-12">
-          <div class="card">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-9  card-body">
-                  <div class="list-title">
-                    <ul class="list-inline list-unstyled">
-                      <li class="list-inline-item">
-                            <h3><b>{{booking.apartmentDto.propertyDto.name}}, 
-                              {{booking.apartmentDto.name}}</b></h3>     
-                      </li>
-                      <li class="list-inline-item text-warning"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                        class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half"></i></li>
-                      <li class="list-inline-item text-success"><i class="fa fa-thumbs-up"></i></li>
-                    </ul>
-                  </div>
-                  <div class="list-location">
-                    <h4>Price: {{booking.totalPrice}} USD</h4> 
-                    <li>
-                    <h4>Status:
-                      <b *ngIf="isCanceled(booking.bookingStatus.name)" style="color:red">{{booking.bookingStatus.name}}</b>
-                      <b *ngIf="!isCanceled(booking.bookingStatus.name)"style="color:green">{{booking.bookingStatus.name}}</b>
-                    </h4>
-                    </li>
-                    <h4>Dates: {{booking.checkIn | date:'dd-MM-yyyy' }} - {{booking.checkOut | date:'dd-MM-yyyy' }}</h4>          
-                    <h4>Number of guests: {{booking.apartmentDto.numberOfGuests}}</h4>  
-                  </div>
-                  <div class="list-descrip">  
-                    <br>
-                    <h5>Apartment:</h5>
-                    <small>Actual Price: {{booking.apartmentDto.price}} USD</small>                      
-                    <br>
-                    <small>Amenties: 
-                    </small> 
-                    <small *ngFor= "let am of booking.apartmentDto.amenities">{{am.name}}; 
-                    </small>           
-                    <br>
-                    <small>Apartment type: {{booking.apartmentDto.apartmentType.name}}</small>                      
-                    <br><br>
-                    <h5>Hotel:</h5>
-                    <small>Rating: {{booking.apartmentDto.propertyDto.rating}}</small>                      
-                    <br>
-                    <small>Address: {{booking.apartmentDto.propertyDto.address.addressLine}}, 
-                        {{booking.apartmentDto.propertyDto.address.city.name}},
-                        {{booking.apartmentDto.propertyDto.address.city.country.name}}
-                    </small>                      
-                    <br>
-                    <small>Phone number: {{booking.apartmentDto.propertyDto.phoneNumber}}</small>                      
-                    <br>
-                    <small>Email: {{booking.apartmentDto.propertyDto.contactEmail}}</small>                      
-                    <br>
-                    <small>Facilities: </small>
-                    <small *ngFor= "let facilitie of booking.apartmentDto.propertyDto.facilities">
-                    {{facilitie.name}}; </small>                    
-                    <br>
-                    <small>Descroption: {{booking.apartmentDto.propertyDto.description}}</small>                      
-                    <br>
-                      <div *ngIf= "booking?.reviewDto">
-                        <br>
-                        <h5>Your review:</h5>
-                        <small>Rating: {{booking.reviewDto.rating}}</small>
-                        <br>
-                        <small>Message: {{booking.reviewDto.message}}</small>
-                        <br>
-                     </div>
-                     <br>
-                      
-                  </div>
-                </div>  
-                  <div class="col-md-3 border-left card-body">
-                    <img *ngIf="booking.apartmentDto.propertyDto.photos[0]" class="img-responsive"
-                    alt="No Photo" src={{booking.apartmentDto.propertyDto.photos[0].url}}>
-                    <br><br>
-                    <img *ngIf="booking.apartmentDto.propertyDto.photos[1]" class="img-responsive"
-                    alt="No Photo" src={{booking.apartmentDto.propertyDto.photos[1].url}}>
-                    <br><br>
-                    <img *ngIf="booking.apartmentDto.propertyDto.photos[2]" class="img-responsive"
-                    alt="No Photo" src={{booking.apartmentDto.propertyDto.photos[2].url}}>
-                    <br><br>
+<div class="container" *ngIf="booking" style="margin-top: 2%">
+  <div class="row">
 
-                    <app-photo-popup
-                    [booking]="booking">
-                    </app-photo-popup> <!-- add conditionng ngIf-->
-                    <br>
-                    </div>
-              </div>
-              <hr>    
-              <div >
-                  <button class="btn btn-primary btn-block" (click)="backToBookings()">Back to bookings</button>
-                  <div *ngIf="isBookingDateActual(booking?.checkIn, booking?.checkOut) && 
-                    !isCanceled(booking?.bookingStatus?.name)">
-                    <br>
-                    <button class="btn btn-secondary btn-block" (click)="cancelBooking()">Cancel Booking</button>
-                  </div>                      
-              </div>          
-            </div>
-          </div>
-        </div>
+    <div class="col-md-8">
+      <h2 style="width: 90%; margin-left: 25%;margin-top: -2%"><a href="#" style="text-decoration: none;"
+                                                                 *ngIf="booking"
+                                                                 routerLink="/property/{{booking.apartmentDto.propertyDto.id}}">
+        <b>{{booking.apartmentDto.propertyDto.name}}</b></a>
+      </h2>
+
+      <div class="featured-article">
+        <img class="thumb" alt="No Photo" *ngIf="booking.apartmentDto.propertyDto.photos.length > 0"
+             src={{booking.apartmentDto.propertyDto.photos[0].url}}>
       </div>
+
+      <div class="col-md-12" style="margin-top: -11%">
+          <ul class="menu-items" style="list-style: none; margin-left: -8%">
+            <li style="font-size: 20px; color: #bb5500">Information about booking</li>
+            <li style="font-family: 'Bitstream Vera Sans'; font-size: 20px">
+                Status: 
+                <b *ngIf="isCanceled(booking.bookingStatus.name)" style="color:red">{{booking.bookingStatus.name}}</b>
+                <b *ngIf="!isCanceled(booking.bookingStatus.name)"style="color:green">{{booking.bookingStatus.name}}</b>
+            </li>
+            <li style="font-family: 'Bitstream Vera Sans'; font-size: 20px">
+                Price: <b>{{booking.totalPrice}}</b>
+            </li>
+            <li style="font-family: 'Bitstream Vera Sans'; font-size: 20px">
+              Dates: {{booking.checkIn | date:'dd-MM-yyyy' }} - {{booking.checkOut | date:'dd-MM-yyyy' }}
+            </li>
+            <br>
+    
+            <li style="font-size: 18px; color: #bb5500">Apartment</li>
+            <li style="font-family: 'Bitstream Vera Sans'; font-size: 14px">Name:
+              {{booking.apartmentDto.name}}</li>
+            <li style="font-family: 'Bitstream Vera Sans'; font-size: 14px">Apartment type:
+                {{booking.apartmentDto.apartmentType.name}}</li>
+            <li style="font-family: 'Bitstream Vera Sans'; font-size: 14px">Number of guests:
+               {{booking.apartmentDto.numberOfGuests}}</li>
+            <li style="font-family: 'Bitstream Vera Sans'; font-size: 14px">Amenities:
+              <ul>
+              <li *ngFor= "let am of booking.apartmentDto.amenities">{{am.name}};</li></ul>
+            </li>
+            <br>
+
+            <li style="font-size: 18px; color: #bb5500">Properties</li>
+            <li style="font-family: 'Bitstream Vera Sans'; font-size: 14px">Rating:
+              {{booking.apartmentDto.propertyDto.rating}}</li>
+            <li style="font-family: 'Bitstream Vera Sans'; font-size: 14px">Address:
+              {{booking.apartmentDto.propertyDto.address.addressLine}}, 
+              {{booking.apartmentDto.propertyDto.address.city.name}},
+              {{booking.apartmentDto.propertyDto.address.city.country.name}}</li>
+            <li style="font-family: 'Bitstream Vera Sans'; font-size: 14px">Phone number:
+              {{booking.apartmentDto.propertyDto.phoneNumber}}</li>
+            <li style="font-family: 'Bitstream Vera Sans'; font-size: 14px">Email:
+              {{booking.apartmentDto.propertyDto.contactEmail}}</li>
+            <li style="font-family: 'Bitstream Vera Sans'; font-size: 14px">Facilities:
+              <ul>
+              <li *ngFor= "let facilitie of booking.apartmentDto.propertyDto.facilities">
+                {{facilitie.name}};</li></ul>
+            </li>
+            <li style="font-family: 'Bitstream Vera Sans'; font-size: 14px">Description:
+                {{booking.apartmentDto.propertyDto.description}}</li>
+          </ul>
+
+          <ul *ngIf= "booking?.reviewDto" class="menu-items" style="list-style: none; margin-left: -8%">
+            <li style="font-size: 18px; color: #bb5500">Your review:</li>
+            <li style="font-family: 'Bitstream Vera Sans'; font-size: 14px">Rating:
+                {{booking.reviewDto.rating}}</li>
+            <li style="font-family: 'Bitstream Vera Sans'; font-size: 14px">Message:
+                {{booking.reviewDto.message}}</li>    
+          </ul>        
+        </div>
+
+        <div >
+            <button class="btn btn-primary btn-block" (click)="backToBookings()">Back to bookings</button>
+            <div *ngIf="isBookingDateActual(booking?.checkIn, booking?.checkOut) && 
+              !isCanceled(booking?.bookingStatus?.name)">
+              <br>
+              <button class="btn btn-secondary btn-block" (click)="cancelBooking()">Cancel Booking</button>
+            </div>                      
+        </div>
     </div>
-</ul>
+
+    <div class="col-md-4 border-left card-body" id="photo-list" *ngIf='booking'>
+      <ul class="media-list main-list">
+        <li class="media">
+          <img class="media-object"
+               alt="No Photo" *ngIf="booking.apartmentDto.propertyDto.photos.length > 0"
+               src={{booking.apartmentDto.propertyDto.photos[0].url}}>
+          <img class="media-object"
+               alt="No Photo" *ngIf="booking.apartmentDto.propertyDto.photos.length === 0"
+               src="assets/image/Capture.PNG">
+        </li>
+        <li class="media">
+          <img class="media-object"
+               alt="No Photo" *ngIf="booking.apartmentDto.propertyDto.photos.length > 0"
+               src={{booking.apartmentDto.propertyDto.photos[1].url}}>
+          <img class="media-object"
+               alt="No Photo" *ngIf="booking.apartmentDto.propertyDto.photos.length === 0"
+               src="assets/image/Capture.PNG">
+        </li>
+        <li class="media">
+          <img class="media-object"
+               alt="No Photo" *ngIf="booking.apartmentDto.propertyDto.photos.length === 0"
+               src="assets/image/Capture.PNG">
+          <img class="media-object"
+               alt="No Photo" *ngIf="booking.apartmentDto.propertyDto.photos.length > 0"
+               src={{booking.apartmentDto.propertyDto.photos[2].url}}>
+        </li>
+      </ul>
+      <app-photo-popup style="margin-left: 33%"
+                       [booking]="booking">
+      </app-photo-popup>
+    </div>
+  </div>
+</div>
 <app-spinner *ngIf="isLoading"></app-spinner>
 

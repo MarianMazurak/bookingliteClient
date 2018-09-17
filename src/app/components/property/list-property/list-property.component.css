@@ -2,15 +2,10 @@
   box-sizing: border-box;
 }
 
-  /*.container {*/
-    /*position: fixed;*/
-  /*}*/
-
-
 .img-responsive {
   padding-bottom: 4%;
   width: 250px;
-  height: 170px;
+  height: 200px;
   position: absolute ;
   border-radius: 15px;
 }
