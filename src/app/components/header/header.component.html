@@ -11,14 +11,14 @@
     </ul>
   </div>
   <div class="collapse navbar-collapse" id="navbarRightSide" >
-    <ul class="navbar-nav ">
-      <a class="navbar-brand" routerLink="/user" *ngIf="auth.isAuthenticated">
-        <img src="assets/image/profile.png" width="30" height="30" class="d-inline-block align-top" alt="">
-      </a>
-      <li class="nav-item active">
-        <a class="nav-link" routerLink="/login" *ngIf="auth.isAuthenticated">Logout</a>
-        <a class="nav-link" routerLink="/login" *ngIf="!auth.isAuthenticated">Login</a>
-      </li>
-    </ul>
+<ul class="navbar-nav ">
+<a class="navbar-brand" routerLink="/user" *ngIf="auth.isAuthenticated">
+  <img src="assets/image/profile.png" width="30" height="30" class="d-inline-block align-top" alt="">
+</a>
+  <li class="nav-item active">
+    <a class="nav-link" routerLink="/login" *ngIf="auth.isAuthenticated">Logout</a>
+    <a class="nav-link" routerLink="/login" *ngIf="!auth.isAuthenticated">Login</a>
+  </li>
+</ul>
   </div>
 </nav>
