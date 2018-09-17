@@ -14,3 +14,9 @@ nav {
 app-spinner {
   display: contents;
 }
+
+
+app-footer {
+  display: block;
+  margin-top: 100%;
+}
