@@ -16,17 +16,14 @@ export class BookingComponent implements OnInit {
 
   @Input() booking: Booking;
   private bookingsUrl = '/bookings'; 
-  private authenticated;
   public isLoading = false;
 
-  constructor(private auth: AuthService,
-    private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
     private bookingService: BookingService,
     private router: Router 
 ) {}
 
   ngOnInit() {
-    this.authenticated = this.auth.isAuthenticated;
     this.getBooking();
   }
 
