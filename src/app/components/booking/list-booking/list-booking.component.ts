@@ -12,7 +12,6 @@ import { ActivatedRoute } from '../../../../../node_modules/@angular/router';
 })
 export class ListBookingComponent implements OnInit {
 
-  private authenticated;
   public isLoading = false;
   public bookings: BookingDto[];
   public currentPage: number ;
@@ -29,13 +28,11 @@ export class ListBookingComponent implements OnInit {
                        + "bookings" ;                     
   
 
-constructor(private auth: AuthService,
-              private bookingService: BookingService,
+constructor(private bookingService: BookingService,
               private paginationService: PaginationService,
               private route: ActivatedRoute) { }
   
   ngOnInit() {
-    this.authenticated = this.auth.isAuthenticated;
     if( this.route.snapshot.queryParamMap.get('filter') ){
       this.filterBookingsByDates=  this.route.snapshot.queryParamMap.get('filter');
     }

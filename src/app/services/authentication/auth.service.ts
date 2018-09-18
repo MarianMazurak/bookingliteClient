@@ -17,8 +17,6 @@ export class AuthService {
   }
 
   signIn(model: LoginDto): Observable<any> {
-    console.log('In auth service');
-    console.log('json', JSON.stringify(model));
     return this.http.post('/api/login', JSON.stringify({email: model.email, password: model.password}),
       {headers: new HttpHeaders({
           'Content-Type':  'application/json' }),
@@ -27,7 +25,6 @@ export class AuthService {
   }
 
   signUp(model: RegisterDto): Observable<any> {
-    console.log('json', JSON.stringify(model));
     return this.http.post('/api/register', JSON.stringify(model),
       {headers: new HttpHeaders({
           'Content-Type':  'application/json' }),
@@ -37,7 +34,6 @@ export class AuthService {
   loadUser(): Observable<User> {
     return this.http.get<User>('/api/user').pipe(tap( user => {
         this._currentUser = user;
-        console.log(this._currentUser);
         const ownerrole = this._currentUser.roles.find(role => role.name === 'ROLE_OWNER');
         if (ownerrole) {
           this._isOwner = true;
